@@ -1,36 +1,54 @@
-const User = require('../models/User/mock_user').users;
+const Users = require('../models/User/mock_user').users;
+
+// Mock up only, plase use MongoDB
+const findUser = (id) => {
+    Users.forEach(element => {
+        if (element.id == id) {
+            res.json(element);
+            return element;
+        }
+    });
+}
+
+// Mock up only, plase use MongoDB
+const addUser = (user) => {
+    Users.push(user);
+}
+
+// Mock up only, plase use MongoDB
+const deleteUserById = (id) => {
+    for( var i = 0; i < Users.length; i++){ 
+        if ( Users[i].id == id) { 
+            Users.splice(i, 1); 
+        }
+    }
+}
 
 module.exports = {
     
     getUser: (req, res) =>  {
-        res.json(User);
+        res.json(Users);
     },
 
     getUserById: (req, res) => {
         const id = req.param('id');
-        User.forEach(element => {
-            if (element.id == id) {
-                res.json(element);
-                return;
-            }
-        });
+        const user = findUser(id);
+        res.json(user);
     },
 
     registerUser: (req, res) => {
-        const id = User.length + 1; // mockup only please use uuid()
+        const id = Users.length + 1; // mockup only please use uuid()
         const body = req.body;
         body['id'] = id;
-        User.push(body);
-        res.json({id, ...body});
+        user = {id, ...body};
+        // Please use MongoDB
+        addUser(user);
+        res.json(user);
     },
 
     deleteUser: (req, res) => {
-        for( var i = 0; i < User.length; i++){ 
-            if ( User[i].id == req.param('id')) { 
-                User.splice(i, 1); 
-            }
-            res.json(User);
-            return;
-        }
+        const id = req.param('id');
+        deleteUserById(id);
+        res.json(Users);
     },
 }
