@@ -3,7 +3,11 @@ const router = express.Router();
 const UserController = require('../controllers/User');
 
 router.get('/', (req, res) => {
-    UserController.getUser(req, res);
+    if (Object.keys(req.body).length === 0) {
+        UserController.getUser(req, res);
+    } else {
+        UserController.getUserByEmail(req, res);
+    }
 });
 
 router.get('/:id', (req, res) => {
