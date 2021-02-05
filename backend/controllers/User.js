@@ -71,4 +71,7 @@ module.exports = {
         deleteUserById(id);
         res.json(Users);
     },
+
+    // export function
+    findUserByEmail,
 }
