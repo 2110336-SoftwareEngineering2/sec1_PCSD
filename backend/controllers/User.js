@@ -1,13 +1,23 @@
 const Users = require('../models/User/mock_user').users;
 
 // Mock up only, plase use MongoDB
-const findUser = (id) => {
-    Users.forEach(element => {
-        if (element.id == id) {
-            res.json(element);
-            return element;
+const findUserByEmail = (email) => {
+    for (var i=0; i < Users.length; i++) {
+        if (Users[i].email == email) {
+            return Users[i];
         }
-    });
+    }
+    return null;
+}
+
+// Mock up only, plase use MongoDB
+const findUserById = (id) => {
+    for (var i=0; i < Users.length; i++) {
+        if (Users[i].id == id) {
+            return Users[i];
+        }
+    }
+    return null;
 }
 
 // Mock up only, plase use MongoDB
@@ -20,6 +30,7 @@ const deleteUserById = (id) => {
     for( var i = 0; i < Users.length; i++){ 
         if ( Users[i].id == id) { 
             Users.splice(i, 1); 
+            return;
         }
     }
 }
@@ -31,8 +42,16 @@ module.exports = {
     },
 
     getUserById: (req, res) => {
-        const id = req.param('id');
-        const user = findUser(id);
+        const id = req.params.id;
+        // Please use MongoDB
+        const user = findUserById(id);
+        res.json(user);
+    },
+
+    getUserByEmail: (req, res) => {
+        const email = req.body.email;
+        // Please use MongoDB
+        const user = findUserByEmail(email);
         res.json(user);
     },
 
@@ -47,7 +66,8 @@ module.exports = {
     },
 
     deleteUser: (req, res) => {
-        const id = req.param('id');
+        const id = req.params.id;
+        // Please use MongoDB
         deleteUserById(id);
         res.json(Users);
     },
