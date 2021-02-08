@@ -17,7 +17,7 @@ mongoose
     useUnifiedTopology: true,
     useCreateIndex: true,
   })
-  .then(() => console.log("Database Connection Successfully"))
+  .then(() => console.log("Database Connection Successful"))
   .catch((err) => console.log(err));
 
 // Body Parser Json
