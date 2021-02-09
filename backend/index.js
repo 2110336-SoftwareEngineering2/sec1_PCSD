@@ -35,5 +35,5 @@ app.listen(port, (error) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("hello there");
+  res.send("First page");
 });

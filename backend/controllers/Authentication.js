@@ -1,20 +1,17 @@
 const jwt = require("jsonwebtoken");
-const UserController = require("./User");
+const User = require("../models/User/User-model");
+//const UserController = require("./User");
 const bcrypt = require("bcrypt");
 
-// Please use hash password
-const validEmailAndPassword = (email, password) => {
-  const user = UserController.findUserByEmail(email);
-  if (user == null) {
-    return false;
-  } else {
-    const match = bcrypt.compare(password, user.password);
+const validEmailAndPassword = async (email, password) => {
+  const user = await User.findOne({ email: email });
+  if (user) {
+    const match = await bcrypt.compare(password, user.password);
     if (match) {
       return true;
-    } else {
-      return false;
     }
   }
+  return false;
 };
 
 const generateAccessToken = (email, secretKey) => {
@@ -42,10 +39,10 @@ const authToken = (req, res) => {
 
 module.exports = {
   // test
-  login: (req, res) => {
+  login: async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    const val = validEmailAndPassword(email, password);
+    const val = await validEmailAndPassword(email, password);
     if (val == true) {
       const accessToken = generateAccessToken(
         {
@@ -64,7 +61,7 @@ module.exports = {
         refreshToken: refreshToken,
       });
     }
-    return res.status(404).send("Email and Password invalid");
+    return res.status(404).send("Email or Password invalid");
   },
 
   valid: (req, res) => {

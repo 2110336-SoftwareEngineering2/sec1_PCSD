@@ -2,16 +2,14 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User/User-model");
 
-const Users = require("../models/User/mock_user").users;
-
-async function findUserByEmail(email) {
+const findUserByEmail = async (email) => {
   const user = await User.findOne({ email: email });
   if (!user) {
     return "User with this email does not exist";
   } else {
     return user;
   }
-}
+};
 
 const findUserById = async (id) => {
   const user = await User.findById(id);
@@ -24,6 +22,7 @@ const findUserById = async (id) => {
 
 const addUser = async (body) => {
   const user = await User.findOne({ username: body.username });
+  body.password = await bcrypt.hash(body.password, 10);
   if (!user) {
     const newUser = new User({
       ...body,
