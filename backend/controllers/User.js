@@ -47,8 +47,8 @@ const deleteUserById = async (id) => {
 };
 
 module.exports = {
-  getUser: (req, res) => {
-    const allUser = User.find({}, function (err, result) {
+  getUser: async (req, res) => {
+    const allUser = await User.find({}, function (err, result) {
       if (err) {
         console.log(err);
       } else {
