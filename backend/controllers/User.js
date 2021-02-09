@@ -4,39 +4,46 @@ const User = require("../models/User/User-model");
 
 const Users = require("../models/User/mock_user").users;
 
-// MongoDB email test
 async function findUserByEmail(email) {
   const user = await User.findOne({ email: email });
   if (!user) {
-    return null;
+    return "User with this email does not exist";
   } else {
-    console.log(user);
     return user;
   }
 }
 
-// Mock up only, plase use MongoDB
-const findUserById = (id) => {
-  for (var i = 0; i < Users.length; i++) {
-    if (Users[i].id == id) {
-      return Users[i];
-    }
+const findUserById = async (id) => {
+  const user = await User.findById(id);
+  if (!user) {
+    return "User with this id did not exist";
+  } else {
+    return user;
   }
-  return null;
 };
 
-// Mock up only, plase use MongoDB
-const addUser = (user) => {
-  Users.push(user);
+const addUser = async (body) => {
+  const user = await User.findOne({ username: body.username });
+  if (!user) {
+    const newUser = new User({
+      ...body,
+    });
+    newUser.save((err) => {
+      if (err) console.log(err);
+    });
+    return newUser;
+  } else {
+    return "Add user failed";
+  }
 };
 
-// Mock up only, plase use MongoDB
-const deleteUserById = (id) => {
-  for (var i = 0; i < Users.length; i++) {
-    if (Users[i].id == id) {
-      Users.splice(i, 1);
-      return;
-    }
+const deleteUserById = async (id) => {
+  const user = await User.findById(id);
+  if (user) {
+    await User.deleteOne({ _id: id });
+    return "User deleted";
+  } else {
+    return "User not found";
   }
 };
 
@@ -49,38 +56,30 @@ module.exports = {
         res.json(result);
       }
     });
-    // console.log(allUser);
   },
 
-  getUserById: (req, res) => {
+  getUserById: async (req, res) => {
     const id = req.params.id;
-    // Please use MongoDB
-    const user = findUserById(id);
+    const user = await findUserById(id);
     res.json(user);
   },
 
   getUserByEmail: async (req, res) => {
-    // const email = req.body.email;
-    // Currently trying MongoDB
-    const user = await findUserByEmail("user1@email.com");
+    const email = req.body.email;
+    const user = await findUserByEmail(email);
     res.json(user);
   },
 
-  registerUser: (req, res) => {
-    const id = Users.length + 1; // mockup only please use uuid()
+  registerUser: async (req, res) => {
     const body = req.body;
-    body["id"] = id;
-    user = { id, ...body };
-    // Please use MongoDB
-    addUser(user);
+    const user = await addUser(body);
     res.json(user);
   },
 
-  deleteUser: (req, res) => {
+  deleteUser: async (req, res) => {
     const id = req.params.id;
-    // Please use MongoDB
-    deleteUserById(id);
-    res.json(Users);
+    const result = await deleteUserById(id);
+    res.send(result);
   },
 
   // export function
