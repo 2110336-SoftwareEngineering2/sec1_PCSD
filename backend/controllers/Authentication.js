@@ -26,7 +26,7 @@ const generateRefreshToken = (email, secretKey) => {
 
 const authToken = (req, res) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  const token = authHeader && authHeader.split(" ")[0];
   if (token == null) return res.sendStatus(401);
 
   // decoded is decoded data; In this case is an email.
@@ -38,7 +38,6 @@ const authToken = (req, res) => {
 };
 
 module.exports = {
-  // test
   login: async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
