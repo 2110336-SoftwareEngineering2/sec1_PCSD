@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User/User-model");
-//const UserController = require("./User");
 const bcrypt = require("bcrypt");
 
 const validEmailAndPassword = async (email, password) => {
