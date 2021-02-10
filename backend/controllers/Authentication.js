@@ -14,25 +14,20 @@ const validEmailAndPassword = async (email, password) => {
 };
 
 const generateAccessToken = (email, secretKey) => {
-  const accessToken = jwt.sign(email, secretKey, { expiresIn: "15m" });
+  const accessToken = jwt.sign(email, secretKey, { expiresIn: "1d" });
   return accessToken;
-};
-
-const generateRefreshToken = (email, secretKey) => {
-  const refreshToken = jwt.sign(email, secretKey, { expiresIn: "1w" });
-  return refreshToken;
 };
 
 const authToken = (req, res) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[0];
+  const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
 
   // decoded is decoded data; In this case is an email.
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) return res.sendStatus(403);
     req.decoded = decoded;
-    res.json(decoded);
+    res.status(200).json(decoded);
   });
 };
 
@@ -48,26 +43,21 @@ module.exports = {
         },
         process.env.ACCESS_TOKEN_SECRET
       );
-      const refreshToken = generateRefreshToken(
-        {
-          email: email,
-        },
-        process.env.REFRESH_TOKEN_SECRET
-      );
       return res.status(201).json({
         accessToken: accessToken,
-        refreshToken: refreshToken,
       });
     }
     return res.status(404).send("Email or Password invalid");
   },
 
-  valid: (req, res) => {
+  validateAccessToken: (req, res) => {
     authToken(req, res);
   },
 
   // test
   logout: (req, res) => {
+    // remove access token in web browser (client side process)
+    // store access token in blacklist token in redis (in-memory database)
     res.send("logout");
   },
 };
