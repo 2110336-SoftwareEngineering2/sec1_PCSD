@@ -39,10 +39,32 @@ const addUser = async (body) => {
 const deleteUserById = async (id) => {
   const user = await User.findById(id);
   if (user) {
-    await User.deleteOne({ _id: id });
-    return "User deleted";
+    try {
+      const deleteUser = await User.deleteOne({ _id: id });
+      if (deleteUser === null) {
+        return {
+          status: 400,
+          message: "Something went wrong. Cannot delete user please try again."
+        }
+      } else {
+        return {
+          status: 200,
+          message: "Delete user suceccessfully."
+        }
+      }
+    } catch (error) {
+      const message = `Something went wrong. Got some error : ${error}`;
+      return {
+        status: 400,
+        message: message
+      }
+    }
   } else {
-    return "User not found";
+    message = `Cannot find user id: ${id}`;
+    return {
+      status: 400,
+      message: message
+    }
   }
 };
 
@@ -78,7 +100,7 @@ module.exports = {
   deleteUser: async (req, res) => {
     const id = req.params.id;
     const result = await deleteUserById(id);
-    res.send(result);
+    res.status(result.status).send(result.message);
   },
 
   // export function
