@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User/User-model");
 
+// Please set response status code
 const findUserByEmail = async (email) => {
   const user = await User.findOne({ email: email });
   if (!user) {
@@ -11,6 +12,7 @@ const findUserByEmail = async (email) => {
   }
 };
 
+// Please set response status code
 const findUserById = async (id) => {
   const user = await User.findById(id);
   if (!user) {
@@ -20,6 +22,7 @@ const findUserById = async (id) => {
   }
 };
 
+// Please set response status code
 const addUser = async (body) => {
   const user = await User.findOne({ username: body.username });
   body.password = await bcrypt.hash(body.password, 10);
