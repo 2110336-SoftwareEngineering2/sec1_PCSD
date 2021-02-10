@@ -22,23 +22,20 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 
 const MessageSchema = Schema({
-    memberID: Number,
+    memberID: Object,
     message: String,
     date: {type: Date,default: Date.now}
 });
 
 const ChatBoxSchema = Schema({
-     memberID: [Number],
+     memberID: [Object],
      message : [MessageSchema]
 });
 
 const ChatBox = mongoose.model('ChatBox', ChatBoxSchema, collection);
 const message = mongoose.model('message', MessageSchema, collection);
 
-// create(123456);
 function create(memberID){
-    // Database connection
-
     var createdChat = new ChatBox();
     createdChat.memberID.push(memberID)
     createdChat.save();
@@ -49,7 +46,7 @@ function create(memberID){
 }
 
 function add_member(ChatBoxID,new_memberID){
-    ChatBox.findOneAndUpdate(ChatBoxID,{ $push :{ 'memberID' : new_memberID}}, function (err, docs) {}); 
+    ChatBox.findByIdAndUpdate(ChatBoxID,{ $push :{ 'memberID' : new_memberID}}, function (err, docs) {}); 
 }
 
 function del_Chat(ChatBoxID){
@@ -62,12 +59,12 @@ function read (ChatBoxID) {
     }); 
 }
 
-function sent (ChatBoxID,new_message,UserID) {
+function sent (ChatBoxID,new_message,SenderID) {
     var This_Message = new message();
     This_Message.message = new_message;
-    This_Message.memberID = UserID;
+    This_Message.memberID = SenderID;
 
-    ChatBox.findOneAndUpdate(ChatBoxID,{ $push :{ 'message' : This_Message}}, function (err, docs) {}); 
+    ChatBox.findByIdAndUpdate(ChatBoxID,{ $push :{ 'message' : This_Message}}, function (err, docs) {}); 
 }
 
 module.exports = {
