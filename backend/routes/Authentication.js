@@ -14,7 +14,7 @@ router.post('/logout', (req, res) => {
 
 // Validate Token
 router.post('/valid', (req, res) => {
-    AuthenController.valid(req, res);
+    AuthenController.validateAccessToken(req, res);
 });
 
 module.exports = router;
