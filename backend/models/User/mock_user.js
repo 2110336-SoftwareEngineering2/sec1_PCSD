@@ -34,7 +34,10 @@ users_data = [
                  discovered the undoubtable source.',
                  available: ['Mon', 'Tue', 'Wed', 'Sun']
             }
-        }
+        },
+        chatroom: [123, 24124, 21424, 1234], // chatroom id
+        ban: false,
+
     },
     {
         id: 2,
@@ -64,7 +67,9 @@ users_data = [
                     gender: 'female'
                 },
             ]
-        }
+        },
+        chatroom: [123, 24124, 21424, 1234], // chatroom id
+        ban: false,
     },
 ]
 
