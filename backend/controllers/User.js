@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User/User-model");
 
+// Please set response status code
 const findUserByEmail = async (email) => {
   const user = await User.findOne({ email: email });
   if (!user) {
@@ -11,6 +12,7 @@ const findUserByEmail = async (email) => {
   }
 };
 
+// Please set response status code
 const findUserById = async (id) => {
   const user = await User.findById(id);
   if (!user) {
@@ -20,6 +22,7 @@ const findUserById = async (id) => {
   }
 };
 
+// Please set response status code
 const addUser = async (body) => {
   const user = await User.findOne({ username: body.username });
   body.password = await bcrypt.hash(body.password, 10);
@@ -39,16 +42,38 @@ const addUser = async (body) => {
 const deleteUserById = async (id) => {
   const user = await User.findById(id);
   if (user) {
-    await User.deleteOne({ _id: id });
-    return "User deleted";
+    try {
+      const deleteUser = await User.deleteOne({ _id: id });
+      if (deleteUser === null) {
+        return {
+          status: 400,
+          message: "Something went wrong. Cannot delete user please try again."
+        }
+      } else {
+        return {
+          status: 200,
+          message: "Delete user suceccessfully."
+        }
+      }
+    } catch (error) {
+      const message = `Something went wrong. Got some error : ${error}`;
+      return {
+        status: 400,
+        message: message
+      }
+    }
   } else {
-    return "User not found";
+    message = `Cannot find user id: ${id}`;
+    return {
+      status: 400,
+      message: message
+    }
   }
 };
 
 module.exports = {
-  getUser: (req, res) => {
-    const allUser = User.find({}, function (err, result) {
+  getUser: async (req, res) => {
+    const allUser = await User.find({}, function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -78,7 +103,7 @@ module.exports = {
   deleteUser: async (req, res) => {
     const id = req.params.id;
     const result = await deleteUserById(id);
-    res.send(result);
+    res.status(result.status).send(result.message);
   },
 
   // export function

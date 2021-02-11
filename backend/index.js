@@ -1,6 +1,18 @@
 const express = require("express");
 const app = express();
+const http = require('http');
+const cors = require('cors');
 const mongoose = require("mongoose");
+const server = http.createServer(app);
+
+// Middlewares
+app.use(cors());
+
+// chat socket server
+const chatServer = require('./chat/server');
+chatServer.listen(server);
+
+// Routes
 const UserRoute = require("./routes/User");
 const AuthRoute = require("./routes/Authentication");
 
@@ -29,11 +41,12 @@ app.use("/user", UserRoute);
 // Authenticate route
 app.use("/auth", AuthRoute);
 
-// Server listenining on Port
-app.listen(port, (error) => {
-  console.log(`Listening on port ${port}`);
-});
 
 app.get("/", (req, res) => {
   res.send("First page");
+});
+
+// Server listenining on Port
+server.listen(port, (error) => {
+  console.log(`Listening on port ${port}`);
 });
