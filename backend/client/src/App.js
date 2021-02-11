@@ -7,6 +7,7 @@ class App extends Component {
 
     this.state = {
       input: '',
+      username: '',
       message: [],
       endpoint: "http://localhost:4000" // connect to url socket server
     }
@@ -19,8 +20,9 @@ class App extends Component {
   send = (message) => {
     const { endpoint, input } = this.state
     const socket = socketIOClient(endpoint)
-    socket.emit('sent-message', input)
-    this.setState({ input: '' })
+    const data = `${this.state.username}: ${this.state.input}`;
+    socket.emit('sent-message', data);
+    this.setState({ input: '' });
   }
 
   response = () => {
@@ -34,7 +36,11 @@ class App extends Component {
   }
 
   changeInput = (e) => {
-    this.setState({ input: e.target.value })
+    this.setState({ input: e.target.value });
+  }
+
+  changeUsername = (e) => {
+    this.setState({ username: e.target.value });
   }
 
   render() {
@@ -42,13 +48,17 @@ class App extends Component {
     return (
       <div>
         <div style={style}>
+          <h2>Username : {this.state.username}</h2>
+          <input value={this.state.username} onChange={this.changeUsername} />
+          <br />
           <input value={input} onChange={this.changeInput} />
           <button onClick={() => this.send()}>Send</button>
+
         </div>
         {
           message.map((data, i) =>
             <div key={i} style={style} >
-              {i + 1} : {data}
+              {data}
             </div>
           )
         }
