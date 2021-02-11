@@ -1,21 +1,21 @@
-const io = require('socket.io');
+const socket = require('socket.io');
 
 const chatServer = {
     listen (server) {
-        chat = io(server, {
+        io = socket(server, {
             cors: '*'
         });
 
-        chat.on('connection', (client) => {
+        io.on('connection', (socket) => {
             console.log('a user connected');
 
-            client.on('disconnect', () => {
+            socket.on('disconnect', () => {
                 console.log('user disconnected');
             });
 
-            client.on('sent-message', function (message) {
-                io.sockets.emit('new-message', message)
-            })
+            socket.on('sent-message', function (message) {
+                io.emit('new-message', message)
+            });
 
         });
     },
