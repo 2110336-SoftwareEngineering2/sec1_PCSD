@@ -10,6 +10,7 @@ const userSchema = new Schema({
   lastname: String,
   mobileNumber: String,
   password: String,
+  banStatus: Boolean,
 });
 
 module.exports = mongoose.model("User", userSchema, "Users");
