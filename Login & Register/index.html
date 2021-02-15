@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-- Bootstrap CSS -->
+       
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+      
+      <link rel="stylesheet" href="style.css">
+      
+       <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap JS. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+       <!-- My own JS. -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="script.js"></script>
+    </head>
+<body>
+    <div class="row"> 
+        <div class="logo-pic">
+        <div class="col-6">
+            <img src="petidcare.png">
+            <p>
+            online matching platform
+for caretakers and pet owners
+            </p>
+                </div>
+            </div>
+        <div class="col-6">
+    <section class="loginWrapper">
+  
+	<ul class="tabs">
+		<li class="active">Login</li>
+		<li>Register</li>
+	</ul>
+
+	<ul class="tab__content">
+    
+		<li class="active">
+			<div class="content__wrapper">
+				<form method="POST" action="">
+					<input type="email" name="email" placeholder="Email address">
+					<input type="password" name="password" placeholder="Password">
+					<input type="submit" value="Login" name="login">
+				</form>
+                <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox">  Remember me  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"> Forgotten password? </a>
+                            </label>
+                        </div>
+			</div>
+		</li>
+   
+		<li>
+			<div class="content__wrapper">
+				<form method="POST" action="">
+                    <div class="nameja">
+                    <div class="row">
+                    <div class="col">
+                    <input type="fname" name="fname" placeholder="First name">
+                        </div>
+                         <div class="col">
+                        <input type="lname" name="lname" placeholder="Surname">
+                    </div></div>
+                        </div>
+					<input type="email" name="email" placeholder="Email address">
+                    <input type="tel" name="tel" placeholder="Mobile Number">
+					<input type="pass" name="pass" placeholder="New Password">
+                        
+                                <label class="gender">  Gender: </label> 
+                    
+    
+                    <div class="row">
+                    <div class="col" id="gendercol">
+                    <input type="radio" id="male"
+                                       name="gender" value="male">
+                                <label for="male">Male</label>
+                        </div>
+                         <div class="col" id="gendercol">
+                        <input type="radio" id="female"
+                                       name="gender" value="female">
+                                <label for="female">Female</label>
+                    </div></div>
+                    
+                    <label class="gender">  Register as: </label> 
+                    
+    
+                    <div class="row">
+                    <div class="col" id="gendercol">
+                    <input type="radio" id="po"
+                                       name="user" value="Petowner">
+                                <label for="po">Pet Owner</label>
+                        </div>
+                         <div class="col" id="gendercol">
+                        <input type="radio" id="ct"
+                                       name="user" value="Caretaker">
+                                <label for="ct">Caretaker</label>
+                    </div></div>
+					<input type="submit" value="Sign Up" name="register">
+				</form>
+			</div>
+		</li>
+  
+	</ul>
+        
+</section>
+        </div>
+</div>
+	
+
+
+  </body>
+    <footer>
+    <div class="logginFormFooter">
+	&copy; Powered by P.C.S.D.
+	</div>
+    </footer>
+</html>
