@@ -14,7 +14,9 @@ const validEmailAndPassword = async (email, password) => {
 };
 
 const generateAccessToken = (email, secretKey) => {
-  const accessToken = jwt.sign(email, secretKey, { expiresIn: "1d" });
+  const accessToken = jwt.sign({ email, role: "user" }, secretKey, {
+    expiresIn: "1d",
+  });
   return accessToken;
 };
 

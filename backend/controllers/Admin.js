@@ -11,7 +11,7 @@ const authToken = (req) => {
 
   const decoded = jwt.verify(
     token,
-    process.env.ADMIN_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRET,
     (err, decoded) => {
       if (err) return null;
       req.decoded = decoded;
@@ -29,8 +29,8 @@ module.exports = {
       const match = await bcrypt.compare(password, admin.password);
       if (match) {
         const token = jwt.sign(
-          { username: username },
-          process.env.ADMIN_TOKEN_SECRET,
+          { username: username, role: "admin" },
+          process.env.ACCESS_TOKEN_SECRET,
           {
             expiresIn: "1d",
           }
@@ -47,7 +47,7 @@ module.exports = {
   ban: async (req, res) => {
     const auth = authToken(req);
 
-    if (auth) {
+    if (auth && req.decoded.role === "admin") {
       const username = req.body.target;
       const user = await User.findOne({ username });
       if (!user) {
