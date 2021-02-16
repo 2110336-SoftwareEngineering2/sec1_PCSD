@@ -23,13 +23,20 @@ const generateAccessToken = (email, secretKey) => {
 const authToken = (req, res) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
-  if (token == null) return res.sendStatus(401);
+  if (token == null) {
+    res.sendStatus(401);
+    return false;
+  }
 
   // decoded is decoded data; In this case is an email.
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      res.sendStatus(403);
+      return false;
+    }
     req.decoded = decoded;
-    res.status(200).json(decoded);
+    return true;
+    // res.status(200).json(decoded);
   });
 };
 
