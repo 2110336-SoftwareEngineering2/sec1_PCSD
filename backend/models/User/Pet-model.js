@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
@@ -10,4 +10,4 @@ const petSchema = new Schema({
   owner: String,
 });
 
-module.exports = mongoose.model("Pet", petSchema);
+module.exports = mongoose.model("Pet", petSchema, "Pets");
