@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   }
 });
 
-router.get("/:id", (req, res) => {
+router.get("/account/:id", (req, res) => {
   UserController.getUserById(req, res);
 });
 
@@ -19,12 +19,16 @@ router.post("/", (req, res) => {
   UserController.registerUser(req, res);
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/account/:id", (req, res) => {
   UserController.deleteUser(req, res);
 });
 
 router.post("/pet", (req, res) => {
   PetController.addPet(req, res);
+});
+
+router.delete("/pet", (req, res) => {
+  PetController.removePet(req, res);
 });
 
 module.exports = router;
