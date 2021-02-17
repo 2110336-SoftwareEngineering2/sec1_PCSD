@@ -17,15 +17,16 @@ class ChatPage extends Component {
             user: '',
             message: [],
             email: '',
-            token: undefined,
             endpoint: "http://localhost:4000",
+            roomId: "602d0d2c4fc065c4b007384f",
+            roomDetail: {},
         }
     }
 
     componentDidMount = async() => {
         const { cookies } = this.props;
         const token = cookies.get('accessToken');
-        if (token !== undefined) {
+        if (token !== undefined || token !== null) {
             this.setState({ token : token });
             const url = 'http://localhost:4000/auth/valid';
             const requestOptions = {
@@ -38,13 +39,32 @@ class ChatPage extends Component {
             const decoded = await res.json();
             this.setState({ email: decoded.email.email });
             this.setFirstName(this.state.email);
+
+            // get chatroom detail
+            await this.getChatRoom(this.state.roomId);
             
-            
+            // response socket
             this.response();
         }
         else {
             window.alert("Please login !");
         }
+    }
+
+    getChatRoom = async (roomId) => {
+        const url = `${this.state.endpoint}/chat/rooms/${roomId}`;
+        const token = this.props.cookies.get('accessToken');
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application-json'
+            }
+        }
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        this.setState({ roomDetail: data});
+        this.setState({ message: data.messages })
     }
 
     setFirstName = async (email) => {
@@ -61,9 +81,13 @@ class ChatPage extends Component {
         this.setState({ user: firstname });
     }
 
-    send = (message) => {
+    send = () => {
         const { endpoint, input, token, email } = this.state
-        const socket = socketIOClient(endpoint);
+        const socket = socketIOClient(endpoint, {
+            query: {
+                room: this.state.roomId
+            }
+        });
         if (token === undefined || token === null) window.alert("Cannot sent message, please login !");
         const data = {
             message: input,
@@ -74,19 +98,31 @@ class ChatPage extends Component {
         }
         socket.emit('sent-message', data);
         this.setState({ input: '' });
+        console.log("Hello")
     }
 
     response = () => {
         const { endpoint, message } = this.state
-        const socket = socketIOClient(endpoint)
+        const socket = socketIOClient(endpoint, {
+            query: {
+                "room": this.state.roomId
+            }
+        })
         socket.on('new-message-status', (res) => {
-            message.push({user: res.user, message: res.message});
+            message.push({user: res.user, message: res.message, email: res.email});
             if (res.status == false) {
                 window.alert(res.message);
             } else {
                 this.setState({ message: message });
             }
         })
+    }
+
+    logout = () => {
+        const { cookies } = this.props;
+        cookies.remove('accessToken');
+        window.alert('Logout success');
+        this.setState({ user: ''});
     }
 
     changeInput = (e) => {
@@ -98,19 +134,20 @@ class ChatPage extends Component {
     }
 
     render() {
-        const { input, message } = this.state
+        const { input, message,  } = this.state
         return (
         <div>
             <div style={style}>
             <h2>Name : {this.state.user}</h2>
             <input value={input} onChange={this.changeInput} />
             <button onClick={() => this.send()}>Send</button>
+            <button onClick={() => this.logout()}>Logout</button>
 
             </div>
             {
             message.map((data, i) =>
                 <div key={i} style={style} >
-                {`${data.user}: ${data.message}`}
+                {`${data.email}: ${data.message}`}
                 </div>
             )
             }
