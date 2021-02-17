@@ -89,7 +89,7 @@ module.exports = {
   },
 
   getUserByEmail: async (req, res) => {
-    const email = req.body.email;
+    const email = req.params.email;
     const user = await findUserByEmail(email);
     res.json(user);
   },
