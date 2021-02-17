@@ -4,12 +4,12 @@ const UserController = require("../controllers/User");
 const PetController = require("../controllers/Pet");
 
 router.get("/", (req, res) => {
-  if (Object.keys(req.body).length === 0) {
-    UserController.getUser(req, res);
-  } else {
-    UserController.getUserByEmail(req, res);
-  }
+  UserController.getUser(req, res);
 });
+
+router.get("/:email", (req, res) => {
+  UserController.getUserByEmail(req, res);
+})
 
 router.get("/account/:id", (req, res) => {
   UserController.getUserById(req, res);
