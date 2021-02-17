@@ -54,6 +54,7 @@ class LoginBox extends Component {
         const res = await fetch(url, requestOptions).then(async (res) => {
             const data = await res.json();
             this.props.cookies.set("accessToken", data.accessToken, { path: "/" });
+            window.alert("Login success");
         }).catch(err => alert("Email or Password is incorrect, please login again"));
         console.log(res)
     }
