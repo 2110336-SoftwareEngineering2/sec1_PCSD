@@ -23,7 +23,6 @@ class LoginBox extends Component {
     async componentDidMount() {
       const { cookies } = this.props;
       const token = cookies.get("accessToken");
-      console.log(token);
       if (cookies.get("accessToken") !== undefined) {
         this.setState({ loggin: true });
         const url = 'http://localhost:4000/auth/valid';
@@ -55,7 +54,8 @@ class LoginBox extends Component {
         const res = await fetch(url, requestOptions).then(async (res) => {
             const data = await res.json();
             this.props.cookies.set("accessToken", data.accessToken, { path: "/" });
-        });
+        }).catch(err => alert("Email or Password is incorrect, please login again"));
+        console.log(res)
     }
 
     handleChageEmail(e) {
