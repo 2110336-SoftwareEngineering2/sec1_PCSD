@@ -45,6 +45,6 @@ module.exports = {
     },
 
     getUserChatrooms: async (req, res) => {
-        await findUserChatrooms(req, res);
+        await findUserChatroomsByEmail(req, res);
     },
 }
