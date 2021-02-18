@@ -155,7 +155,7 @@ class ChatPage extends Component {
             {
             message.map((data, i) =>
                 <div key={i} style={style} >
-                {`${data.email}: ${data.message}`}
+                {`time : ${data.time} user: ${data.email}: ${data.message}`}
                 </div>
             )
             }

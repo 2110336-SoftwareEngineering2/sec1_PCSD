@@ -9,6 +9,7 @@ class ChatHome extends Component {
         this.state = {
             rooms: [],
             email: '',
+            users: [],
         }
     }
 
@@ -30,6 +31,8 @@ class ChatHome extends Component {
 
             // get chatroom detail
             await this.getMyChatrooms();
+
+            // await this.getAllUsers();
             
         }
         else {
@@ -51,10 +54,25 @@ class ChatHome extends Component {
         const data = await res.json()
         var tmp = [];
         for (var i=0; i<data.length; i++) {
-            tmp.push(data[i]._id);
+            tmp.push(data[i]);
         }
         this.setState({ rooms: tmp });
         console.log(this.state.rooms)
+    }
+
+    async getAllUsers() {
+        const url = 'http://localhost:4000/user/emails';
+        const requestOptions = {
+            method: 'GET',
+        }
+        const res = await fetch(url, requestOptions);
+        const data = await res.json()
+        var tmp = [];
+        for (var i=0; i<data.length; i++) {
+            tmp.push(data[i].email);
+        }
+        this.setState({ users: tmp});
+        console.log(this.state.users);
     }
 
     render() {
@@ -63,8 +81,8 @@ class ChatHome extends Component {
                 <h1>My chat rooms: </h1>
                 <br />
                 {
-                    this.state.rooms.map((id, i) =>
-                        <Chatroom key={i} roomId={id}/>
+                    this.state.rooms.map((elem, i) =>
+                        <Chatroom key={i} roomId={elem._id} members={elem.members}/>
                     )
                 }
             </div>
