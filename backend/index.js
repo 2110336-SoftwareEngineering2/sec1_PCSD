@@ -16,6 +16,7 @@ chatServer.listen(server);
 const UserRoute = require("./routes/User");
 const AuthRoute = require("./routes/Authentication");
 const AdminRoute = require("./routes/Admin");
+const ChatRoute = require("./routes/Chat");
 
 // ENVIRONMENT VARIABLE (in .env file)
 require("dotenv").config();
@@ -44,6 +45,9 @@ app.use("/auth", AuthRoute);
 
 // Admin route
 app.use("/admin", AdminRoute);
+
+// Chat route
+app.use("/chat", ChatRoute);
 
 app.get("/", (req, res) => {
   res.send("First page");
