@@ -39,9 +39,10 @@ app.use(express.json());
 // User route
 app.use("/user", UserRoute);
 
-// Authenticate route
+// Authentication route
 app.use("/auth", AuthRoute);
 
+// Admin route
 app.use("/admin", AdminRoute);
 
 app.get("/", (req, res) => {

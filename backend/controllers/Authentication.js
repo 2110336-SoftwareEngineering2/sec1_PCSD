@@ -45,7 +45,7 @@ module.exports = {
     const email = req.body.email;
     const password = req.body.password;
     const val = await validEmailAndPassword(email, password);
-    if (val == true) {
+    if (val) {
       const accessToken = generateAccessToken(
         {
           email: email,
@@ -56,7 +56,7 @@ module.exports = {
         accessToken: accessToken,
       });
     }
-    return res.status(404).send("Email or Password invalid");
+    return res.send("Incorrect Email or Password");
   },
 
   validateAccessToken: (req, res) => {
