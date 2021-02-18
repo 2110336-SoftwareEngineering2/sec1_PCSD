@@ -18,7 +18,7 @@ class ChatPage extends Component {
             message: [],
             email: '',
             endpoint: "http://localhost:4000",
-            roomId: "602d0d2c4fc065c4b007384f",
+            roomId: this.props.match.params.id,
             roomDetail: {},
         }
     }
@@ -58,7 +58,7 @@ class ChatPage extends Component {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application-json'
+                'Content-Type': 'application/json'
             }
         }
         const res = await fetch(url, requestOptions);
@@ -89,16 +89,20 @@ class ChatPage extends Component {
             }
         });
         if (token === undefined || token === null) window.alert("Cannot sent message, please login !");
-        const data = {
-            message: input,
-            user: this.state.user,
-            email: email,
-            token: token,
-            time: Date.now()
+        else {
+            if (input.length !== 0) {
+                const data = {
+                    message: input,
+                    user: this.state.user,
+                    email: email,
+                    token: token,
+                    time: Date.now()
+                }
+                socket.emit('sent-message', data);
+                this.setState({ input: '' });
+            }
         }
-        socket.emit('sent-message', data);
-        this.setState({ input: '' });
-        console.log("Hello")
+        
     }
 
     response = () => {
@@ -115,7 +119,11 @@ class ChatPage extends Component {
             } else {
                 this.setState({ message: message });
             }
-        })
+        });
+
+        socket.on('exception', (err) => {
+            throw (err)
+        });
     }
 
     logout = () => {

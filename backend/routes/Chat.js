@@ -16,6 +16,14 @@ router.get("/:email", (req, res) => {
 
 router.get("/rooms/:id", (req, res) => {
     ChatController.getChatRoomById(req, res);
+});
+
+router.delete("/rooms/:id", (req, res) => {
+    ChatController.deleteAllMessages(req, res);
+});
+
+router.post("/rooms/send", (req, res) => {
+    ChatController.pushMessage(req, res);
 })
 
 module.exports = router;

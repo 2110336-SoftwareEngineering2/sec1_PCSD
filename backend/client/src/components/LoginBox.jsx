@@ -55,8 +55,24 @@ class LoginBox extends Component {
             const data = await res.json();
             this.props.cookies.set("accessToken", data.accessToken, { path: "/" });
             window.alert("Login success");
+            await this.setFirstName(this.state.email);
+            this.setState({ loggin : true });
         }).catch(err => alert("Email or Password is incorrect, please login again"));
         console.log(res)
+    }
+
+    setFirstName = async (email) => {
+        const url = `http://localhost:4000/user/${this.state.email}`;
+        const requestOptions = {
+            method: 'GET',
+            headers:  {
+                'Content-Type': 'application/json'
+            },
+        }
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        const firstname = data.firstname;
+        this.setState({ user: firstname });
     }
 
     handleChageEmail(e) {

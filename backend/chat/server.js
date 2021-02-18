@@ -32,9 +32,8 @@ const chatServer = {
         });
 
         io.on('connection', async (socket) => {
-            console.log('connection seccessfully');
             const room = socket.handshake.query.room;
-            console.log(room)
+            console.log(`connect to room : ${room}`);
 
             socket.join(room, () => {
                 console.log(`join in room : ${room}`);
@@ -51,13 +50,13 @@ const chatServer = {
                     time: data.time,
                     message: data.message
                 }
-                console.log(message)
                 if (checkToken.status == true) {
-                    const res = await Chatrooms.findOneAndUpdate({_id: room}, {$push: {messages: message}}, (err, result)=> {
-                        if (err) console.log(err)
-                    })
-                    io.to(room).emit('new-message-status', { status: checkToken.status, message: data.message, user: data.user, email: data.email });
-                    
+                    try {
+                        const res = await Chatrooms.findOneAndUpdate({_id: room}, {$push: {messages: message}}, { "new": true, "upsert": true });
+                        io.to(room).emit('new-message-status', { status: checkToken.status, message: data.message, user: data.user, email: data.email });
+                    } catch (err) {
+                        io.to(room).emit('exception', { errMessage: err });
+                    }
                 } else {
                     io.to(room).emit('new-message-status', { status: checkToken.status, message: checkToken.message, user: data.user, email: data.email });
                 }

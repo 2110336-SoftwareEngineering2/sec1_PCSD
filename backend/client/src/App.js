@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import ChatHome from './pages/ChatPage/ChatHome';
 import ChatPage from './pages/ChatPage/ChatPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 
@@ -21,12 +22,16 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
+          <Route exact path='/'>
+            <LoginPage />
+          </Route>
           <Route exact path='/login'>
             <LoginPage />
           </Route>
           <Route exact path='/chat'>
-            <ChatPage />
+            <ChatHome />
           </Route>
+          <Route path='/chat/room/:id' component={ChatPage} />
         </Router>
       </div>
     );
