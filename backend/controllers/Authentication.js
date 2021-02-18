@@ -56,11 +56,7 @@ module.exports = {
         accessToken: accessToken,
       });
     }
-<<<<<<< HEAD
-    return res.send("Incorrect Email or Password");
-=======
     return res.status(401).send("Email or Password invalid");
->>>>>>> df19b71ec6da401cacf234283acc931d7753a0e0
   },
 
   validateAccessToken: (req, res) => {
