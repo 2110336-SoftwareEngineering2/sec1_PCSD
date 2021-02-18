@@ -11,6 +11,10 @@ router.post("/", (req, res) => {
   UserController.getUserByEmail(req, res);
 });
 
+router.get("/emails", (req, res) => {
+  UserController.getAllEmails(req, res);
+});
+
 router.get("/:email", (req, res) => {
   UserController.getUserByEmail(req, res);
 });
