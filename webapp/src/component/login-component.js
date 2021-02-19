@@ -4,7 +4,7 @@ import Register from "./Register-component";
 import "./style.css";
 import $ from 'jquery';
 import "./script";
-
+import Logo from "./../Logo";
 export default class UserLogin extends Component {
   constructor(props) {
     super(props);

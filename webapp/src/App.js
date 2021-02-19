@@ -3,24 +3,18 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import Logo from "./Logo";
 import UserLogin from "./component/login-component";
-
+import LoginPage from "./LoginPage";
+import Home from "./Home/Home";
+import Routes from "./Routes";
 function App() {
   // const [email, setEmail] = useState('');
   // const [pass, setPass] = useState('');
   // console.log('render email', email);
-
   return (
        <div className="app">
-      <div className="app__body">
-      <Logo />
-     <Router>
-      <Route path="/" exact component={UserLogin} />
-    </Router>
-      </div>
-    </div>
-
+            <Routes />
+       </div>
   );
 }
 
 export default App;
-
