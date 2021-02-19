@@ -1,14 +1,24 @@
-.body {
-    background-color: #f1f2f5;
-    
-}
 .app__body {
     display: flex;
     
 }
 
+.login__register {
+    margin-left: 150px;
+    
+}
+
+.logo {
+    margin-left: 150px;
+    margin-top: 50px;
+    
+}
 .logo > p {
     color: #DBC2B0;
     text-align: center;
 }
 
+.logo > img {
+    margin-left: 40px;
+    
+}

@@ -1,15 +1,17 @@
 body {
-    
     background: #F1F1F1;
     margin: 0;
-    padding: 0;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;font-weight: light;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-weight: light;
     font-weight: 100;
     display : flex;
     align-items: center;
-    padding: 10px;
-    width: 800px;
+    padding: 90px;
 	}
+
+.login__register {
+    width: 430px;
+}
 
 .loginWrapper {
 	display: block;
@@ -61,7 +63,7 @@ nav {
   -webkit-transform: translateY(5px);
   transform: translateY(5px);
 background-color: #FFFFFF;
-     border-radius: 8px 8px 0 0;
+     border-radius: 8px 8px 0 0; 
 } 
 
 .tabs > li {
@@ -75,8 +77,9 @@ background-color: #FFFFFF;
   cursor: pointer;
   color: #9D7F70;
   background-color: none;
-
+    
 }
+
 .tabs > li:before {
   z-index: -1;
   position: absolute;
@@ -152,18 +155,6 @@ box-shadow: 0px 12px 34px -8px rgba(0,0,0,0.28);
 		font-weight: 100;
     	outline: none;
 	}
-.col {
-    margin: 0px;
-    padding: 12px;
-}
-    form [type="fname"]{
-    width: 145px;
-        margin-left: 16%;
-    }
-    form [type="lname"]{
-    width: 145px;
-        margin-right: 18%;
-    }
 	form input:first-child {margin-top: 8px;}
 	form input:last-child {margin-top: 16px; margin-bottom: 0px;}
 
@@ -206,55 +197,39 @@ box-shadow: 0px 12px 34px -8px rgba(0,0,0,0.28);
     align-items: center;
     margin-left: 20px;
     margin-right: 20px;
+    
 }
 
 .gendercol {
     color: black;
+    font-size: 12px;
     margin: 12px;
-    padding: 10px;
-    padding-left: 5px;
-    position: relative;
+    padding: 5px;
+    padding-left: 0px;
+    align-items: center;
     border-color: #B5B3B3;
     border-style: solid;
     border-radius: 8px;
     border-width: thin;
     width: 140px;
+    height: 40px;
    
 }
 .gendercol > input  {
     align-items: center;
-    width: 20px;
 }
 
 form [type="radio"]{
     margin: auto;
     }
-.logo-pic {
-    display: block;
-	position: relative;
-	width: 40%;
-	margin: auto;
-	right: 0;
-	left: 0;
-    margin-top: 140px;
-	margin-bottom: 200px;
-    margin-left: 120px;
-    margin-right: 0px;
-}
 
-.logo-pic p {
-    color: #DBC2B0;
-    text-align: center;
-    margin-left: 50px;
-  
-}
 
 label {
     margin-left: 10px;
 }
 .nameja > input {
     margin: 10px;
-    width: 200px;
+    width: 41%;
 }
 
 .nameja {
@@ -265,5 +240,25 @@ label {
     
 }
 form > input {
-    width: 420px;
+    width: 80%;
+}
+
+.login__register {
+    margin-left: 150px;
+    
+}
+
+.logo {
+    margin-left: 150px;
+    margin-top: 50px;
+    
+}
+.logo > p {
+    color: #DBC2B0;
+    text-align: center;
+}
+
+.logo > img {
+    margin-left: 40px;
+    
 }
