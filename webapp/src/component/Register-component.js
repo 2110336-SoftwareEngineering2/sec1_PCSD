@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import $ from 'jquery';
 import "./script";
+import history from './../history';
 function Register() {
      return (
         <li>
@@ -43,7 +44,7 @@ function Register() {
                                 <label for="ct">Caretaker</label>
                     </div>
                     </div>
-					<input type="submit" value="Sign Up" name="register" />
+					<input type="submit" value="Sign Up" name="register" onClick={() => history.push('/Register')} />
 				</form>
 			</div>
 		</li>

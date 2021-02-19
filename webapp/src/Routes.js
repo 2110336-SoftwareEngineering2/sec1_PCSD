@@ -17,7 +17,7 @@ export default class Routes extends Component {
             <Router history={history}>
                 <Switch>
                     <Route path="/" exact component={ !user ? LoginPage : Home } />
-                    <Route path="/register" exact component={ role == "petowner"? Caretaker : Petowner } />
+                    <Route path="/register" exact component={ role == "petowner" ? Petowner : Caretaker  } />
                 </Switch>
             </Router>
         );
