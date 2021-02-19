@@ -1,0 +1,14 @@
+.body {
+    background-color: #f1f2f5;
+    
+}
+.app__body {
+    display: flex;
+    
+}
+
+.logo > p {
+    color: #DBC2B0;
+    text-align: center;
+}
+

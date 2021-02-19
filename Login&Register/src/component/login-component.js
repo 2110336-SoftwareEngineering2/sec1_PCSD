@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Register from "./Register-component";
+import "./style.css";
+import $ from 'jquery';
+import "./script";
 
 export default class UserLogin extends Component {
   constructor(props) {
@@ -38,7 +42,7 @@ export default class UserLogin extends Component {
 
   render() {
     return (
-      <div className="container my-4">
+      /*<div className="container my-4">
         <div className="row">
           <div className="col12 col-md-8 offset-md-2">
             <form onSubmit={(e) => this.onSubmit(e)}>
@@ -84,7 +88,36 @@ export default class UserLogin extends Component {
             </form>
           </div>
         </div>
-      </div>
+      </div> */
+    <div className="login__register">
+        <ul class="tabs">
+		<li class="active">Login</li>
+		<li>Register</li>
+	   </ul>
+        <ul className="tab__content">
+		<li className="active">
+			<div className="content__wrapper">
+				<form onSubmit={(e) => this.onSubmit(e)}>
+					<input type="email" 
+                        name="email" 
+                        placeholder="Email address" 
+                        onChange={(e) => this.setEmail(e.target.value) }/>
+					<input type="password" 
+                              name="password" 
+                              placeholder="Password" 
+                            onChange={(e) => this.setPass(e.target.value)} />
+					<input type="submit" value="Login" name="login" />
+				</form>
+                <div className="form-check">
+                            <label className="form-check-label">
+                                <input className="form-check-input" type="checkbox" />  Remember me  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"> Forgotten password? </a>
+                            </label>
+                        </div>
+			</div>
+		</li>
+        <Register />
+        </ul>
+        </div>
     );
   }
 }
