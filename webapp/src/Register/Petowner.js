@@ -5,9 +5,9 @@ import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 function Petowner() {
   return (
-    <div className="Petowner">
-        <p>This is Petowner register page</p>
-        {/*User Profile*/}
+    <div className="petowner">
+        <UserProfile />
+        <UserInfo />
         {/*User Info*/}
     </div>
 
@@ -15,4 +15,3 @@ function Petowner() {
 }
 
 export default Petowner;
-
