@@ -1,0 +1,12 @@
+.userInfo {
+    background-color: white;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
+    width: 708px;
+    height: 759px;
+    position: relative;
+    margin-left: 60px;
+    margin-right: 70px;
+    
+}
