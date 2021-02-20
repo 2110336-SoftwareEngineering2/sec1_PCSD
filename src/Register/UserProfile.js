@@ -27,6 +27,7 @@ export default class UserProfile extends React.Component {
                     <label>Acceptable formats: <b className="blacklabel" >jpg, png</b> only</label><br/>
                     <label>Max file size is <b className="blacklabel">500 KB</b> and min size <b className="blacklabel">70 KB</b></label>
                 </div>
+                
             </div>
         );
     }
