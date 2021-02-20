@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const http = require('http');
-const cors = require('cors');
+const http = require("http");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const server = http.createServer(app);
 
@@ -9,12 +9,14 @@ const server = http.createServer(app);
 app.use(cors());
 
 // chat socket server
-const chatServer = require('./chat/server');
+const chatServer = require("./chat/server");
 chatServer.listen(server);
 
 // Routes
 const UserRoute = require("./routes/User");
 const AuthRoute = require("./routes/Authentication");
+const AdminRoute = require("./routes/Admin");
+const ChatRoute = require("./routes/Chat");
 
 // ENVIRONMENT VARIABLE (in .env file)
 require("dotenv").config();
@@ -38,9 +40,14 @@ app.use(express.json());
 // User route
 app.use("/user", UserRoute);
 
-// Authenticate route
+// Authentication route
 app.use("/auth", AuthRoute);
 
+// Admin route
+app.use("/admin", AdminRoute);
+
+// Chat route
+app.use("/chat", ChatRoute);
 
 app.get("/", (req, res) => {
   res.send("First page");

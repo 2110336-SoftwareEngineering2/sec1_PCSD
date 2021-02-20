@@ -47,29 +47,39 @@ const deleteUserById = async (id) => {
       if (deleteUser === null) {
         return {
           status: 400,
-          message: "Something went wrong. Cannot delete user please try again."
-        }
+          message: "Something went wrong. Cannot delete user please try again.",
+        };
       } else {
         return {
           status: 200,
-          message: "Delete user suceccessfully."
-        }
+          message: "Delete user suceccessfully.",
+        };
       }
     } catch (error) {
       const message = `Something went wrong. Got some error : ${error}`;
       return {
         status: 400,
-        message: message
-      }
+        message: message,
+      };
     }
   } else {
     message = `Cannot find user id: ${id}`;
     return {
       status: 400,
-      message: message
-    }
+      message: message,
+    };
   }
 };
+
+const getAllUsersEmail = async (req, res) => {
+  const emails = User.find({}, {_id: 0, email:1} , (err, result) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.status(200).json(result);
+    }
+  })
+}
 
 module.exports = {
   getUser: async (req, res) => {
@@ -89,7 +99,7 @@ module.exports = {
   },
 
   getUserByEmail: async (req, res) => {
-    const email = req.body.email;
+    const email = req.params.email;
     const user = await findUserByEmail(email);
     res.json(user);
   },
@@ -106,6 +116,7 @@ module.exports = {
     res.status(result.status).send(result.message);
   },
 
-  // export function
-  // findUserByEmail,
+  getAllEmails: async (req, res) => {
+    await getAllUsersEmail(req, res);
+  },
 };
