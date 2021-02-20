@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 export default class UserLogin extends Component {
   constructor(props) {
@@ -31,9 +30,7 @@ export default class UserLogin extends Component {
       password: this.state.password,
     };
 
-    axios
-      .post("http://localhost:4000/auth/login", user)
-      .then((res) => console.log(res.data));
+    window.location = "/login";
   }
 
   render() {
