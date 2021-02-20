@@ -4,6 +4,7 @@ import "./UserInfo.css";
 function UserInfo() {
   return (
     <div className="userInfo">
+      <p> this is user info</p>
     </div>
 
   );

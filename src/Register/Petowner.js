@@ -5,8 +5,9 @@ import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 function Petowner() {
   return (
-    <div className="Petowner">
+    <div className="petowner">
         <UserProfile />
+        <UserInfo />
         {/*User Info*/}
     </div>
 
