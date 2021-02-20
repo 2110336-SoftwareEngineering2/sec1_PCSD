@@ -33,8 +33,14 @@ class CaretakerInfo extends React.Component {
                     <div className="row">
                         {this.state.isNext ? null : 
                             <div className="col-12 next">
-                                <button className="submit" onClick={this.clickedNext}>Next</button>
-                        </div>}
+                                <button className="submit" type="button" onClick={this.clickedNext}>Next</button>
+                            </div>}
+                    </div>
+                    <div className="row">
+                        {this.state.isNext ? 
+                            <div className="col-12 signup">
+                                <button className="submit" type="submit">Sign Up</button>
+                            </div> : null}
                     </div>
                 </form>
             </div>
@@ -153,11 +159,6 @@ class JobInfo extends React.Component {
                         <div className="col-8 availdaysbox">
                             <label>Available Day(s)</label><br/>
                             <AvailableDays/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-12 signup">
-                            <button className="submit" type="submit">Sign Up</button>
                         </div>
                     </div>
                 </form>

@@ -40,16 +40,16 @@
     padding: 10px;
 }
 
+.userinfo, .jobinfo, .next, .signup {
+    background-color: white;
+}
+
 .next {
     text-align: right;
     padding-right: 5%;
 }
 
-.signup {
-    text-align: center;
-}
-
-.availdaysbox {
+.signup, .availdaysbox {
     text-align: center;
 }
 
@@ -58,7 +58,7 @@
 }
 
 /* button ------------------------------------------*/
-button {
+.container button {
     border: none;
     outline: none;
     background-color: inherit;
@@ -67,7 +67,7 @@ button {
     cursor: pointer;
 }
 
-button.submit {
+.container button.submit {
     background-color: #bd6a43;
     color: white;
     border-radius: 4px;
