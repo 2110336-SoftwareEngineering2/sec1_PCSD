@@ -1,0 +1,263 @@
+body {
+    background: #F1F1F1;
+    margin: 0;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-weight: light;
+    font-weight: 100;
+    display : flex;
+    align-items: center;
+    padding: 90px;
+	}
+
+.login__register {
+    width: 430px;
+}
+
+.loginWrapper {
+	display: block;
+	position: relative;
+	width: 350px;
+	text-align: center;	
+	margin: auto;
+	right: 0;
+	left: 0;
+	margin-top: 60px;
+	margin-bottom: 60px;
+	z-index: 1000;
+	transition: box-shadow 1s;
+}
+
+.logginFormFooter {
+	text-align: center;
+	color: #777;
+	width: 100%;
+	font-size: 12px;
+	position: fixed;
+	bottom: 10px;
+}
+
+	.logginFormFooter a       {color: #777; font-weight: 600;}
+	.logginFormFooter a:hover {color: #AAA;}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  z-index: 9;
+  color: #FFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.tabs {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+background-color: #FFFFFF;
+     border-radius: 8px 8px 0 0; 
+} 
+
+.tabs > li {
+  transition-duration: .25s;
+  display: table-cell;
+  list-style: none;
+  text-align: center;
+  padding: 20px 20px 25px 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: #9D7F70;
+  background-color: none;
+    
+}
+
+.tabs > li:before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 120%;
+  color: #9D7F70;  
+  top: 0;
+  left: 0;
+ 	background-color: #DDD;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  transition-duration: .25s;
+  border-radius: 8px 8px 0 0;
+}
+
+.tabs > li:hover:before {
+  -webkit-transform: translateY(70%);
+  transform: translateY(70%);
+}
+.tabs > li.active {
+  color: #FFF;
+    
+}
+.tabs > li.active:before {
+  transition-duration: .5s;
+ 	background-color: #9D7F70;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+     
+}
+
+.tab__content {
+  background-color: white;
+  position: relative;
+  width: 100%;
+  
+ 	background-color: #FFFFFF;
+-webkit-box-shadow: 0px 12px 34px -8px rgba(0,0,0,0.28);
+-moz-box-shadow: 0px 12px 34px -8px rgba(0,0,0,0.28);
+box-shadow: 0px 12px 34px -8px rgba(0,0,0,0.28);
+ 
+}
+.tab__content > li {
+  width: 100%;
+  position: absolute;
+  border-radius: 5px;
+  color: #FFF;
+  top: 0;
+  left: 0;
+  background-color: #444;
+  display: none;
+  list-style: none;
+}
+.tab__content > li .content__wrapper {
+  text-align: center;
+  padding-top: 24px;
+    padding-bottom: 70px;
+  background-color: #FFFFFF;
+}
+
+
+	form input {
+		border-color: #B5B3B3;
+        border-style: solid;
+        border-radius: 8px;
+        border-width: thin;
+		padding: 12px;
+		background: none;
+		font-size: 16px;
+		margin: 12px 0px;
+		width: 300px;
+		font-weight: 100;
+    	outline: none;
+	}
+	form input:first-child {margin-top: 8px;}
+	form input:last-child {margin-top: 16px; margin-bottom: 0px;}
+
+	form input:focus {background-color: #FFF;}
+	form input:hover {background-color: #FFF;}
+	form input:placeholder {color: blue;}
+
+    form [type="radio"]{
+    width: 20px;
+   
+    }
+	form [type="submit"]:focus,
+	form [type="submit"]:hover {background: #BD6A43;}
+
+	form [type="submit"] {
+		background: #B5B3B3;
+		color: #FFF;
+		padding: 24px 24px 20 20px;
+        margin: 12px 0px;
+		cursor: pointer;
+	}
+	::-webkit-input-placeholder {color: #DDD;}
+	:-moz-placeholder           {color: #DDD;}
+	::-moz-placeholder          {color: #DDD;}
+	:-ms-input-placeholder      {color: #DDD;}
+.form-check {
+    color: #BD6A43;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+.form-check-label a{
+    color: #BD6A43;
+}
+
+.gender {
+    color: black;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+}
+
+.gendercol {
+    color: black;
+    font-size: 12px;
+    margin: 12px;
+    padding: 5px;
+    padding-left: 0px;
+    align-items: center;
+    border-color: #B5B3B3;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: thin;
+    width: 140px;
+    height: 40px;
+   
+}
+.gendercol > input  {
+    align-items: center;
+}
+
+form [type="radio"]{
+    margin: auto;
+    }
+
+
+label {
+    margin-left: 10px;
+}
+.nameja > input {
+    margin: 10px;
+    width: 41%;
+}
+
+.nameja {
+    position: relative;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+form > input {
+    width: 80%;
+}
+
+.login__register {
+    margin-left: 150px;
+    
+}
+
+.logo {
+    margin-left: 150px;
+    margin-top: 50px;
+    
+}
+.logo > p {
+    color: #DBC2B0;
+    text-align: center;
+}
+
+.logo > img {
+    margin-left: 40px;
+    
+}
