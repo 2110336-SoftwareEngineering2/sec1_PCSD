@@ -35,7 +35,9 @@ export default class UserLogin extends Component {
       password: this.state.password,
     };
 
-    window.location = "/login";
+    axios
+      .post("http://localhost:4000/auth/login", user)
+      .then((res) => console.log(res.data));
   }
 
   render() {
