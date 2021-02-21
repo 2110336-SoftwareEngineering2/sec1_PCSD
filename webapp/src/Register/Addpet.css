@@ -27,3 +27,12 @@
     display: none;
 }
 
+.pettype > .row {
+    margin-left: 150px;
+    font-weight: bold;
+}
+
+.pettype > label {
+    color: #8E8E8E;
+    font-weight: bold;
+}
