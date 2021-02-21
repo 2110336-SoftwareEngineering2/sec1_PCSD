@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./UserInfo.css";
 import Register_info from "./Register_info";
 import Register_header from "./Register_header";
-import JobInfo from "./JobInfo"
+import JobInfo from "./JobInfo";
+import MyPet from "./MyPet";
 function UserInfo(props) {
   return (
     <div className="userInfo">
@@ -50,7 +51,7 @@ class Info extends React.Component {
     render() {
         return(
             <div>
-                {this.props.info == "Caretaker" ? <JobInfo/> : <label>insert My Pet component</label>}
+                {this.props.info == "Caretaker" ? <JobInfo/> : <MyPet/>}
             </div>
         );
     }
