@@ -10,7 +10,6 @@ import Petowner from "./Register/Petowner";
 import history from "./history";
 
 export default class Routes extends Component {
-<<<<<<< HEAD
   render() {
     var user;
     var role = "petowner";
@@ -28,32 +27,3 @@ export default class Routes extends Component {
     );
   }
 }
-||||||| constructed merge base
-    render() {
-        const user = null;
-        const role = "petowner";
-        return (
-            <Router history={history}>
-                <Switch>
-                    <Route path="/" exact component={ !user ? LoginPage : Home } />
-                    <Route path="/register" exact component={ role == "petowner" ? Petowner : Caretaker  } />
-                </Switch>
-            </Router>
-        );
-    }
-}
-=======
-    render() {
-        const user = null;
-        const role = "caretaker";
-        return (
-            <Router history={history}>
-                <Switch>
-                    <Route path="/" exact component={ !user ? LoginPage : Home } />
-                    <Route path="/register" exact component={ role == "petowner" ? Petowner : Caretaker  } />
-                </Switch>
-            </Router>
-        );
-    }
-}
->>>>>>> update RegisterInfo
