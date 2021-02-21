@@ -43,7 +43,7 @@
     padding: 10px;
 }
 
-.userinfo, .jobinfo, .next, .signup {
+.jobinfo, .next, .signup {
     background-color: white;
 }
 
@@ -96,12 +96,4 @@ input.texting {
     border-radius: 4px;
     padding: 3px;
     font-size: 16px;
-}
-
-/* radiobutton */
-.radio {
-    border: 1px solid #8e8e8e;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 5px;
 }
