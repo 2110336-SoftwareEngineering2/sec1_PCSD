@@ -16,6 +16,7 @@ class RegisterInfo extends React.Component {
     render() {
         return(
             <div className="registerinfo">
+                <form>
                 <div className="row">
                     <div className="col-6">
                         <label>First name</label><br/>
@@ -56,6 +57,7 @@ class RegisterInfo extends React.Component {
                         <RadioButton/>
                     </div>
                 </div>
+                </form>
             </div>
         );
     }

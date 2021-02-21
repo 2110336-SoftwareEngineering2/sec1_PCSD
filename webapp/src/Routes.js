@@ -9,21 +9,21 @@ import Caretaker from "./Register/Caretaker";
 import Petowner from "./Register/Petowner";
 import history from "./history";
 
-export default class Routes extends Component {
-  render() {
-    var user;
-    var role = "petowner";
+function Routes(){
+    const user = null;
+    const role = "petowner";
     return (
       <Router history={history}>
         <Switch>
           <Route path="/" exact component={!user ? LoginPage : Home} />
           <Route
-            path="/register"
-            exact
+            path="/register" 
             component={role == "petowner" ? Petowner : Caretaker}
           />
         </Switch>
       </Router>
     );
-  }
+
 }
+
+export default Routes;

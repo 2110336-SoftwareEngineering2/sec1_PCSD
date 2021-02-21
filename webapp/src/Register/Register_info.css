@@ -1,3 +1,7 @@
+.registerinfo{
+    width: 100%;
+}
+
 /* row & col initialization -----------------------*/
 .row {
     display: flex;
@@ -64,4 +68,5 @@ input.texting {
     border-radius: 4px;
     cursor: pointer;
     padding: 5px;
+    width: 100px;
 }

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import "./script";
 import history from "./../history";
+import { Route } from "react-router-dom";
+import Routes from "./../Routes";
 function Register() {
+  const [role, setRole] = useState("");
   return (
     <li>
       <div className="content__wrapper">
@@ -30,11 +33,14 @@ function Register() {
             <label> Register as: </label>
 
             <div className="gendercol">
-              <input type="radio" id="po" name="user" value="Petowner" />
+              <input type="radio" id="po" name="user" value="Petowner" 
+              onChange = { (e) => setRole(e.target.value)}
+              />
               <label htmlFor="po">Pet Owner</label>
             </div>
             <div className="gendercol">
-              <input type="radio" id="ct" name="user" value="Caretaker" />
+              <input type="radio" id="ct" name="user" value="Caretaker" 
+              onChange = { (e) => setRole(e.target.value)}/>
               <label htmlFor="ct">Caretaker</label>
             </div>
           </div>
