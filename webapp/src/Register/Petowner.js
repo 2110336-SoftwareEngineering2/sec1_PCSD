@@ -7,7 +7,7 @@ function Petowner() {
   return (
     <div className="petowner">
         <UserProfile />
-        <UserInfo />
+        <UserInfo infotype="Pet Owner"/>
         {/*User Info*/}
     </div>
 
