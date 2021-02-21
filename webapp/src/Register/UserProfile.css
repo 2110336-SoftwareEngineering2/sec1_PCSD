@@ -1,8 +1,5 @@
-.profile, .userinfo, .jobinfo, .next {
-    background-color: white;
-}
-
 .profile {
+    background-color: white;
     text-align: center;
     border-radius: 8px;
     padding: 4%;
@@ -10,8 +7,6 @@
     width: 342px;
     height: 481px;
     position: relative;
-    margin-left: 80px;
-    
 }
 
 .profile h3 {
@@ -22,14 +17,10 @@
     margin-top: 25px;
 }
 
-label {
-    color: #8e8e8e;
-    line-height: 2rem;
-    font-weight: bold;
-}
-
 .profile label {
+    color: #8e8e8e;
     font-size: 11px;
+    font-weight: bold;
     line-height: 1.5rem;
 }
 
@@ -56,7 +47,7 @@ label {
     display: none;
 }
 
-.inputfile {
+#inputfile {
     cursor: pointer;
     background-color: #872935;
     color: white;

@@ -23,7 +23,7 @@ export default class UserProfile extends React.Component {
                 <label className="blacklabel">@username</label><br/>
                 <img src={this.state.img}/>
                 <br/>
-                <label className="inputfile">
+                <label id="inputfile">
                     Upload Your Photo <input type="file" accept="image/png, image/jpeg" onChange={this.uploadImg}/>
                 </label>
                 <div className="inputformat">

@@ -4,17 +4,16 @@ import "./App.css";
 import petidcare from "./petidcare.png";
 import Logo from "./Logo";
 import UserLogin from "./component/login-component";
-function LoginPage() {
 
+function LoginPage() {
   return (
     <div className="loginPage">
       <div className="app__body">
         <Logo />
         <UserLogin />
+      </div>
     </div>
-</div>
   );
 }
 
 export default LoginPage;
-
