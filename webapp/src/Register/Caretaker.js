@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './Caretaker.css'
+import UserProfile from "./UserProfile";
 
 function Caretaker() {
   return (
-//    <div className="caretaker">
-//        <p>This is Caretaker register page</p>
-//    </div>
+  <div className="caretaker">
+    <UserProfile/>
       <CaretakerInfo/>
+      </div>
   );
 }
 
