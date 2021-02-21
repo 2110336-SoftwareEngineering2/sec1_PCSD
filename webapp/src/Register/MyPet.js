@@ -1,12 +1,14 @@
-import React from 'react'
-import Addpet from './AddPet'
-
-function MyPet() {
+import React from 'react';
+import Addpet from './AddPet';
+import AddButton from "./AddButton";
+import "./MyPet.css";
+function MyPet(props) {
     return (
         <div className="mypet">
-            <Addpet />
+            <AddButton />
         </div>
     )
 }
 
-export default MyPet
+export default MyPet;
+

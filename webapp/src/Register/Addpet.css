@@ -36,3 +36,7 @@
     color: #8E8E8E;
     font-weight: bold;
 }
+
+.pet__info {
+    margin-left: 10px;
+}
