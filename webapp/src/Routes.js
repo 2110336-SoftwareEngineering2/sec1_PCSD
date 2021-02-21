@@ -12,12 +12,12 @@ import history from './history';
 export default class Routes extends Component {
     render() {
         const user = null;
-        const role = "caretaker";
+        const role = "petowner";
         return (
             <Router history={history}>
                 <Switch>
                     <Route path="/" exact component={ !user ? LoginPage : Home } />
-                    <Route path="/register" component={ role == "petowner" ? Petowner : Caretaker  } />
+                    <Route path="/register" exact component={ role == "petowner" ? Petowner : Caretaker  } />
                 </Switch>
             </Router>
         );
