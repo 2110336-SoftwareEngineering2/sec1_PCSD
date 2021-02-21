@@ -76,7 +76,7 @@ class RadioButton extends React.Component {
         return(
             <div>
                 <label className="radio">
-                    Female<input 
+                    Female&nbsp;<input 
                               type="radio" 
                               value="female" 
                               checked={this.state.selectedOption === "female"} 
@@ -84,7 +84,7 @@ class RadioButton extends React.Component {
                 </label>
                 &nbsp;
                 <label className="radio">
-                    Male<input 
+                    Male&nbsp;<input 
                             type="radio" 
                             value="male" 
                             checked={this.state.selectedOption === "male"} 

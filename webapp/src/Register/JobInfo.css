@@ -34,22 +34,41 @@
     text-align: left;
 }
 
-.register_info {
-    padding: 15px 20px;
-    display: flex;
-    background-color: white;
-    border-radius: 0px 0px 8px 8px;
-    height: 509px;
-    top: 0;
-/*    box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);*/
+/* container ---------------------------------------*/
+.availdays {
+    text-align: center;
+    margin-top: 13px;
 }
 
-.registerinfo {
-    width: 100%;
+.signupbutton {
+    text-align: center;
+}
+
+/* button ------------------------------------------*/
+button.signup {
+    border: none;
+    outline: none;
+    background-color: #bd6a43;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
+
+.availdays button {
+    outline: none;
+    background-color: #fffefe;
+    color: #8e8e8e;
+    border: 1px solid #8e8e8e;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 15px;
 }
 
 /* label & input -----------------------------------*/
-.registerinfo label {
+.jobinfo label {
     color: #8e8e8e;
     line-height: 2rem;
     font-weight: bold;
@@ -60,12 +79,4 @@ input.texting {
     border-radius: 4px;
     padding: 3px;
     font-size: 16px;
-}
-
-/* radiobutton */
-.radio {
-    border: 1px solid #8e8e8e;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 5px;
 }
