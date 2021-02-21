@@ -4,7 +4,6 @@ import "./App.css";
 import petidcare from "./petidcare.png";
 import Logo from "./Logo";
 import UserLogin from "./component/login-component";
-import "./component/script";
 
 function LoginPage() {
   return (
