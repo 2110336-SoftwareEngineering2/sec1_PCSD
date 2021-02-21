@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-import $ from "jquery";
 import "./script";
 import history from "./../history";
 function Register() {
@@ -43,7 +42,7 @@ function Register() {
             type="submit"
             value="Sign Up"
             name="register"
-            onClick={() => history.push("/Register")}
+            onClick={() => history.push("/register")}
           />
         </form>
       </div>

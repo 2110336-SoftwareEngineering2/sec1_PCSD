@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Register from "./Register-component";
+import LoadScript from "./script";
 import "./style.css";
-import $ from "jquery";
-import "./script";
-import Logo from "./../Logo";
+
 export default class UserLogin extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +12,8 @@ export default class UserLogin extends Component {
       email: "",
       password: "",
     };
+
+    LoadScript();
   }
 
   setEmail(email) {
@@ -37,7 +38,8 @@ export default class UserLogin extends Component {
 
     axios
       .post("http://localhost:4000/auth/login", user)
-      .then((res) => console.log(res.data));
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   }
 
   render() {
