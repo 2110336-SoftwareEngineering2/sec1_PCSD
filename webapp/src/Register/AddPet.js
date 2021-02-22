@@ -1,27 +1,33 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./Addpet.css";
 import "./Register_info.css";
 import image from "./../petpic.png";
 
-export default class Addpet extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { img: image };
-        this.uploadImg = this.uploadImg.bind(this);
+function Addpet({addPetList}) {
+    const [img, setImage] = useState(image);
+    const [uploadImg, setUpload] = useState('');
+    const [input, setInput] = useState('');
+    const [pet_lists, setPetlists] = useState([]);
+
+    function uploadImage(event) {
+        const pic = URL.createObjectURL(event.target.files[0]);
+        setImage(pic);
     }
 
-    uploadImg(event) {
-        const img = URL.createObjectURL(event.target.files[0]);
-        this.setState({ img: img });
+    function onChange(event){
+        setInput(event.target.value);
     }
-
-    render() {
+    
+    function onClicked(event){
+            addPetList(input);
+                setInput('');
+    }
         return (
             <div className="addpet">
                 <div className="picture">
-                    <img src={this.state.img} />
+                    <img src={img} />
                     <label id="uploadpic">
-                        Upload Photo <input type="file" accept="image/png, image/jpeg" onChange={this.uploadImg} />
+                        Upload Photo <input type="file" accept="image/png, image/jpeg" onChange={uploadImage} />
                     </label>
                 </div>
                 <div className="pettype">
@@ -60,7 +66,7 @@ export default class Addpet extends React.Component {
                                 <label>
                                     Pet Name
                                 </label>
-                                <input type="text" placeholder="Your Pet Name"></input>
+                                <input type="text" placeholder="Your Pet Name" onChange={onChange} value= {input} ></input>
                             </div>
                             <div className="col-6">
                                 <label>
@@ -85,8 +91,9 @@ export default class Addpet extends React.Component {
                 </div>
             </div>
         );
-    }
 }
+
+export default Addpet;
 
 class RadioGender extends React.Component {
     constructor(props) {

@@ -1,26 +1,34 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import Pet from "./Pet";
 import AddPet from "./AddPet";
 import SumPet from "./SumPet";
 import "./AddButton.css";
-export default class AddButton extends React.Component {
-    constructor(props) {
-        super();
-        this.state = {isNext: false};
-        this.clickedAdd = this.clickedAdd.bind(this);
+
+let id = 1;
+
+function AddButton() {
+    const [isNext, setIsNext] = useState(false);
+    const [pet_lists, setPetlists] = useState([]);
+    
+    function clickedAdd(event) {
+        if(!isNext)
+        setIsNext(true);
+        else  setIsNext(false);
     }
     
-    clickedAdd(event) {
-        this.setState({isNext: true});
+    function addPetList(name) {
+        const newPet = {id, name};
+        setPetlists([newPet, ...pet_lists]);
+        id +=1;
     }
-    render() {
-        return(
+        return( 
             <div>
-                {!this.state.isNext ? <AddPet /> : <SumPet/> }
-                {!this.state.isNext ? 
+                {!isNext ? <AddPet addPetList = {addPetList} /> : <SumPet pet_lists={pet_lists} id={id}/> }
                  <div className="addbutton">
-                    <button className="submit" onClick={this.clickedAdd}>Add Pet</button>
-                 </div> : null}
-            </div>
+                    <button className="submit" onClick={clickedAdd}>Add Pet</button>
+                 </div> 
+            </div> 
         );
-    }
 }
+
+export default AddButton;

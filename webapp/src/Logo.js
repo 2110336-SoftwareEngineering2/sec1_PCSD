@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import petidcare from "./petidcare.png";
 
@@ -10,7 +9,7 @@ function Logo() {
   <img src={petidcare} />
             <p>
             online matching platform
-for caretakers and pet owners
+            for caretakers and pet owners
             </p>
     </div>
 
