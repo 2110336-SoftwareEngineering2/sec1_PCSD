@@ -61,12 +61,12 @@
   margin: 10px;
 }
 
-.profile {
+.header__profile {
   display: flex;
   align-items: center;
   margin-left: 10px;
 }
 
-.profile > h4 {
+.header__profile > h4 {
   margin-left: 10px;
 }
