@@ -8,8 +8,7 @@ import Caretaker from "./Register/Caretaker";
 import Petowner from "./Register/Petowner";
 import history from "./history";
 import ChatPage from "./Chat/chat";
-import Header from "./header";
-
+import Header from "./Header/header";
 function Routes() {
   const user = null;
   const role = "petowner";
