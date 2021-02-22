@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html,
+  
+    body{
+      height: 100%;
+    }
+  
+    html{
+      background: #F1F1F1;
+          font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;font-weight: light;
+          font-weight: 100;
+    }
+  
+    body{
+      display: grid;
+      place-items: center;
+    }
+  
+    #chat-container{
+      display: grid;
+      grid:
+          /*'Title' 71px*/
+          'search-container chat-title' 60px
+          'conversation-list chat-mesages' 1fr
+          'new-chat-container chat-form'65px
+          /275px 1fr;
+      min-width: 800px;
+      /*max-width: 1000px;*/
+      max-height: 800px;
+      height: 95vh;
+      width: 95vw;
+      background: #fff;
+      border-radius: 10px;
+    }
+    #search-container,
+    #conversation-list,
+    #new-chat-container{
+      background: #fff;
+    }
+  
+    #search-container{
+      grid-area: search-container;
+      display: grid;
+      align-items: center;
+      padding: 0 20px;
+      border-radius: 10px 0 0 0;
+      /*Edit this*/
+      box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.25);
+      z-index: 1;
+    }
+    #search-container input{
+      background: #d3d3d3;
+      outline: black;
+      font-weight: bold;
+      border-radius: 2px;
+      height: 30px;
+      border: 0;
+      padding-left: 15px;
+      padding-right: 7px;
+      font-size: 1rem;
+    }
+  
+    #search-container input::placeholder{
+      color: #fff;
+      font-weight: bold;
+    }
+  
+    #conversation-list{
+      grid-area: conversation-list;
+    }
+    #new-chat-container{
+      grid-area: new-chat-container;
+      /*Edit this*/
+      box-shadow: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 0 0 0 10px;
+    }
+  
+    #chat-title,
+    #chat-form{
+      background: #e1e1e1;
+    }
+  
+    #chat-title{
+      grid-area: chat-title;
+      border-radius: 0 10px 0 0;
+      color: #000;
+      font-weight: bold;
+      font-size: 2.0rem;
+      box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.75);
+    }
+    #chat-mesages{
+      grid-area: chat-mesages;
+      background: #d3d3d3;
+      
+    }
+    #chat-form{
+      grid-row: chat-form ;
+      border-radius: 0 0 10px 0;
+    }
