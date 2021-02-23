@@ -7,13 +7,10 @@ import LoginPage from "./LoginPage";
 import Home from "./Home/Home";
 import Routes from "./Routes";
 function App() {
-  // const [email, setEmail] = useState('');
-  // const [pass, setPass] = useState('');
-  // console.log('render email', email);
   return (
-       <div className="app">
-            <Routes />
-       </div>
+    <div className="app">
+      <Routes />
+    </div>
   );
 }
 
