@@ -5,20 +5,15 @@ table {
 }
 
 table th {
-  font-size: 20px;
+  font-size: 18px;
+  padding: 8px 10px 8px 10px;
 }
-
-table td,
-table th {
-  /* border: 10px solid #ddd; */
+table td {
+  font-size: 13px;
   padding: 8px 0px 8px 0px;
   text-align: center;
 }
 
-button {
-  margin-left: 10px;
-  margin-bottom: 7px;
-}
 .normal_line {
   background-color: #c6c6c6;
   border-color: white;

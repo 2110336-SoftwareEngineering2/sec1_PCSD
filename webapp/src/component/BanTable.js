@@ -30,7 +30,7 @@ export const BanTable = () => {
               return (
                 <th {...column.getHeaderProps()}>
                   {column.render("Header")}
-                  <hr />
+                  {/* <hr /> */}
                 </th>
               );
             })}
@@ -39,19 +39,71 @@ export const BanTable = () => {
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
+          const status = row.values.status;
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                if (cell.value === undefined) {
+                if (cell.value === undefined && status == "Banned") {
                   return (
                     <td>
-                      <button variant="contained" disabled>
+                      <Button
+                        variant="contained"
+                        style={{
+                          padding: "0px",
+                          fontSize: "11px",
+                          color: "white",
+                          backgroundColor: "#43BD48",
+                          marginRight: "8px",
+                          marginBottom: "3px",
+                        }}
+                      >
                         Unban
-                      </button>
-                      <button variant="contained" disabled>
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        style={{
+                          padding: "0px",
+                          fontSize: "11px",
+                          width: "5px",
+                          marginBottom: "3px",
+                        }}
+                        disabled
+                      >
                         Ban
-                      </button>
+                      </Button>
+                      <hr className="ban_line" />
+                    </td>
+                  );
+                } else if (cell.value === undefined && status == "Normal") {
+                  return (
+                    <td>
+                      <Button
+                        variant="contained"
+                        style={{
+                          padding: "0px",
+                          fontSize: "11px",
+                          marginRight: "8px",
+                          marginBottom: "3px",
+                        }}
+                        disabled
+                      >
+                        Unban
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        style={{
+                          padding: "0px",
+                          fontSize: "11px",
+                          backgroundColor: "#C53030",
+                          width: "5px",
+                          marginBottom: "3px",
+                        }}
+                      >
+                        Ban
+                      </Button>
                       <hr className="ban_line" />
                     </td>
                   );
