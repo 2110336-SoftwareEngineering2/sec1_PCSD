@@ -27,6 +27,10 @@ router.delete("/account/:id", (req, res) => {
   UserController.deleteUser(req, res);
 });
 
+router.get("/pet", (req, res) => {
+  PetController.getPet(req, res);
+});
+
 router.post("/pet", (req, res) => {
   PetController.addPet(req, res);
 });

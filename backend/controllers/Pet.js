@@ -46,4 +46,8 @@ module.exports = {
       );
     }
   },
+  getPet: async (req, res) => {
+    const pets = await Pet.find();
+    return pets;
+  },
 };
