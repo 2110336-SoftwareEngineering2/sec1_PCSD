@@ -9,7 +9,8 @@ import Petowner from "./Register/Petowner";
 import history from "./history";
 import ChatPage from "./Chat/chat";
 import MyContext from "./component/MyContext";
-
+import UpdateInfoCaretaker from "./UpdateInfo/UpdateInfoCaretaker";
+import UpdateInfoPetowner from "./UpdateInfo/UpdateInfoPetowner";
 function Routes() {
   const [values, setValue] = useState({
     user: "",
@@ -21,7 +22,6 @@ function Routes() {
     setValue({ ...values, [key]: value });
     console.log(values);
   };
-
   return (
     <MyContext.Provider value={{ state: values, updateValue: { updateValue } }}>
       <Router history={history}>
@@ -33,6 +33,14 @@ function Routes() {
           />
           <Route path="/chat" component={ChatPage} />
           <Route path="/banpage" component={BanPage} />
+          <Route
+            path="/updateinfo"
+            component={
+              values.role == "petowner"
+                ? UpdateInfoPetowner
+                : UpdateInfoCaretaker
+            }
+          />
         </Switch>
       </Router>
     </MyContext.Provider>
