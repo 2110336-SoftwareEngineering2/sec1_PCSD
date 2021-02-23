@@ -4,12 +4,9 @@ import "./Register_header.css";
 function Register_header(props) {
   return (
     <div className="register_header">
-       <p>Register as {props.title}</p>
+      <p>Edit {props.title}'s Profile</p>
     </div>
-
   );
 }
 
 export default Register_header;
-
-
