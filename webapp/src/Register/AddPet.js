@@ -3,12 +3,13 @@ import "./Addpet.css";
 import "./Register_info.css";
 import image from "./../petpic.png";
 
-function Addpet({addPetList}) {
+function Addpet({addPetList, click}) {
     const [img, setImage] = useState(image);
     const [uploadImg, setUpload] = useState('');
     const [input, setInput] = useState('');
     const [pet_lists, setPetlists] = useState([]);
-
+    console.log({click});
+    console.log({input});
     function uploadImage(event) {
         const pic = URL.createObjectURL(event.target.files[0]);
         setImage(pic);
@@ -16,11 +17,16 @@ function Addpet({addPetList}) {
 
     function onChange(event){
         setInput(event.target.value);
+        onClicked(click);
+        addPetList(input);
     }
-    
-    function onClicked(event){
+
+    function onClicked(clicked){
+        console.log(clicked);
+        if(clicked) {
             addPetList(input);
                 setInput('');
+        }
     }
         return (
             <div className="addpet">

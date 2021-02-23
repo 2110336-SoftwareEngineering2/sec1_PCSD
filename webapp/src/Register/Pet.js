@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import "./Pet.css";
 
 function Pet({ id, name, deletePet }) {
+    console.log({name});
     return (
         <div className="pet">
             <img className="Pet__image" src={`https://source.unsplash.com/random?sig=${id}`} />
