@@ -1,7 +1,3 @@
-.registerinfo{
-    width: 100%;
-}
-
 /* row & col initialization -----------------------*/
 .row {
     display: flex;
