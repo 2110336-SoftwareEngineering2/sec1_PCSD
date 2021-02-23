@@ -33,6 +33,17 @@ const findUserChatroomsByEmail = async (req, res) => {
     })
 }
 
+// const pushMessage = async (req, res) => {
+//     const {id, message, token, email, time} = req.body;
+//     const data = {
+//         message: message,
+//         email: email,
+//         time: time
+//     }
+//     const result = await Chatrooms.updateOne({_id: id}, {$push: {messages: data }}, { new: true, upsert: true });
+//     res.json(result);
+// }
+
 const createChatroom = (req, res) => {
     // send req.body => { members : [email_user_1, email_user_2 ] }
     const newChatRoom = new Chatrooms({ ...req.body, });
@@ -44,6 +55,17 @@ const createChatroom = (req, res) => {
             return res.status(200).json(newChatRoom);
         }
     })
+}
+
+const clearMessages = async (req, res) => {
+    const roomId = req.params.id;
+    await Chatrooms.findOneAndUpdate({_id: roomId}, {$set: {messages: []}}, (err, result) => {
+        if (err) {
+            res.status(404).send(err);
+        } else {
+            res.status(200).json(result);
+        }
+    }) 
 }
 
 const createMessage = async (roomId, message) => {
@@ -77,5 +99,9 @@ module.exports = {
 
     saveMessage: async (roomId, message) => {
         await createMessage(roomId, message);
+    },
+
+    deleteAllMessages: async (req, res) => {
+        await clearMessages(req, res);
     },
 }

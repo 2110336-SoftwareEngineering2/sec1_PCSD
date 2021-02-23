@@ -12,6 +12,7 @@ class LoginPage extends Component {
         return (
             <div className="login">
                 <LoginBox />
+                <h2><a href="/chat">Chat Page</a></h2>
             </div>
         );
     }

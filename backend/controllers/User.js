@@ -71,6 +71,16 @@ const deleteUserById = async (id) => {
   }
 };
 
+const getAllUsersEmail = async (req, res) => {
+  const emails = User.find({}, {_id: 0, email:1} , (err, result) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.status(200).json(result);
+    }
+  })
+}
+
 module.exports = {
   getUser: async (req, res) => {
     const allUser = await User.find({}, function (err, result) {
@@ -104,5 +114,9 @@ module.exports = {
     const id = req.params.id;
     const result = await deleteUserById(id);
     res.status(result.status).send(result.message);
+  },
+
+  getAllEmails: async (req, res) => {
+    await getAllUsersEmail(req, res);
   },
 };
