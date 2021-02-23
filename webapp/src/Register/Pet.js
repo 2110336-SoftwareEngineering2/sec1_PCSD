@@ -1,12 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import "./Pet.css";
 
 function Pet({ id, name, deletePet }) {
+    console.log({name});
     return (
         <div className="pet">
-            <button className="Pet__delete" onClick={() => deletePet(id)}>X</button>
-            <div className="Pet__name">{name}</div>
             <img className="Pet__image" src={`https://source.unsplash.com/random?sig=${id}`} />
+            <div className="col-5">
+            <div className="Pet__name">{name}, 10 months</div>
+            <button className="Pet__edit">Edit</button>
+            </div>
+            <button className="Pet__delete" onClick={() => deletePet(id)}>X</button>
         </div>
     )
 }
