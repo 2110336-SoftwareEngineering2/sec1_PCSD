@@ -6,29 +6,30 @@ import image from "./../petpic.png";
 function Addpet({addPetList, click}) {
     const [img, setImage] = useState(image);
     const [uploadImg, setUpload] = useState('');
-    const [input, setInput] = useState('');
-    const [pet_lists, setPetlists] = useState([]);
-    console.log({click});
-    console.log({input});
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
+    const [breed, setBreed] = useState('');
+    const [gender, setGender] = useState('');
     function uploadImage(event) {
         const pic = URL.createObjectURL(event.target.files[0]);
         setImage(pic);
     }
-
-    function onChange(event){
-        setInput(event.target.value);
-        onClicked(click);
-        addPetList(input);
+    function onName(event){
+        setName(event.target.value);
     }
-
-    function onClicked(clicked){
-        console.log(clicked);
-        if(clicked) {
-            addPetList(input);
-                setInput('');
-        }
+    function onAge(event){
+        setAge(event.target.value);
     }
-        return (
+    function onBreed(event){
+        setBreed(event.target.value);
+    }
+    function onGender(gender){
+        setGender(gender);
+    }
+    if(click){
+        addPetList(name,img,age,breed,gender);
+    }        
+    return (
             <div className="addpet">
                 <div className="picture">
                     <img src={img} />
@@ -72,13 +73,13 @@ function Addpet({addPetList, click}) {
                                 <label>
                                     Pet Name
                                 </label>
-                                <input type="text" placeholder="Your Pet Name" onChange={onChange} value= {input} ></input>
+                                <input type="text" placeholder="Your Pet Name" onChange={onName} value= {name} ></input>
                             </div>
                             <div className="col-6">
                                 <label>
                                     Breed
                                 </label>
-                                <input type="text" placeholder="Breed of you pet"></input>
+                                <input type="text" placeholder="Breed of you pet" onChange={onBreed} value= {breed}></input>
                             </div>
                         </div>
                         <div className="row">
@@ -86,11 +87,11 @@ function Addpet({addPetList, click}) {
                                 <label>
                                     Age
                                 </label>
-                                <input type="text" placeholder="Your Pet Age"></input>
+                                <input type="text" placeholder="Your Pet Age" onChange={onAge} value= {age}></input>
                             </div>
                             <div className="col-6">
                                 <label>Gender</label><br /><br />
-                                <RadioGender  />
+                                <RadioGender onGender={onGender} />
                             </div>
                         </div>
                     </form>
@@ -106,12 +107,14 @@ class RadioGender extends React.Component {
         super(props);
         this.state = {selectedOption: null};
         this.onValueChange = this.onValueChange.bind(this);
+        this.onGender = props.onGender;
     }
     
     onValueChange(event) {
         this.setState({selectedOption: event.target.value});
+        this.onGender(event.target.value);
     }
-    
+
     render() {
         return(
             <div>
