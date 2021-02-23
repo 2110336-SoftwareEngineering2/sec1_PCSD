@@ -11,4 +11,3 @@ function MyPet(props) {
 }
 
 export default MyPet;
-

@@ -5,6 +5,7 @@ import Register_info from "./Register_info";
 import Register_header from "./Register_header";
 import JobInfo from "./JobInfo";
 import MyPet from "./MyPet";
+import SumPet from "./SumPet";
 function UserInfo(props) {
   return (
     <div className="userInfo">

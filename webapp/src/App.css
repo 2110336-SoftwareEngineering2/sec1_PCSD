@@ -1,6 +1,5 @@
 .app__body {
     display: flex;
-    
 }
 
 .login__register {
@@ -20,5 +19,8 @@
 
 .logo > img {
     margin-left: 40px;
-    
+}
+
+.loginPage {
+    display: flex;
 }
