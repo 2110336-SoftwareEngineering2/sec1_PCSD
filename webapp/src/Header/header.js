@@ -6,7 +6,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MailIcon from "@material-ui/icons/Mail";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar, IconButton } from "@material-ui/core";
-
+import history from "./../history";
 function Header() {
   return (
     <div className="header">
@@ -24,7 +24,8 @@ function Header() {
       </div>
       <div className="header__right">
         <IconButton>
-          <NotificationsIcon />
+          <NotificationsIcon onClick={() => {
+              history.push({ pathname: "/updateinfo" });}}/>
         </IconButton>
         <IconButton>
           <MailIcon />

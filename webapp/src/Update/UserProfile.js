@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./UpdateUserProfile.css";
+import "./UserProfile.css";
 import image from "./../userpic.png";
 
-function UpdateUserProfile({uInfo}) {
+function UserProfile({uInfo}) {
     console.log(uInfo);
     const [img, setImage] = useState(image);
    
@@ -27,4 +27,4 @@ function UpdateUserProfile({uInfo}) {
     
 }
 
-export default UpdateUserProfile;
+export default UserProfile;

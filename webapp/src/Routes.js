@@ -8,15 +8,14 @@ import Caretaker from "./Register/Caretaker";
 import Petowner from "./Register/Petowner";
 import history from "./history";
 import ChatPage from "./Chat/chat";
-import UpdateInfoCaretaker from "./UpdateInfo/UpdateInfoCaretaker";
-import UpdateInfoPetowner from "./UpdateInfo/UpdateInfoPetowner";
-
+import UpdateCaretaker from "./Update/Caretaker";
+import UpdatePetowner from "./Update/Petowner";
 import { RegisterContext, UserContext } from "./context/MyContext";
 
 function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
-  console.log(context);
+  console.log(context, userContext);
   const [values, setValue] = useState({
     user: null,
     roleDefault: "petowner",
@@ -37,8 +36,8 @@ function Routes() {
           path="/updateinfo"
           component={
             context.data.role == "petowner"
-              ? UpdateInfoPetowner
-              : UpdateInfoCaretaker
+              ? UpdatePetowner
+              : UpdateCaretaker
           }
         />
       </Switch>
