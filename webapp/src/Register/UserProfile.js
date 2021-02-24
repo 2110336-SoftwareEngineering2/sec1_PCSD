@@ -1,30 +1,25 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState } from "react";
 import "./UserProfile.css";
 import image from "./../userpic.png";
-import { Avatar } from "@material-ui/core";
 
-export default class UserProfile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {img: image};
-        this.uploadImg = this.uploadImg.bind(this);
+function UserProfile({uInfo}) {
+    console.log("ypypyp", uInfo);
+    const [img, setImage] = useState(image);
+    const [Fname, setFName] = useState(uInfo.fname);
+    const [Sname, setSName] = useState(uInfo.sname);
+    const [Username, setUserName] = useState(uInfo.username);
+   
+    function uploadImg(event) {
+        setImage(URL.createObjectURL(event.target.files[0]));
     }
-    
-    uploadImg(event) {
-        const img = URL.createObjectURL(event.target.files[0]);
-        this.setState({img: img});
-    }
-    
-    render() {
         return(
             <div className="profile">
-                <h3>Name</h3><br/>
-                <label className="blacklabel">@username</label><br/>
-                <img src={this.state.img}/>
+                <h3>{uInfo.fname}  {uInfo.sname}</h3><br/>
+                <label className="blacklabel">@{uInfo.username}</label><br/>
+                <img src={img}/>
                 <br/>
                 <label id="inputfile">
-                    Upload Your Photo <input type="file" accept="image/png, image/jpeg" onChange={this.uploadImg}/>
+                    Upload Your Photo <input type="file" accept="image/png, image/jpeg" onChange={uploadImg}/>
                 </label>
                 <div className="inputformat">
                     <label>Acceptable formats: <b className="blacklabel" >jpg, png</b> only</label><br/>
@@ -32,5 +27,7 @@ export default class UserProfile extends React.Component {
                 </div>
             </div>
         );
-    }
+    
 }
+
+export default UserProfile;
