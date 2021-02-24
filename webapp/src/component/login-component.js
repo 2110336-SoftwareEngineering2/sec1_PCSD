@@ -3,7 +3,7 @@ import axios from "axios";
 import Register from "./Register-component";
 import LoadScript from "./script";
 import "./style.css";
-
+import history from "./../history";
 import { UserContext } from "../context/MyContext";
 
 function UserLogin(props) {
@@ -31,7 +31,8 @@ function UserLogin(props) {
       .post("http://localhost:4000/auth/login", user)
       .then((res) => {
         context.login(res.data);
-        // console.log(res.data);
+        context.user = user;
+        console.log(context.user);
       })
       .catch((err) => console.log(err));
   };
@@ -58,7 +59,9 @@ function UserLogin(props) {
                 placeholder="Password"
                 onChange={onChange}
               />
-              <input type="submit" value="Login" name="login" />
+              <input type="submit" value="Login" name="login" onClick={() => {
+              history.push({ pathname: "/" });
+            }} />
             </form>
             <div className="form-check">
               <label className="form-check-label">
