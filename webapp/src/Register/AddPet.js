@@ -3,10 +3,10 @@ import "./Addpet.css";
 import "./Register_info.css";
 import image from "./../petpic.png";
 
-function Addpet({ addPetList }) {
+function Addpet({ onChange, input }) {
   const [img, setImage] = useState(image);
   const [uploadImg, setUpload] = useState("");
-  const [input, setInput] = useState("");
+
   const [pet_lists, setPetlists] = useState([]);
 
   function uploadImage(event) {
@@ -14,13 +14,8 @@ function Addpet({ addPetList }) {
     setImage(pic);
   }
 
-  function onChange(event) {
-    setInput(event.target.value);
-  }
-
-  function onClicked(event) {
-    addPetList(input);
-    setInput("");
+  function handleChange(event) {
+    onChange(event);
   }
 
   return (
@@ -42,29 +37,65 @@ function Addpet({ addPetList }) {
         <div className="row">
           <div className="col-2" id="type">
             <label>
-              <input type="checkbox" value="dog" /> Dog
+              <input
+                type="checkbox"
+                name="petType"
+                value="dog"
+                onChange={handleChange}
+              />{" "}
+              Dog
             </label>
             <br />
             <label>
-              <input type="checkbox" value="cat" /> Cat
+              <input
+                type="checkbox"
+                name="petType"
+                value="cat"
+                onChange={handleChange}
+              />{" "}
+              Cat
             </label>
           </div>
           <div className="col-2" id="type">
             <label>
-              <input type="checkbox" value="rabbit" /> Rabbit
+              <input
+                type="checkbox"
+                name="petType"
+                value="rabbit"
+                onChange={handleChange}
+              />{" "}
+              Rabbit
             </label>
             <br />
             <label>
-              <input type="checkbox" value="bird" /> Bird
+              <input
+                type="checkbox"
+                name="petType"
+                value="bird"
+                onChange={handleChange}
+              />{" "}
+              Bird
             </label>
           </div>
           <div className="col-3" id="type">
             <label>
-              <input type="checkbox" value="hamster" /> Hamster
+              <input
+                type="checkbox"
+                name="petType"
+                value="hamster"
+                onChange={handleChange}
+              />{" "}
+              Hamster
             </label>
             <br />
             <label>
-              <input type="checkbox" value="turtle" /> Turtle
+              <input
+                type="checkbox"
+                name="petType"
+                value="turtle"
+                onChange={handleChange}
+              />{" "}
+              Turtle
             </label>
           </div>
         </div>
@@ -77,25 +108,38 @@ function Addpet({ addPetList }) {
               <input
                 type="text"
                 placeholder="Your Pet Name"
-                onChange={onChange}
-                value={input}
+                name="petName"
+                onChange={handleChange}
+                value={input.petName}
               ></input>
             </div>
             <div className="col-6">
               <label>Breed</label>
-              <input type="text" placeholder="Breed of you pet"></input>
+              <input
+                type="text"
+                placeholder="Breed of you pet"
+                name="breed"
+                onChange={handleChange}
+                value={input.breed}
+              ></input>
             </div>
           </div>
           <div className="row">
             <div className="col-6">
               <label>Age</label>
-              <input type="text" placeholder="Your Pet Age"></input>
+              <input
+                type="text"
+                name="age"
+                placeholder="Your Pet Age"
+                value={input.age}
+                onChange={handleChange}
+              ></input>
             </div>
             <div className="col-6">
               <label>Gender</label>
               <br />
               <br />
-              <RadioGender />
+              <RadioGender onChange={onChange} />
             </div>
           </div>
         </form>
@@ -115,6 +159,7 @@ class RadioGender extends React.Component {
 
   onValueChange(event) {
     this.setState({ selectedOption: event.target.value });
+    this.props.onChange(event);
   }
 
   render() {
@@ -126,6 +171,7 @@ class RadioGender extends React.Component {
             type="radio"
             value="female"
             checked={this.state.selectedOption === "female"}
+            name="gender"
             onChange={this.onValueChange}
           />
         </label>
@@ -136,6 +182,7 @@ class RadioGender extends React.Component {
             type="radio"
             value="male"
             checked={this.state.selectedOption === "male"}
+            name="gender"
             onChange={this.onValueChange}
           />
         </label>
