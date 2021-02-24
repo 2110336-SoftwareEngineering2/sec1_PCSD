@@ -4,10 +4,17 @@ import MOCK_DATA from "./MOCK_DATA.json";
 import { COLUMNS } from "./columns";
 import "./BanTable.css";
 import { Button } from "@material-ui/core";
+import axios from "axios";
 
 export const BanTable = () => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => MOCK_DATA, []);
+
+  const data2 = axios
+    .get("http://localhost:4000/User")
+    .then((res) => console.log("res", res.data));
+
+  console.log("data2", data2);
 
   const tableInstance = useTable({
     columns,
