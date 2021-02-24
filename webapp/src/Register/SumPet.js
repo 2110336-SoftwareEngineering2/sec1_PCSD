@@ -1,14 +1,19 @@
-import React, { Component } from "react";
-import AddPet from "./AddPet";
-import AddButton2 from "./AddButton2";
-function SumPet() {
+import React, { useState } from "react";
+import Pet from "./Pet";
+import "./Sumpet.css";
+function SumPet({pet_lists,deletePet}) {
+   
+    console.log("choichoi");
     return (
-        <div>
-            <p>this is sumpet</p>
+        <div className="sumpet">
             {/*Pet lists*/}
+          { /* */} 
+          {pet_lists.map((pet) => (
+        <Pet info={pet} deletePet={deletePet} />
+    ))} 
         </div>
+  
     )
 }
 
-export default SumPet
-
+export default SumPet;

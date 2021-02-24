@@ -26,4 +26,4 @@ export default class ChatPage extends React.Component{
         </div>
     }
 }
-export default ChatPage;
+//export default ChatPage;
