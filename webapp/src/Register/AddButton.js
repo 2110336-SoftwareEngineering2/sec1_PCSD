@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Pet from "./Pet";
 import AddPet from "./AddPet";
 import SumPet from "./SumPet";
 import "./AddButton.css";
@@ -70,7 +69,9 @@ function AddButton() {
         <button className="submit" onClick={clickedAdd}>
           Add Pet
         </button>
+        {!isNext ? null : <button className="SignUpButton">Sign Up</button>}
       </div>
+      
     </div>
   );
 }

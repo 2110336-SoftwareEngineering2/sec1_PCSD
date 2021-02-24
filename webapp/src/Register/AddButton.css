@@ -8,7 +8,19 @@
 .addbutton button {
     border: none;
     outline: none;
-    background-color: #bd6a43;
+    background-color: #644D3C;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
+
+.addbutton > .SignUpButton {
+    border: none;
+    outline: none;
+    background-color: #BD6A43;
     color: white;
     font-size: 16px;
     font-weight: bold;
