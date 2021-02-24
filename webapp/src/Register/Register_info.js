@@ -20,7 +20,7 @@ function RegisterInfo(props) {
     <div className="registerinfo">
       <form>
         <div className="row">
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>First name</label>
             <br />
             <input
@@ -31,7 +31,7 @@ function RegisterInfo(props) {
               onChange={props.onChange}
             />
           </div>
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>Surname</label>
             <br />
             <input
@@ -44,7 +44,7 @@ function RegisterInfo(props) {
           </div>
         </div>
         <div className="row">
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>Password</label>
             <br />
             <input
@@ -55,7 +55,7 @@ function RegisterInfo(props) {
               onChange={props.onChange}
             />
           </div>
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>Comfirm Password</label>
             <br />
             <input
@@ -68,7 +68,7 @@ function RegisterInfo(props) {
           </div>
         </div>
         <div className="row">
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>Email Address</label>
             <br />
             <input
@@ -79,7 +79,7 @@ function RegisterInfo(props) {
               onChange={props.onChange}
             />
           </div>
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>Username</label>
             <br />
             <input
@@ -92,7 +92,7 @@ function RegisterInfo(props) {
           </div>
         </div>
         <div className="row">
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>Phone Number</label>
             <br />
             <input
@@ -104,7 +104,7 @@ function RegisterInfo(props) {
               onChange={props.onChange}
             />
           </div>
-          <div className="col-6">
+          <div className="col-6 registercol">
             <label>Gender</label>
             <br />
             <RadioButton

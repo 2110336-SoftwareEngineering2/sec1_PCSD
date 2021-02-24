@@ -28,9 +28,9 @@
     box-sizing: border-box;
 }
 
-[class*="col-"] {
+.registercol {
     float: left;
-    padding: 3%;
+    padding: 15px;
     text-align: left;
 }
 

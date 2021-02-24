@@ -37,7 +37,7 @@ function Addpet({ addPetList, click, onChange, input }) {
       </div>
       <div className="pettype">
         <label>Pet Type</label>
-        <br />
+        <br /><br/>
         <div className="row">
           <div className="col-2" id="type">
             <label>
@@ -107,7 +107,7 @@ function Addpet({ addPetList, click, onChange, input }) {
       <div className="pet__info">
         <form>
           <div className="row">
-            <div className="col-6">
+            <div className="col-6 petinfocol">
               <label>Pet Name</label>
               <input
                 type="text"
@@ -117,7 +117,7 @@ function Addpet({ addPetList, click, onChange, input }) {
                 value={input.petName}
               ></input>
             </div>
-            <div className="col-6">
+            <div className="col-6 petinfocol">
               <label>Breed</label>
               <input
                 type="text"
@@ -129,7 +129,7 @@ function Addpet({ addPetList, click, onChange, input }) {
             </div>
           </div>
           <div className="row">
-            <div className="col-6">
+            <div className="col-6 petinfocol">
               <label>Age</label>
               <input
                 type="text"
@@ -139,7 +139,7 @@ function Addpet({ addPetList, click, onChange, input }) {
                 onChange={handleChange}
               ></input>
             </div>
-            <div className="col-6">
+            <div className="col-6 petinfocol">
               <label>Gender</label>
               <br />
               <br />
