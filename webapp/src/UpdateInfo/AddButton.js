@@ -27,6 +27,7 @@ function AddButton() {
                  <div className="addbutton">
                     <button className="submit" onClick={clickedAdd}>Add Pet</button>
                  </div> 
+
             </div> 
         );
 }

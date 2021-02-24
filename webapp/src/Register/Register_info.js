@@ -1,30 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Register_info.css";
 import Caretaker from './Caretaker.js'
-function Register_info() {
+function Register_info(props) {
+    function onfName(event){
+        //setFName(event.target.value);
+        props.updateFunc.onfName(event.target.value);
+    }
+    function onsName(event){
+        //setSName(event.target.value);
+        props.updateFunc.onsName(event.target.value);
+    }
+    function onUsername(event){
+        //setUserName(event.target.value);
+        props.updateFunc.onUsername(event.target.value);
+    }
+    //console.log(fname);
   return (
     <div className="register_info">
-        <RegisterInfo/>
-    </div>
-  );
-}
-
-export default Register_info;
-
-class RegisterInfo extends React.Component {
-    render() {
-        return(
-            <div className="registerinfo">
+        <div className="registerinfo">
                 <form>
                 <div className="row">
                     <div className="col-6">
                         <label>First name</label><br/>
-                        <input className="texting" type="text"/>
+                        <input className="texting" type="text" onChange={onfName}/>
                     </div>
                     <div className="col-6">
                         <label>Surname</label><br/>
-                        <input className="texting" type="text"/>
+                        <input className="texting" type="text" onChange={onsName}/>
                     </div>
                 </div>
                 <div className="row">
@@ -44,7 +47,7 @@ class RegisterInfo extends React.Component {
                     </div>
                     <div className="col-6">
                         <label>Username</label><br/>
-                        <input className="texting" type="text"/>
+                        <input className="texting" type="text"onChange={onUsername}/>
                     </div>
                 </div>
                 <div className="row">
@@ -59,9 +62,12 @@ class RegisterInfo extends React.Component {
                 </div>
                 </form>
             </div>
-        );
-    }
+    </div>
+  );
 }
+
+export default Register_info;
+
 
 class RadioButton extends React.Component {
     constructor(props) {

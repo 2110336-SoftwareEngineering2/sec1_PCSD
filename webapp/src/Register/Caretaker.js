@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Caretaker.css"
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo"
@@ -16,7 +15,9 @@ import UserInfo from "./UserInfo"
 class Caretaker extends React.Component {
     constructor(props) {
         super();
-        this.state = {isNext: false};
+        this.state = {
+            isNext: false,
+            };
         this.profileControl = this.profileControl.bind(this);
     }
     
@@ -27,7 +28,7 @@ class Caretaker extends React.Component {
     render() {
         return(
             <div className="caretaker">
-                  {this.state.isNext ? null : <UserProfile/>}
+                  {this.state.isNext ? null : <UserProfile />}
                   <UserInfo func={this.profileControl} infotype="Caretaker"/>
             </div>
         );
