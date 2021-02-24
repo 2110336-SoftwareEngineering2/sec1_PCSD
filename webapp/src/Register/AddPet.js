@@ -3,7 +3,7 @@ import "./Addpet.css";
 import "./Register_info.css";
 import image from "./../petpic.png";
 
-function Addpet({ onChange, input }) {
+function Addpet({ addPetList, click, onChange, input }) {
   const [img, setImage] = useState(image);
   const [uploadImg, setUpload] = useState("");
 
@@ -16,6 +16,10 @@ function Addpet({ onChange, input }) {
 
   function handleChange(event) {
     onChange(event);
+  }
+
+  if (click) {
+    addPetList(...input, img);
   }
 
   return (

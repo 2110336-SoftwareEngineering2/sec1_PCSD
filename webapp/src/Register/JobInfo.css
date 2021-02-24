@@ -30,15 +30,28 @@
 
 [class*="col-"] {
     float: left;
-    padding: 3%;
+    padding: 0;
     text-align: left;
 }
 
 /* container ---------------------------------------*/
-.availdays {
-    text-align: center;
-    margin-top: 13px;
+.jobinfobox {
+    height: 609px;
 }
+
+.jobinfo {
+    width: 100%;
+}
+
+.availdaysbox {
+    text-align: center;
+}
+
+/*
+.availdays {
+    text-align: left;
+}
+*/
 
 .signupbutton {
     text-align: center;
@@ -68,15 +81,19 @@ button.signup {
 }
 
 /* label & input -----------------------------------*/
-.jobinfo label {
+.jobinfobox label {
     color: #8e8e8e;
     line-height: 2rem;
     font-weight: bold;
 }
 
-input.texting {
+.texting {
     border: 1px solid #8e8e8e;
     border-radius: 4px;
     padding: 3px;
     font-size: 16px;
+}
+
+input[type=checkbox] {
+    width: 13px;
 }

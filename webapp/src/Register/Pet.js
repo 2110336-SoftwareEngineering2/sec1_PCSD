@@ -2,16 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import "./Pet.css";
 
-function Pet({ id, name, deletePet }) {
-    console.log({name});
+function Pet({ info, deletePet }) {
+    
     return (
         <div className="pet">
-            <img className="Pet__image" src={`https://source.unsplash.com/random?sig=${id}`} />
+            <img className="Pet__image" src={info.img} />
             <div className="col-5">
-            <div className="Pet__name">{name}, 10 months</div>
-            <button className="Pet__edit">Edit</button>
+            <div className="Pet__name">{info.name}, {info.age}, {info.gender} </div>
+   
             </div>
-            <button className="Pet__delete" onClick={() => deletePet(id)}>X</button>
+            <button className="Pet__delete" onClick={() => deletePet(info.id)}>X</button>
         </div>
     )
 }

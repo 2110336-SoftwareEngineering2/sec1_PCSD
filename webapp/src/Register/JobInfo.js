@@ -4,73 +4,75 @@ import "./JobInfo.css"
 
 function JobInfo() {
   return (
-      <div className="jobinfo">
-            <form>
-                <div className="row">
-                    <div className="col-4">
-                        <label>Service Type</label><br/>
-                        <label>
-                            <input type="checkbox" value="housesitting"/>House Sitting
-                        </label><br/>
-                        <label>
-                            <input type="checkbox" value="boarding"/>Boarding
-                        </label><br/>
-                        <label>
-                            <input type="checkbox" value="daycare"/>Day Care
-                        </label><br/>
-                        <label>Rate per hour (baht)</label><br/>
-                        <input className="texting" type="number"/>
-                    </div>
-                    <div className="col-4">
-                        <label>Service Area</label><br/>
-                        <label>City:</label>&nbsp; &nbsp;<input className="texting" type="text"/><br/>
-                        <label>Province:</label>&nbsp; &nbsp;<input className="texting" type="text"/><br/>
-                        <label>Country:</label>&nbsp; &nbsp;<input className="texting" type="text"/>
-                    </div>
-                    <div className="col-4">
-                        <label>Description</label><br/>
-                        <textarea className="texting"/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-4">
-                        <label>Pet Type</label><br/>
-                        <div className="row">
-                            <div className="col-6">
-                                <label>
-                                    <input type="checkbox" value="dog"/>Dog
-                                </label><br/>
-                                <label>
-                                    <input type="checkbox" value="cat"/>Cat
-                                </label><br/>
-                                <label>
-                                    <input type="checkbox" value="rabbit"/>Rabbit
-                                </label>
-                            </div>
-                            <div className="col-6">
-                                <label>
-                                    <input type="checkbox" value="bird"/>Bird
-                                </label><br/>
-                                <label>
-                                    <input type="checkbox" value="hamster"/>Hamster
-                                </label><br/>
-                                <label>
-                                    <input type="checkbox" value="turtle"/>Turtle
-                                </label>
-                            </div>
+      <div className="jobinfobox">
+          <div className="jonibfo"> 
+              <form>
+                    <div className="row">
+                        <div className="col-4">
+                            <label>Service Type</label><br/>
+                            <label>
+                                <input type="checkbox" value="housesitting"/>&nbsp;House Sitting
+                            </label><br/>
+                            <label>
+                                <input type="checkbox" value="boarding"/>&nbsp;Boarding
+                            </label><br/>
+                            <label>
+                                <input type="checkbox" value="daycare"/>&nbsp;Day Care
+                            </label><br/><br/>
+                            <label>Rate per hour (baht)</label><br/>
+                            <input className="texting" type="number"/>
+                        </div>
+                        <div className="col-4">
+                            <label>Service Area</label><br/>
+                            <label>City:</label>&nbsp; &nbsp;<input className="texting" type="text"/><br/>
+                            <label>Province:</label>&nbsp; &nbsp;<input className="texting" type="text"/><br/>
+                            <label>Country:</label>&nbsp; &nbsp;<input className="texting" type="text"/>
+                        </div>
+                        <div className="col-4">
+                            <label>Description</label><br/>
+                            <textarea className="texting"/>
                         </div>
                     </div>
-                    <div className="col-8 availdaysbox">
-                        <label>Available Day(s)</label><br/>
-                        <AvailableDays/>
+                    <div className="row">
+                        <div className="col-4">
+                            <label>Pet Type</label><br/>
+                            <div className="row">
+                                <div className="col-6">
+                                    <label>
+                                        <input type="checkbox" value="dog"/>&nbsp;Dog
+                                    </label><br/>
+                                    <label>
+                                        <input type="checkbox" value="cat"/>&nbsp;Cat
+                                    </label><br/>
+                                    <label>
+                                        <input type="checkbox" value="rabbit"/>&nbsp;Rabbit
+                                    </label>
+                                </div>
+                                <div className="col-6">
+                                    <label>
+                                        <input type="checkbox" value="bird"/>&nbsp;Bird
+                                    </label><br/>
+                                    <label>
+                                        <input type="checkbox" value="hamster"/>&nbsp;Hamster
+                                    </label><br/>
+                                    <label>
+                                        <input type="checkbox" value="turtle"/>&nbsp;Turtle
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-8 availdaysbox">
+                            <label>Available Day(s)</label><br/>
+                            <AvailableDays/>
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col-12 signupbutton">
-                        <button className="signup" type="submit">Sign Up</button>
+                    <div className="row">
+                        <div className="col-12 signupbutton">
+                            <button className="signup" type="submit">Sign Up</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div> 
         </div>
   );
 }

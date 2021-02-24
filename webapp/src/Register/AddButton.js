@@ -24,12 +24,10 @@ function AddButton() {
   }
 
   function clickedAdd(event) {
-    if (!isNext && !isAdd) {
-      setIsNext(true);
-      setIsAdd(true);
-    } else {
-      setIsNext(false);
+    if (!isAdd) setIsAdd(true);
+    else {
       setIsAdd(false);
+      setIsNext(false);
     }
 
     const newPet = {
@@ -45,10 +43,15 @@ function AddButton() {
       .catch((err) => console.log(err));
   }
 
-  function addPetList(name) {
-    const newPet = { id, name };
+  function addPetList(name, img, age, breed, gender) {
+    const newPet = { id, name, img, age, breed, gender };
     setPetlists([newPet, ...pet_lists]);
     id += 1;
+    setIsNext(true);
+  }
+
+  function deletePet(id) {
+    setPetlists(pet_lists.filter((pet) => pet.id !== id));
   }
 
   return (
@@ -61,7 +64,7 @@ function AddButton() {
           input={input}
         />
       ) : (
-        <SumPet pet_lists={pet_lists} id={id} />
+        <SumPet pet_lists={pet_lists} deletePet={deletePet} />
       )}
       <div className="addbutton">
         <button className="submit" onClick={clickedAdd}>
