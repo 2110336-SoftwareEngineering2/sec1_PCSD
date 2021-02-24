@@ -53,7 +53,9 @@ class NextButton extends React.Component {
     
     clickedNext(event) {
         this.setState({isNext: true});
-        this.props.func();
+        if (this.props.type == "Caretaker") {
+            this.props.func();
+        }
     }
     
     render() {
