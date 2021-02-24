@@ -28,9 +28,9 @@
     box-sizing: border-box;
 }
 
-[class*="col-"] {
+.jobinfocol {
     float: left;
-    padding: 0;
+    padding: 30px 0 0 53px;
     text-align: left;
 }
 
@@ -43,17 +43,17 @@
     width: 100%;
 }
 
+.animalcheckbox {
+    padding: 0;
+}
+
 .availdaysbox {
+    padding-top: 60px;
     text-align: center;
 }
 
-/*
-.availdays {
-    text-align: left;
-}
-*/
-
 .signupbutton {
+    padding-left: 0;
     text-align: center;
 }
 
@@ -92,6 +92,11 @@ button.signup {
     border-radius: 4px;
     padding: 3px;
     font-size: 16px;
+}
+
+textarea.texting {
+    width: 292px;
+    margin: 12px 0;
 }
 
 input[type=checkbox] {

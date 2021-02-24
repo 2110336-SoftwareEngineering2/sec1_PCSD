@@ -8,7 +8,7 @@ function JobInfo() {
           <div className="jonibfo"> 
               <form>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-4 jobinfocol">
                             <label>Service Type</label><br/>
                             <label>
                                 <input type="checkbox" value="housesitting"/>&nbsp;House Sitting
@@ -22,22 +22,22 @@ function JobInfo() {
                             <label>Rate per hour (baht)</label><br/>
                             <input className="texting" type="number"/>
                         </div>
-                        <div className="col-4">
+                        <div className="col-4 jobinfocol">
                             <label>Service Area</label><br/>
                             <label>City:</label>&nbsp; &nbsp;<input className="texting" type="text"/><br/>
                             <label>Province:</label>&nbsp; &nbsp;<input className="texting" type="text"/><br/>
                             <label>Country:</label>&nbsp; &nbsp;<input className="texting" type="text"/>
                         </div>
-                        <div className="col-4">
+                        <div className="col-4 jobinfocol">
                             <label>Description</label><br/>
                             <textarea className="texting"/>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-3 jobinfocol">
                             <label>Pet Type</label><br/>
                             <div className="row">
-                                <div className="col-6">
+                                <div className="col-6 jobinfocol animalcheckbox">
                                     <label>
                                         <input type="checkbox" value="dog"/>&nbsp;Dog
                                     </label><br/>
@@ -48,7 +48,7 @@ function JobInfo() {
                                         <input type="checkbox" value="rabbit"/>&nbsp;Rabbit
                                     </label>
                                 </div>
-                                <div className="col-6">
+                                <div className="col-6 jobinfocol animalcheckbox">
                                     <label>
                                         <input type="checkbox" value="bird"/>&nbsp;Bird
                                     </label><br/>
@@ -61,13 +61,13 @@ function JobInfo() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-8 availdaysbox">
-                            <label>Available Day(s)</label><br/>
+                        <div className="col-9 jobinfocol availdaysbox">
+                            <label>Available Day(s)</label><br/><br/>
                             <AvailableDays/>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-12 signupbutton">
+                        <div className="col-12 jobinfocol signupbutton">
                             <button className="signup" type="submit">Sign Up</button>
                         </div>
                     </div>
