@@ -32,7 +32,7 @@
   padding: 2px 0px 2px 12px;
   border-radius: 33px;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 7px;
   margin-left: 10px;
 }
 
@@ -52,7 +52,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 40px 10px 10px;
+  padding: 10px 40px 0px 10px;
   height: 40px;
 }
 

@@ -21,7 +21,6 @@ import { RegisterContext } from "../context/MyContext";
 //
 //  );
 //}
-
 class UserInfo extends React.Component {
   constructor(props) {
     super();

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Pet from "./Pet";
 import AddPet from "./AddPet";
 import SumPet from "./SumPet";
+import history from "./../history";
 import "./AddButton.css";
 
 let id = 1;
@@ -70,6 +70,11 @@ function AddButton() {
         <button className="submit" onClick={clickedAdd}>
           Add Pet
         </button>
+      </div>
+      <div className="S">
+      {!isNext ? null : <button className="SignUpButton" onClick={() => {
+                    history.push({ pathname: "/" });
+                  }}>Sign Up</button>}
       </div>
     </div>
   );

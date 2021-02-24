@@ -1,14 +1,25 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { useTable } from "react-table";
 import MOCK_DATA from "./MOCK_DATA.json";
 import { COLUMNS } from "./columns";
 import "./BanTable.css";
 import { Button } from "@material-ui/core";
+import axios from "axios";
 
 export const BanTable = () => {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, []);
+  const [dataFromBack, setData] = useState([]);
+  useEffect(() => {
+    const dataFromBack = axios
+      .get("http://localhost:4000/User")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => console.log("err", err));
+  }, []);
 
+  const columns = useMemo(() => COLUMNS, []);
+  // const data = useMemo(() => MOCK_DATA, []);
+  const data = dataFromBack;
   const tableInstance = useTable({
     columns,
     data,
@@ -39,12 +50,12 @@ export const BanTable = () => {
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
-          const status = row.values.status;
+          const status = row.values.banStatus;
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                if (cell.value === undefined && status == "Banned") {
+                if (cell.value === undefined && status === true) {
                   return (
                     <td>
                       <Button
@@ -76,7 +87,7 @@ export const BanTable = () => {
                       <hr className="ban_line" />
                     </td>
                   );
-                } else if (cell.value === undefined && status == "Normal") {
+                } else if (cell.value === undefined && status === false) {
                   return (
                     <td>
                       <Button
@@ -108,12 +119,28 @@ export const BanTable = () => {
                     </td>
                   );
                 } else {
-                  return (
-                    <td {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                      <hr className="normal_line" />
-                    </td>
-                  );
+                  if (cell.value === true) {
+                    return (
+                      <td>
+                        <h4>Banned</h4>
+                        <hr className="normal_line" />
+                      </td>
+                    );
+                  } else if (cell.value === false) {
+                    return (
+                      <td>
+                        <h4>Normal</h4>
+                        <hr className="normal_line" />
+                      </td>
+                    );
+                  } else {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        {cell.render("Cell")}
+                        <hr className="normal_line" />
+                      </td>
+                    );
+                  }
                 }
               })}
             </tr>

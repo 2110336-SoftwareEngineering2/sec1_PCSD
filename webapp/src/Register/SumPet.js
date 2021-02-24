@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Pet from "./Pet";
-import AddPet from "./AddPet";
-import AddButton2 from "./AddButton2";
-
+import "./Sumpet.css";
 function SumPet({pet_lists,deletePet}) {
    
     console.log("choichoi");
@@ -13,9 +11,8 @@ function SumPet({pet_lists,deletePet}) {
           {pet_lists.map((pet) => (
         <Pet info={pet} deletePet={deletePet} />
     ))} 
-            
-
         </div>
+  
     )
 }
 
