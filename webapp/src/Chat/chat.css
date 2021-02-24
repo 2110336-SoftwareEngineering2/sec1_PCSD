@@ -1,15 +1,15 @@
-* {
-    margin: 0;
+/*{
+    margin: 90;
     padding: 0;
     box-sizing: border-box;
-  }
+  }*/
   
   html,
-  
+   
     body{
       height: 100%;
     }
-  
+ 
     html{
       background: #F1F1F1;
           font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;font-weight: light;
@@ -17,10 +17,10 @@
     }
   
     body{
-      display: grid;
+     display: grid;
       place-items: center;
     }
-  
+    
     #chat-container{
       display: grid;
       grid:

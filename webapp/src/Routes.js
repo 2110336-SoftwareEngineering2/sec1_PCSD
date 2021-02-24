@@ -9,9 +9,7 @@ import Petowner from "./Register/Petowner";
 import history from "./history";
 import ChatPage from "./Chat/chat";
 import MyContext from "./component/MyContext";
-import UpdateInfoCaretaker from "./UpdateInfo/UpdateInfoCaretaker";
-import UpdateInfoPetowner from "./UpdateInfo/UpdateInfoPetowner";
-
+import UpdateInfo from "./UpdateInfo/UpdateInfo";
 function Routes() {
   const [values, setValue] = useState({
     user: "",
@@ -36,11 +34,12 @@ function Routes() {
           <Route path="/banpage" component={BanPage} />
           <Route
             path="/updateinfo"
-            component={
+           /* component={
               values.role == "petowner"
                 ? UpdateInfoPetowner
                 : UpdateInfoCaretaker
-            }
+            } */
+            component = {UpdateInfo}
           />
         </Switch>
       </Router>
