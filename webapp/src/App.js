@@ -6,11 +6,18 @@ import UserLogin from "./component/login-component";
 import LoginPage from "./LoginPage";
 import Home from "./Home/Home";
 import Routes from "./Routes";
+
+import { ContextProvider, RegisterProvider } from "./context/MyContext";
+
 function App() {
   return (
-    <div className="app">
-      <Routes />
-    </div>
+    <ContextProvider>
+      <RegisterProvider>
+        <div className="app">
+          <Routes />
+        </div>
+      </RegisterProvider>
+    </ContextProvider>
   );
 }
 
