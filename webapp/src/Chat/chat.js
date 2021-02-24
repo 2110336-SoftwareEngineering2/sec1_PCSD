@@ -4,7 +4,7 @@ import "./chat.css"
 
 export default class ChatPage extends React.Component{
     render(){
-        <div className ="chat-container">
+        <div class ="chat-container">
         <div id = "search-container">
             <input type="text" placeholder="Seach on Chats:"/>
         </div>
@@ -26,3 +26,4 @@ export default class ChatPage extends React.Component{
         </div>
     }
 }
+export default ChatPage;
