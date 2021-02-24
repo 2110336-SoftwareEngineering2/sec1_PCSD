@@ -4,10 +4,9 @@ import image from "./../userpic.png";
 
 function UserProfile({uInfo}) {
     console.log("ypypyp", uInfo);
+    if (!uInfo)
+        uInfo = {fname: 'fname', sname: 'sname', username: 'username'};
     const [img, setImage] = useState(image);
-    const [Fname, setFName] = useState(uInfo.fname);
-    const [Sname, setSName] = useState(uInfo.sname);
-    const [Username, setUserName] = useState(uInfo.username);
    
     function uploadImg(event) {
         setImage(URL.createObjectURL(event.target.files[0]));

@@ -3,9 +3,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Register_info.css";
 import Caretaker from './Caretaker.js'
 function Register_info(props) {
-    const [fname, setFName] = useState("firstName");
-    const [sname, setSName] = useState("surName");
-    const [username, setUserName] = useState("username");
     function onfName(event){
         //setFName(event.target.value);
         props.updateFunc.onfName(event.target.value);
