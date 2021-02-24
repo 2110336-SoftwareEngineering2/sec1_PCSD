@@ -1,5 +1,5 @@
 import React from "react";
-import petidcare from "../petidcare.png";
+import petidcare from "../petidcareOnlyLogo.png";
 import "./header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import NotificationsIcon from "@material-ui/icons/Notifications";
