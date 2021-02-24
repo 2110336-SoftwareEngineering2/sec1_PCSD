@@ -66,11 +66,11 @@ export const BanTable = () => {
           const status = row.values.banStatus;
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()} onClick={() => handleBan(row.original)}>
+            <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
                 if (cell.value === undefined && status === true) {
                   return (
-                    <td>
+                    <td onClick={() => handleBan(row.original)}>
                       <Button
                         variant="contained"
                         style={{
@@ -102,7 +102,7 @@ export const BanTable = () => {
                   );
                 } else if (cell.value === undefined && status === false) {
                   return (
-                    <td>
+                    <td onClick={() => handleBan(row.original)}>
                       <Button
                         variant="contained"
                         style={{
@@ -125,7 +125,6 @@ export const BanTable = () => {
                           width: "5px",
                           marginBottom: "3px",
                         }}
-                        // onClick={handleBan}
                       >
                         Ban
                       </Button>
