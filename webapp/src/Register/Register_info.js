@@ -126,7 +126,7 @@ function RadioButton(props) {
 
   const onValueChange = (event) => {
     setState({ selectedOption: event.target.value });
-    props.onChange({ gender: state.selectedOption });
+    props.onChange(event);
   };
 
   return (
@@ -134,6 +134,7 @@ function RadioButton(props) {
       <label className="radio">
         Female&nbsp;
         <input
+          name="gender"
           type="radio"
           value="female"
           checked={state.selectedOption === "female"}
@@ -144,6 +145,7 @@ function RadioButton(props) {
       <label className="radio">
         Male&nbsp;
         <input
+          name="gender"
           type="radio"
           value="male"
           checked={state.selectedOption === "male"}

@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Caretaker.css";
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
+import { RegisterContext } from "../context/MyContext";
 
 function Caretaker() {
+  const context = useContext(RegisterContext);
   const [values, setValue] = useState({
-    firstname: "Firstname",
-    lastname: "Lastname",
-    username: "Username"});
+    ...context.data,
+    username: ""});
   
   const [isNext, setIsNext] = useState(false);
       const profileControl = () => {

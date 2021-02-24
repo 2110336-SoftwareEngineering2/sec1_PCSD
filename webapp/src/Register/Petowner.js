@@ -1,18 +1,19 @@
-import React, {useState} from "react";
+import React, { useContext, useState} from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Petowner.css";
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
+import { RegisterContext } from "../context/MyContext";
 function Petowner() {
+  const context = useContext(RegisterContext);
   const [values, setValue] = useState({
-    firstname: "Firstname",
-    lastname: "Lastname",
-    username: "Username"});
+    ...context.data,
+    username: ""});
   
   function onChange(e) {
     setValue({...values, [e.target.name]: e.target.value})
   }
-  
+
   return (
     <div className="petowner">
         <UserProfile uInfo = {values}/>
