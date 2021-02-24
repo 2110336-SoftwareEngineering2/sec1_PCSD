@@ -4,25 +4,19 @@ import "./Petowner.css";
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 function Petowner() {
-  const [fname, setFName] = useState("fName");
-  const [sname, setSName] = useState("sName");
-  const [username, setUserName] = useState("username");
-
-  function onfName(fName){
-    setFName(fName);
+  const [values, setValue] = useState({
+    firstname: "Firstname",
+    lastname: "Lastname",
+    username: "Username"});
+  
+  function onChange(e) {
+    setValue({...values, [e.target.name]: e.target.value})
   }
-  function onsName(sName){
-    setSName(sName);
-  }
-  function onUsername(uName){
-    setUserName(uName);
-  }
-  console.log(fname, sname, username);
-  const uInfo = {fname, sname, username}
+  
   return (
     <div className="petowner">
-        <UserProfile uInfo = {uInfo}/>
-        <UserInfo infotype="Pet Owner" updateFunc = {{onfName, onsName, onUsername}}/>
+        <UserProfile uInfo = {values}/>
+        <UserInfo infotype="Pet Owner" onChange = {onChange} />
         {/*User Info*/}
     </div>
 

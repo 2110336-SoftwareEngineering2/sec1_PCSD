@@ -4,19 +4,25 @@ import "./Caretaker.css";
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 
-function Caretaker(props) {
-  const [state, setState] = useState({
-    isNext: false,
-  });
+function Caretaker() {
+  const [values, setValue] = useState({
+    firstname: "Firstname",
+    lastname: "Lastname",
+    username: "Username"});
+  
+  const [isNext, setIsNext] = useState(false);
+      const profileControl = () => {
+        setIsNext(true);
+      };
 
-  const profileControl = () => {
-    setState({ isNext: true });
-  };
-
+  function onChange(e) {
+    setValue({...values, [e.target.name]: e.target.value})
+  }
+  
   return (
     <div className="caretaker">
-      {state.isNext ? null : <UserProfile />}
-      <UserInfo func={profileControl} infotype="Caretaker" />
+      {isNext ? null : <UserProfile uInfo={values} />}
+      <UserInfo func={profileControl} infotype="Caretaker" onChange={onChange}/>
     </div>
   );
 }

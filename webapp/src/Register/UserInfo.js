@@ -23,7 +23,7 @@ import { RegisterContext } from "../context/MyContext";
 //}
 class UserInfo extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = { classname: "userInfo" };
     this.changeClassName = this.changeClassName.bind(this);
   }
@@ -37,7 +37,7 @@ class UserInfo extends React.Component {
     return (
       <div className={this.state.classname}>
         <Register_header title={this.props.infotype} />
-        <NextButton func={this.changeClassName} type={this.props.infotype} />
+        <NextButton func={this.changeClassName} type={this.props.infotype} onChange={this.props.onChange} />
         {/*regis_header*/}
         {/*regis_info*/}
       </div>
@@ -60,6 +60,7 @@ function NextButton(props) {
 
   const onChange = (e) => {
     setValue({ ...values, [e.target.name]: e.target.value });
+    props.onChange(e);
   };
 
   const clickedNext = (event) => {
@@ -103,7 +104,7 @@ function NextButton(props) {
   return (
     <div>
       {!state.isNext ? (
-        <Register_info onChange={onChange} values={values} />
+        <Register_info onChange={onChange} values={values}/>
       ) : (
         <Info info={props.type} />
       )}

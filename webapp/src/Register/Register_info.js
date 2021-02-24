@@ -8,7 +8,7 @@ import { RegisterContext } from "../context/MyContext";
 function Register_info(props) {
   return (
     <div className="register_info">
-      <RegisterInfo onChange={props.onChange} values={props.values} />
+      <RegisterInfo onChange={props.onChange} values={props.values}/>
     </div>
   );
 }

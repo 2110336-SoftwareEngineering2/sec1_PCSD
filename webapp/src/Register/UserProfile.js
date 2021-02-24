@@ -3,9 +3,7 @@ import "./UserProfile.css";
 import image from "./../userpic.png";
 
 function UserProfile({uInfo}) {
-    console.log("ypypyp", uInfo);
-    if (!uInfo)
-        uInfo = {fname: 'fname', sname: 'sname', username: 'username'};
+    console.log(uInfo);
     const [img, setImage] = useState(image);
    
     function uploadImg(event) {
@@ -13,7 +11,7 @@ function UserProfile({uInfo}) {
     }
         return(
             <div className="profile">
-                <h3>{uInfo.fname}  {uInfo.sname}</h3><br/>
+                <h3>{uInfo.firstname}  {uInfo.lastname}</h3><br/>
                 <label className="blacklabel">@{uInfo.username}</label><br/>
                 <img src={img}/>
                 <br/>

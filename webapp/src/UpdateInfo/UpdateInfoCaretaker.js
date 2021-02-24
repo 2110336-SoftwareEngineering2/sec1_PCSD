@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./UpdateInfoCaretaker.css";
 import Header from "../Header/header";
-function UpdateInfoCaretaker() {
+import UpdateUserProfile from "./UpdateUserProfile";
+function UpdateInfoCaretaker({uInfo}) {
+    const [isNext, setIsNext] = useState(false);
+      const profileControl = () => {
+        setIsNext(true);
+      };
     return (
-        <div className="updateinfo">
+        <div className="caretaker__updateinfo">
             <Header />
+            {isNext ? null : <UpdateUserProfile />}
         </div>
     )
 }
