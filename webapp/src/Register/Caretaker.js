@@ -1,38 +1,24 @@
-import React from "react";
-import "./Caretaker.css"
+import React, { useContext, useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "./Caretaker.css";
 import UserProfile from "./UserProfile";
-import UserInfo from "./UserInfo"
+import UserInfo from "./UserInfo";
 
-//function Caretaker() {
-//  return (
-//      <div className="caretaker">
-//          <UserProfile/>
-//          <UserInfo infotype="Caretaker"/>
-//      </div>
-//  );
-//}
+function Caretaker(props) {
+  const [state, setState] = useState({
+    isNext: false,
+  });
 
-class Caretaker extends React.Component {
-    constructor(props) {
-        super();
-        this.state = {
-            isNext: false,
-            };
-        this.profileControl = this.profileControl.bind(this);
-    }
-    
-    profileControl() {
-        this.setState({isNext: true});
-    }
-    
-    render() {
-        return(
-            <div className="caretaker">
-                  {this.state.isNext ? null : <UserProfile />}
-                  <UserInfo func={this.profileControl} infotype="Caretaker"/>
-            </div>
-        );
-    }
+  const profileControl = () => {
+    setState({ isNext: true });
+  };
+
+  return (
+    <div className="caretaker">
+      {state.isNext ? null : <UserProfile />}
+      <UserInfo func={profileControl} infotype="Caretaker" />
+    </div>
+  );
 }
 
 export default Caretaker;

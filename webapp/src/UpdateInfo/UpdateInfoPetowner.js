@@ -1,16 +1,11 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./Petowner.css";
-import UserProfile from "./UserProfile";
-import UserInfo from "./UserInfo";
+import React from 'react'
+
 function UpdateInfoPetowner() {
-  return (
-    <div className="petowner">
-      <UserProfile />
-      <UserInfo infotype="Pet Owner" />
-      {/*User Info*/}
-    </div>
-  );
+    return (
+        <div>
+            
+        </div>
+    )
 }
 
 export default UpdateInfoPetowner;

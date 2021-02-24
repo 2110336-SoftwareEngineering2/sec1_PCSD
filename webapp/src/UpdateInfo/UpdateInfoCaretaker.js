@@ -1,16 +1,12 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./Caretaker.css";
-import UserProfile from "./UserProfile";
-import UserInfo from "./UserInfo";
-
+import React from 'react'
+import "./UpdateInfoCaretaker.css";
+import Header from "../Header/header";
 function UpdateInfoCaretaker() {
-  return (
-    <div className="caretaker">
-      <UserProfile />
-      <UserInfo infotype="Caretaker" />
-    </div>
-  );
+    return (
+        <div className="updateinfo">
+            <Header />
+        </div>
+    )
 }
 
 export default UpdateInfoCaretaker;
