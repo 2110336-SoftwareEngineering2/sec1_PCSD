@@ -5,9 +5,8 @@ const Pet = require("../models/User/Pet-model");
 module.exports = {
   addPet: (req, res) => {
     // Check if user is logged in
-    // checkAuth.validateAccessToken(req, res);
-    // const user = req.decoded;
-    const user = { role: "user", email: { email: "akiraz@gmail.com" } };
+    checkAuth.validateAccessToken(req, res);
+    const user = req.decoded;
 
     // user is logged in and hase "user" role
     if (user && user.role === "user") {

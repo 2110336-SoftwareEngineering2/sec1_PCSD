@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const petSchema = new Schema({
   petName: String,
   breed: String,
-  age: Number,
+  age: String,
   gender: String,
   owner: String,
 });
