@@ -9,7 +9,9 @@ const userSchema = new Schema({
   firstname: String,
   lastname: String,
   mobileNumber: String,
+  gender: String,
   password: String,
+  role: String,
   banStatus: Boolean,
 });
 

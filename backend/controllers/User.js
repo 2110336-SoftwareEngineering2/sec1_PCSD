@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const auth = require("./Authentication");
 
 const User = require("../models/User/User-model");
 
@@ -72,14 +73,14 @@ const deleteUserById = async (id) => {
 };
 
 const getAllUsersEmail = async (req, res) => {
-  const emails = User.find({}, {_id: 0, email:1} , (err, result) => {
+  const emails = User.find({}, { _id: 0, email: 1 }, (err, result) => {
     if (err) {
       res.status(404).send(err);
     } else {
       res.status(200).json(result);
     }
-  })
-}
+  });
+};
 
 module.exports = {
   getUser: async (req, res) => {

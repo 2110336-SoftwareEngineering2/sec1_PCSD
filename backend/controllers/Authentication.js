@@ -7,10 +7,13 @@ const validEmailAndPassword = async (email, password) => {
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      return true;
+      const data = user._doc;
+      return {
+        uid: data._id,
+      };
     }
   }
-  return false;
+  return null;
 };
 
 const generateAccessToken = (email, secretKey) => {
@@ -53,6 +56,7 @@ module.exports = {
         process.env.ACCESS_TOKEN_SECRET
       );
       return res.status(201).json({
+        ...val,
         accessToken: accessToken,
       });
     }
