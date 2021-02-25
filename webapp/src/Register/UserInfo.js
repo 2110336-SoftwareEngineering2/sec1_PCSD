@@ -8,7 +8,7 @@ import Register_header from "./Register_header";
 import JobInfo from "./JobInfo";
 import MyPet from "./MyPet";
 import SumPet from "./SumPet";
-import { RegisterContext } from "../context/MyContext";
+import { UserContext, RegisterContext } from "../context/MyContext";
 
 //function UserInfo(props) {
 //  return (
@@ -37,7 +37,11 @@ class UserInfo extends React.Component {
     return (
       <div className={this.state.classname}>
         <Register_header title={this.props.infotype} />
-        <NextButton func={this.changeClassName} type={this.props.infotype} onChange={this.props.onChange} />
+        <NextButton
+          func={this.changeClassName}
+          type={this.props.infotype}
+          onChange={this.props.onChange}
+        />
         {/*regis_header*/}
         {/*regis_info*/}
       </div>
@@ -49,6 +53,7 @@ export default UserInfo;
 
 function NextButton(props) {
   const context = useContext(RegisterContext);
+  const userContext = useContext(UserContext);
   const [state, setState] = useState({
     isNext: false,
   });
@@ -79,8 +84,6 @@ function NextButton(props) {
         banStatus: values.banStatus,
       };
 
-      const response = { user: null };
-
       axios
         .post("http://localhost:4000/user/register", newUser)
         .then((res) => {
@@ -88,7 +91,8 @@ function NextButton(props) {
           axios
             .post("http://localhost:4000/auth/login", res.data)
             .then((response) => {
-              // context.login(res.data);
+              console.log(res.data);
+              userContext.login(response.data);
               console.log(response.data);
             })
             .catch((err) => console.log(err));
@@ -104,7 +108,7 @@ function NextButton(props) {
   return (
     <div>
       {!state.isNext ? (
-        <Register_info onChange={onChange} values={values}/>
+        <Register_info onChange={onChange} values={values} />
       ) : (
         <Info info={props.type} />
       )}
