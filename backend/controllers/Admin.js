@@ -44,28 +44,42 @@ module.exports = {
       // throw new Error('Admin not found')
     }
   },
+
+  // Anyone can ban
   ban: async (req, res) => {
-    const auth = authToken(req);
-
-    if (auth && req.decoded.role === "admin") {
-      const username = req.body.target;
-      const user = await User.findOne({ username });
-      if (!user) {
-        res.send(`User not found`);
-        return;
-      }
-
-      const updated = await User.updateOne(
-        { username },
-        { banStatus: !user.banStatus }
-      );
-      if (updated.n) {
-        res.send(`Ban/Unban user successful`);
-      } else {
-        res.send(`Ban/Unban user unsuccessful`);
-      }
+    const username = req.body.username;
+    const user = await User.findOne({ username });
+    if (!user) {
+      res.send(`User not found`);
+      return;
+    }
+    const updated = await User.updateOne(
+      { username },
+      { banStatus: !user.banStatus }
+    );
+    if (updated.n) {
+      res.send(`Ban/Unban user successful`);
     } else {
-      res.send(`Authentication fail`);
+      res.send(`Ban/Unban user unsuccessful`);
     }
   },
+
+  // Only admin can ban
+  // ban: async (req, res) => {
+  //   const username = req.body.username;
+  //   const user = await User.findOne({ username });
+  //   if (!user) {
+  //     res.send(`User not found`);
+  //     return;
+  //   }
+  //   const updated = await User.updateOne(
+  //     { username },
+  //     { banStatus: !user.banStatus }
+  //   );
+  //   if (updated.n) {
+  //     res.send(`Ban/Unban user successful`);
+  //   } else {
+  //     res.send(`Ban/Unban user unsuccessful`);
+  //   }
+  // },
 };
