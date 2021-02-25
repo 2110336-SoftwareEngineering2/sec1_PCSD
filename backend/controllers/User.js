@@ -36,7 +36,7 @@ const addUser = async (body) => {
     });
     return newUser;
   } else {
-    return "Add user failed";
+    throw new Error("username taken!");
   }
 };
 
@@ -107,8 +107,16 @@ module.exports = {
 
   registerUser: async (req, res) => {
     const body = req.body;
-    const user = await addUser(body);
-    res.json(user);
+    try {
+      const user = await addUser(body);
+      res.json(user);
+    } catch (err) {
+      res.status(400).send({ problem: err.message });
+    }
+    // if (user) {
+    // } else {
+    //   res.status(418).send('oh no');
+    // }
   },
 
   deleteUser: async (req, res) => {

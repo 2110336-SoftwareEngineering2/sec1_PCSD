@@ -8,7 +8,7 @@ module.exports = {
     checkAuth.validateAccessToken(req, res);
     const user = req.decoded;
 
-    // user is logged in and hase "user" role
+    // user is logged in and has "user" role
     if (user && user.role === "user") {
       const petInfo = req.body;
       const { email } = user.email;

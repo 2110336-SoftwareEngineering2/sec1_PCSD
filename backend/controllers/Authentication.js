@@ -10,6 +10,8 @@ const validEmailAndPassword = async (email, password) => {
       const data = user._doc;
       return {
         uid: data._id,
+        username: data.username,
+        role: data.role,
       };
     }
   }
