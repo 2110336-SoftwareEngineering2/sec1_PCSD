@@ -15,17 +15,15 @@ import { RegisterContext, UserContext } from "./context/MyContext";
 function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
-  console.log(context, userContext);
-  const [values, setValue] = useState({
-    user: null,
-    roleDefault: "petowner",
-    role: "",
-  });
 
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={!userContext.user ? LoginPage : Home} />
+        <Route
+          path="/"
+          exact
+          component={!userContext.user ? LoginPage : Home}
+        />
         <Route
           path="/register"
           component={context.data.role == "petowner" ? Petowner : Caretaker}
@@ -35,7 +33,7 @@ function Routes() {
         <Route
           path="/updateinfo"
           component={
-            context.data.role == "petowner"
+            userContext.user && userContext.user.role == "petowner"
               ? UpdatePetowner
               : UpdateCaretaker
           }

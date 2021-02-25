@@ -10,17 +10,6 @@ import MyPet from "./MyPet";
 import SumPet from "./SumPet";
 import { UserContext, RegisterContext } from "../context/MyContext";
 
-//function UserInfo(props) {
-//  return (
-//    <div className="userInfo">
-//      <Register_header title={props.infotype}/>
-//        <NextButton type={props.infotype}/>
-//      {/*regis_header*/}
-//      {/*regis_info*/}
-//    </div>
-//
-//  );
-//}
 class UserInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -62,6 +51,7 @@ function NextButton(props) {
     username: "",
     confirmPass: "",
   });
+  const [errors, setError] = useState({});
 
   const onChange = (e) => {
     setValue({ ...values, [e.target.name]: e.target.value });
@@ -87,19 +77,23 @@ function NextButton(props) {
       axios
         .post("http://localhost:4000/user/register", newUser)
         .then((res) => {
+          console.log(res);
           res.data.password = newUser.password;
           axios
             .post("http://localhost:4000/auth/login", res.data)
             .then((response) => {
-              console.log(res.data);
               userContext.login(response.data);
               console.log(response.data);
+              setState({ isNext: true });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+              console.log(err);
+            });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setError(err.response.data);
+        });
     }
-    setState({ isNext: true });
     if (props.type == "Caretaker") {
       props.func();
     }
@@ -108,7 +102,7 @@ function NextButton(props) {
   return (
     <div>
       {!state.isNext ? (
-        <Register_info onChange={onChange} values={values} />
+        <Register_info onChange={onChange} values={values} errors={errors} />
       ) : (
         <Info info={props.type} />
       )}

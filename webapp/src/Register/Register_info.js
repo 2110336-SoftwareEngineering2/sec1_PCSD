@@ -7,16 +7,6 @@ import { RegisterContext } from "../context/MyContext";
 
 function Register_info(props) {
   return (
-    <div className="register_info">
-      <RegisterInfo onChange={props.onChange} values={props.values}/>
-    </div>
-  );
-}
-
-export default Register_info;
-
-function RegisterInfo(props) {
-  return (
     <div className="registerinfo">
       <form>
         <div className="row">
@@ -80,12 +70,19 @@ function RegisterInfo(props) {
             />
           </div>
           <div className="col-6 registercol">
-            <label>Username</label>
+            <label style={props.errors.problem ? { color: "#a13737" } : {}}>
+              Username
+            </label>
             <br />
             <input
               className="texting"
               type="text"
               name="username"
+              style={
+                props.errors.problem
+                  ? { backgroundColor: "#ffd7d4", borderColor: "red" }
+                  : {}
+              }
               value={props.values.username}
               onChange={props.onChange}
             />
@@ -117,6 +114,8 @@ function RegisterInfo(props) {
     </div>
   );
 }
+
+export default Register_info;
 
 function RadioButton(props) {
   const selected = props.gender;

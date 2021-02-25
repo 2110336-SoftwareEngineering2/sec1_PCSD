@@ -66,9 +66,14 @@ function UserLogin(props) {
                 placeholder="Password"
                 onChange={onChange}
               />
-              <input type="submit" value="Login" name="login" onClick={() => {
-              history.push({ pathname: "/" });
-            }} />
+              <input
+                type="submit"
+                value="Login"
+                name="login"
+                onClick={() => {
+                  history.push({ pathname: "/" });
+                }}
+              />
             </form>
             <div className="form-check">
               <label className="form-check-label">
