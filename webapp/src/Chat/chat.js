@@ -1,29 +1,17 @@
-import React from "react";
+import React,{useState} from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./chat.css"
+import Header from "../Header/header";
+import Sidebar from "./Sidebar";
+import Chatbox from "./Chatbox";
 
 function ChatPage() {
     return(
-        <div class ="chat-container">
-        <div id = "search-container">
-            <input type="text" placeholder="Seach on Chats:"/>
+        <div className = "ChatPage">
+            {/*<Header />*/}
+            <Sidebar />
+            {/*<Chatbox />*/}
         </div>
-        <div id = "conversation-list">
-            
-        </div>
-        <div id = "new-chat-container">
-            <a href="#">+</a>
-        </div>
-        <div id = "chat-title">
-
-        </div>
-        <div id = "chat-mesages">
-
-        </div>
-        <div id = "chat-form">
-
-        </div>
-        </div>
-    )
+    );
 }
 export default ChatPage;
