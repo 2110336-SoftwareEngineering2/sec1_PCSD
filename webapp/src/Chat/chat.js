@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./chat.css"
 
-export default class ChatPage extends React.Component{
-    render(){
+function ChatPage() {
+    return(
         <div class ="chat-container">
         <div id = "search-container">
             <input type="text" placeholder="Seach on Chats:"/>
@@ -24,6 +24,6 @@ export default class ChatPage extends React.Component{
 
         </div>
         </div>
-    }
+    )
 }
-//export default ChatPage;
+export default ChatPage;
