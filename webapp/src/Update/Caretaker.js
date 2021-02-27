@@ -5,7 +5,7 @@ import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 import { RegisterContext } from "../context/MyContext";
 
-function Caretaker() {
+function UpdateCaretaker() {
   const context = useContext(RegisterContext);
   const [values, setValue] = useState({
     ...context.data,
@@ -28,4 +28,4 @@ function Caretaker() {
   );
 }
 
-export default Caretaker;
+export default UpdateCaretaker;

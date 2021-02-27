@@ -7,9 +7,9 @@ import { Button } from "@material-ui/core";
 import axios from "axios";
 
 export const BanTable = () => {
-  const [dataFromBack, setData] = useState([]);
+  const [data, setData] = useState([]);
   useEffect(() => {
-    const dataFromBack = axios
+    axios
       .get("http://localhost:4000/User")
       .then((res) => {
         setData(res.data);
@@ -19,11 +19,24 @@ export const BanTable = () => {
 
   const columns = useMemo(() => COLUMNS, []);
   // const data = useMemo(() => MOCK_DATA, []);
-  const data = dataFromBack;
+  // const data = dataFromBack;
   const tableInstance = useTable({
     columns,
     data,
   });
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  const handleBan = async (data) => {
+    axios.post("http://localhost:4000/Admin/ban", data).then();
+    await sleep(100);
+    axios
+      .get("http://localhost:4000/User")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => console.log("err", err));
+  };
 
   const {
     getTableProps,
@@ -57,7 +70,7 @@ export const BanTable = () => {
               {row.cells.map((cell) => {
                 if (cell.value === undefined && status === true) {
                   return (
-                    <td>
+                    <td onClick={() => handleBan(row.original)}>
                       <Button
                         variant="contained"
                         style={{
@@ -89,7 +102,7 @@ export const BanTable = () => {
                   );
                 } else if (cell.value === undefined && status === false) {
                   return (
-                    <td>
+                    <td onClick={() => handleBan(row.original)}>
                       <Button
                         variant="contained"
                         style={{

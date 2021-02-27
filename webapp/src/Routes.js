@@ -8,23 +8,22 @@ import Caretaker from "./Register/Caretaker";
 import Petowner from "./Register/Petowner";
 import history from "./history";
 import ChatPage from "./Chat/chat";
-import UpdateInfoCaretaker from "./UpdateInfo/UpdateInfoCaretaker";
-import UpdateInfoPetowner from "./UpdateInfo/UpdateInfoPetowner";
-
-import { RegisterContext } from "./context/MyContext";
+import UpdateCaretaker from "./Update/Caretaker";
+import UpdatePetowner from "./Update/Petowner";
+import { RegisterContext, UserContext } from "./context/MyContext";
 
 function Routes() {
   const context = useContext(RegisterContext);
-  const [values, setValue] = useState({
-    user: null,
-    roleDefault: "petowner",
-    role: "",
-  });
+  const userContext = useContext(UserContext);
 
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={!values.user ? LoginPage : Home} />
+        <Route
+          path="/"
+          exact
+          component={!userContext.user ? LoginPage : Home}
+        />
         <Route
           path="/register"
           component={context.data.role == "petowner" ? Petowner : Caretaker}
@@ -34,9 +33,9 @@ function Routes() {
         <Route
           path="/updateinfo"
           component={
-            context.data.role == "petowner"
-              ? UpdateInfoPetowner
-              : UpdateInfoCaretaker
+            userContext.user && userContext.user.role == "petowner"
+              ? UpdatePetowner
+              : UpdateCaretaker
           }
         />
       </Switch>
