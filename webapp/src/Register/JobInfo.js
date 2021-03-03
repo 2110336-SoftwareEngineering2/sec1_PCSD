@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./JobInfo.css"
+import history from "./../history";
 
 function JobInfo() {
   return (
@@ -68,7 +69,10 @@ function JobInfo() {
                     </div>
                     <div className="row">
                         <div className="col-12 jobinfocol signupbutton">
-                            <button className="signup" type="submit">Sign Up</button>
+                            <button className="signup" type="submit" 
+                            onClick={() => {
+              history.push({ pathname: "/" });
+            }}>Sign Up</button>
                         </div>
                     </div>
                 </form>
