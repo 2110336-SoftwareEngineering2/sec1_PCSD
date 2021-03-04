@@ -13,6 +13,7 @@ const userSchema = new Schema({
   password: String,
   role: String,
   banStatus: Boolean,
+  balance: mongoose.Types.Decimal128,
 });
 
 module.exports = mongoose.model("User", userSchema, "Users");

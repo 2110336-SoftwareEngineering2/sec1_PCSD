@@ -43,4 +43,8 @@ router.delete("/pet", (req, res) => {
   PetController.removePet(req, res);
 });
 
+router.post("/topup", (req, res) => {
+  UserController.TopUp(req,res);
+});
+
 module.exports = router;
