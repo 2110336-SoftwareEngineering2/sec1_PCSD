@@ -4,7 +4,8 @@ const checkAuth = require("./Authentication");
 const User = require("../models/User/User-model");
 
 module.exports = {
-    reserveCaretaker: (req, res) => {
+    //IF role=="user" find caretaker by id --> reserved ? ;  reserve = 1: out(reserved)?
+    reserveCaretaker: (req, res , id) => {
       // Check if user is logged in
       checkAuth.validateAccessToken(req, res);
       const user = req.decoded;
@@ -16,7 +17,7 @@ module.exports = {
         // create new pet
         //const newPet = new Pet({ ...petInfo, owner: email });
         //Find User by email and reserve
-        caretaker = User.findUserByEmail(email);
+        caretaker = User.findUserById(id);
         
         newPet.save((err) => {
           if (err) console.log(err);
@@ -24,6 +25,7 @@ module.exports = {
         });
       }
     },
+    // UnReserve Caretaker is the function when user logged in is caretaker and what to unreserve themself.
     removePet: async (req, res) => {
       // Check if user is logged in
       checkAuth.validateAccessToken(req, res);
