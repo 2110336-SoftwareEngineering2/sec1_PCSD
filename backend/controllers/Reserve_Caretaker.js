@@ -20,6 +20,12 @@ module.exports = {
         //const newPet = new Pet({ ...petInfo, owner: email });
         //Find User by email and reserve
         caretaker = checkUser.findUserById(id);
+
+        //Check if user is caretaker and not reserved;
+        if(caretaker.role === "caretaker" && caretaker.reserved === "False"){
+            //Update that caretaker's caretaker.reserved to "True"
+
+        }
         
         newPet.save((err) => {
           if (err) console.log(err);
