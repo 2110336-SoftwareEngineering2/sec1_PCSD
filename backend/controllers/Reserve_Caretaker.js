@@ -1,5 +1,7 @@
 //  Reserve Care taker is the operation when user in user role reserve and unresurve the caretaker.
 const checkAuth = require("./Authentication");
+const checkUser = require("./User");
+
 
 const User = require("../models/User/User-model");
 
@@ -17,7 +19,7 @@ module.exports = {
         // create new pet
         //const newPet = new Pet({ ...petInfo, owner: email });
         //Find User by email and reserve
-        caretaker = User.findUserById(id);
+        caretaker = checkUser.findUserById(id);
         
         newPet.save((err) => {
           if (err) console.log(err);
