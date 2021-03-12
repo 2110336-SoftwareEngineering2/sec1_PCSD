@@ -103,6 +103,26 @@ const editUser = async (req, res) => {
 };
 
 module.exports = {
+  TopUp: async (req, res) => {
+    if (user && user.role === "user") {
+      const body = req.body;
+      const { email } = user.email;
+      const filter = { username: email };
+      const update = {$inc : {'balance' : body.value}};
+      
+      await User.findOneAndUpdate( filter, update,(err, result) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.status(200).json(result);
+        }
+      });
+    }
+    else{
+      res.status(404).send('user not found');
+    }
+  },
+
   getUser: async (req, res) => {
     const allUser = await User.find({}, function (err, result) {
       if (err) {

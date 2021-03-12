@@ -13,6 +13,10 @@ const userSchema = new Schema({
   password: String,
   role: String,
   banStatus: Boolean,
+  balance: {
+    type: mongoose.Decimal128,
+    get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(2)),
+    default: 0},
 });
 
 module.exports = mongoose.model("User", userSchema, "Users");

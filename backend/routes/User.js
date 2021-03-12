@@ -52,5 +52,8 @@ router.delete("/pet", (req, res) => {
 router.post("/edit", (req, res) => {
   UserController.editUser(req,res);
 })
+router.post("/topup", (req, res) => {
+  UserController.TopUp(req,res);
+});
 
 module.exports = router;
