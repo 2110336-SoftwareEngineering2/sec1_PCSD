@@ -82,6 +82,26 @@ const getAllUsersEmail = async (req, res) => {
   });
 };
 
+const editUser = async (req, res) => {
+  const id = req.body.id;
+  var user;
+
+  if (req.body.username) {
+    user = User.findOne({ username: req.body.username });
+  }
+
+  if (!user || user._id == id) {
+    const editedUser = await User.findByIdAndUpdate(id, req.body);
+    if(editedUser) {
+      res.send("Edit successful")
+    } else {
+      res.status(400).send({ problem: "user not found" });
+    }
+  } else {
+    res.status(400).send({ problem: "username taken" });
+  }
+};
+
 module.exports = {
   getUser: async (req, res) => {
     const allUser = await User.find({}, function (err, result) {
@@ -100,7 +120,7 @@ module.exports = {
   },
 
   getUserByEmail: async (req, res) => {
-    const email = req.params.email;
+    const email = req.body.email;
     const user = await findUserByEmail(email);
     res.json(user);
   },
@@ -113,10 +133,6 @@ module.exports = {
     } catch (err) {
       res.status(400).send({ problem: err.message });
     }
-    // if (user) {
-    // } else {
-    //   res.status(418).send('oh no');
-    // }
   },
 
   deleteUser: async (req, res) => {
@@ -125,7 +141,7 @@ module.exports = {
     res.status(result.status).send(result.message);
   },
 
-  getAllEmails: async (req, res) => {
-    await getAllUsersEmail(req, res);
-  },
+  getAllUsersEmail,
+
+  editUser,
 };
