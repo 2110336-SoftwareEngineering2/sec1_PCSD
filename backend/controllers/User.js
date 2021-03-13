@@ -102,26 +102,53 @@ const editUser = async (req, res) => {
   }
 };
 
+const TopUp = async (req, res) => {
+  if (user && user.role === "user") {
+    const body = req.body;
+    const { email } = user.email;
+    const filter = { username: email };
+    const update = { $inc: { balance: body.value } };
+
+    await User.findOneAndUpdate(filter, update, (err, result) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.send(result);
+      }
+    });
+  } else {
+    res.status(404).send("user not found");
+  }
+};
+
+const transfer = async (req, res) => {
+  const senderId = req.body.senderId;
+  const receiverId = req.body.receiverId;
+  const amount = req.body.amount;
+
+  const sender = await User.findById(senderId);
+  const receiver = await User.findById(receiverId);
+
+  
+  if (!sender) {
+    res.status(400).send("Sender user not found");
+  } else if (!receiver) {
+    res.status(400).send("Receiver user not found");
+  } else {
+    const sufficient = sender.balance.bytes >= amount;
+
+    if (!sufficient) {
+      res.status(400).send("Insufficient balance")
+    } else {
+      await User.findByIdAndUpdate(senderId, { $inc: { balance: -amount } });
+      await User.findByIdAndUpdate(receiverId, { $inc: { balance: amount } });
+      res.send("Transfer successfully")
+    }
+  }
+};
+
 module.exports = {
-  TopUp: async (req, res) => {
-    if (user && user.role === "user") {
-      const body = req.body;
-      const { email } = user.email;
-      const filter = { username: email };
-      const update = {$inc : {'balance' : body.value}};
-      
-      await User.findOneAndUpdate( filter, update,(err, result) => {
-        if (err) {
-          res.status(404).send(err);
-        } else {
-          res.status(200).json(result);
-        }
-      });
-    }
-    else{
-      res.status(404).send('user not found');
-    }
-  },
+  TopUp,
 
   getUser: async (req, res) => {
     const allUser = await User.find({}, function (err, result) {
@@ -164,4 +191,6 @@ module.exports = {
   getAllUsersEmail,
 
   editUser,
+
+  transfer,
 };
