@@ -31,6 +31,29 @@
   width: 100% ;
   font-size: 16pt;
 }
+
+.People_Profile{
+  grid-area: 'People_Profile';
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+}
+
+.ChatList{  
+  margin-top: 10px;
+}
+.People_Name{
+  grid-area: "People_Name";
+  padding-top: 17px;
+}
+.Chat_People{
+  display: grid;
+  padding: 10px;
+  grid:
+   'People_Profile People_Name';
+  background-color: #eee;
+  height: 70px ;
+}
 /*  html,
    
     body{
