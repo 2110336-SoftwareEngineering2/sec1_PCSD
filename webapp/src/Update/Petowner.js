@@ -1,5 +1,4 @@
 import React, { useContext, useState} from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Petowner.css";
 import Header from "./../Header/header";
 import UserProfile from "./UserProfile";
