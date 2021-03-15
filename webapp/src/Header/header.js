@@ -11,6 +11,7 @@ import { UserContext } from "../context/MyContext";
 import { DropdownButton } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 function Header() {
   const { user, logout } = useContext(UserContext);
 
@@ -28,27 +29,27 @@ function Header() {
         </div>
       <div className="header__right">
         <IconButton>
-          <NotificationsIcon
-          />
+          <NotificationsIcon/>
         </IconButton>
         <IconButton>
-          <MailIcon/>
+          <MailIcon onClick={() => {
+              history.push({ pathname: "/updateinfo" });
+            }}/>
         </IconButton>
         <hr />
         <div className="header__profile">
-          <Avatar />
           <DropdownButton
           menuAlign="right"
-          title={user.username}
+          title= {<div class="user_infoo"> <Avatar /> &nbsp; {user.username} </div>}
           id="dropdown-menu-align-right" >
         <Dropdown.Item eventKey="1" onClick={() => {
               history.push({ pathname: "/updateinfo" });
-            }}> {user.username}
+            }}> edit your profile
         </Dropdown.Item>
         <Dropdown.Divider />
       <Dropdown.Item eventKey="4" onClick={() => {
               logout();
-            }}>Log out</Dropdown.Item>
+            }}><ExitToAppIcon/> Log out</Dropdown.Item>
       </DropdownButton>
         </div>
       </div>
@@ -57,3 +58,4 @@ function Header() {
 }
 
 export default Header;
+

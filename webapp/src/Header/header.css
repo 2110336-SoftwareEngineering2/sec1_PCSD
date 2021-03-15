@@ -4,6 +4,7 @@
   position: sticky;
   box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
   background-color: white;
+  align-items: center;
 }
 
 .header__logo {
@@ -35,7 +36,6 @@
   justify-content: center;
   margin-top: 7px;
   margin-left: 15px;
-  font-weight: bold;
 }
 
 .header__input:hover {
@@ -82,7 +82,14 @@
 }
 
 #dropdown-menu-align-right {
+  display: flex;
+  align-items: center;
   background-color: white;
   color: black;
   border: none;
+}
+.user_infoo {
+  display: flex;
+  align-items: center;
+  margin: auto;
 }
