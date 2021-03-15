@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
+import { UserContext } from "../context/MyContext";
 import "./Register_info.css";
-import Caretaker from "./Caretaker.js";
 import { RegisterContext } from "../context/MyContext";
 
 function Register_info(props) {
+  const { user } = useContext(UserContext);
+  
   return (
     <div className="registerinfo">
       <form>

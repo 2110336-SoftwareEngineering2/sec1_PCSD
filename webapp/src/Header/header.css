@@ -55,8 +55,11 @@
   padding: 10px 100px 10px 10px;
   justify-content: center;
   margin-left: 0px;
+  margin: 0;
 }
-
+.header__label {
+  margin: 0;
+}
 .header__input > .MuiSvgIcon-root {
   color: #898989;
 }
@@ -87,7 +90,8 @@
 #dropdown-menu-align-right {
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: transparent;
+  height: auto;
   color: black;
   border: none;
 }
@@ -95,4 +99,7 @@
   display: flex;
   align-items: center;
   margin: auto;
+}
+.dropdown-menu.show.dropdown-menu-right{
+   z-index: -1;
 }

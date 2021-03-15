@@ -4,7 +4,7 @@ import "./Caretaker.css";
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 import { RegisterContext } from "../context/MyContext";
-
+import Header from "./../Header/header";
 function UpdateCaretaker() {
   const context = useContext(RegisterContext);
   const [values, setValue] = useState({
@@ -22,8 +22,11 @@ function UpdateCaretaker() {
   
   return (
     <div className="caretaker">
+      <Header />
+      <div className="info">
       {isNext ? null : <UserProfile uInfo={values} />}
       <UserInfo func={profileControl} infotype="Caretaker" onChange={onChange}/>
+      </div>
     </div>
   );
 }
