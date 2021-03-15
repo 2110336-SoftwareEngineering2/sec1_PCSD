@@ -4,7 +4,6 @@ import "./header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MailIcon from "@material-ui/icons/Mail";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar, IconButton } from "@material-ui/core";
 import history from "./../history";
 import { UserContext } from "../context/MyContext";
@@ -26,7 +25,7 @@ function Header() {
         </div>
         <div className="header__input">
           <SearchIcon />
-          <label>Search for caketakers</label>
+          <label className="header__label">Search for caketakers</label>
         </div>
         </div>
       <div className="header__right">
