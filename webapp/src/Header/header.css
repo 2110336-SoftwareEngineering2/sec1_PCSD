@@ -26,22 +26,29 @@
 }
 
 .header__input {
+  color: grey;
   display: flex;
   align-items: center;
-  background-color: #f1f1f1;
   padding: 2px 0px 2px 12px;
-  border-radius: 33px;
   justify-content: center;
   margin-top: 7px;
-  margin-left: 10px;
 }
 
-.header__input > input {
+
+.header__input:hover {
+  color: #9d7f70 ;
+  
+}
+.header__input:hover > .MuiSvgIcon-root {
+  color: #9d7f70;
+}
+.header__input > label {
   border: none;
   background-color: transparent;
   outline: 0;
   padding: 10px 100px 10px 10px;
   justify-content: center;
+  margin-left: 0px;
 }
 
 .header__input > .MuiSvgIcon-root {
