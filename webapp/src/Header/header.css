@@ -100,3 +100,6 @@
   align-items: center;
   margin: auto;
 }
+.dropdown-menu.show.dropdown-menu-right{
+   z-index: -1;
+}
