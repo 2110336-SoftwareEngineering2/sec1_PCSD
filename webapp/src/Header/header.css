@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .header__logo > img {
@@ -39,6 +40,7 @@
 }
 
 .header__input:hover {
+  cursor: pointer;
   color: #872935;
   
 }
@@ -46,6 +48,7 @@
   color: #872935;
 }
 .header__input > label {
+  cursor: pointer;
   border: none;
   background-color: transparent;
   outline: 0;

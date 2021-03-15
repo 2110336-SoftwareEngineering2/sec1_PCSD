@@ -18,7 +18,9 @@ function Header() {
   return (
     <div className="header">
       <div className="header__left">
-        <div className="header__logo">
+        <div className="header__logo" onClick={() => {
+              history.push({ pathname: "/" });
+            }}>
           <img src={petidcare} alt="" />
           <h4>Petidcare</h4>
         </div>
