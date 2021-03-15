@@ -33,7 +33,7 @@ function Header() {
         </IconButton>
         <IconButton>
           <MailIcon onClick={() => {
-              history.push({ pathname: "/updateinfo" });
+              history.push({ pathname: "/chat" });
             }}/>
         </IconButton>
         <hr />
@@ -46,6 +46,10 @@ function Header() {
               history.push({ pathname: "/updateinfo" });
             }}> edit your profile
         </Dropdown.Item>
+       {user.username == "admin" ? <Dropdown.Item eventKey="2" onClick={() => {
+              history.push({ pathname: "/banpage" });
+            }}>Ban Status </Dropdown.Item> : null }
+
         <Dropdown.Divider />
       <Dropdown.Item eventKey="4" onClick={() => {
               logout();
