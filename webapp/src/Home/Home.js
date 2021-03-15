@@ -4,7 +4,6 @@ import Header from "./../Header/header";
 function Home() {
   return (
     <div className="home">
-        <p>This is HomePage</p>
         <Header />
     </div>
 

@@ -19,7 +19,9 @@
 .header__logo > h4 {
   color: #9d7f70;
 }
-
+.header__left {
+  display: flex;
+}
 .header__middle {
   justify-content: center;
   margin-left: 100px;
@@ -32,15 +34,16 @@
   padding: 2px 0px 2px 12px;
   justify-content: center;
   margin-top: 7px;
+  margin-left: 15px;
+  font-weight: bold;
 }
 
-
 .header__input:hover {
-  color: #9d7f70 ;
+  color: #872935;
   
 }
 .header__input:hover > .MuiSvgIcon-root {
-  color: #9d7f70;
+  color: #872935;
 }
 .header__input > label {
   border: none;
@@ -76,4 +79,10 @@
 
 .header__profile > h4 {
   margin-left: 10px;
+}
+
+#dropdown-menu-align-right {
+  background-color: white;
+  color: black;
+  border: none;
 }

@@ -8,7 +8,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar, IconButton } from "@material-ui/core";
 import history from "./../history";
 import { UserContext } from "../context/MyContext";
-
+import { DropdownButton } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function Header() {
   const { user, logout } = useContext(UserContext);
 
@@ -19,35 +21,35 @@ function Header() {
           <img src={petidcare} alt="" />
           <h4>Petidcare</h4>
         </div>
-      </div>
-      <div className="header__middle">
         <div className="header__input">
           <SearchIcon />
           <label>Search for caketakers</label>
         </div>
-      </div>
+        </div>
       <div className="header__right">
         <IconButton>
           <NotificationsIcon
-            onClick={() => {
-              history.push({ pathname: "/updateinfo" });
-            }}
           />
         </IconButton>
         <IconButton>
-          <MailIcon
-            onClick={() => {
-              logout();
-            }}
-          />
+          <MailIcon/>
         </IconButton>
         <hr />
         <div className="header__profile">
           <Avatar />
-          <h4>{user.username}</h4>
-          <IconButton>
-            <ExpandMoreIcon />
-          </IconButton>
+          <DropdownButton
+          menuAlign="right"
+          title={user.username}
+          id="dropdown-menu-align-right" >
+        <Dropdown.Item eventKey="1" onClick={() => {
+              history.push({ pathname: "/updateinfo" });
+            }}> {user.username}
+        </Dropdown.Item>
+        <Dropdown.Divider />
+      <Dropdown.Item eventKey="4" onClick={() => {
+              logout();
+            }}>Log out</Dropdown.Item>
+      </DropdownButton>
         </div>
       </div>
     </div>
