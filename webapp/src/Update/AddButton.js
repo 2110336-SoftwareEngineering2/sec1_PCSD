@@ -37,10 +37,10 @@ function AddButton() {
       gender: input.gender,
     };
 
-    axios
+    /*axios
       .post("http://localhost:4000/user/pet", newPet)
       .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)); */
   }
 
   function addPetList(name, img, age, breed, gender) {
@@ -74,7 +74,7 @@ function AddButton() {
       <div className="S">
       {!isNext ? null : <button className="SignUpButton" onClick={() => {
                     history.push({ pathname: "/" });
-                  }}>Sign Up</button>}
+                  }}>Save Change</button>}
       </div>
     </div>
   );

@@ -65,7 +65,7 @@ function NextButton(props) {
       };
 
       const response = { user: null };
-
+/*
       axios
         .post("http://localhost:4000/user/register", newUser)
         .then((res) => {
@@ -78,7 +78,7 @@ function NextButton(props) {
             })
             .catch((err) => console.log(err));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err)); */
     }
     setState({ isNext: true });
     if (props.type == "Caretaker") {
