@@ -7,19 +7,21 @@ import MailIcon from "@material-ui/icons/Mail";
 import { Avatar, IconButton } from "@material-ui/core";
 import history from "./../history";
 import { UserContext } from "../context/MyContext";
-import { DropdownButton } from 'react-bootstrap';
-import { Dropdown } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { DropdownButton, MenuItem } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 function Header() {
   const { user, logout } = useContext(UserContext);
 
   return (
     <div className="header">
       <div className="header__left">
-        <div className="header__logo" onClick={() => {
-              history.push({ pathname: "/" });
-            }}>
+        <div
+          className="header__logo"
+          onClick={() => {
+            history.push({ pathname: "/" });
+          }}
+        >
           <img src={petidcare} alt="" />
           <h4>Petidcare</h4>
         </div>
@@ -27,35 +29,61 @@ function Header() {
           <SearchIcon />
           <label className="header__label">Search for caketakers</label>
         </div>
-        </div>
+      </div>
       <div className="header__right">
         <IconButton>
-          <NotificationsIcon/>
+          <NotificationsIcon />
         </IconButton>
         <IconButton>
-          <MailIcon onClick={() => {
+          <MailIcon
+            onClick={() => {
               history.push({ pathname: "/chat" });
-            }}/>
+            }}
+          />
         </IconButton>
         <hr />
         <div className="header__profile">
           <DropdownButton
-          menuAlign="right"
-          title= {<div class="user_infoo"> <Avatar /> &nbsp; {user.username} </div>}
-          id="dropdown-menu-align-right" >
-        <Dropdown.Item eventKey="1" onClick={() => {
-              history.push({ pathname: "/updateinfo" });
-            }}> edit your profile
-        </Dropdown.Item>
-       {user.username == "admin" ? <Dropdown.Item eventKey="2" onClick={() => {
-              history.push({ pathname: "/banpage" });
-            }}>Ban Status </Dropdown.Item> : null }
+            menuAlign="right"
+            title={
+              <div class="user_infoo">
+                {" "}
+                <Avatar /> &nbsp; {user.username}{" "}
+              </div>
+            }
+            id="dropdown-menu-align-right"
+          >
+            <MenuItem
+              eventKey="1"
+              onClick={() => {
+                history.push({ pathname: "/updateinfo" });
+              }}
+            >
+              {" "}
+              edit your profile
+            </MenuItem>
+            {user.username == "admin" ? (
+              <MenuItem
+                eventKey="2"
+                onClick={() => {
+                  history.push({ pathname: "/banpage" });
+                }}
+              >
+                Ban Status{" "}
+              </MenuItem>
+            ) : null}
 
-        <Dropdown.Divider />
-      <Dropdown.Item eventKey="4" onClick={() => {
-              logout();
-            }}><ExitToAppIcon/> Log out</Dropdown.Item>
-      </DropdownButton>
+            <MenuItem divider />
+            <MenuItem
+              eventKey="4"
+              onClick={() => {
+                logout();
+              }}
+            >
+              <ExitToAppIcon /> Log out
+            </MenuItem>
+            <MenuItem divider />
+          </DropdownButton>
         </div>
       </div>
     </div>
@@ -63,4 +91,3 @@ function Header() {
 }
 
 export default Header;
-
