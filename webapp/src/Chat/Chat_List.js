@@ -1,26 +1,41 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from "axios"
-import ChatPeople from "./Chat_People"
+import ChatRoom from "./ChatRoom"
+import { UserContext } from "../context/MyContext";
+
 function ChatList(){
 
     const [chatPeoples,setPeoples] = useState([])
     const [people, setPeople] = useState([])
+    const myData = useContext(UserContext)
 
     useEffect(async () => {
-        const res = await axios.get("http://localhost:4000/user/fnames");
-        const names = []
+        const res = await axios.get("http://localhost:4000/chat/johndoe@email.com");
+        const allinfo = []
         for (var i=0; i<(res.data).length; i++) {
-            names.push((res.data)[i].firstname)
+            // data = {firstname: '', email: ''}
+            allinfo.push((res.data)[i])
         }
-        setPeople(names)
-        console.log(people)
+        setPeoples(allinfo)
+        // console.log(people)
     })
+
+    const getChatroomTitle = (members) => {
+        const myEmail = myData.user.email;
+        const title = members[0] === myEmail ? members[1] : members[0];
+        return title;
+    }
 
     return(
         <div className = 'ChatList'>
             {/* <ChatPeople name = 'AA'/> */}
-            {people.map((fname, idx) => {
-                return (<ChatPeople name={fname} key={idx} />)
+            {chatPeoples.map((data, idx) => {
+                const info = {
+                    title: getChatroomTitle(data.members),
+                    members: data.members,
+                    roomId: data._id
+                }
+                return (<ChatRoom info={info} key={idx} />)
             })}
         </div>
     );
