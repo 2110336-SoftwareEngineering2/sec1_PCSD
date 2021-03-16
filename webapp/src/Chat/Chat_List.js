@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import axios from "axios"
 import ChatRoom from "./ChatRoom"
-import { UserContext } from "../context/MyContext";
+import { UserContext, ChatContext } from "../context/MyContext";
 
 function ChatList(){
 
@@ -10,13 +10,14 @@ function ChatList(){
     const myData = useContext(UserContext)
 
     useEffect(async () => {
-        const res = await axios.get("http://localhost:4000/chat/johndoe@email.com");
+        const res = await axios.get(`http://localhost:4000/chat/${myData.user.email}`);
         const allinfo = []
         for (var i=0; i<(res.data).length; i++) {
-            // data = {firstname: '', email: ''}
+            // console.log(res.data)
             allinfo.push((res.data)[i])
         }
         setPeoples(allinfo)
+
         // console.log(people)
     })
 
