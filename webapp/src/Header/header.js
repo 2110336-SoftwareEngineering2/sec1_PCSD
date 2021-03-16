@@ -7,10 +7,10 @@ import MailIcon from "@material-ui/icons/Mail";
 import { Avatar, IconButton } from "@material-ui/core";
 import history from "./../history";
 import { UserContext } from "../context/MyContext";
-import { DropdownButton } from 'react-bootstrap';
-import { Dropdown } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function Header() {
   const { user, logout } = useContext(UserContext);
 
@@ -39,7 +39,7 @@ function Header() {
         </IconButton>
         <hr />
         <div className="header__profile">
-          <DropdownButton
+        <DropdownButton
           menuAlign="right"
           title= {<div class="user_infoo"> <Avatar /> &nbsp; {user.username} </div>}
           id="dropdown-menu-align-right" >

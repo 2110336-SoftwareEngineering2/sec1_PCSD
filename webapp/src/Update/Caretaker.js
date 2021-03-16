@@ -5,6 +5,7 @@ import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 import { RegisterContext } from "../context/MyContext";
 import Header from "./../Header/header";
+
 function UpdateCaretaker() {
   const context = useContext(RegisterContext);
   const [values, setValue] = useState({
