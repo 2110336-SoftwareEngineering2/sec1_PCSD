@@ -1,3 +1,4 @@
+import { fn } from "jquery";
 import React from "react";
 
 // User context
@@ -12,6 +13,25 @@ const RegisterContext = React.createContext({
   data: null,
   setData: (data) => {},
 });
+
+// Chat context
+const ChatContext = React.createContext({
+  currentChatRoom: "",
+  changeChatRoom: (roomId) => {},
+})
+
+// Reducer for Chat Context
+function ChatContextReducer(state, action) {
+  switch (action.type) {
+    case "CHANGE_CHAT_ROOM":
+      return {
+        ...state,
+        currentChatRoom: action.payload
+      };
+    default:
+      return state;
+  }
+}
 
 // Reducer for user context
 function ContextReducer(state, action) {
@@ -67,6 +87,25 @@ function ContextProvider(props) {
   );
 }
 
+// Context provider for chat context
+function ChatProvider(props) {
+  const [state, dispatch] = React.useReducer(ChatContextReducer, {currentChatRoom: null});
+
+  function changeChatRoom(chatRoomId) {
+    dispatch({
+      type: "CHANGE_CHAT_ROOM",
+      payload: chatRoomId,
+    });
+  }
+
+  return (
+    <ChatContext.Provider
+      value={{ currentChatRoom: state.currentChatRoom, changeChatRoom}}
+      {...props}
+    />
+  )
+}
+
 // Context provider for registration
 function RegisterProvider(props) {
   const [state, dispatch] = React.useReducer(RegisterRuducer, { data: "" });
@@ -86,4 +125,4 @@ function RegisterProvider(props) {
   );
 }
 
-export { UserContext, ContextProvider, RegisterContext, RegisterProvider };
+export { UserContext, ContextProvider, RegisterContext, RegisterProvider, ChatContext, ChatProvider };
