@@ -10,6 +10,7 @@ import history from "./history";
 import ChatPage from "./Chat/chat";
 import UpdateCaretaker from "./Update/Caretaker";
 import UpdatePetowner from "./Update/Petowner";
+import SearchPage from "./SearchPage/SearchPage";
 import { RegisterContext, UserContext } from "./context/MyContext";
 
 function Routes() {
@@ -28,6 +29,7 @@ function Routes() {
           path="/register"
           component={context.data.role == "petowner" ? Petowner : Caretaker}
         />
+        <Route path="/searchpage" component={SearchPage} />
         <Route path="/chat" component={ChatPage} />
         <Route path="/banpage" component={BanPage} />
         <Route

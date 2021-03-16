@@ -1,26 +1,13 @@
 import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
-
 import "./UserInfo.css";
 import Register_info from "./Register_info";
 import Register_header from "./Register_header";
 import JobInfo from "./JobInfo";
 import MyPet from "./MyPet";
-import SumPet from "./SumPet";
 import { RegisterContext } from "../context/MyContext";
 
-//function UserInfo(props) {
-//  return (
-//    <div className="userInfo">
-//      <Register_header title={props.infotype}/>
-//        <NextButton type={props.infotype}/>
-//      {/*regis_header*/}
-//      {/*regis_info*/}
-//    </div>
-//
-//  );
-//}
 class UserInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -38,8 +25,6 @@ class UserInfo extends React.Component {
       <div className={this.state.classname}>
         <Register_header title={this.props.infotype} />
         <NextButton func={this.changeClassName} type={this.props.infotype} onChange={this.props.onChange} />
-        {/*regis_header*/}
-        {/*regis_info*/}
       </div>
     );
   }

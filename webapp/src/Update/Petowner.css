@@ -1,9 +1,6 @@
-.petowner {
+.updatepetowner {
     display: block;
     align-items: center;
 }
-.info {
-    margin-top: 30px;
-    display: flex;
-}
+
 
