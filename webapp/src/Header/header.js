@@ -26,7 +26,9 @@ function Header() {
           <img src={petidcare} alt="" />
           <h4>Petidcare</h4>
         </div>
-        <div className="header__input">
+        <div className="header__input" onClick={() => {
+            history.push({ pathname: "/searchpage" });
+          }}>
           <SearchIcon />
           <label className="header__label">Search for caketakers</label>
         </div>
