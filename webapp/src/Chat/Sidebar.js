@@ -16,7 +16,6 @@ function Sidebar(){
             <div className = "Searchbar">
                 {/*<SearchIcon />   Diew Ma Sai Thee lang*/}
                 <input className = "Search_input" placeholder = "Search Chat" value = {searchContent} onChange = {onChange}></input>
-                <h1>Hello 12</h1>
             </div>
             <ChatList />
         </div>

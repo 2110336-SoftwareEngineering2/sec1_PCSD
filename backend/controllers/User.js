@@ -188,7 +188,14 @@ module.exports = {
     res.status(result.status).send(result.message);
   },
 
-  getAllUsersEmail,
+  getAllEmails: async (req, res) => {
+    await getAllUsersEmail(req, res);
+  },
+
+  getAllUsersInfo: async (req, res) => {
+    const names = await User.find({}, {firstname: 1, email: 1, _id: 0});
+    res.status(200).json(names);
+  },
 
   editUser,
 
