@@ -40,7 +40,8 @@ const chatServer = {
             });
 
             socket.on('disconnect', () => {
-                console.log('user disconnected');
+                // console.log('user disconnected');
+                // socket.leave(room);
             });
 
             socket.on('sent-message', async (data) => {
@@ -53,12 +54,12 @@ const chatServer = {
                 if (checkToken.status == true) {
                     try {
                         const res = await Chatrooms.findOneAndUpdate({_id: room}, {$push: {messages: message}}, { "new": true, "upsert": true });
-                        io.to(room).emit('new-message-status', { status: checkToken.status, message: data.message, user: data.user, email: data.email });
+                        io.to(room).emit('new-message-status', { status: checkToken.status, message: data.message, user: data.user, email: data.email, time: data.time });
                     } catch (err) {
                         io.to(room).emit('exception', { errMessage: err });
                     }
                 } else {
-                    io.to(room).emit('new-message-status', { status: checkToken.status, message: checkToken.message, user: data.user, email: data.email });
+                    io.to(room).emit('new-message-status', { status: checkToken.status, message: checkToken.message, user: data.user, email: data.email, time: data.time });
                 }
             });
 
