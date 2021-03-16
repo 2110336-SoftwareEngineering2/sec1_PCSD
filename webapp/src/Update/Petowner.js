@@ -15,7 +15,7 @@ function UpdatePetowner() {
   }
 
   return (
-    <div className="petowner">
+    <div className="updatepetowner">
       <Header />
         <div className="info">
         <UserProfile uInfo = {values}/>

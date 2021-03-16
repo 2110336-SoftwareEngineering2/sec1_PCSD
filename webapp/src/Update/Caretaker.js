@@ -21,7 +21,7 @@ function UpdateCaretaker() {
   }
   
   return (
-    <div className="caretaker">
+    <div className="updatecaretaker">
       <Header />
       <div className="info">
       {isNext ? null : <UserProfile uInfo={values} />}
