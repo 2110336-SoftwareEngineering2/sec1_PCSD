@@ -1,15 +1,15 @@
 import React, { useContext, useState} from "react";
 import "./Petowner.css";
 import Header from "./../Header/header";
-import UserProfile from "./UserProfile";
-import UserInfo from "./UserInfo";
-import { RegisterContext } from "../context/MyContext";
+import UserProfile from "./Update_profile";
+import UserInfo from "./Update_info";
+import { UserContext } from "../context/MyContext";
 
 function UpdatePetowner() {
-  const context = useContext(RegisterContext);
+  const context = useContext(UserContext);
   const [values, setValue] = useState({
     ...context.data,
-    username: ""});
+  });
   
   function onChange(e) {
     setValue({...values, [e.target.name]: e.target.value})

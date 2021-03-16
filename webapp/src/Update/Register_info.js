@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./Register_info.css";
 import Caretaker from "./Caretaker.js";
-import { RegisterContext } from "../context/MyContext";
+import { UserContext } from "../context/MyContext";
 
 function Register_info(props) {
   return (
@@ -45,30 +45,6 @@ function RegisterInfo(props) {
         </div>
         <div className="row">
           <div className="col-6 registercol">
-            <label>Password</label>
-            <br />
-            <input
-              className="texting"
-              type="password"
-              name="password"
-              value={props.values.password}
-              onChange={props.onChange}
-            />
-          </div>
-          <div className="col-6 registercol">
-            <label>Comfirm Password</label>
-            <br />
-            <input
-              className="texting"
-              type="password"
-              name="confirmPass"
-              value={props.values.confirmPass}
-              onChange={props.onChange}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6 registercol">
             <label>Email Address</label>
             <br />
             <input
@@ -77,6 +53,7 @@ function RegisterInfo(props) {
               name="email"
               value={props.values.email}
               onChange={props.onChange}
+              disabled
             />
           </div>
           <div className="col-6 registercol">
@@ -113,7 +90,7 @@ function RegisterInfo(props) {
             />
           </div>
         </div>
-        <button >Save Change</button>
+        <button className="savechange" type="submit">Save Change</button>
       </form>
     </div>
   );

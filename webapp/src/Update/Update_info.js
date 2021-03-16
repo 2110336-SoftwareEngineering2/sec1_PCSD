@@ -1,44 +1,48 @@
 import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
+import "./Edit_header.css";
 import "./Update_userInfo.css";
 import Register_info from "./Register_info";
 import Register_header from "./Register_header";
 import JobInfo from "./JobInfo";
 import MyPet from "./MyPet";
-import { UserContext } from "../context/MyContext";
+import { RegisterContext } from "../context/MyContext";
 
-class UserInfo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { classname: "userInfo" };
-    this.changeClassName = this.changeClassName.bind(this);
-  }
+function UserInfo(props) {
+  const [state, setState] = useState({
+    classname: "userInfo",
+  });
 
-  changeClassName() {
-    this.setState({ classname: "expand" });
-    this.props.func();
-  }
+  const changeClassName = () => {
+    setState({ classname: "expand" });
+  };
 
-  render() {
-    return (
-      <div className={this.state.classname}>
-        <Register_header title={this.props.infotype} />
-        <NextButton func={this.changeClassName} type={this.props.infotype} onChange={this.props.onChange} />
+  return (
+    <div className={state.classname}>
+      <div className="register_header">
+       <p>Edit Profile</p>
       </div>
-    );
-  }
+      <NextButton
+        func={changeClassName}
+        type={props.infotype}
+        onChange={props.onChange}
+      />
+    </div>
+  );
 }
 
 export default UserInfo;
 
 function NextButton(props) {
-  const context = useContext(UserContext);
+  const context = useContext(RegisterContext);
   const [state, setState] = useState({
     isNext: false,
   });
   const [values, setValue] = useState({
-    ...context.user,
+    ...context.data,
+    username: "",
+    confirmPass: "",
   });
 
   const onChange = (e) => {
@@ -63,7 +67,7 @@ function NextButton(props) {
       };
 
       const response = { user: null };
-/*
+
       axios
         .post("http://localhost:4000/user/register", newUser)
         .then((res) => {
@@ -76,7 +80,7 @@ function NextButton(props) {
             })
             .catch((err) => console.log(err));
         })
-        .catch((err) => console.log(err)); */
+        .catch((err) => console.log(err));
     }
     setState({ isNext: true });
     if (props.type == "Caretaker") {

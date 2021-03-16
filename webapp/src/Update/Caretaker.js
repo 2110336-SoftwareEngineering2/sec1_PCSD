@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Caretaker.css";
-import UserProfile from "./UserProfile";
+import UserProfile from "./Update_profile";
 import UserInfo from "./UserInfo";
-import { RegisterContext } from "../context/MyContext";
+import { UserContext } from "../context/MyContext";
 import Header from "./../Header/header";
 
 function UpdateCaretaker() {
-  const context = useContext(RegisterContext);
+  const context = useContext(UserContext);
   const [values, setValue] = useState({
-    ...context.data,
-    username: ""});
+    ...context.user,
+  });
   
   const [isNext, setIsNext] = useState(false);
       const profileControl = () => {
