@@ -192,9 +192,9 @@ module.exports = {
     await getAllUsersEmail(req, res);
   },
 
-  getAllNames: async (req, res) => {
-    const names = await User.find({}, {firstname: 1, _id: 0});
-    res.status(200).json(names);
+  getAllUsersInfo: async (req, res) => {
+    const info = await User.find({}, {firstname: 1, email: 1, _id: 0});
+    res.status(200).json(info);
   },
 
   editUser,

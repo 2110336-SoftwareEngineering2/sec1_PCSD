@@ -17,8 +17,8 @@ router.post("/", (req, res) => {
   UserController.getUserByEmail(req, res);
 });
 
-router.get("/fnames", (req, res) => {
-  UserController.getAllNames(req, res);
+router.get("/usersinfo", (req, res) => {
+  UserController.getAllUsersInfo(req, res);
 });
 
 // For testing, currently unused
