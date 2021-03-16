@@ -7,10 +7,10 @@ import MailIcon from "@material-ui/icons/Mail";
 import { Avatar, IconButton } from "@material-ui/core";
 import history from "./../history";
 import { UserContext } from "../context/MyContext";
-import { DropdownButton, MenuItem } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function Header() {
   const { user, logout } = useContext(UserContext);
 
@@ -53,9 +53,8 @@ function Header() {
               </div>
             }
             id="dropdown-menu-align-right"
-            data-toggle="dropdown"
           >
-            <MenuItem
+            <Dropdown.Item
               eventKey="1"
               onClick={() => {
                 history.push({ pathname: "/updateinfo" });
@@ -63,28 +62,27 @@ function Header() {
             >
               {" "}
               edit your profile
-            </MenuItem>
+            </Dropdown.Item>
             {user.username == "admin" ? (
-              <MenuItem
+              <Dropdown.Item
                 eventKey="2"
                 onClick={() => {
                   history.push({ pathname: "/banpage" });
                 }}
               >
                 Ban Status{" "}
-              </MenuItem>
+              </Dropdown.Item>
             ) : null}
 
-            <MenuItem divider />
-            <MenuItem
+            <Dropdown.Divider />
+            <Dropdown.Item
               eventKey="4"
               onClick={() => {
                 logout();
               }}
             >
               <ExitToAppIcon /> Log out
-            </MenuItem>
-            <MenuItem divider />
+            </Dropdown.Item>
           </DropdownButton>
         </div>
       </div>
