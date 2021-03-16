@@ -114,7 +114,14 @@ const SearchBox = () => {
               }}
               size="small"
             />
-            <p style={{ margin: "1% 0 0 3%", fontSize: "30px" }}>&#8594;</p>
+            <p
+              style={{
+                margin: "0 0 0 3%",
+                fontSize: "28px",
+              }}
+            >
+              &#8594;
+            </p>
             <TextField
               variant="outlined"
               type="date"
