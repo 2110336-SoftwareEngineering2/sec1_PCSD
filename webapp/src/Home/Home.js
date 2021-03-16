@@ -10,6 +10,9 @@ function Home() {
       backgroundImage: `url(${background})`
     }}>
         <Header />
+        <p> Online Matchmaking Loving Pet Care </p>
+<h2> Book trusted caretakers who’ll treat 
+your pets like family.</h2>
         <SearchBox />
     </div>
 

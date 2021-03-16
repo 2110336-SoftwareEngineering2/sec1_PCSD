@@ -1,7 +1,30 @@
 .home {
     color: black;
-    height: 680px;
+    height: 730px;
     background-Size: cover;
     background-repeat: no-repeat;
     background-blend-mode: luminosity;
+}
+
+.home > p {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.44);
+}
+.home > h2 {
+    margin-bottom: 0px;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.44);
+}
+
+.home > .makeStyles-searchBox-3 {
+    margin-top: 0px;
 }
