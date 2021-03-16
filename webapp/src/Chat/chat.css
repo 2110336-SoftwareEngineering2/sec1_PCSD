@@ -13,12 +13,14 @@
 .Sidebar{
   background-color: #fff;
   padding:  20px;
-  width: 35%;
+  width: 35vw;
   max-height: 100vh;
   min-height: 90vh;
 }
 
 .Chat_Title{
+  margin: 10px;
+  margin-bottom: 20px;
   padding: 5px;
   font-size: 32pt;
 }
@@ -54,6 +56,38 @@
    'People_Profile People_Name';
   background-color: #eee;
   height: 70px ;
+}
+
+/*Chat Box Part*/
+.Chatbox{
+  align-self: left;
+  width: 65vw;
+}
+.Messages{
+  margin: 1%;
+  height: 85%;
+  border-radius: 5px;
+  background-color: #ccc;
+}
+.Downside_Bar{
+  font-size: x-large;
+  margin :1%;
+  border-radius: 5px;
+  background-color: #fff;
+  height: 11%;
+}
+.Message_Box{
+  align-items: baseline;
+  margin : 1%;
+  padding: 10px;
+  width: 80%;
+  height: 80%;
+  border-radius: 5px;
+}
+.Send_Chat{
+  height: 80%;
+  width: 18%;
+  border-radius: 10px;
 }
 /*  html,
    
