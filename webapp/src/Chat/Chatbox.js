@@ -3,7 +3,7 @@ import socketIOClient from 'socket.io-client';
 import React, { useEffect, useContext, useState } from "react"
 import { ChatContext, UserContext } from "../context/MyContext";
 
-const dump_chat = []
+//const dump_chat = []
 
 function Chatbox(){
     const chatContext = useContext(ChatContext);
@@ -81,7 +81,7 @@ function Chatbox(){
     
     function handleChangeInputMessage(e) {
         setInputMessage(e.target.value)
-        // console.log(inputMessage)
+        console.log(inputMessage)
     }
     // function handleOnClickSendMessage() {
     // }
@@ -91,18 +91,20 @@ function Chatbox(){
             {/*<div className = "Messages">
                 {}
             </div>
-            <div className = "Downside_Bar">
-                <input className = "Message_Box"></input>
-                <button className = "Send_Chat">Send</button>
-            u</div>*/}
+            
+                <input ></input>
+                <button >Send</button>*/}
+            
             
             <h1>ChatBox</h1>
             <h2>{chatContext.currentChatRoom}</h2>
             {messages.map((mDetail, idx) => {
                 return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
             })}
-            <input onChange={handleChangeInputMessage} />
-            <button onClick={() => send()}>send</button>
+            <div className = "Downside_Bar">
+                <input className = "Message_Box" onChange={handleChangeInputMessage} />
+                <button className = "Send_Chat" onClick={() => send()}>send</button>
+            </div>
         </div>
     )
 }
