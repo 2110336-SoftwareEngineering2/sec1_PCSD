@@ -72,7 +72,7 @@ function AddButton() {
         </button>
       </div>
       <div className="S">
-      {!isNext ? null : <button className="SignUpButton" onClick={() => {
+      {!isNext ? null : <button className="SaveButton" onClick={() => {
                     history.push({ pathname: "/" });
                   }}>Save Change</button>}
       </div>

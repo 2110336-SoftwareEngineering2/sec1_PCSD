@@ -70,3 +70,26 @@ input.texting {
     padding: 5px;
     width: 100px;
 }
+.savechange {
+    border: none;
+    outline: none;
+    background-color: #8e8e8e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
+
+.savechange:hover{
+    border: none;
+    outline: none;
+    background-color: #BD6A43;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
