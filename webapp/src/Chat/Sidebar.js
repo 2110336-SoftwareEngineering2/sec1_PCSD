@@ -1,5 +1,6 @@
-import React,{useState} from "react"
+import React,{useState, useEffect} from "react"
 import ChatList from "./Chat_List"
+import axios from "axios"
 import SearchIcon from "@material-ui/icons/Search";
 
 function Sidebar(){

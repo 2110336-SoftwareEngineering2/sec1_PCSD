@@ -1,4 +1,5 @@
 import React from "react";
+import history from "../history";
 
 // User context
 const UserContext = React.createContext({
@@ -22,6 +23,7 @@ function ContextReducer(state, action) {
         user: action.payload,
       };
     case "LOGOUT":
+      history.push({ pathname: "/" });
       return {
         ...state,
         user: null,

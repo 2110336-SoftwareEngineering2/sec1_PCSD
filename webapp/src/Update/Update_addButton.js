@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import AddPet from "./AddPet";
 import SumPet from "./SumPet";
-import history from "./../history";
+import history from "../history";
 import "./AddButton.css";
 
 let id = 1;
@@ -37,10 +37,10 @@ function AddButton() {
       gender: input.gender,
     };
 
-    /*axios
+    axios
       .post("http://localhost:4000/user/pet", newPet)
       .then((res) => console.log(res.data))
-      .catch((err) => console.log(err)); */
+      .catch((err) => console.log(err));
   }
 
   function addPetList(name, img, age, breed, gender) {
@@ -72,9 +72,9 @@ function AddButton() {
         </button>
       </div>
       <div className="S">
-      {!isNext ? null : <button className="SaveButton" onClick={() => {
+      {!isNext ? null : <button className="SignUpButton" onClick={() => {
                     history.push({ pathname: "/" });
-                  }}>Save Change</button>}
+                  }}>Sign Up</button>}
       </div>
     </div>
   );

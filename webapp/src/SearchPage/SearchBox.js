@@ -25,7 +25,7 @@ const SearchBox = () => {
           <input type="checkbox" name="petType" value="cat" /> Cat
         </label>
         <label className={classes.label}>
-          <input type="checkbox" name="petType" value="rabbit" /> Rabit
+          <input type="checkbox" name="petType" value="rabbit" /> Rabbit
         </label>
         <label className={classes.label}>
           <input type="checkbox" name="petType" value="bird" /> Bird

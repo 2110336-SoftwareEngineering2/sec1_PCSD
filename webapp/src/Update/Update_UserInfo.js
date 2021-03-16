@@ -1,14 +1,15 @@
 import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
-import "./Update_userInfo.css";
+
+import "./UserInfo.css";
 import Register_info from "./Register_info";
 import Register_header from "./Register_header";
 import JobInfo from "./JobInfo";
 import MyPet from "./MyPet";
-import { UserContext } from "../context/MyContext";
+import { UserContext, RegisterContext } from "../context/MyContext";
 
-class UserInfo extends React.Component {
+class UpdateUserInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = { classname: "userInfo" };
@@ -24,22 +25,30 @@ class UserInfo extends React.Component {
     return (
       <div className={this.state.classname}>
         <Register_header title={this.props.infotype} />
-        <NextButton func={this.changeClassName} type={this.props.infotype} onChange={this.props.onChange} />
+        <NextButton
+          func={this.changeClassName}
+          type={this.props.infotype}
+          onChange={this.props.onChange}
+        />
       </div>
     );
   }
 }
 
-export default UserInfo;
+export default UpdateUserInfo;
 
 function NextButton(props) {
-  const context = useContext(UserContext);
+  const context = useContext(RegisterContext);
+  const userContext = useContext(UserContext);
   const [state, setState] = useState({
     isNext: false,
   });
   const [values, setValue] = useState({
-    ...context.user,
+    ...context.data,
+    username: "",
+    confirmPass: "",
   });
+  const [errors, setError] = useState({});
 
   const onChange = (e) => {
     setValue({ ...values, [e.target.name]: e.target.value });
@@ -62,23 +71,26 @@ function NextButton(props) {
         banStatus: values.banStatus,
       };
 
-      const response = { user: null };
-/*
       axios
         .post("http://localhost:4000/user/register", newUser)
         .then((res) => {
+          console.log(res);
           res.data.password = newUser.password;
           axios
             .post("http://localhost:4000/auth/login", res.data)
             .then((response) => {
-              // context.login(res.data);
+              userContext.login(response.data);
               console.log(response.data);
+              setState({ isNext: true });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+              console.log(err);
+            });
         })
-        .catch((err) => console.log(err)); */
+        .catch((err) => {
+          setError(err.response.data);
+        });
     }
-    setState({ isNext: true });
     if (props.type == "Caretaker") {
       props.func();
     }
@@ -87,7 +99,7 @@ function NextButton(props) {
   return (
     <div>
       {!state.isNext ? (
-        <Register_info onChange={onChange} values={values}/>
+        <Register_info onChange={onChange} values={values} errors={errors} />
       ) : (
         <Info info={props.type} />
       )}

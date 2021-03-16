@@ -9,9 +9,16 @@ function ChatPage() {
         <div className = "ChatPage">
             {/*<Header />*/}
             <Header />
-            <Sidebar />
-            {/*<Chatbox />*/}
+            <div style={tmpStyle} >
+                <Sidebar />
+                <Chatbox />
+            </div>
         </div>
     );
+}
+
+const tmpStyle = {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
 }
 export default ChatPage;

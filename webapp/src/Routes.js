@@ -11,6 +11,7 @@ import ChatPage from "./Chat/chat";
 import UpdateCaretaker from "./Update/Caretaker";
 import UpdatePetowner from "./Update/Petowner";
 import SearchPage from "./SearchPage/SearchPage";
+import Test from "./Test";
 import { RegisterContext, UserContext } from "./context/MyContext";
 
 function Routes() {
@@ -39,6 +40,11 @@ function Routes() {
               ? UpdatePetowner
               : UpdateCaretaker
           }
+        />
+        <Route
+          path="/test"
+          exact
+          component={Test}
         />
       </Switch>
     </Router>
