@@ -1,8 +1,10 @@
 import React from "react"
 
 function Chatbox(){
-    <div className = "Chatbox">
-        This is Chatbox
-    </div>
+    return (
+        <div className = "Chatbox">
+            <h1>ChatBox</h1>
+        </div>
+    )
 }
 export default Chatbox;
