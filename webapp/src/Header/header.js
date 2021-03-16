@@ -9,6 +9,7 @@ import history from "./../history";
 import { UserContext } from "../context/MyContext";
 import { DropdownButton, MenuItem } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 function Header() {
   const { user, logout } = useContext(UserContext);
@@ -52,6 +53,7 @@ function Header() {
               </div>
             }
             id="dropdown-menu-align-right"
+            data-toggle="dropdown"
           >
             <MenuItem
               eventKey="1"
