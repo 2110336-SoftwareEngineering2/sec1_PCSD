@@ -113,6 +113,7 @@ function RegisterInfo(props) {
             />
           </div>
         </div>
+        <button >Save Change</button>
       </form>
     </div>
   );
