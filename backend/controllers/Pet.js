@@ -25,15 +25,14 @@ module.exports = {
     // Check if user is logged in
     checkAuth.validateAccessToken(req, res);
     const user = req.decoded;
-
     // user is logged in and has "user" role
     if (user && user.role === "user") {
-      const petName = req.body.petName;
+      const petId = req.body.source;
       const { email } = user.email;
       // remove pet
       await Pet.findOneAndDelete(
         {
-          petName: petName,
+          _id: petId,
           owner: email,
         },
         (err) => {
@@ -46,8 +45,24 @@ module.exports = {
       );
     }
   },
-  getPet: async (req, res) => {
-    const pets = await Pet.find();
-    return pets;
+  getPet: (req, res) => {
+    // Check if user is logged in
+    checkAuth.validateAccessToken(req, res);
+    const user = req.decoded;
+
+    // user is logged in and has "user" role
+    if (user && user.role === "user") {
+      const { email } = user.email;
+      // find pet
+      Pet.find({ owner: email },
+        (err, docs) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send(docs);
+          }
+        }
+      );
+    }
   },
 };

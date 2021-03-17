@@ -43,7 +43,11 @@ router.post("/register", (req, res) => {
 
 router.post("/caretaker", (req, res) => {
   CaretakerController.addCaretaker(req, res);
-})
+});
+
+router.post("/caretaker/find", (req, res) => {
+  CaretakerController.getCaretaker(req, res);
+});
 
 router.get("/caretaker", (req, res) => {
   CaretakerController.getCaretaker(req.body, res);
@@ -68,7 +72,11 @@ router.delete("/pet", (req, res) => {
 
 router.post("/edit", (req, res) => {
   UserController.editUser(req,res);
-})
+});
+
+router.post("/edit/caretaker", (req, res) => {
+  CaretakerController.updateCaretaker(req, res);
+});
 
 router.post("/topup", (req, res) => {
   UserController.TopUp(req,res);
