@@ -87,7 +87,9 @@ const SearchBox = () => {
               size="small"
               placeholder="Max"
             />
-            <h4 style={{ margin: "10px 0px 0px 10px" }}>Baht</h4>
+            <h4 style={{ margin: "10px 0px 0px 10px", opacity: "0.5" }}>
+              Baht
+            </h4>
           </div>
         </div>
       </div>
@@ -120,7 +122,8 @@ const SearchBox = () => {
             <p
               style={{
                 margin: "0 0 0 3%",
-                fontSize: "28px",
+                fontSize: "25px",
+                opacity: "0.5",
               }}
             >
               &#8594;
