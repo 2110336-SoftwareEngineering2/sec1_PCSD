@@ -12,7 +12,14 @@ function Sidebar(){
 
     return(
         <div className = 'Sidebar'>
-            <div className = 'Chat_Title'>Chats</div>
+            <div className = 'Sidebar_Head'>
+                <div className = 'Chat_Title'>
+                    Chat
+                </div>
+                <div className = 'Chat_Menu'>
+                    
+                </div>
+            </div>
             <div className = "Searchbar">
                 {/*<SearchIcon />   Diew Ma Sai Thee lang*/}
                 <input className = "Search_input" placeholder = "Search Chat" value = {searchContent} onChange = {onChange}></input>

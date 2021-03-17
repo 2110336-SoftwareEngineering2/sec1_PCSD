@@ -75,6 +75,7 @@ function Chatbox({roomId}){
         //         room: chatContext.currentChatRoom
         //     }
         // });
+        
         if (inputMessage.length !== 0) {
             const data = {
                 message: inputMessage,
@@ -138,7 +139,7 @@ function Chatbox({roomId}){
                 })}
             </div>
             <div className = "Downside_Bar">
-                <input className = "Message_Box" onChange={handleChangeInputMessage} />
+                <input className = "Message_Box" onChange={handleChangeInputMessage} value = {inputMessage}/>
                 <button className = "Send_Chat" onClick={() => send()}>send</button>
             </div>
         </div>
