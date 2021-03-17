@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
+import axios from "axios";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./Register_info.css";
 import Caretaker from "./Caretaker.js";
 import { UserContext } from "../context/MyContext";
-import context from "react-bootstrap/esm/AccordionContext";
 
 function Register_info(props) {
   return (
@@ -17,25 +17,42 @@ function Register_info(props) {
 export default Register_info;
 
 function RegisterInfo(props) {
+  const { login } = useContext(UserContext);
+  const [errors, setError] = useState({});
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const editedUser = {};
-
     // In case password and confirm password not matched
-    if(props.values.confirmPass !== props.values.password) return;
+    if(props.values.confirmPass !== props.values.password) {
+      setError({confirmError: true});
+      return;
+    }
+    
+    editUser();
+  }
+  
+  const editUser = () => {
+    const editedUser = {};
 
     for(const key in props.values) {
       if(key == "confirmPass") continue;
       if(props.values[key].length > 0) {
-        if(props.context[key] !== props.values[key])
+        if(props.context[key] !== props.values[key]) {
           editedUser[key] = props.values[key];
+        }
       }
     }
-
-    console.log(editedUser);
-  }
+  
+    axios
+      .post("http://localhost:4000/user/edit", editedUser)
+      .then((res) => {
+        login(res.data);
+        console.log('Edit user successful');
+        setError({});
+      })
+      .catch((err) => setError(err.response.data));
+  };
 
   return (
     <div className="registerinfo">
@@ -77,12 +94,17 @@ function RegisterInfo(props) {
             />
           </div>
           <div className="col-6 registercol">
-            <label>Comfirm New Password</label>
+            <label style={errors.confirmError ? { color: "#a13737" } : {}}>Comfirm New Password</label>
             <br />
             <input
               className="texting"
               type="password"
               name="confirmPass"
+              style={
+                errors.confirmError
+                  ? { backgroundColor: "#ffd7d4", borderColor: "red" }
+                  : {}
+              }
               value={props.values.confirmPass}
               onChange={props.onChange}
             />
@@ -102,12 +124,17 @@ function RegisterInfo(props) {
             />
           </div>
           <div className="col-6 registercol">
-            <label>Username</label>
+            <label style={errors.usernameError ? { color: "#a13737" } : {}}>Username</label>
             <br />
             <input
               className="texting"
               type="text"
               name="username"
+              style={
+                errors.usernameError
+                  ? { backgroundColor: "#ffd7d4", borderColor: "red" }
+                  : {}
+              }
               value={props.values.username}
               onChange={props.onChange}
             />

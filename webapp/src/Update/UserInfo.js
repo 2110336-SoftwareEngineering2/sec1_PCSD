@@ -49,6 +49,7 @@ function NextButton(props) {
   );
   const [values, setValue] = useState({
     ...user,
+    id: context.user._id,
     password: "",
     confirmPass: "",
   });
@@ -115,17 +116,5 @@ function NextButton(props) {
 }
 
 function Info(props) {
-  return <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>;
+  return <div>{props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>;
 }
-
-// class Info extends React.Component {
-//   constructor(props) {
-//     super();
-//   }
-
-//   render() {
-//     return (
-//       <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
-//     );
-//   }
-// }
