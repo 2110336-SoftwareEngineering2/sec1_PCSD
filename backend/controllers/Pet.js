@@ -46,8 +46,24 @@ module.exports = {
       );
     }
   },
-  getPet: async (req, res) => {
-    const pets = await Pet.find();
-    return pets;
+  getPet: (req, res) => {
+    // Check if user is logged in
+    checkAuth.validateAccessToken(req, res);
+    const user = req.decoded;
+
+    // user is logged in and has "user" role
+    if (user && user.role === "user") {
+      const { email } = user.email;
+      // find pet
+      Pet.find({ owner: email },
+        (err, docs) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send(docs);
+          }
+        }
+      );
+    }
   },
 };
