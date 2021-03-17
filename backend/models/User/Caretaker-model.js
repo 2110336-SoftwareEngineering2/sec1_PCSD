@@ -17,6 +17,8 @@ const CaretakerSchema = new Schema({
     type: mongoose.Decimal128,
     get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(2))
     },
+  reserved : String,
+  
 });
 
 module.exports = mongoose.model("Caretaker", CaretakerSchema, "Users");
