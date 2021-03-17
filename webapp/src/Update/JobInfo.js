@@ -68,7 +68,7 @@ function JobInfo() {
                     </div>
                     <div className="row">
                         <div className="col-12 jobinfocol signupbutton">
-                            <button className="signup" type="submit" onClick={() => {
+                            <button className="updatechange" type="submit" onClick={() => {
                     history.push({ pathname: "/" });
                   }}>Save Change</button>
                         </div>

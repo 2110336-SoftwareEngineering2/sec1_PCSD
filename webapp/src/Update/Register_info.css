@@ -87,7 +87,7 @@ input.texting {
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
-    padding: 7px 35px;
+    padding: 10px 35px;
 }
 
 .savechange:hover{
@@ -99,5 +99,5 @@ input.texting {
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
-    padding: 7px 35px;
+    padding: 10px 35px;
 }
