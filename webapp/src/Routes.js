@@ -32,7 +32,7 @@ function Routes() {
           component={context.data.role == "petowner" ? Petowner : Caretaker}
         />
         <Route path="/searchpage" component={SearchPage} />
-        <Route path="/reserve" component={ReservePage} />
+        <Route path="/reservepage" component={ReservePage} />
         <Route path="/chat" component={ChatPage} />
         <Route path="/banpage" component={BanPage} />
         <Route

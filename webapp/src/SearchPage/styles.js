@@ -95,7 +95,7 @@ export default makeStyles((theme) => ({
   },
   cityInput: {
     marginLeft: "13%",
-    fontSize: "10px",
+    width: "230px",
   },
   dateBoxLine2: {
     display: "flex",
