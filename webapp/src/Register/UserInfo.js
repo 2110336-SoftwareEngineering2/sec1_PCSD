@@ -71,7 +71,7 @@ function NextButton(props) {
         mobileNumber: values.mobileNumber,
         gender: values.gender,
         role: values.role,
-        banStatus: values.banStatus,
+        banStatus: false,
       };
 
       axios
