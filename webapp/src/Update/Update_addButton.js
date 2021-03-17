@@ -8,8 +8,8 @@ import "./AddButton.css";
 let id = 1;
 
 function AddButton() {
-  const [isNext, setIsNext] = useState(false);
-  const [isAdd, setIsAdd] = useState(false);
+  const [isNext, setIsNext] = useState(true);
+  const [isAdd, setIsAdd] = useState(true);
   const [pet_lists, setPetlists] = useState([]);
   const [input, setInput] = useState({
     petType: "",
@@ -74,7 +74,7 @@ function AddButton() {
       <div className="S">
       {!isNext ? null : <button className="SignUpButton" onClick={() => {
                     history.push({ pathname: "/" });
-                  }}>Sign Up</button>}
+                  }}>Save Change</button>}
       </div>
     </div>
   );

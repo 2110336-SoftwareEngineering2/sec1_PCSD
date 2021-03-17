@@ -6,8 +6,6 @@ function SumPet({pet_lists,deletePet}) {
     console.log("choichoi");
     return (
         <div className="sumpet">
-            {/*Pet lists*/}
-          { /* */} 
           {pet_lists.map((pet) => (
         <Pet info={pet} deletePet={deletePet} />
     ))} 

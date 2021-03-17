@@ -87,7 +87,9 @@ const SearchBox = () => {
               size="small"
               placeholder="Max"
             />
-            <h4 style={{ margin: "10px 0px 0px 10px" }}>Baht</h4>
+            <h4 style={{ margin: "10px 0px 0px 10px", opacity: "0.5" }}>
+              Baht
+            </h4>
           </div>
         </div>
       </div>
@@ -105,6 +107,9 @@ const SearchBox = () => {
           <h2 className={classes.h2}>Date</h2>
           <div className={classes.dateBoxLine2}>
             <TextField
+              inputProps={{
+                style: { opacity: 0.5 },
+              }}
               variant="outlined"
               type="date"
               format={"DD/MM/YYYY"}
@@ -117,12 +122,16 @@ const SearchBox = () => {
             <p
               style={{
                 margin: "0 0 0 3%",
-                fontSize: "28px",
+                fontSize: "25px",
+                opacity: "0.5",
               }}
             >
               &#8594;
             </p>
             <TextField
+              inputProps={{
+                style: { opacity: 0.5 },
+              }}
               variant="outlined"
               type="date"
               className={classes.dateInput}
