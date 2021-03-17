@@ -23,9 +23,10 @@ const findUserById = async (id) => {
   }
 };
 
-// Please set response status code
-const addUser = async (body) => {
-  const user = await User.findOne({ username: body.username });
+const addUser = async (body, res) => {
+  const user = await User.findOne({
+    $or: [{ username: body.username }, { email: body.email }],
+  });
   body.password = await bcrypt.hash(body.password, 10);
   if (!user) {
     const newUser = new User({
@@ -35,8 +36,12 @@ const addUser = async (body) => {
       if (err) console.log(err);
     });
     return newUser;
+  } else if(user.username === body.username) {
+    res.status(400).send({ usernameError: "Username taken" });
+    // throw new Error("username taken!");
   } else {
-    throw new Error("username taken!");
+    res.status(400).send({ emailError: "Email taken" });
+    // throw new Error("email taken!");
   }
 };
 
@@ -174,12 +179,13 @@ module.exports = {
 
   registerUser: async (req, res) => {
     const body = req.body;
-    try {
-      const user = await addUser(body);
-      res.json(user);
-    } catch (err) {
-      res.status(400).send({ problem: err.message });
-    }
+    // try {
+      const user = await addUser(body, res);
+      if(user)
+        res.json(user);
+    // } catch (err) {
+      // res.status(400).send({ problem: err.message });
+    // }
   },
 
   deleteUser: async (req, res) => {
