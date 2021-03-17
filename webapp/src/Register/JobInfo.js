@@ -272,9 +272,6 @@ function JobInfo() {
               <button
                 className="signup"
                 type="submit"
-                // onClick={() => {
-                //   history.push({ pathname: "/" });
-                // }}
               >
                 Sign Up
               </button>
@@ -291,15 +288,6 @@ export default JobInfo;
 class AvailableDays extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   mon: null,
-    //   tue: null,
-    //   wed: null,
-    //   thu: null,
-    //   fri: null,
-    //   sat: null,
-    //   sun: null,
-    // };
     this.handleOnClicked = this.handleOnClicked.bind(this);
   }
 
