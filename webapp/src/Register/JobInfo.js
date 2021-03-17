@@ -98,7 +98,7 @@ function JobInfo() {
           console.log(err.response.data);
         });
 
-    //   history.push({pathname: "/"});
+    history.push({pathname: "/"});
   };
 
   return (
