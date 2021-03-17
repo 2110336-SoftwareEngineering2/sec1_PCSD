@@ -35,7 +35,9 @@ function Header() {
       </div>
       <div className="header__right">
         <IconButton>
-          <NotificationsIcon />
+          <NotificationsIcon onClick={() => {
+            history.push({ pathname: "/reservepage" });
+          }}/>
         </IconButton>
         <IconButton>
           <MailIcon

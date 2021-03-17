@@ -4,7 +4,6 @@ import "./Register_info.css";
 import { RegisterContext } from "../context/MyContext";
 
 function Register_info(props) {
-  const { user } = useContext(UserContext);
   
   return (
     <div className="registerinfo">
@@ -59,18 +58,25 @@ function Register_info(props) {
         </div>
         <div className="row">
           <div className="col-6 registercol">
-            <label>Email Address</label>
+            <label style={props.errors.emailError ? { color: "#a13737" } : {}}>
+              Email Address
+            </label>
             <br />
             <input
               className="texting"
               type="email"
               name="email"
+              style={
+                props.errors.emailError
+                  ? { backgroundColor: "#ffd7d4", borderColor: "red" }
+                  : {}
+              }
               value={props.values.email}
               onChange={props.onChange}
             />
           </div>
           <div className="col-6 registercol">
-            <label style={props.errors.problem ? { color: "#a13737" } : {}}>
+            <label style={props.errors.usernameError ? { color: "#a13737" } : {}}>
               Username
             </label>
             <br />
@@ -79,7 +85,7 @@ function Register_info(props) {
               type="text"
               name="username"
               style={
-                props.errors.problem
+                props.errors.usernameError
                   ? { backgroundColor: "#ffd7d4", borderColor: "red" }
                   : {}
               }
