@@ -64,9 +64,7 @@
   width: 65vw;
 }
 .Messages{
-  margin-top: 1%;
-  margin-left :1%;
-  margin-right: 1%;
+  margin: 1%;
   padding-left: 10px;
   height: 85%;
   border-radius: 5px;
@@ -74,8 +72,7 @@
 }
 .Downside_Bar{
   font-size: x-large;
-  margin-left :1%;
-  margin-right: 1%;
+  margin: 1%;
   /*padding-bottom: 5px;*/
   border-radius: 5px;
   background-color: #fff;
