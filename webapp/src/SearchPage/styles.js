@@ -102,4 +102,67 @@ export default makeStyles((theme) => ({
     width: "40%",
     transparent: "0%",
   },
+  searchResult: {
+    // backgroundColor: "yellow",
+    backgroundColor: "#F1F1F1",
+    hegith: "100%",
+    display: "flex",
+  },
+
+  sideSearchBox: {
+    margin: "10px",
+    width: "350px",
+    height: "630px",
+    position: "sticky",
+    top: "40px",
+    backgroundColor: "white",
+  },
+  paper: {
+    backgroundColor: "white",
+    "& > *": {
+      borderRadius: "5px",
+      backgroundColor: "white",
+      width: "100%",
+      height: "100%",
+    },
+  },
+  header: {
+    margin: "10px",
+  },
+  formControl: {
+    width: "250px",
+    marginLeft: "10px",
+  },
+  formControlLabel: {
+    marginRight: "47px",
+  },
+  firstColumnFormControlLabel: {
+    marginRight: "47px",
+    marginLeft: "10px",
+  },
+  sideButton: {
+    backgroundColor: "#bd6a43",
+    color: "white",
+    fontSize: "20px",
+    margin: "10px 0 50px 100px",
+  },
+  sideCityInput: {
+    width: "270px",
+    marginLeft: "10px",
+  },
+
+  sidePriceSection: {
+    display: "flex",
+    marginLeft: "10px",
+  },
+  sidePriceInput: {
+    width: "108px",
+  },
+  sideDateInput: {
+    width: "150px",
+  },
+  datePlaceHolder: {
+    fontSize: "12px",
+    opacity: "0.5",
+  },
 }));
