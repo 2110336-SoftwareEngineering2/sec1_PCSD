@@ -123,14 +123,8 @@ function NextButton(props) {
   );
 }
 
-class Info extends React.Component {
-  constructor(props) {
-    super();
-  }
-
-  render() {
-    return (
-      <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
-    );
-  }
+function Info(props) {
+  return (
+    <div>{props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
+  );
 }
