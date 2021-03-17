@@ -80,7 +80,7 @@ const deleteUserById = async (id) => {
 const getAllUsersEmail = async (req, res) => {
   const emails = User.find({}, { _id: 0, email: 1 }, (err, result) => {
     if (err) {
-      res.status(404).send(err);
+      res.status(400).send(err);
     } else {
       res.status(200).json(result);
     }
@@ -95,15 +95,20 @@ const editUser = async (req, res) => {
     user = User.findOne({ username: req.body.username });
   }
 
+  if(req.body.password) {
+    req.body.password = await bcrypt.hash(req.body.password, 10);
+  }
+
   if (!user || user._id == id) {
-    const editedUser = await User.findByIdAndUpdate(id, req.body);
+    var editedUser = await User.findByIdAndUpdate(id, req.body);
     if(editedUser) {
-      res.send("Edit successful")
+      editedUser = await User.findById(id);
+      res.send(editedUser);
     } else {
-      res.status(400).send({ problem: "user not found" });
+      res.status(400).send({ userError: true });
     }
   } else {
-    res.status(400).send({ problem: "username taken" });
+    res.status(400).send({ usernameError: true });
   }
 };
 
