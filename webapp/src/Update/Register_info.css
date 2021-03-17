@@ -56,42 +56,19 @@
 }
 
 input.texting {
-<<<<<<< HEAD
     border: 1px solid #8e8e8e;
     border-radius: 4px;
     padding: 3px;
     font-size: 16px;
-=======
-    border: 1px solid #b5b3b3b3;
-    border-radius: 5px;
-    padding: 12px;
-    font-size: 16px;
-    width: 80%;
-    overflow: visible;
-    
->>>>>>> 32211c1c7cf4f42e2fa5cd2fe954e26173ef9e5c
 }
 
 /* radiobutton */
 .radio {
-<<<<<<< HEAD
     border: 1px solid #8e8e8e;
     border-radius: 4px;
     cursor: pointer;
     padding: 5px;
     width: 100px;
-=======
-    border: 1px solid #b5b3b3b3;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 0px;
-    width: 30%;
-    height: fit-content;
-}
-#radioo {
-    margin-top: 20px;
-    padding: 0px;
->>>>>>> 32211c1c7cf4f42e2fa5cd2fe954e26173ef9e5c
 }
 .savechange {
     border: none;
@@ -102,11 +79,7 @@ input.texting {
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
-<<<<<<< HEAD
     padding: 7px 35px;
-=======
-    padding: 10px 35px;
->>>>>>> 32211c1c7cf4f42e2fa5cd2fe954e26173ef9e5c
 }
 
 .savechange:hover{
@@ -118,9 +91,5 @@ input.texting {
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
-<<<<<<< HEAD
     padding: 7px 35px;
-=======
-    padding: 10px 35px;
->>>>>>> 32211c1c7cf4f42e2fa5cd2fe954e26173ef9e5c
 }
