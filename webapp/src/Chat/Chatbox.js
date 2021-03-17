@@ -88,7 +88,7 @@ function Chatbox(){
     
     return (
         <div className = "Chatbox">
-            {/*<div className = "Messages">
+            {/*
                 {}
             </div>
             
@@ -96,11 +96,14 @@ function Chatbox(){
                 <button >Send</button>*/}
             
             
-            <h1>ChatBox</h1>
-            <h2>{chatContext.currentChatRoom}</h2>
-            {messages.map((mDetail, idx) => {
-                return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
-            })}
+            
+            <div className = "Messages">
+                <h1>ChatBox</h1>
+                <h2>{chatContext.currentChatRoom}</h2>
+                {messages.map((mDetail, idx) => {
+                    return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
+                })}
+            </div>
             <div className = "Downside_Bar">
                 <input className = "Message_Box" onChange={handleChangeInputMessage} />
                 <button className = "Send_Chat" onClick={() => send()}>send</button>
