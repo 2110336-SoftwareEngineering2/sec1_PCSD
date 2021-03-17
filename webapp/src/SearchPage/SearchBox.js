@@ -105,6 +105,9 @@ const SearchBox = () => {
           <h2 className={classes.h2}>Date</h2>
           <div className={classes.dateBoxLine2}>
             <TextField
+              inputProps={{
+                style: { opacity: 0.5 },
+              }}
               variant="outlined"
               type="date"
               format={"DD/MM/YYYY"}
@@ -123,6 +126,9 @@ const SearchBox = () => {
               &#8594;
             </p>
             <TextField
+              inputProps={{
+                style: { opacity: 0.5 },
+              }}
               variant="outlined"
               type="date"
               className={classes.dateInput}
