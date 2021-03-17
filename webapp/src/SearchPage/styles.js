@@ -4,8 +4,25 @@ export default makeStyles((theme) => ({
   label: {
     margin: "5px 5px 5px 20px",
   },
+  animalType: {
+    marginBottom: "10px",
+    padding: "15px 0",
+    width: "100%",
+    height: "18%",
+    backgroundColor: "#9d7f70",
+    display: "inline-flex",
+    borderRadius: "10px 10px 0 0",
+    color: "white",
+  },
   h2: {
+    fontWeight: "normal",
+    fontFamily: "system-ui",
     margin: "10px 0px 10px 20px",
+  },
+  h3: {
+    fontWeight: "normal",
+    fontFamily: "system-ui",
+    padding: "7px 0px 0px 18px",
   },
   searchBox: {
     backgroundColor: "white",
@@ -22,15 +39,7 @@ export default makeStyles((theme) => ({
     borderRadius: "10px",
     boxShadow: "0px 5px 8px -9px rgba(0, 0, 0, 0.75)",
   },
-  animalType: {
-    padding: "2%",
-    width: "100%",
-    height: "18%",
-    backgroundColor: "#9d7f70",
-    display: "inline-flex",
-    borderRadius: "10px 10px 0 0",
-    color: "white",
-  },
+
   searchPage: {
     height: "660px",
     backgroundColor: "#F1F1F1",
@@ -40,9 +49,13 @@ export default makeStyles((theme) => ({
     backgroundColor: "#bd6a43",
     width: "25%",
     color: "white",
-    position: "relative",
-    top: "0%",
-    left: "37.5%",
+    position: "fixed",
+    top: "100%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    // position: "relative",
+    // top: "0%",
+    // left: "37.5%",
     fontSize: "20px",
   },
 
@@ -51,14 +64,14 @@ export default makeStyles((theme) => ({
     display: "flex",
   },
   serviceTypeBox: {
-    width: "60%",
+    width: "65%",
   },
   serviceBox: {
     border: "1px solid grey",
-    marginLeft: "5px",
+    marginLeft: "18px",
     fontSize: "16px",
     borderRadius: "10px",
-    width: "28%",
+    width: "20px",
     "& .MuiBottomNavigationAction-iconOnly": {
       color: "red",
     },
@@ -72,11 +85,11 @@ export default makeStyles((theme) => ({
     },
   },
   priceBox: {
-    width: "40%",
+    width: "35%",
   },
   priceBoxLine2: {
     display: "flex",
-    margin: "5% 0 0 7%",
+    margin: "20px 0 0 5px",
   },
   priceInput: {
     width: "25%",
@@ -94,15 +107,15 @@ export default makeStyles((theme) => ({
     width: "65%",
   },
   cityInput: {
-    marginLeft: "13%",
+    marginLeft: "20px",
     width: "230px",
   },
   dateBoxLine2: {
     display: "flex",
-    margin: "0 0 0 5%",
+    margin: "0 0 0 20px",
   },
   dateInput: {
-    marginLeft: "3%",
+    // marginLeft: "20px",
     width: "40%",
     transparent: "0%",
   },
@@ -143,6 +156,9 @@ export default makeStyles((theme) => ({
   firstColumnFormControlLabel: {
     marginRight: "47px",
     marginLeft: "10px",
+  },
+  searchBoxFormControlLabel: {
+    marginLeft: "5px",
   },
   sideButton: {
     backgroundColor: "#bd6a43",

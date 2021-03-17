@@ -5,7 +5,9 @@ import {
   BottomNavigationAction,
   TextField,
 } from "@material-ui/core";
-
+import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import LocalAirportIcon from "@material-ui/icons/LocalAirport";
@@ -17,8 +19,40 @@ const SearchBox = () => {
   return (
     <div className={classes.searchBox}>
       <div className={classes.animalType}>
-        <h3>looking for to take care my:</h3>
-        <label className={classes.label}>
+        <h3 className={classes.h3}>Looking for to take care my:</h3>
+        <FormGroup row>
+          <FormControlLabel
+            className={classes.searchBoxFormControlLabel}
+            control={<Checkbox name="checkedA" color="primary" />}
+            label="Dog"
+          />
+          <FormControlLabel
+            className={classes.searchBoxFormControlLabel}
+            control={<Checkbox name="checkedA" color="primary" />}
+            label="Cat"
+          />
+          <FormControlLabel
+            className={classes.searchBoxFormControlLabel}
+            control={<Checkbox name="checkedA" color="primary" />}
+            label="Rabbit"
+          />
+          <FormControlLabel
+            className={classes.searchBoxFormControlLabel}
+            control={<Checkbox name="checkedA" color="primary" />}
+            label="Bird"
+          />
+          <FormControlLabel
+            className={classes.searchBoxFormControlLabel}
+            control={<Checkbox name="checkedA" color="primary" />}
+            label="Hamster"
+          />
+          <FormControlLabel
+            className={classes.searchBoxFormControlLabel}
+            control={<Checkbox name="checkedA" color="primary" />}
+            label="Turtle"
+          />
+        </FormGroup>
+        {/* <label className={classes.label}>
           <input type="checkbox" name="petType" value="dog" /> Dog
         </label>
         <label className={classes.label}>
@@ -35,11 +69,11 @@ const SearchBox = () => {
         </label>
         <label className={classes.label}>
           <input type="checkbox" name="petType" value="turtle" /> Turtle
-        </label>
+        </label> */}
       </div>
       <div className={classes.upperSection}>
         <div className={classes.serviceTypeBox}>
-          <h2 className={classes.h2}>For</h2>
+          <h2 className={classes.h2}>For When You're Away</h2>
           <BottomNavigation
             value={value}
             onChange={(event, newValue) => {
@@ -95,7 +129,7 @@ const SearchBox = () => {
       </div>
       <div className={classes.lowerSection}>
         <div className={classes.cityBox}>
-          <h2 className={classes.h2}>City</h2>
+          <h2 className={classes.h2}>Near by</h2>
           <TextField
             className={classes.cityInput}
             variant="outlined"
@@ -104,7 +138,7 @@ const SearchBox = () => {
           />
         </div>
         <div className={classes.dateBox}>
-          <h2 className={classes.h2}>Date</h2>
+          <h2 className={classes.h2}>For these days</h2>
           <div className={classes.dateBoxLine2}>
             <TextField
               inputProps={{
@@ -121,7 +155,7 @@ const SearchBox = () => {
             />
             <p
               style={{
-                margin: "0 0 0 3%",
+                margin: "0 20px 0 20px",
                 fontSize: "25px",
                 opacity: "0.5",
               }}
