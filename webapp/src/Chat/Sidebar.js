@@ -20,7 +20,7 @@ function Sidebar(){
                     Chat
                 </div>
                 <div className = 'Chat_Menu'>
-                    
+                    <Button>+</Button>
                 </div>
             </div>
             <div className = "Searchbar">
