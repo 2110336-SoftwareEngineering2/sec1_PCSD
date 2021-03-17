@@ -33,10 +33,10 @@ const chatServer = {
 
         io.on('connection', async (socket) => {
             const room = socket.handshake.query.room;
-            console.log(`connect to room : ${room}`);
+            // console.log(`connect to room : ${room}`);
 
             socket.join(room, () => {
-                console.log(`join in room : ${room}`);
+                // console.log(`join in room : ${room}`);
             });
 
             socket.on('disconnect', () => {
