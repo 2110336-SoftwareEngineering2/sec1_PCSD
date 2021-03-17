@@ -1,6 +1,4 @@
 .register_header {
-    padding: 15px 20px;
-    display: flex;
     background-color: #FFFCFB;
     border-radius: 8px 8px 0px 0px;
     height: 150px;
@@ -8,8 +6,6 @@
 }
 
 .register_header > p {
-    margin-top: 30px;
-    margin-left: 30px;
     font-style: normal;
     font-weight: bold;
     font-size: 30px;
