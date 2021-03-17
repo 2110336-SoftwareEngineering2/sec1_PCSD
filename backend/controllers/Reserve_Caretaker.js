@@ -16,8 +16,7 @@ module.exports = {
       if (user && user.role === "user") {
         const petInfo = req.body;
         const { email } = user.email;
-        // create new pet
-        //const newPet = new Pet({ ...petInfo, owner: email });
+        
         //Find User by email and reserve
         caretaker = checkUser.findUserById(id);
 
@@ -47,27 +46,6 @@ module.exports = {
       
         
         
-        
-        
-        
-        
-        
-        /*const petName = req.body.petName;
-        const { email } = user.email;
-        // remove pet
-        await Pet.findOneAndDelete(
-          {
-            petName: petName,
-            owner: email,
-          },
-          (err) => {
-            if (err) {
-              res.send(err);
-            } else {
-              res.send("Remove pet successful");
-            }
-          }
-        );*/
       }
     },
     getPet: async (req, res) => {
