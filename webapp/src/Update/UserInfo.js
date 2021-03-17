@@ -37,8 +37,20 @@ function NextButton(props) {
   const [state, setState] = useState({
     isNext: false,
   });
+  const user = (({
+    username,
+    firstname,
+    lastname,
+    email,
+    mobileNumber,
+    gender,
+  }) => ({ username, firstname, lastname, email, mobileNumber, gender }))(
+    context.user
+  );
   const [values, setValue] = useState({
-    ...context.user,
+    ...user,
+    password: "",
+    confirmPass: "",
   });
 
   const onChange = (e) => {
@@ -87,7 +99,7 @@ function NextButton(props) {
   return (
     <div>
       {!state.isNext ? (
-        <Register_info onChange={onChange} values={values}/>
+        <Register_info onChange={onChange} values={values} context={user} />
       ) : (
         <Info info={props.type} />
       )}
@@ -102,14 +114,18 @@ function NextButton(props) {
   );
 }
 
-class Info extends React.Component {
-  constructor(props) {
-    super();
-  }
-
-  render() {
-    return (
-      <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
-    );
-  }
+function Info(props) {
+  return <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>;
 }
+
+// class Info extends React.Component {
+//   constructor(props) {
+//     super();
+//   }
+
+//   render() {
+//     return (
+//       <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
+//     );
+//   }
+// }

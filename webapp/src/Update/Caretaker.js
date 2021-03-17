@@ -8,8 +8,18 @@ import Header from "./../Header/header";
 
 function UpdateCaretaker() {
   const context = useContext(UserContext);
+  const user = (({
+    username,
+    firstname,
+    lastname,
+    email,
+    mobileNumber,
+    gender,
+  }) => ({ username, firstname, lastname, email, mobileNumber, gender }))(
+    context.user
+  );
   const [values, setValue] = useState({
-    ...context.user,
+    ...user,
   });
   
   const [isNext, setIsNext] = useState(false);

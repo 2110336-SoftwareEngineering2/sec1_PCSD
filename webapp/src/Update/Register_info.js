@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Register_info.css";
 import Caretaker from "./Caretaker.js";
 import { UserContext } from "../context/MyContext";
+import context from "react-bootstrap/esm/AccordionContext";
 
 function Register_info(props) {
   return (
     <div className="register_info">
-      <RegisterInfo onChange={props.onChange} values={props.values}/>
+      <RegisterInfo onChange={props.onChange} values={props.values} context={props.context} />
     </div>
   );
 }
@@ -16,9 +17,29 @@ function Register_info(props) {
 export default Register_info;
 
 function RegisterInfo(props) {
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const editedUser = {};
+
+    // In case password and confirm password not matched
+    if(props.values.confirmPass !== props.values.password) return;
+
+    for(const key in props.values) {
+      if(key == "confirmPass") continue;
+      if(props.values[key].length > 0) {
+        if(props.context[key] !== props.values[key])
+          editedUser[key] = props.values[key];
+      }
+    }
+
+    console.log(editedUser);
+  }
+
   return (
     <div className="registerinfo">
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="row">
           <div className="col-6 registercol">
             <label>First name</label>
@@ -39,6 +60,30 @@ function RegisterInfo(props) {
               type="text"
               name="lastname"
               value={props.values.lastname}
+              onChange={props.onChange}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6 registercol">
+            <label>New Password</label>
+            <br />
+            <input
+              className="texting"
+              type="password"
+              name="password"
+              value={props.values.password}
+              onChange={props.onChange}
+            />
+          </div>
+          <div className="col-6 registercol">
+            <label>Comfirm New Password</label>
+            <br />
+            <input
+              className="texting"
+              type="password"
+              name="confirmPass"
+              value={props.values.confirmPass}
               onChange={props.onChange}
             />
           </div>
