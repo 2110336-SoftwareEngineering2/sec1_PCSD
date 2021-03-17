@@ -58,7 +58,7 @@
 }
 
 /* button ------------------------------------------*/
-button.signup {
+button.updatechange {
     border: none;
     outline: none;
     background-color: gray;
@@ -68,8 +68,10 @@ button.signup {
     cursor: pointer;
     border-radius: 4px;
     padding: 7px 35px;
+    position: absolute;
+    top: 7px;
 }
-button.signup:hover {
+button.updatechange:hover {
     border: none;
     outline: none;
     background-color: #bd6a43;

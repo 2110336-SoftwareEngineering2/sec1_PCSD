@@ -53,7 +53,7 @@ function Header() {
             title={
               <div class="user_infoo">
                 {" "}
-                <Avatar /> &nbsp; {user.username}{" "}
+                <Avatar src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ user.email}/> &nbsp; {user.username}{" "}
               </div>
             }
             id="dropdown-menu-align-right"

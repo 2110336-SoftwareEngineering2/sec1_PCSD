@@ -180,28 +180,25 @@ function RadioButton(props) {
   };
 
   return (
-    <div>
-      <label className="radio">
-        Female&nbsp;
-        <input
-          name="gender"
+    <div class="container" id="radioo">
+  <form>
+    <label className="radio" >
+      <input name="gender"
           type="radio"
           value="female"
           checked={state.selectedOption === "female"}
-          onChange={onValueChange}
-        />
-      </label>
-      &nbsp;
-      <label className="radio">
-        Male&nbsp;
-        <input
-          name="gender"
+          onChange={onValueChange}/>
+      <span>Female</span>
+    </label>
+    <label className="radio">
+      <input name="gender"
           type="radio"
           value="male"
           checked={state.selectedOption === "male"}
-          onChange={onValueChange}
-        />
-      </label>
-    </div>
+          onChange={onValueChange}/>
+      <span>Male</span>
+    </label>
+  </form>
+</div>
   );
 }

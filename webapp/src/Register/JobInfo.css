@@ -58,7 +58,19 @@
 }
 
 /* button ------------------------------------------*/
-button.signup {
+button.updatechange {
+    border: none;
+    outline: none;
+    background-color: grey;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
+
+button.updatechange:hover {
     border: none;
     outline: none;
     background-color: #bd6a43;
@@ -69,7 +81,6 @@ button.signup {
     border-radius: 4px;
     padding: 7px 35px;
 }
-
 .availdays button {
     outline: none;
     background-color: #fffefe;
