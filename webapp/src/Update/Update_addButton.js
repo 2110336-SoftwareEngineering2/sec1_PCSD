@@ -13,8 +13,6 @@ function AddButton() {
   const componentIsMounted = useRef(true);
   // 0: AddPetForm, 1: AddButtonClicked, 2: SumPet
   const [pageState, setPageState] = useState(1);
-  const [isNext, setIsNext] = useState(false);
-  const [isAdd, setIsAdd] = useState(true);
   const [pet_lists, setPetlists] = useState([]);
   const [input, setInput] = useState({
     petType: "",
@@ -22,11 +20,10 @@ function AddButton() {
     breed: "",
     age: "",
     gender: "",
+    petImg: "",
   });
-  console.log(pageState);
   
   useEffect(() => {
-    // each useEffect can return a cleanup function
     return () => {
       componentIsMounted.current = false;
     };
@@ -36,7 +33,6 @@ function AddButton() {
     const cancelTokenSource = CancelToken.source();
     try {
       if (pageState === 1) {
-        console.log("TwT");
         axios.get("http://localhost:4000/user/pet", {
           headers: { Authorization: `Bearer ${user.accessToken}` },
         })
@@ -76,7 +72,6 @@ function AddButton() {
     if (pageState === 2) {
       setPageState(0);
     } else {
-      setPageState(1);
       const newPet = {
         petName: input.petName,
         breed: input.breed,
@@ -84,31 +79,51 @@ function AddButton() {
         gender: input.gender,
       };
       axios
-        .post("http://localhost:4000/user/pet", newPet, {
-          headers: { Authorization: `Bearer ${user.accessToken}` },
-        })
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
+      .post("http://localhost:4000/user/pet", newPet, {
+        headers: { Authorization: `Bearer ${user.accessToken}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        uploadPetPic(res.data);
+        setPageState(1);
+      })
+      .catch((err) => console.log(err));
     }
   }
-  
-  function addPetList(name, img, age, breed, gender) {
-    const newPet = { id, name, img, age, breed, gender };
-    setPetlists([newPet, ...pet_lists]);
-    id += 1;
-    setIsNext(true);
+
+  function uploadPetPic(pet) {
+    const data = new FormData();
+    data.append("email", pet._id);
+    data.append("file", input.petImg);
+    console.log(data);
+    axios.post("http://localhost:4000/user/profilepic", data)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
-  function deletePet(id) {
-    setPetlists(pet_lists.filter((pet) => pet.id !== id));
+
+  function deletePet(petId) {
+    axios.delete("http://localhost:4000/user/pet", {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`
+      },
+      data: {
+        source: petId
+      }
+    }).then((res) => {
+      console.log(res.data);
+      setPetlists(pet_lists.filter((pet) => pet._id !== petId));
+    }).catch((err) => console.log(err));
   }
 
   return (
     <div>
       {pageState !== 2 ? (
         <AddPet
-          addPetList={addPetList}
-          click={isAdd}
           onChange={onChange}
           input={input}
         />

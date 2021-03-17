@@ -1,31 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Addpet.css";
 import "./Register_info.css";
-import image from "./../petpic.png";
 
-function Addpet({ addPetList, click, onChange, input }) {
-  const [img, setImage] = useState(image);
-  const [uploadImg, setUpload] = useState("");
-
-  const [pet_lists, setPetlists] = useState([]);
+function Addpet({ onChange, input }) {
 
   function uploadImage(event) {
-    const pic = URL.createObjectURL(event.target.files[0]);
-    setImage(pic);
+    const url = URL.createObjectURL(event.target.files[0]);
+    onChange({target: {name: "petImg", value: url}});
   }
 
   function handleChange(event) {
     onChange(event);
   }
-
-  if (click) {
-    //addPetList(input.petName, img, input.age, input.breed, input.gender);
-  }
   
   return (
     <div className="addpet">
       <div className="picture">
-        <img src={img} />
+        <img src={input.petImg} />
         <label id="uploadpic">
           Upload Photo{" "}
           <input

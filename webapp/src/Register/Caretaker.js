@@ -22,7 +22,7 @@ function Caretaker() {
   
   return (
     <div className="caretaker">
-      {isNext ? null : <UserProfile uInfo={values} isNextt={isNext}  />}
+      {isNext ? null : <UserProfile uInfo={values}/>}
       <UserInfo func={profileControl} infotype="Caretaker" onChange={onChange}/>
     </div>
   );
