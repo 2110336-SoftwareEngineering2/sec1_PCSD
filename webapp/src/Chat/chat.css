@@ -64,14 +64,19 @@
   width: 65vw;
 }
 .Messages{
-  margin: 1%;
+  margin-top: 1%;
+  margin-left :1%;
+  margin-right: 1%;
+  padding-left: 10px;
   height: 85%;
   border-radius: 5px;
   background-color: #ccc;
 }
 .Downside_Bar{
   font-size: x-large;
-  margin :1%;
+  margin-left :1%;
+  margin-right: 1%;
+  /*padding-bottom: 5px;*/
   border-radius: 5px;
   background-color: #fff;
   height: 11%;
@@ -86,8 +91,8 @@
 }
 .Send_Chat{
   height: 80%;
-  width: 18%;
-  border-radius: 10px;
+  width: 17%;
+  border-radius: 5px;
 }
 /*  html,
    
