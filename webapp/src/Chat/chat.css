@@ -17,12 +17,22 @@
   max-height: 100vh;
   min-height: 90vh;
 }
-
+.Sidebar_Head{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .Chat_Title{
   margin: 10px;
   margin-bottom: 20px;
   padding: 5px;
   font-size: 32pt;
+}
+.Chat_Menu{
+  height: 32pt;
+  background-color: #eee;
+  width: 64pt;
+  border-radius: 5px;
 }
 .Seachbar{
   margin: 1px;
@@ -64,9 +74,7 @@
   width: 65vw;
 }
 .Messages{
-  margin-top: 1%;
-  margin-left :1%;
-  margin-right: 1%;
+  margin: 1%;
   padding-left: 10px;
   height: 85%;
   border-radius: 5px;
@@ -74,8 +82,7 @@
 }
 .Downside_Bar{
   font-size: x-large;
-  margin-left :1%;
-  margin-right: 1%;
+  margin: 1%;
   /*padding-bottom: 5px;*/
   border-radius: 5px;
   background-color: #fff;
