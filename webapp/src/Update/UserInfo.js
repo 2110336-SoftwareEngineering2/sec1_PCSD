@@ -49,6 +49,7 @@ function NextButton(props) {
   );
   const [values, setValue] = useState({
     ...user,
+    id: context.user._id,
     password: "",
     confirmPass: "",
   });
@@ -61,35 +62,6 @@ function NextButton(props) {
   const clickedNext = (event) => {
     event.preventDefault();
 
-    if (!state.isNext) {
-      const newUser = {
-        username: values.username,
-        firstname: values.firstname,
-        lastname: values.lastname,
-        email: values.email,
-        password: values.password,
-        mobileNumber: values.mobileNumber,
-        gender: values.gender,
-        role: values.role,
-        banStatus: values.banStatus,
-      };
-
-      const response = { user: null };
-/*
-      axios
-        .post("http://localhost:4000/user/register", newUser)
-        .then((res) => {
-          res.data.password = newUser.password;
-          axios
-            .post("http://localhost:4000/auth/login", res.data)
-            .then((response) => {
-              // context.login(res.data);
-              console.log(response.data);
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log(err)); */
-    }
     setState({ isNext: true });
     if (props.type == "Caretaker") {
       props.func();
@@ -115,17 +87,5 @@ function NextButton(props) {
 }
 
 function Info(props) {
-  return <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>;
+  return <div>{props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>;
 }
-
-// class Info extends React.Component {
-//   constructor(props) {
-//     super();
-//   }
-
-//   render() {
-//     return (
-//       <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
-//     );
-//   }
-// }

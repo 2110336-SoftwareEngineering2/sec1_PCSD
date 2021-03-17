@@ -45,12 +45,17 @@ function Register_info(props) {
             />
           </div>
           <div className="col-6 registercol">
-            <label>Comfirm Password</label>
+            <label style={props.errors.confirmError ? { color: "#a13737" } : {}}>Comfirm Password</label>
             <br />
             <input
               className="texting"
               type="password"
               name="confirmPass"
+              style={
+                props.errors.confirmError
+                  ? { backgroundColor: "#ffd7d4", borderColor: "red" }
+                  : {}
+              }
               value={props.values.confirmPass}
               onChange={props.onChange}
             />
