@@ -15,5 +15,5 @@ const updateCaretaker = async (body) => {
 
 module.exports = {
     addCaretaker,
-    updateCaretaker,
+    updateCaretaker
 }
