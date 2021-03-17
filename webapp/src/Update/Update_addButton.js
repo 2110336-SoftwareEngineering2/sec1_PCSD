@@ -71,7 +71,6 @@ function AddButton() {
     if (pageState === 2) {
       setPageState(0);
     } else {
-      setPageState(1);
       const newPet = {
         petName: input.petName,
         breed: input.breed,
@@ -82,7 +81,10 @@ function AddButton() {
       .post("http://localhost:4000/user/pet", newPet, {
         headers: { Authorization: `Bearer ${user.accessToken}` },
       })
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        setPageState(1);
+      })
       .catch((err) => console.log(err));
     }
   }
