@@ -1,0 +1,114 @@
+/* row & col initialization -----------------------*/
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.row::after  {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+/* 12 columns */
+.col-1 {width: 8.33%}
+.col-2 {width: 16.66%}
+.col-3 {width: 25%}
+.col-4 {width: 33.33%}
+.col-5 {width: 41.66%}
+.col-6 {width: 50%}
+.col-7 {width: 58.33%}
+.col-8 {width: 66.66%}
+.col-9 {width: 75%}
+.col-10 {width: 83.33%}
+.col-11 {width: 91.66%}
+.col-12 {width: 100%}
+
+* {
+    box-sizing: border-box;
+}
+
+.jobinfocol {
+    float: left;
+    padding: 30px 0 0 53px;
+    text-align: left;
+}
+
+/* container ---------------------------------------*/
+.jobinfobox {
+    height: 609px;
+}
+
+.jobinfo {
+    width: 100%;
+}
+
+.animalcheckbox {
+    padding: 0;
+}
+
+.availdaysbox {
+    padding-top: 60px;
+    text-align: center;
+}
+
+.signupbutton {
+    padding-left: 0;
+    text-align: center;
+}
+
+/* button ------------------------------------------*/
+button.signup {
+    border: none;
+    outline: none;
+    background-color: gray;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
+button.signup:hover {
+    border: none;
+    outline: none;
+    background-color: #bd6a43;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
+.availdays button {
+    outline: none;
+    background-color: #fffefe;
+    color: #8e8e8e;
+    border: 1px solid #8e8e8e;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 15px;
+}
+
+/* label & input -----------------------------------*/
+.jobinfobox label {
+    color: #8e8e8e;
+    line-height: 2rem;
+    font-weight: bold;
+}
+
+.texting {
+    border: 1px solid #8e8e8e;
+    border-radius: 4px;
+    padding: 3px;
+    font-size: 16px;
+}
+
+textarea.texting {
+    width: 292px;
+    margin: 12px 0;
+}
+
+input[type=checkbox] {
+    width: 13px;
+}

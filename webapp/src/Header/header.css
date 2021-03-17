@@ -1,0 +1,102 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
+  background-color: white;
+  align-items: center;
+  z-index: 1;
+}
+
+.header__logo {
+  display: flex;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.header__logo > img {
+  height: 60px;
+}
+
+.header__logo > h4 {
+  color: #9d7f70;
+}
+.header__left {
+  display: flex;
+}
+.header__middle {
+  justify-content: center;
+  margin-left: 100px;
+}
+
+.header__input {
+  color: grey;
+  display: flex;
+  align-items: center;
+  padding: 2px 0px 2px 12px;
+  justify-content: center;
+  margin-top: 7px;
+  margin-left: 15px;
+}
+
+.header__input:hover {
+  cursor: pointer;
+  color: #872935;
+  
+}
+.header__input:hover > .MuiSvgIcon-root {
+  color: #872935;
+}
+.header__input > label {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  outline: 0;
+  padding: 10px 100px 10px 10px;
+  justify-content: center;
+  margin-left: 0px;
+  margin: 0;
+}
+.header__label {
+  margin: 0;
+}
+.header__input > .MuiSvgIcon-root {
+  color: #898989;
+}
+
+.header__right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 40px 0px 10px;
+  height: 40px;
+}
+
+.header__right > hr {
+  height: 40px;
+  margin: 10px;
+}
+
+.header__profile {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.header__profile > h4 {
+  margin-left: 10px;
+}
+
+#dropdown-menu-align-right {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  height: auto;
+  color: black;
+  border: none;
+}
+.user_infoo {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
