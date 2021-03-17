@@ -11,14 +11,18 @@ const findAllChatrooms = async (req, res) => {
 }
 
 const findChatRoomById = async (req, res) => {
-    const roomId = req.params.id;
-    await Chatrooms.findOne({_id: roomId}, (err, result) => {
-        if (err) {
-            return res.status(404).send(err);
-        } else {
-            return res.status(200).json(result);
-        }
-    })
+    if (req.params.id !== null) {
+        await Chatrooms.findById(req.params.id, (err, result) => {
+            if (err) {
+                return res.status(404).send(err);
+            } else {
+                return res.status(200).json(result);
+            }
+        });
+    } else {
+        return res.status(400).send("Request parameter :id == null");
+    }
+
 }
 
 const findUserChatroomsByEmail = async (req, res) => {
@@ -30,7 +34,7 @@ const findUserChatroomsByEmail = async (req, res) => {
         } else {
             return res.status(200).json(result);
         }
-    })
+    });
 }
 
 // const pushMessage = async (req, res) => {
