@@ -27,10 +27,6 @@ module.exports = {
 
         }
         
-        newPet.save((err) => {
-          if (err) console.log(err);
-          res.send(newPet);
-        });
       }
     },
     // UnReserve Caretaker is the function when user logged in is caretaker and what to unreserve themself.
@@ -40,11 +36,10 @@ module.exports = {
       const user = req.decoded;
       // if user is logged in and has a "caretaker" role
       if (user && user.role === "caretaker") {
-        
-
       //Unreserve themselves
+      //Change reserved to "False"
+      await user.updateOne({reserved:"False"}, body);
       
-        
         
       }
     },
