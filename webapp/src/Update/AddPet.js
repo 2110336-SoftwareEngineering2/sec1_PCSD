@@ -3,11 +3,8 @@ import "./Addpet.css";
 import "./Register_info.css";
 import image from "./../petpic.png";
 
-function Addpet({ addPetList, click, onChange, input }) {
+function Addpet({ onChange, input }) {
   const [img, setImage] = useState(image);
-  const [uploadImg, setUpload] = useState("");
-
-  const [pet_lists, setPetlists] = useState([]);
 
   function uploadImage(event) {
     const pic = URL.createObjectURL(event.target.files[0]);
@@ -16,10 +13,6 @@ function Addpet({ addPetList, click, onChange, input }) {
 
   function handleChange(event) {
     onChange(event);
-  }
-
-  if (click) {
-    //addPetList(input.petName, img, input.age, input.breed, input.gender);
   }
   
   return (
