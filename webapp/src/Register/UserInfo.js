@@ -91,6 +91,9 @@ function NextButton(props) {
               userContext.login(response.data);
               console.log(response.data);
               setState({ isNext: true });
+              if (props.type == "Caretaker") {
+                props.func();
+              }
             })
             .catch((err) => {
               console.log(err);
@@ -99,9 +102,6 @@ function NextButton(props) {
         .catch((err) => {
           setError(err.response.data);
         });
-    }
-    if (props.type == "Caretaker") {
-      props.func();
     }
   };
 
@@ -123,14 +123,8 @@ function NextButton(props) {
   );
 }
 
-class Info extends React.Component {
-  constructor(props) {
-    super();
-  }
-
-  render() {
-    return (
-      <div>{this.props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
-    );
-  }
+function Info(props) {
+  return (
+    <div>{props.info == "Caretaker" ? <JobInfo /> : <MyPet />}</div>
+  );
 }
