@@ -61,6 +61,11 @@ function NextButton(props) {
   const clickedNext = (event) => {
     event.preventDefault();
 
+    if(values.password !== values.confirmPass) {
+      setError({confirmError: true});
+      return;
+    }
+
     if (!state.isNext) {
       const newUser = {
         username: values.username,
