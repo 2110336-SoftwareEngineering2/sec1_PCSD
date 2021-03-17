@@ -80,8 +80,14 @@
   border-radius: 5px;
   background-color: #ccc;
 }
+.Chat_Messages{
+  height: 90%;
+  margin-bottom: 5px;
+}
 .Downside_Bar{
   font-size: x-large;
+  display: flex;
+  flex-direction: row;
   margin: 1%;
   /*padding-bottom: 5px;*/
   border-radius: 5px;
@@ -95,8 +101,10 @@
   width: 80%;
   height: 80%;
   border-radius: 5px;
+  overflow-y: auto;
 }
 .Send_Chat{
+  margin-top: 1%;
   height: 80%;
   width: 17%;
   border-radius: 5px;

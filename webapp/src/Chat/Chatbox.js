@@ -2,7 +2,10 @@ import axios from "axios";
 import socketIOClient from 'socket.io-client';
 import React, { useEffect, useContext, useState, useRef } from "react"
 import { ChatContext, UserContext } from "../context/MyContext";
-
+//import {FixedSizeList as List} from 'react-window';
+import {Container} from "react-bootstrap"
+import Icon from "@material-ui/core/Icon"
+//import classNames from 'classnames';
 //const dump_chat = []
 
 function Chatbox({roomId}){
@@ -131,17 +134,31 @@ function Chatbox({roomId}){
             
             
             
-            <div className = "Messages">
-                <h1>ChatBox</h1>
-                {/* <h2>{roomId}</h2> */}
-                {messages.map((mDetail, idx) => {
-                    return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
-                })}
-            </div>
-            <div className = "Downside_Bar">
-                <input className = "Message_Box" onChange={handleChangeInputMessage} value = {inputMessage}/>
-                <button className = "Send_Chat" onClick={() => send()}>send</button>
-            </div>
+                <Container fixed = 'md' className = "d-flex flex-column py-2" style ={{height:"90vh"}} >
+                    <div className = "Messages">
+                        <h1>ChatBox</h1>
+                    {/* <h2>{roomId}</h2> */}
+                    {/*<List
+                        className = 'Messages_List'
+                        height = {150} 
+                        itemCount = {1000}
+                        itemSize = {35}
+                        width = {300}
+                    >*/}
+                        <div className = "Chat_Messages" style = {{overflowY :"auto"}}>
+                            {messages.map((mDetail, idx) => {
+                                return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
+                            })}
+                        </div>
+                    </div>
+                    {/*</List>*/}
+                    <div className = "Downside_Bar">
+                        <input className = "Message_Box" onChange={handleChangeInputMessage} value = {inputMessage}/>
+                        <button className = "Send_Chat" onClick={() => send()}>
+                            send
+                        </button>
+                    </div>
+                </Container>
         </div>
     )
 }
