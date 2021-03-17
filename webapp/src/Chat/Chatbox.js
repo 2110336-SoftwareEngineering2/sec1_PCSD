@@ -23,9 +23,12 @@ function Chatbox(){
     },)
 
     async function getChatRoomDetail () {
-        const res = await axios.get(`http://localhost:4000/chat/rooms/${chatContext.currentChatRoom}`);
-        const data = await res.data;
-        setMessage(data.messages);
+        if (chatContext.currentChatRoom != null) {
+            const res = await axios.get(`http://localhost:4000/chat/rooms/${chatContext.currentChatRoom}`);
+            const data = res.data;
+            // console.log(data)
+            setMessage(data.messages);
+        }
     } 
 
     function timeStampToDateStr (timestamp) {
