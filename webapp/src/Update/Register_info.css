@@ -56,27 +56,19 @@
 }
 
 input.texting {
-    border: 1px solid #b5b3b3b3;
-    border-radius: 5px;
-    padding: 12px;
+    border: 1px solid #8e8e8e;
+    border-radius: 4px;
+    padding: 3px;
     font-size: 16px;
-    width: 80%;
-    overflow: visible;
-    
 }
 
 /* radiobutton */
 .radio {
-    border: 1px solid #b5b3b3b3;
-    border-radius: 5px;
+    border: 1px solid #8e8e8e;
+    border-radius: 4px;
     cursor: pointer;
-    padding: 0px;
-    width: 30%;
-    height: fit-content;
-}
-#radioo {
-    margin-top: 20px;
-    padding: 0px;
+    padding: 5px;
+    width: 100px;
 }
 .savechange {
     border: none;

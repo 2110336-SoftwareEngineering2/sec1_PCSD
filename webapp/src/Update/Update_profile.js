@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./UserProfile.css";
-import image from "./../userpic.png";
-
+import { UserContext } from "../context/MyContext";
+import axios from "axios";
 function UserProfile({ uInfo }) {
   // console.log(uInfo);
-  const [img, setImage] = useState(image);
+  const { user } = useContext(UserContext);
+  const [img, setImage] = useState("https://pcsdimage.s3-us-west-1.amazonaws.com/"+ user.email);
 
   function uploadImg(event) {
     setImage(URL.createObjectURL(event.target.files[0]));
+
+    const data = new FormData();
+    data.append("email", uInfo.email);
+    data.append("file", event.target.files[0]);
+
+    console.log(data);
+
+    axios.post("http://localhost:4000/user/profilepic",data)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
   return (
     <div className="profile">

@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import "./UserProfile.css";
 import image from "./../userpic.png";
 import axios from "axios";
-
-function UserProfile({ uInfo }) {
+function UserProfile({ uInfo, isNextt }) {
   // console.log(uInfo);
-  const [img, setImage] = useState(image);
+  const [img, setImage] = useState({image});
+  const [isNext, setIsNext] = useState(false);
   // const [file, setFile] = useState();
-
   function uploadImg(event) {
     // setFile(event.target.files[0]);
     const url = URL.createObjectURL(event.target.files[0]); 
     setImage(url);
+    if(isNext) {
+      addPic(event);
+    }
+  }
 
+  function addPic(event) {
     const data = new FormData();
     data.append("email", uInfo.email);
     data.append("file", event.target.files[0]);
@@ -26,9 +30,6 @@ function UserProfile({ uInfo }) {
       .catch(err => {
         console.log(err);
       });
-    
-
-    
   }
   return (
     <div className="profile">

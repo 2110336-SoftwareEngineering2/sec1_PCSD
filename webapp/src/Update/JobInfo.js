@@ -304,7 +304,7 @@ function JobInfo() {
           <div className="row">
             <div className="col-12 jobinfocol signupbutton">
               <button className="signup" type="submit">
-                Done
+                Save Change
               </button>
             </div>
           </div>
