@@ -2,6 +2,9 @@ import React,{useState, useEffect} from "react"
 import ChatList from "./Chat_List"
 import axios from "axios"
 import SearchIcon from "@material-ui/icons/Search";
+import AddIcon from "@material-ui/icons/Add"
+import Button from '@material-ui/core/Button';
+
 
 function Sidebar(){
     const [searchContent,setSearch] = useState('')

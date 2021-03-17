@@ -10,7 +10,6 @@ function ChatPage() {
     const chatContext = useContext(ChatContext);
     return(
         <div className = "ChatPage">
-            {/*<Header />*/}
             <Header />
             <div style={tmpStyle} >
                 <Sidebar />
