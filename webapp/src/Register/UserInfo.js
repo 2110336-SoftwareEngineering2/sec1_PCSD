@@ -72,6 +72,7 @@ function NextButton(props) {
         gender: values.gender,
         role: values.role,
         banStatus: false,
+        balance: 0
       };
 
       axios
