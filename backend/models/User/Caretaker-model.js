@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 // Basic user schema
 const CaretakerSchema = new Schema({
-  email: String,
+  caretaker: String,
   type : [String],
   pet_type : [String],
   city : String,
@@ -21,4 +21,4 @@ const CaretakerSchema = new Schema({
   
 });
 
-module.exports = mongoose.model("Caretaker", CaretakerSchema, "Users");
+module.exports = mongoose.model("Caretaker", CaretakerSchema, "Caretakers");

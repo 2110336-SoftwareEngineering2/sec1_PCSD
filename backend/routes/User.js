@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/User");
 const PetController = require("../controllers/Pet");
+const CaretakerController = require("../controllers/Caretaker");
 const userprofile = require("../controllers/userprofile");
 const multer = require("multer");
 const { default: axios } = require("axios");
@@ -39,6 +40,10 @@ router.get("/account/:id", (req, res) => {
 router.post("/register", (req, res) => {
   UserController.registerUser(req, res);
 });
+
+router.post("/caretaker", (req, res) => {
+  CaretakerController.addCaretaker(req, res);
+})
 
 // For testing, currently unused
 router.delete("/account/:id", (req, res) => {

@@ -92,7 +92,7 @@ const editUser = async (req, res) => {
   var user;
 
   if (req.body.username) {
-    user = User.findOne({ username: req.body.username });
+    user = await User.findOne({ username: req.body.username });
   }
 
   if(req.body.password) {

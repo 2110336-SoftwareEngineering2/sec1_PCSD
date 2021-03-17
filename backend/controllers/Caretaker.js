@@ -1,12 +1,13 @@
 const Caretaker = require("../models/User/Caretaker-model");
 
-const addCaretaker = async (body) => {
+const addCaretaker = async (req, res) => {
     const newCaretaker = new Caretaker({
-        ...body,
+        ...req.body,
       });
     newCaretaker.save((err) => {
         if (err) console.log(err);
     });
+    res.send(newCaretaker);
 };
 
 const updateCaretaker = async (body) => {
