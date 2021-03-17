@@ -76,7 +76,7 @@ function NextButton(props) {
         <Info info={props.type} />
       )}
       {!state.isNext ? (
-        <div className="nextbutton">
+        <div className="updatenextbutton">
           <button className="submit" onClick={clickedNext}>
             Next
           </button>

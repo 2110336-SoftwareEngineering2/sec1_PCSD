@@ -11,8 +11,8 @@ function ReserveCaretaker() {
     
     return (
         <div className="reserve">
+            <Header/>
             <div className="reserve_background">
-                <Header/>
                 <div className="reserve_container">
                     <div className="row">
                         <div className="col-3 reserve_img">

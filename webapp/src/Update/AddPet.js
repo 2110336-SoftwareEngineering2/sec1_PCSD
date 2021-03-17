@@ -21,7 +21,7 @@ function Addpet({ addPetList, click, onChange, input }) {
   if (click) {
     //addPetList(input.petName, img, input.age, input.breed, input.gender);
   }
-
+  
   return (
     <div className="addpet">
       <div className="picture">

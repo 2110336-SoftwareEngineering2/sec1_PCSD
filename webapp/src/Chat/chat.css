@@ -17,12 +17,22 @@
   max-height: 100vh;
   min-height: 90vh;
 }
-
+.Sidebar_Head{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .Chat_Title{
   margin: 10px;
   margin-bottom: 20px;
   padding: 5px;
   font-size: 32pt;
+}
+.Chat_Menu{
+  height: 32pt;
+  background-color: #eee;
+  width: 64pt;
+  border-radius: 5px;
 }
 .Seachbar{
   margin: 1px;

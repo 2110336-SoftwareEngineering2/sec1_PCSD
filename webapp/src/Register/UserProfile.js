@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import "./UserProfile.css";
 import image from "./../userpic.png";
 import axios from "axios";
-
 function UserProfile({ uInfo }) {
   // console.log(uInfo);
-  const [img, setImage] = useState(image);
+  const [img, setImage] = useState({image});
   // const [file, setFile] = useState();
-
   function uploadImg(event) {
     // setFile(event.target.files[0]);
     const url = URL.createObjectURL(event.target.files[0]); 

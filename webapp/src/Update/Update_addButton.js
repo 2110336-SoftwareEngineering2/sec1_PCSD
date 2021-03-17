@@ -99,7 +99,6 @@ function AddButton() {
     setIsNext(true);
   }
 
-
   function deletePet(id) {
     setPetlists(pet_lists.filter((pet) => pet.id !== id));
   }
