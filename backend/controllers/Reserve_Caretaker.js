@@ -24,6 +24,7 @@ module.exports = {
         //Check if user is caretaker and not reserved;
         if(caretaker.role === "caretaker" && caretaker.reserved === "False"){
             //Update that caretaker's caretaker.reserved to "True"
+            await caretaker.updateOne({email:body.email}, body);
 
         }
         
