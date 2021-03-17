@@ -20,6 +20,7 @@ function AddButton() {
     breed: "",
     age: "",
     gender: "",
+    petImg: "",
   });
   
   useEffect(() => {
@@ -83,11 +84,27 @@ function AddButton() {
       })
       .then((res) => {
         console.log(res.data);
+        uploadPetPic(res.data);
         setPageState(1);
       })
       .catch((err) => console.log(err));
     }
   }
+
+  function uploadPetPic(pet) {
+    const data = new FormData();
+    data.append("email", pet._id);
+    data.append("file", input.petImg);
+    console.log(data);
+    axios.post("http://localhost:4000/user/profilepic", data)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
 
   function deletePet(petId) {
     axios.delete("http://localhost:4000/user/pet", {
