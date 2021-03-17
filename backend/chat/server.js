@@ -35,13 +35,11 @@ const chatServer = {
             const room = socket.handshake.query.room;
             // console.log(`connect to room : ${room}`);
 
-            socket.join(room, () => {
-                // console.log(`join in room : ${room}`);
-            });
+            socket.join(room);
 
             socket.on('disconnect', () => {
                 // console.log('user disconnected');
-                // socket.leave(room);
+                socket.leave(room);
             });
 
             socket.on('sent-message', async (data) => {
