@@ -25,15 +25,14 @@ module.exports = {
     // Check if user is logged in
     checkAuth.validateAccessToken(req, res);
     const user = req.decoded;
-
     // user is logged in and has "user" role
     if (user && user.role === "user") {
-      const petName = req.body.petName;
+      const petId = req.body.source;
       const { email } = user.email;
       // remove pet
       await Pet.findOneAndDelete(
         {
-          petName: petName,
+          _id: petId,
           owner: email,
         },
         (err) => {
