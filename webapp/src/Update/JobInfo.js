@@ -303,7 +303,7 @@ function JobInfo() {
           </div>
           <div className="row">
             <div className="col-12 jobinfocol signupbutton">
-              <button className="signup" type="submit">
+              <button className="updatechange" type="submit">
                 Save Change
               </button>
             </div>
