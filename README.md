@@ -13,7 +13,7 @@
     - Add new caretaker's info: `POST /caretaker`
     - Get caretaker's info: `POST /caretaker/find`
     - Delete user by id: `DELETE account/:id`
-    - Get all pets: `GET /pet`
+    - Get pets from specific user: `GET /pet`
     - Add new pet: `POST /pet`
     - Delete pet by pet id: `DELETE /pet`
     - Edit general user info: `POST /edit`
