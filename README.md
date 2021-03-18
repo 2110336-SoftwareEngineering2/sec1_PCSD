@@ -1,5 +1,30 @@
 **We are P.C.S.D. (Pet Caring System Developer) currently developing PetidCare.**
 
+## API Lists
+- User ("/user")
+    - GET ("/")
+    - POST ("/")
+    - GET ("/userinfo")
+    - GET ("/emails")
+    - POST ("/email")
+    - GET ("/account/:id")
+    - POST ("/register")
+    - POST ("/caretaker")
+    - POST ("/caretaker/find")
+    - GET ("/caretaker")
+    - DELETE ("account/:id")
+    - GET ("/pet")
+    - POST ("/pet")
+    - DELETE ("/pet")
+    - POST ("/edit")
+    - POST ("/edit/caretaker")
+    - POST ("/topup")
+    - POST ("/transfer")
+    - GET ("transfer")
+    - POST ("/porfilepic")
+
+---
+
 - editUser in UserController
     - Receive changes in request body, send back bad request if user is not found or new username is taken 
     - Not accounted for empty input yet and something feels off
