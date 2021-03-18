@@ -48,7 +48,7 @@ function RegisterInfo(props) {
       .post("http://localhost:4000/user/edit", editedUser)
       .then((res) => {
         login(res.data);
-        console.log('Edit user successful');
+        window.alert("Edit user successful");
         setError({});
       })
       .catch((err) => setError(err.response.data));
