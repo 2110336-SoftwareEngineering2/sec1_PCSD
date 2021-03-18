@@ -17,7 +17,7 @@ const CaretakerSchema = new Schema({
     type: mongoose.Decimal128,
     get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(2))
     },
-  reserved : String,
+  reserved : Boolean,
   
 });
 
