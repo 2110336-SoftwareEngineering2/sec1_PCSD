@@ -9,7 +9,6 @@ const validEmailAndPassword = async (email, password) => {
     if (match) {
       const data = user._doc;
       return {
-        uid: data._id,
         ...data,
       };
     }
@@ -18,7 +17,7 @@ const validEmailAndPassword = async (email, password) => {
 };
 
 const generateAccessToken = (email, secretKey) => {
-  const accessToken = jwt.sign({ email, role: "user" }, secretKey, {
+  const accessToken = jwt.sign({ ...email, role: "user" }, secretKey, {
     expiresIn: "1d",
   });
   return accessToken;
