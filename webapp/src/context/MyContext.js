@@ -1,5 +1,8 @@
 import { fn } from "jquery";
-import React from "react";
+import React, { useEffect } from "react";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+
 import history from "../history";
 
 // User context
@@ -19,7 +22,7 @@ const RegisterContext = React.createContext({
 const ChatContext = React.createContext({
   currentChatRoom: "",
   changeChatRoom: (roomId) => {},
-})
+});
 
 // Reducer for Chat Context
 function ChatContextReducer(state, action) {
@@ -27,7 +30,7 @@ function ChatContextReducer(state, action) {
     case "CHANGE_CHAT_ROOM":
       return {
         ...state,
-        currentChatRoom: action.payload
+        currentChatRoom: action.payload,
       };
     default:
       return state;
@@ -70,7 +73,26 @@ function RegisterRuducer(state, action) {
 function ContextProvider(props) {
   const [state, dispatch] = React.useReducer(ContextReducer, { user: null });
 
+  useEffect(() => {
+    if (localStorage.getItem("jwtToken")) {
+      const accessToken = localStorage.getItem("jwtToken");
+      const decodedToken = jwtDecode(accessToken);
+
+      if (decodedToken.exp * 1000 < Date.now()) {
+        localStorage.removeItem("jwtToken");
+      } else {
+        axios
+          .post("http://localhost:4000/user", { email: decodedToken.email })
+          .then((res) => {
+            login({ ...res.data, accessToken: accessToken });
+          })
+          .catch((err) => console.log(err));
+      }
+    }
+  }, []);
+
   function login(userData) {
+    localStorage.setItem("jwtToken", userData.accessToken);
     dispatch({
       type: "LOGIN",
       payload: userData,
@@ -78,6 +100,7 @@ function ContextProvider(props) {
   }
 
   function logout() {
+    localStorage.removeItem("jwtToken");
     dispatch({ type: "LOGOUT" });
   }
 
@@ -91,7 +114,9 @@ function ContextProvider(props) {
 
 // Context provider for chat context
 function ChatProvider(props) {
-  const [state, dispatch] = React.useReducer(ChatContextReducer, {currentChatRoom: null});
+  const [state, dispatch] = React.useReducer(ChatContextReducer, {
+    currentChatRoom: null,
+  });
 
   function changeChatRoom(chatRoomId) {
     dispatch({
@@ -102,10 +127,10 @@ function ChatProvider(props) {
 
   return (
     <ChatContext.Provider
-      value={{ currentChatRoom: state.currentChatRoom, changeChatRoom}}
+      value={{ currentChatRoom: state.currentChatRoom, changeChatRoom }}
       {...props}
     />
-  )
+  );
 }
 
 // Context provider for registration
@@ -127,4 +152,11 @@ function RegisterProvider(props) {
   );
 }
 
-export { UserContext, ContextProvider, RegisterContext, RegisterProvider, ChatContext, ChatProvider };
+export {
+  UserContext,
+  ContextProvider,
+  RegisterContext,
+  RegisterProvider,
+  ChatContext,
+  ChatProvider,
+};
