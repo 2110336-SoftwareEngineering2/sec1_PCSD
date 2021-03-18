@@ -15,6 +15,8 @@ import ReservePage from "./ReserveCaretaker";
 import Test from "./Test";
 import SearchResult from "./SearchPage/SearchResult";
 import { RegisterContext, UserContext } from "./context/MyContext";
+import AuthRoute from "./util/AuthRoute";
+import RegRoute from "./util/RegRoute";
 
 function Routes() {
   const context = useContext(RegisterContext);
@@ -28,16 +30,16 @@ function Routes() {
           exact
           component={!userContext.user ? LoginPage : Home}
         />
-        <Route
+        <RegRoute
           path="/register"
           component={context.data.role == "petowner" ? Petowner : Caretaker}
         />
-        <Route path="/searchpage" component={SearchPage} />
-        <Route path="/searchresult" component={SearchResult} />
-        <Route path="/reservepage" component={ReservePage} />
-        <Route path="/chat" component={ChatPage} />
-        <Route path="/banpage" component={BanPage} />
-        <Route
+        <AuthRoute path="/searchpage" component={SearchPage} />
+        <AuthRoute path="/searchresult" component={SearchResult} />
+        <AuthRoute path="/reservepage" component={ReservePage} />
+        <AuthRoute path="/chat" component={ChatPage} />
+        <AuthRoute path="/banpage" component={BanPage} />
+        <AuthRoute
           path="/updateinfo"
           component={
             userContext.user && userContext.user.role == "petowner"
