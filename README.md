@@ -1,27 +1,24 @@
 **We are P.C.S.D. (Pet Caring System Developer) currently developing PetidCare.**
 
 ## API Lists
-- User ("/user")
-    - GET ("/")
-    - POST ("/")
-    - GET ("/userinfo")
-    - GET ("/emails")
-    - POST ("/email")
-    - GET ("/account/:id")
-    - POST ("/register")
-    - POST ("/caretaker")
-    - POST ("/caretaker/find")
-    - GET ("/caretaker")
-    - DELETE ("account/:id")
-    - GET ("/pet")
-    - POST ("/pet")
-    - DELETE ("/pet")
-    - POST ("/edit")
-    - POST ("/edit/caretaker")
-    - POST ("/topup")
-    - POST ("/transfer")
-    - GET ("transfer")
-    - POST ("/porfilepic")
+- User Route `/user`
+    - Get all users: `GET /`
+    - Get user by email: `POST /`
+    - Get all user's email: `GET /emails`
+    - Get user by email: `POST /email`
+    - Get user by id: `GET /account/:id`
+    - Register new user: `POST /register`
+    - Add new caretaker's info: `POST /caretaker`
+    - Get caretaker's info: `POST /caretaker/find`
+    - Delete user by id: `DELETE account/:id`
+    - Get all pets: `GET /pet`
+    - Add new pet: `POST /pet`
+    - Delete pet by pet id: `DELETE /pet`
+    - Edit general user info: `POST /edit`
+    - Edit caretaker's info: `POST /edit/caretaker`
+    - Add amount to user's balance: `POST /topup`
+    - Transfer amount from one user to another: `POST /transfer`
+    - Storing profile picture: `POST /porfilepic`
 
 ---
 

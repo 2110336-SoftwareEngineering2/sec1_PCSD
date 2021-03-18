@@ -49,10 +49,6 @@ router.post("/caretaker/find", (req, res) => {
   CaretakerController.getCaretaker(req, res);
 });
 
-router.get("/caretaker", (req, res) => {
-  CaretakerController.getCaretaker(req.body, res);
-})
-
 // For testing, currently unused
 router.delete("/account/:id", (req, res) => {
   UserController.deleteUser(req, res);
@@ -83,10 +79,6 @@ router.post("/topup", (req, res) => {
 });
 
 router.post("/transfer", (req, res) => {
-  UserController.transfer(req, res);
-});
-
-router.get("/transfer", (req, res) => {
   UserController.transfer(req, res);
 });
 
