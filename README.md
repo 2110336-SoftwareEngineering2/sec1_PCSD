@@ -19,6 +19,19 @@
     - Add amount to user's balance: `POST /topup`
     - Transfer amount from one user to another: `POST /transfer`
     - Storing profile picture: `POST /porfilepic`
+- Authentication Route `/auth`
+    - Login system: `POST /login`
+    - Logout system (currently unused): `POST /logout`
+    - Check if access token exists and is valid: `POST /valid`
+- Admin Route `/admin`
+    - Admin login: `POST /login`
+    - Ban user: `POST /ban`
+- Chat Route `/chat`
+    - Get all chatrooms: `GET /rooms`
+    - Create chatroom: `POST /create`
+    - Get chatroom by user email: `GET /:email`
+    - Get chatroom by chatroom id: `GET /rooms/:id`
+    - Delete all messages in a specific chatroom: `DELETE /rooms/:id`
 
 ---
 
