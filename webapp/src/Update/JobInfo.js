@@ -122,7 +122,6 @@ function JobInfo() {
     setValue({ ...values, available_day: _availday });
     sentValues.available_day = _availday;
 
-    console.log(values);
     axios
       .post("http://localhost:4000/user/edit/caretaker", sentValues)
       .then((res) => {
@@ -132,6 +131,7 @@ function JobInfo() {
         console.log(err.response.data);
       });
 
+    window.alert("Change(s) saved!")
     history.push({ pathname: "/" });
   };
 
