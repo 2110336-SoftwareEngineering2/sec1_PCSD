@@ -132,27 +132,27 @@ const TopUp = async (req, res) => {
 };
 
 const transfer = async (req, res) => {
-  const senderId = req.body.senderId;
-  const receiverId = req.body.receiverId;
+  const senderName = req.body.senderName;
+  const receiverName = req.body.receiverName;
   const amount = req.body.amount;
 
-  const sender = await User.findById(senderId);
-  const receiver = await User.findById(receiverId);
+  const sender = await User.findOne({username: senderName});
+  const receiver = await User.findOne({username: receiverName});
 
   
   if (!sender) {
-    res.status(400).send("Sender user not found");
+    res.status(400).send({senderError: true});
   } else if (!receiver) {
-    res.status(400).send("Receiver user not found");
+    res.status(400).send({receiverError: true});
   } else {
-    const sufficient = sender.balance.bytes >= amount;
+    const sufficient = (sender.balance.bytes - amount) >= 0;
 
     if (!sufficient) {
-      res.status(400).send("Insufficient balance")
+      res.status(400).send({balanceError: true});
     } else {
-      await User.findByIdAndUpdate(senderId, { $inc: { balance: -amount } });
-      await User.findByIdAndUpdate(receiverId, { $inc: { balance: amount } });
-      res.send("Transfer successfully")
+      const newSender = await User.findOneAndUpdate({username: senderName}, { $inc: { balance: -amount } }, { new: true });
+      const newReceiver = await User.findOneAndUpdate({username: receiverName}, { $inc: { balance: amount } }, { new: true });
+      res.send({senderBalance: newSender.balance.bytes, receiverBalance: newReceiver.balance.bytes})
     }
   }
 };
