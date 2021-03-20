@@ -180,7 +180,7 @@ function RadioButton(props) {
   };
 
   return (
-    <div class="container" id="radioo">
+    <div className="container" id="radioo">
   <form>
     <label className="radio" >
       <input name="gender"
