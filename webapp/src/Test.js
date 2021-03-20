@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 
-// import Test2 from "./Test2";
+import {UserContext} from "./context/MyContext";
+import Test2 from "./Test2";
 
 function Test(props) {
+  const { user } = useContext(UserContext);
+
   const [state, setState] = useState({
     amount: "",
-    senderName: "", //6022a8bf06621b30649233dd
-    receiverName: "", //60222565051c0a6b4c8b855b
+    senderName: "",
+    receiverName: "",
   });
   const [errors, setError] = useState({});
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("hi");
+
+  useEffect(() => {
+    if(user)
+      setState({...state, senderName: user.username});
+  }, [user]);
 
   const onChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
+
+  const handleClose = (() => {setShow(false)});
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -25,10 +37,11 @@ function Test(props) {
         setError({});
         const senderBalance = res.data.senderBalance;
         const receiverBalance = res.data.receiverBalance;
-        const message = `Successfully transfer\n 
-        Sender's balance: ${senderBalance}\n 
-        Receiver's balance: ${receiverBalance}\n`;
-        window.alert(message);
+        const message = `Current balance\n
+        Sender: ${senderBalance} 
+        Receiver: ${receiverBalance}`;
+        setMessage(message);
+        setShow(true);
       })
       .catch((err) => {
         setError({ ...err.response.data });
@@ -41,15 +54,24 @@ function Test(props) {
         <Form.Row>
           <Col>
             <Form.Label>Sender</Form.Label>
-            <Form.Control
+            {user ? 
+              <Form.Control
               type="text"
               name="senderName"
-              value={state.senderName}
-              placeholder="Sender's username"
-              onChange={onChange}
+              defaultValue={state.senderName}
               isInvalid={errors.senderError}
+              readOnly
               required
+              /> : <Form.Control
+                type="text"
+                name="senderName"
+                value={state.senderName}
+                placeholder="Sender's username"
+                onChange={onChange}
+                isInvalid={errors.senderError}
+                required
             />
+            }
           </Col>
           <Col>
             <Form.Label>Receiver</Form.Label>
@@ -84,6 +106,7 @@ function Test(props) {
           Submit
         </Button>
       </Form>
+      <Test2 handleClose={handleClose} show={show} message={message} />
     </div>
   );
 }
