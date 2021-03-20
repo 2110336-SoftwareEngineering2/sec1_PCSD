@@ -160,8 +160,8 @@ const transfer = async (req, res) => {
 module.exports = {
   TopUp,
 
-  getUser: async (req, res) => {
-    const allUser = await User.find({}, function (err, result) {
+  getUser: async (_, res) => {
+    await User.find({}).limit(10).exec(function (err, result) {
       if (err) {
         console.log(err);
       } else {
