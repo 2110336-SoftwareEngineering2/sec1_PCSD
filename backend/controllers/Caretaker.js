@@ -2,7 +2,7 @@ const Caretaker = require("../models/User/Caretaker-model");
 const User = require("../models/User/User-model");
 
 const getCaretaker = async (req, res) => {
-  const caretakerInfo = await Caretaker.findOne({caretaker:req.body.email});
+  const caretakerInfo = await Caretaker.findOne({caretaker:req.body.caretaker});
   res.send(caretakerInfo);
 };
 
