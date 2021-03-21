@@ -10,10 +10,10 @@ function JobInfo() {
     
     useEffect(() => {
         axios
-        .post("http://localhost:4000/user/caretaker/find", {email: user.email})
+        .post("http://localhost:4000/user/caretaker/find", {caretaker: user.email})
         .then((res) => {
             const data = res.data;
-            setValue({...data, rate: data.rate.bytes});
+            setValue({...data, rate: data.rate.$numberDecimal});
             var _tmp = {};
             for (var i = 0; i < data.type.length; i++) {
                 _tmp[data.type[i]] = true;
