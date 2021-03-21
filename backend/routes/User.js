@@ -45,8 +45,12 @@ router.post("/caretaker", (req, res) => {
   CaretakerController.addCaretaker(req, res);
 });
 
-router.post("/caretaker/find", (req, res) => {
-  CaretakerController.getCaretaker(req, res);
+router.post("/caretaker", (req, res) => {
+  CaretakerController.addCaretaker(req, res);
+});
+
+router.post("/caretaker/search", (req, res) => {
+  CaretakerController.SearchCaretaker(req.body, res);
 });
 
 // For testing, currently unused
