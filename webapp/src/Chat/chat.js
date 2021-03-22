@@ -11,7 +11,7 @@ function ChatPage() {
     return(
         <div className = "ChatPage">
             <Header />
-            <div style={tmpStyle} >
+            <div className = 'Chatpage_Components'>
                 <Sidebar />
                 <Chatbox roomId={chatContext.currentChatRoom}/>
             </div>
@@ -19,8 +19,5 @@ function ChatPage() {
     );
 }
 
-const tmpStyle = {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-}
+
 export default ChatPage;
