@@ -30,7 +30,7 @@ function Routes() {
           exact
           component={!userContext.user ? LoginPage : Home}
         />
-        <RegRoute
+        <Route
           path="/register"
           component={context.data.role == "petowner" ? Petowner : Caretaker}
         />
