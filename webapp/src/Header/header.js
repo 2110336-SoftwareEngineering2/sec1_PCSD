@@ -51,7 +51,7 @@ function Header() {
           <DropdownButton
             menuAlign="right"
             title={
-              <div class="user_infoo">
+              <div className="user_infoo">
                 {" "}
                 <Avatar src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ user.email}/> &nbsp; {user.username}{" "}
               </div>

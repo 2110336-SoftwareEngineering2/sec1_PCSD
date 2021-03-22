@@ -17,7 +17,7 @@ function JobInfo() {
     country: "",
     description: "",
     available_day: [],
-    reserved: "No"
+    reserved: false
   });
   const [service, setService] = useState({
     housesitting: false,

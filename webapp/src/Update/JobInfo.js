@@ -10,7 +10,7 @@ function JobInfo() {
     
     useEffect(() => {
         axios
-        .post("http://localhost:4000/user/caretaker/find", user.email)
+        .post("http://localhost:4000/user/caretaker/find", {caretaker: user.email})
         .then((res) => {
             const data = res.data;
             setValue({...data, rate: data.rate.$numberDecimal});
@@ -122,7 +122,6 @@ function JobInfo() {
     setValue({ ...values, available_day: _availday });
     sentValues.available_day = _availday;
 
-    console.log(values);
     axios
       .post("http://localhost:4000/user/edit/caretaker", sentValues)
       .then((res) => {
@@ -132,6 +131,7 @@ function JobInfo() {
         console.log(err.response.data);
       });
 
+    window.alert("Change(s) saved!")
     history.push({ pathname: "/" });
   };
 
@@ -316,121 +316,111 @@ function JobInfo() {
 
 export default JobInfo;
 
-class AvailableDays extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleOnClicked = this.handleOnClicked.bind(this);
-  }
+function AvailableDays(props) {
 
-  startColor() {
-    for(const day in this.props.availdays) {
-        var event = document.getElementById(day);
-        const val = this.props.availdays[day];
+  const startColor = () => {
+    for(const day in props.availdays) {
+      var element = document.getElementById(day);
+        const val = props.availdays[day];
         if (val !== null) {
-            event.style.backgroundColor = "#9d7f70";
-            event.style.color = "white";
+            element.style.backgroundColor = "#9d7f70";
+            element.style.color = "white";
         } else {
-            event.style.backgroundColor = "white";
-            event.style.color = "#8e8e8e";
+            element.style.backgroundColor = "white";
+            element.style.color = "#8e8e8e";
         }
       }
   }
 
-  componentDidMount() {
-      this.startColor();
-  }
+  useEffect(() => {
+    startColor()
+  }, [props]);
 
-  componentDidUpdate() {
-    this.startColor();
-  }
-
-  handleOnClicked(event) {
+  const handleOnClicked = (event) => {
     const name = event.target.name;
-    const val = this.props.availdays[name];
+    const val = props.availdays[name];
     if (val !== null) {
       event.target.style.backgroundColor = "white";
       event.target.style.color = "#8e8e8e";
-      this.props.setAvailday({ ...this.props.availdays, [name]: null });
+      props.setAvailday({ ...props.availdays, [name]: null });
     } else {
       event.target.style.backgroundColor = "#9d7f70";
       event.target.style.color = "white";
-      this.props.setAvailday({ ...this.props.availdays, [name]: name });
+      props.setAvailday({ ...props.availdays, [name]: name });
     }
   }
 
-  render() {
-    return (
-      <div className="availdays">
-        <button
+  return (
+    <div className="availdays">
+      <button
         id="mon"
-          name="mon"
-          type="button"
-          onClick={this.handleOnClicked}
-          value={this.props.availdays.mon}
-        >
-          Mon
-        </button>
-        &nbsp; &nbsp;
-        <button
+        name="mon"
+        type="button"
+        onClick={handleOnClicked}
+        value={props.availdays.mon}
+      >
+        Mon
+      </button>
+      &nbsp; &nbsp;
+      <button
         id="tue"
-          name="tue"
-          type="button"
-          onClick={this.handleOnClicked}
-          value={this.props.availdays.tue}
-        >
-          Tue
-        </button>
-        &nbsp; &nbsp;
-        <button
+        name="tue"
+        type="button"
+        onClick={handleOnClicked}
+        value={props.availdays.tue}
+      >
+        Tue
+      </button>
+      &nbsp; &nbsp;
+      <button
         id="wed"
-          name="wed"
-          type="button"
-          onClick={this.handleOnClicked}
-          value={this.props.availdays.wed}
-        >
-          Wed
-        </button>
-        &nbsp; &nbsp;
-        <button
+        name="wed"
+        type="button"
+        onClick={handleOnClicked}
+        value={props.availdays.wed}
+      >
+        Wed
+      </button>
+      &nbsp; &nbsp;
+      <button
         id="thu"
-          name="thu"
-          type="button"
-          onClick={this.handleOnClicked}
-          value={this.props.availdays.thu}
-        >
-          Thu
-        </button>
-        &nbsp; &nbsp;
-        <button
+        name="thu"
+        type="button"
+        onClick={handleOnClicked}
+        value={props.availdays.thu}
+      >
+        Thu
+      </button>
+      &nbsp; &nbsp;
+      <button
         id="fri"
-          name="fri"
-          type="button"
-          onClick={this.handleOnClicked}
-          value={this.props.availdays.fri}
-        >
-          Fri
-        </button>
-        &nbsp; &nbsp;
-        <button
+        name="fri"
+        type="button"
+        onClick={handleOnClicked}
+        value={props.availdays.fri}
+      >
+        Fri
+      </button>
+      &nbsp; &nbsp;
+      <button
         id="sat"
-          name="sat"
-          type="button"
-          onClick={this.handleOnClicked}
-          value={this.props.availdays.sat}
-        >
-          Sat
-        </button>
-        &nbsp; &nbsp;
-        <button
+        name="sat"
+        type="button"
+        onClick={handleOnClicked}
+        value={props.availdays.sat}
+      >
+        Sat
+      </button>
+      &nbsp; &nbsp;
+      <button
         id="sun"
-          name="sun"
-          type="button"
-          onClick={this.handleOnClicked}
-          value={this.props.availdays.sun}
-        >
-          Sun
-        </button>
-      </div>
-    );
-  }
+        name="sun"
+        type="button"
+        onClick={handleOnClicked}
+        value={props.availdays.sun}
+      >
+        Sun
+      </button>
+    </div>
+  );
 }

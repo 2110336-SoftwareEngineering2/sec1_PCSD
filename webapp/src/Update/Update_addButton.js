@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import axios, { CancelToken }  from "axios";
+import image from "./../userpic.png";
 import AddPet from "./AddPet";
 import SumPet from "./SumPet";
 import history from "../history";
@@ -20,7 +21,7 @@ function AddButton() {
     breed: "",
     age: "",
     gender: "",
-    petImg: "",
+    petImg: image,
   });
   
   useEffect(() => {
@@ -61,7 +62,7 @@ function AddButton() {
         "Cancelling previous http call because a new one was made ;-)"
       );
     };
-  }, [pageState]);
+  }, [pageState, pet_lists]);
   
 
   function onChange(event) {
@@ -93,16 +94,21 @@ function AddButton() {
 
   function uploadPetPic(pet) {
     const data = new FormData();
-    data.append("email", pet._id);
+    data.append("email", pet.owner + pet._id);
     data.append("file", input.petImg);
     console.log(data);
-    axios.post("http://localhost:4000/user/profilepic", data)
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    axios
+      .post("http://localhost:4000/user/profilepic", data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
 

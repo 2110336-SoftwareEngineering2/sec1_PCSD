@@ -32,14 +32,6 @@ function UserLogin(props) {
       .then((res) => {
         context.login(res.data);
         console.log(res.data);
-        //context.user = user;
-        //console.log(context.user);
-      })
-      .catch((err) => console.log(err));
-    axios
-      .get(`http://localhost:4000/user?email=${user.email}`)
-      .then((response) => {
-        console.log(response.data);
       })
       .catch((err) => console.log(err));
   };
