@@ -38,7 +38,7 @@ const authToken = (req, res) => {
       return false;
     }
     req.decoded = decoded;
-    // res.status(200).json(decoded);
+    res.status(200).json(decoded);
     return true;
   });
 };
