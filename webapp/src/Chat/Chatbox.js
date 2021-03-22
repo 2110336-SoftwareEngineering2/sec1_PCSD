@@ -2,6 +2,7 @@ import axios from "axios";
 import socketIOClient from 'socket.io-client';
 import React, { useEffect, useContext, useState, useRef } from "react"
 import { ChatContext, UserContext } from "../context/MyContext";
+import {useWindowScroll} from 'react'
 //import {FixedSizeList as List} from 'react-window';
 import {Container} from "react-bootstrap"
 import Icon from "@material-ui/core/Icon"
@@ -17,6 +18,9 @@ function Chatbox({roomId}){
     const email = userContext.user.email;
     const token = userContext.user.accessToken;
     const endpoint = "http://localhost:4000";
+    //to scroll to buttom
+    const endRef = useRef(null);
+
     
     useEffect(() => {
         // console.log(roomId)
@@ -64,6 +68,15 @@ function Chatbox({roomId}){
             setMessage(data.messages);
         }
     } 
+    
+    //to implement more
+    async function addRoom({members}){
+        const url = 'http://localhost:4000/chat/create'
+        const member = {
+            member : {members}
+        }
+        axios.post(url,member)
+    }
 
     function timeStampToDateStr (timestamp) {
         const dateObj = new Date(timestamp);
@@ -149,6 +162,8 @@ function Chatbox({roomId}){
                             {messages.map((mDetail, idx) => {
                                 return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
                             })}
+                            {/* to implement more 
+                             <div ref={messagesEndRef} />*/}
                         </div>
                     </div>
                     {/*</List>*/}

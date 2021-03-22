@@ -9,7 +9,10 @@
   background-color: #eee;
   height: 100vh;
 }
-
+.Chatpage_Components{
+  display: flex;
+  flex-direction: row;
+}
 .Sidebar{
   background-color: #fff;
   padding:  20px;
@@ -76,13 +79,13 @@
 .Messages{
   margin: 1%;
   padding-left: 10px;
-  height: 85%;
+  height: 82%;
   border-radius: 5px;
   background-color: #ccc;
 }
 .Chat_Messages{
-  height: 90%;
-  margin-bottom: 5px;
+  height: 85%;
+  margin-bottom: 0px;
 }
 .Downside_Bar{
   font-size: x-large;
@@ -92,7 +95,7 @@
   /*padding-bottom: 5px;*/
   border-radius: 5px;
   background-color: #fff;
-  height: 11%;
+  height: 10%;
 }
 .Message_Box{
   align-items: baseline;
