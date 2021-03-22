@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react";
 import "./App.css";
 import Routes from "./Routes";
-
 import { ContextProvider, RegisterProvider, ChatProvider } from "./context/MyContext";
 
 function App() {

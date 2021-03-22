@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 
 import history from "../history";
+import { useCookies } from "react-cookie";
 
 // User context
 const UserContext = React.createContext({
@@ -72,27 +73,50 @@ function RegisterRuducer(state, action) {
 // Context provider for user context
 function ContextProvider(props) {
   const [state, dispatch] = React.useReducer(ContextReducer, { user: null });
+  const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
 
-  useEffect(() => {
-    if (localStorage.getItem("jwtToken")) {
-      const accessToken = localStorage.getItem("jwtToken");
-      const decodedToken = jwtDecode(accessToken);
+  // useEffect(() => {
+    // if (localStorage.getItem("jwtToken")) {
+    //   const accessToken = localStorage.getItem("jwtToken");
+    //   const decodedToken = jwtDecode(accessToken);
 
-      if (decodedToken.exp * 1000 < Date.now()) {
-        localStorage.removeItem("jwtToken");
-      } else {
-        axios
-          .post("http://localhost:4000/user", { email: decodedToken.email })
-          .then((res) => {
-            login({ ...res.data, accessToken: accessToken });
-          })
-          .catch((err) => console.log(err));
-      }
-    }
-  }, []);
+    //   if (decodedToken.exp * 1000 < Date.now()) {
+    //     localStorage.removeItem("jwtToken");
+    //   } else {
+    //     axios
+    //       .post("http://localhost:4000/user", { email: decodedToken.email })
+    //       .then((res) => {
+    //         login({ ...res.data, accessToken: accessToken });
+    //       })
+    //       .catch((err) => console.log(err));
+    //   }
+    // }
+    // if (cookie.accessToken !== undefined) {
+      // console.log("hasdas")
+      // console.log(cookie.accessToken)
+  //     axios
+  //       .post("http://localhost:4000/auth/valid", {}, {
+  //         headers: {
+  //           "authorization": "Bearer " + cookie.accessToken
+  //         }
+  //       })
+  //       .then((res) => {
+  //         axios
+  //           .post("http://localhost:4000/user", {email: (res.data).email})
+  //           .then((res) => {
+  //             login({...res.data, accessToken: cookie.accessToken});
+  //           })
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         removeCookie("accessToken", {path: "/"});
+  //       });
+  //   }
+  // }, []);
 
   function login(userData) {
-    localStorage.setItem("jwtToken", userData.accessToken);
+    // localStorage.setItem("jwtToken", userData.accessToken);
+    setCookie("accessToken", userData.accessToken, { path: "/" });
     dispatch({
       type: "LOGIN",
       payload: userData,
@@ -100,7 +124,9 @@ function ContextProvider(props) {
   }
 
   function logout() {
-    localStorage.removeItem("jwtToken");
+    // localStorage.removeItem("jwtToken");
+    removeCookie("accessToken", {path: "/"});
+
     dispatch({ type: "LOGOUT" });
   }
 

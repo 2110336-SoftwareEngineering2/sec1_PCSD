@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 
 import BanPage from "./banpage";
@@ -17,10 +17,15 @@ import SearchResult from "./SearchPage/SearchResult";
 import { RegisterContext, UserContext } from "./context/MyContext";
 import AuthRoute from "./util/AuthRoute";
 import RegRoute from "./util/RegRoute";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import UserLogin from "./component/login-component";
 
 function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
+  const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
+  
 
   return (
     <Router history={history}>
@@ -28,7 +33,8 @@ function Routes() {
         <Route
           path="/"
           exact
-          component={!userContext.user ? LoginPage : Home}
+          // component={!userContext.user ? LoginPage : Home}
+          component={cookie.accessToken !== undefined ? Home : LoginPage}
         />
         <Route
           path="/register"

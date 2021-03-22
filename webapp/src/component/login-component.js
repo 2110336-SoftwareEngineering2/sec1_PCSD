@@ -31,7 +31,8 @@ function UserLogin(props) {
       .post("http://localhost:4000/auth/login", user)
       .then((res) => {
         context.login(res.data);
-        console.log(res.data);
+        // setCookie("accessToken", (res.data).accessToken, {path: "/"});
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
