@@ -21,6 +21,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import UserLogin from "./component/login-component";
 import AddMoneyPage from "./Payment/AddMoneyPage";
+import PaymentPage from "./Payment/PaymentPage";
 function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
@@ -55,6 +56,7 @@ function Routes() {
         />
         <Route path="/test" exact component={Test} />
         <Route path="/addmoney" exact component={AddMoneyPage} />
+        <Route path="/payment" exact component={PaymentPage} />
       </Switch>
     </Router>
   );
