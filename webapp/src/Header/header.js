@@ -65,7 +65,16 @@ function Header() {
               }}
             >
               {" "}
-              edit your profile
+              Edit your profile
+            </Dropdown.Item>
+            <Dropdown.Item
+              eventKey="5"
+              onClick={() => {
+                history.push({ pathname: "/addmoney" });
+              }}
+            >
+              {" "}
+              Payment
             </Dropdown.Item>
             {user.username == "admin" ? (
               <Dropdown.Item

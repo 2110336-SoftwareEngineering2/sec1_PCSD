@@ -20,7 +20,7 @@ import RegRoute from "./util/RegRoute";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import UserLogin from "./component/login-component";
-
+import AddMoneyPage from "./Payment/AddMoneyPage";
 function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
@@ -54,6 +54,7 @@ function Routes() {
           }
         />
         <Route path="/test" exact component={Test} />
+        <Route path="/addmoney" exact component={AddMoneyPage} />
       </Switch>
     </Router>
   );
