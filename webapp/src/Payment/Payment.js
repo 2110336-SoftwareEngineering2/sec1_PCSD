@@ -7,7 +7,7 @@ function Payment() {
         <div>
              <div className="container d-flex justify-content-center mt-5">
     <div className="card">
-        <div className="acard">
+        <div className="bcard">
             <div className="d-flex pt-3 pl-3">
                 <div><img src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ user.email} width="80" height="80"/> </div>
                 <div className="mt-3 pl-2"><span class="name">{user.firstname} {user.lastname}</span>
@@ -22,7 +22,9 @@ function Payment() {
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary button">Pay Amount</button>
+            <div className="d-flex justify-content-between px-3 pt-4 pb-3">
+                <div><span className="back">Cancle</span></div> <button type="button" class="btn btn-primary button pay">Pay amount</button>
+            </div>
         </div>
     </div>
 </div>
