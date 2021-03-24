@@ -6,17 +6,17 @@ import "./AddMoney.css";
 function Addmoney() {
   const { user } = useContext(UserContext);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onClick = () => {
+    const balance = document.getElementById('amount').value;
 
-    console.log('ehe');
+    console.log(balance);
   };
 
   return (
     <div className="addmoney">
       <div className="container d-flex justify-content-center mt-5">
         <div className="card">
-          <div className="acard" onSubmit={onSubmit}>
+          <div className="acard">
             <div className="d-flex pt-3 pl-3">
               <div>
                 <img
@@ -28,12 +28,12 @@ function Addmoney() {
                 />{" "}
               </div>
               <div className="mt-3 pl-2">
-                <span class="name">
+                <span className="name">
                   {user.firstname} {user.lastname}
                 </span>
                 <div>
                   <span className="cross">Account Balance :</span>
-                  <span class="pin ml-2">{user.balance.$numberDecimal}</span>
+                  <span className="pin ml-2">{user.balance.$numberDecimal}</span>
                 </div>
               </div>
             </div>
@@ -44,16 +44,16 @@ function Addmoney() {
                   <input
                     type="radio"
                     name="optradio"
-                    class="form-check-input mt-3 dot"
+                    className="form-check-input mt-3 dot"
                   />{" "}
                 </div>
                 <div className="border-left pl-2">
-                  <span class="head">Amount</span>
+                  <span className="head">Amount</span>
                   <div className="d-flex">
-                    <span class="dollar">฿</span>
+                    <span className="dollar">฿</span>
                     <input
                       type="number"
-                      name="text"
+                      id="amount"
                       class="form-control ml-1"
                       placeholder=""
                       min="50"
@@ -62,7 +62,7 @@ function Addmoney() {
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary button">
+            <button type="submit" className="btn btn-primary button" onClick={onClick}>
               Add Money
             </button>
           </div>

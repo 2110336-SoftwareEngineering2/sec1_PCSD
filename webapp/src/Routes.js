@@ -55,8 +55,8 @@ function Routes() {
           }
         />
         <Route path="/test" exact component={Test} />
-        <Route path="/addmoney" exact component={AddMoneyPage} />
-        <Route path="/payment" exact component={PaymentPage} />
+        <AuthRoute path="/addmoney" exact component={AddMoneyPage} />
+        <AuthRoute path="/payment" exact component={PaymentPage} />
       </Switch>
     </Router>
   );
