@@ -15,13 +15,15 @@ const rate_point = new Schema({
     get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(2)),
     },
   rate_count : {type: Number},
-  raw_rate : {
-    rater : String,
-    rate : {
-      type: mongoose.Decimal128,
-      get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(2)),
-      },
-  }
+});
+
+const raw_rate = new Schema({
+  rater : String,
+  rate : {
+    type: mongoose.Decimal128,
+    get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(2)),
+    min: 0, max: 5, 
+    },
 });
 
 const CaretakerSchema = new Schema({
@@ -42,6 +44,7 @@ const CaretakerSchema = new Schema({
     sum_rate : 0,
     rate_count : 0,
   }},
+  raw_rate : [raw_rate],
   comment : [comment],
   reserved : String,
   
