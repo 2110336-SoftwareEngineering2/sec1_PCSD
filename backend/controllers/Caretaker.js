@@ -21,6 +21,34 @@ const updateCaretaker = async (req, res) => {
     res.send("Edit caretaker successful");
 };
 
+const rate = async (body,res) =>{
+  if(body.rate<=5 && body.rate>=0 ){
+    Caretaker.updateOne({caretaker:body.caretaker}, 
+      { $push: { 
+          raw_rate: {
+            rater : body.rater,
+            rate : body.rate
+          }
+        },
+        $inc : {
+            'rate_point.rate_count' : 1,
+            'rate_point.sum_rate' : body.rate
+        }
+      },(err, result) => {
+        if(err){
+          console.log(err);
+          res.status(400).send("err");
+        }
+        else{
+          res.send("rate caretaker successful")
+        }
+      });
+  }
+  else{
+    res.status(400).send("rate out of range");
+  }
+};
+
 const SearchCaretaker = async (body,res) =>{
   const fillter = {
      rate : {$gte:0},
@@ -48,7 +76,7 @@ const SearchCaretaker = async (body,res) =>{
   }
   // console.log("is run");
 
-  await Caretaker.find(fillter, '-_id caretaker rate city province country description', (err, result) => {
+  await Caretaker.find(fillter, '-_id caretaker rate city province country description rate_point', (err, result) => {
     if (err) {
       res.status(400).send("not found");
     } else {
@@ -57,10 +85,14 @@ const SearchCaretaker = async (body,res) =>{
       const emaillist = [];
       const response = {};
       for (var email of result){
+        var rate_data = JSON.parse(JSON.stringify(email.rate_point));
         emaillist.push(email.caretaker);
-        response[email.caretaker] = {user: "" ,caretaker : email};
+        response[email.caretaker] = {user: "" ,
+        caretaker : email,
+        rate_point_av : parseFloat(rate_data.sum_rate.$numberDecimal)/email.rate_point.rate_count,};
       }
-      console.log(emaillist);
+      ///email.rate_point.rate_count
+      // console.log(emaillist);
 
       User.find({ email : {$in : emaillist}}, (err, finalresult) => {
         if (err) {
@@ -83,5 +115,6 @@ module.exports = {
     addCaretaker,
     updateCaretaker,
     getCaretaker,
-    SearchCaretaker
+    SearchCaretaker,
+    rate,
 }
