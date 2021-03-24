@@ -16,7 +16,7 @@ function Addmoney() {
     <div className="addmoney">
       <div className="container d-flex justify-content-center mt-5">
         <div className="card">
-          <form className="acard" onSubmit={onSubmit}>
+          <div className="acard" onSubmit={onSubmit}>
             <div className="d-flex pt-3 pl-3">
               <div>
                 <img
@@ -65,7 +65,7 @@ function Addmoney() {
             <button type="submit" class="btn btn-primary button">
               Add Money
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
