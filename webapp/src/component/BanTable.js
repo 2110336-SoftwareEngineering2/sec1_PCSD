@@ -3,7 +3,10 @@ import { useTable } from "react-table";
 import MOCK_DATA from "./MOCK_DATA.json";
 import { COLUMNS } from "./columns";
 import "./BanTable.css";
+import IconButton from "@material-ui/core/IconButton";
+
 import { Button } from "@material-ui/core";
+import CancelIcon from "@material-ui/icons/Cancel";
 import axios from "axios";
 
 export const BanTable = () => {
@@ -28,14 +31,27 @@ export const BanTable = () => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   const handleBan = async (data) => {
-    axios.post("http://localhost:4000/Admin/ban", data).then();
-    await sleep(100);
+    console.log(data);
+    await axios.post("http://localhost:4000/Admin/ban", data).then((res) => {
+      console.log(res);
+    });
+    // await sleep(250);
     axios
       .get("http://localhost:4000/User")
       .then((res) => {
         setData(res.data);
       })
       .catch((err) => console.log("err", err));
+  };
+
+  const deleteUser = async (data) => {
+    // console.log(data._id);
+    // await axios
+    //   .delete("http://localhost:4000/user/account/:id", data)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log("err", err));
   };
 
   const {
@@ -64,13 +80,14 @@ export const BanTable = () => {
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           const status = row.values.banStatus;
+          const deleteButton = false;
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                if (cell.value === undefined && status === true) {
+                if (cell.column.Header === "Ban/Delete" && status === true) {
                   return (
-                    <td onClick={() => handleBan(row.original)}>
+                    <td>
                       <Button
                         variant="contained"
                         style={{
@@ -81,6 +98,7 @@ export const BanTable = () => {
                           marginRight: "8px",
                           marginBottom: "3px",
                         }}
+                        onClick={() => handleBan(row.original)}
                       >
                         Unban
                       </Button>
@@ -97,12 +115,18 @@ export const BanTable = () => {
                       >
                         Ban
                       </Button>
-                      <hr className="ban_line" />
+                      <IconButton aria-label="delete">
+                        <CancelIcon />
+                      </IconButton>
+                      {/* <hr className="ban_line" /> */}
                     </td>
                   );
-                } else if (cell.value === undefined && status === false) {
+                } else if (
+                  cell.column.Header === "Ban/Delete" &&
+                  status === false
+                ) {
                   return (
-                    <td onClick={() => handleBan(row.original)}>
+                    <td>
                       <Button
                         variant="contained"
                         style={{
@@ -125,10 +149,14 @@ export const BanTable = () => {
                           width: "5px",
                           marginBottom: "3px",
                         }}
+                        onClick={() => handleBan(row.original)}
                       >
                         Ban
                       </Button>
-                      <hr className="ban_line" />
+                      <IconButton aria-label="delete">
+                        <CancelIcon onClick={() => deleteUser(row.original)} />
+                      </IconButton>
+                      {/* <hr className="ban_line" /> */}
                     </td>
                   );
                 } else {
@@ -136,21 +164,21 @@ export const BanTable = () => {
                     return (
                       <td>
                         <h4>Banned</h4>
-                        <hr className="normal_line" />
+                        {/* <hr className="normal_line" /> */}
                       </td>
                     );
                   } else if (cell.value === false) {
                     return (
                       <td>
                         <h4>Normal</h4>
-                        <hr className="normal_line" />
+                        {/* <hr className="normal_line" /> */}
                       </td>
                     );
                   } else {
                     return (
                       <td {...cell.getCellProps()}>
                         {cell.render("Cell")}
-                        <hr className="normal_line" />
+                        {/* <hr className="normal_line" /> */}
                       </td>
                     );
                   }
