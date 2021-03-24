@@ -7,7 +7,7 @@ const User = require("../models/User/User-model");
 
 module.exports = {
     //IF role=="user" find caretaker by id --> reserved ? ;  reserve = 1: out(reserved)?
-    reserveCaretaker: (req, res , id) => {
+    reserveCaretaker: async (req, res , id) => {
       // Check if user is logged in
       checkAuth.validateAccessToken(req, res);
       const user = req.decoded;
