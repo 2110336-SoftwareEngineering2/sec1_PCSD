@@ -49,6 +49,10 @@ router.post("/caretaker", (req, res) => {
   CaretakerController.addCaretaker(req, res);
 });
 
+router.post("/caretaker/rate", (req, res) => {
+  CaretakerController.rate(req.body, res);
+});
+
 router.post("/caretaker/search", (req, res) => {
   CaretakerController.SearchCaretaker(req.body, res);
 });
