@@ -113,17 +113,13 @@ const editUser = async (req, res) => {
 };
 
 const TopUp = async (req, res) => {
-  // Check if user is logged in
-  auth.validateAccessToken(req, res);
-  const user = req.decoded;
-
   if (user && user.role === "user") {
     const body = req.body;
-    const email = user.email;
-    const filter = { email: email };
+    const { email } = user.email;
+    const filter = { username: email };
     const update = { $inc: { balance: body.value } };
 
-    await User.findOneAndUpdate(filter, update, {new: true}).exec((err, result) => {
+    await User.findOneAndUpdate(filter, update, (err, result) => {
       if (err) {
         res.status(404).send(err);
       } else {
@@ -198,7 +194,7 @@ module.exports = {
   },
 
   deleteUser: async (req, res) => {
-    const id = req.params.id;
+    const id = req.body.id;
     const result = await deleteUserById(id);
     res.status(result.status).send(result.message);
   },

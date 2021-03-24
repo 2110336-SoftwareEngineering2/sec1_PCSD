@@ -6,7 +6,6 @@ const CaretakerController = require("../controllers/Caretaker");
 const userprofile = require("../controllers/userprofile");
 const multer = require("multer");
 const { default: axios } = require("axios");
-const ReserveCaretakerController = require("../controllers/Reserve_Caretaker");
 
 
 // For testing, currently unused
@@ -50,10 +49,6 @@ router.post("/caretaker", (req, res) => {
   CaretakerController.addCaretaker(req, res);
 });
 
-router.post("/caretaker/rate", (req, res) => {
-  CaretakerController.rate(req.body, res);
-});
-
 router.post("/caretaker/search", (req, res) => {
   CaretakerController.SearchCaretaker(req.body, res);
 });
@@ -63,7 +58,11 @@ router.post("/caretaker/find", (req, res) => {
 });
 
 // For testing, currently unused
-router.delete("/account/:id", (req, res) => {
+// router.delete("/account/:id", (req, res) => {
+//   UserController.deleteUser(req, res);
+// });
+
+router.delete("/account", (req, res) => {
   UserController.deleteUser(req, res);
 });
 
