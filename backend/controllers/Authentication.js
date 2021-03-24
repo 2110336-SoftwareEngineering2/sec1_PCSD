@@ -27,7 +27,7 @@ const authToken = (req, res) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) {
-    res.status(401).sen("Token is null.");
+    res.status(401).send("Token is null.");
     return false;
   }
 
