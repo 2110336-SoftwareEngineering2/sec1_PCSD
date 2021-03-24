@@ -1,15 +1,33 @@
+import axios from "axios";
 import React, { useContext } from "react";
+
 import { UserContext } from "../context/MyContext";
 
 import "./AddMoney.css";
 
 function Addmoney() {
-  const { user } = useContext(UserContext);
+  const { user, login } = useContext(UserContext);
 
   const onClick = () => {
     const balance = document.getElementById('amount').value;
 
-    console.log(balance);
+    axios.post(
+      "http://localhost:4000/user/topup",
+      { email: user.email, value: balance },
+      {
+        headers: { Authorization: `Bearer ${user.accessToken}` },
+      }
+    )
+    .then((res) => {
+        const updateUser = {...user, balance: res.data.balance};
+        login(updateUser);
+        window.alert(`${balance}฿ added to your account`)
+      }
+    )
+    .catch((err) => {
+        console.log(err);
+      }
+    )
   };
 
   return (
@@ -62,7 +80,7 @@ function Addmoney() {
                 </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary button" onClick={onClick}>
+            <button type="button" className="btn btn-primary button" onClick={onClick}>
               Add Money
             </button>
           </div>
