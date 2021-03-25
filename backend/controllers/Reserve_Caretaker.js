@@ -9,11 +9,11 @@ module.exports = {
     //IF role=="user" find caretaker by id --> reserved ? ;  reserve = 1: out(reserved)?
     reserveCaretaker: async (req, res , id) => {
       // Check if user is logged in
-      checkAuth.validateAccessToken(req, res);
-      const user = req.decoded;
+      const user = checkAuth.authToken(req, res);
+      const problem = user.nullToken | user.tokenError;
   
       // user is logged in and has "user" role
-      if (user && user.role === "user") {
+      if (!problem && user.role === "user") {
         const petInfo = req.body;
         const { email } = user.email;
         
@@ -32,10 +32,11 @@ module.exports = {
     // UnReserve Caretaker is the function when user logged in is caretaker and what to unreserve themself.
     unreserveCaretaker: async (req, res) => {
       // Check if user is logged in
-      checkAuth.validateAccessToken(req, res);
-      const user = req.decoded;
+      const user = checkAuth.authToken(req, res);
+      const problem = user.nullToken | user.tokenError;
+      
       // if user is logged in and has a "caretaker" role
-      if (user && user.role === "caretaker") {
+      if (!problem && user.role === "caretaker") {
       //Unreserve themselves
       //Change reserved to "False"
       await user.updateOne({reserved:"False"}, body);

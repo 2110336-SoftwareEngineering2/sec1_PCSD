@@ -27,21 +27,25 @@ const authToken = (req, res) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) {
-    res.status(401).send("Token is null.");
-    return false;
+    return {nullToken: true}
+    // res.status(401).send("Token is null.");
+    // return false;
   }
 
   // decoded is decoded data; In this case is an email.
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
-      res.status(403).send("Validate token error or token has expired");
-      return false;
+      return {tokenError: true}
+      // res.status(403).send("Validate token error or token has expired");
+      // return false;
     }
     else {
-      res.status(200).json(decoded);
-      return true;
+      return decoded
+      // res.status(200).json(decoded);
+      // return true;
     }
   });
+  return decoded;
 };
 
 module.exports = {
@@ -66,8 +70,17 @@ module.exports = {
   },
 
   validateAccessToken: (req, res) => {
-    authToken(req, res);
+    const decoded = authToken(req, res);
+
+    if(decoded.nullToken) {
+      res.status(401).send("Token is null.");
+    } else if(decoded.tokenError) {
+      res.status(403).send("Validate token error or token has expired");
+    }
+    res.status(200).json(decoded);
   },
+
+  authToken,
 
   // test
   logout: (req, res) => {

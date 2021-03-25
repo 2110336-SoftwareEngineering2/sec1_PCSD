@@ -114,10 +114,10 @@ const editUser = async (req, res) => {
 
 const TopUp = async (req, res) => {
   // Check if user is logged in
-  auth.validateAccessToken(req, res);
-  const user = req.decoded;
+  const user = auth.authToken(req, res);
+  const problem = user.nullToken | user.tokenError;
 
-  if (user && user.role === "user") {
+  if (!problem && user.role === "user") {
     const body = req.body;
     const email = user.email;
     const filter = { email: email };
