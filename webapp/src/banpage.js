@@ -5,9 +5,11 @@ import Header from "./Header/header";
 
 function BanPage() {
   return (
-    <div className="table">
+    <div>
       <Header />
-      <BanTable />
+      <div className="table">
+        <BanTable />
+      </div>
     </div>
   );
 }

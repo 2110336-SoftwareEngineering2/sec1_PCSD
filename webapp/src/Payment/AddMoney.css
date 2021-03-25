@@ -89,3 +89,9 @@
     background-color: #137ff3;
     border-color:#137ff3;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
