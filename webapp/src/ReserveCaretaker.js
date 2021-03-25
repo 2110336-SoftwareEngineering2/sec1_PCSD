@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ReserveCaretaker.css";
-import image from "./userpic.png";
+import blankImage from "./userpic.png";
 import Header from "./Header/header";
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
@@ -8,6 +8,8 @@ import MailOutlinedIcon from '@material-ui/icons/MailOutlined';
 import axios from "axios";
 
 function ReserveCaretaker() {
+    const userEmail = "testtttt@gmail.com";
+    const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ userEmail;
     const [name, setName] = useState({firstname: null, lastname: null});
     const [contact, setContact] = useState({email: null, phone: null});
     const [description, setDesc] = useState({desc: null});
@@ -19,8 +21,9 @@ function ReserveCaretaker() {
     
     useEffect(() => {
         axios
-        .post("http://localhost:4000/user/email", {email: "testtttt@gmail.com"})
+        .post("http://localhost:4000/user/email", {email: userEmail})
         .then((res) => {
+//            console.log(res);
             const data = res.data;
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
@@ -32,6 +35,7 @@ function ReserveCaretaker() {
         axios
         .post("http://localhost:4000/user/caretaker/find", {caretaker: "testtttt@gmail.com"})
         .then((res) => {
+//            console.log(res);
             const data = res.data;
             setDesc({desc: data.description});
             const area = data.city + ", " + data.province + ", " + data.country;
@@ -87,7 +91,7 @@ function ReserveCaretaker() {
                 <div className="reserve_container">
                     <div className="row">
                         <div className="col-3 reserve_img">
-                            <img className="reserveimg" src={image}/>
+                            <img className="reserveimg" src={img} alt={blankImage}/>
                         </div>
                         <div className="col-9 reserve_userinfo">
                             <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label><br/>
