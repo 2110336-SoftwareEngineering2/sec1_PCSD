@@ -36,7 +36,7 @@ const addUser = async (body, res) => {
       if (err) console.log(err);
     });
     return newUser;
-  } else if(user.username === body.username) {
+  } else if (user.username === body.username) {
     res.status(400).send({ usernameError: "Username taken" });
     // throw new Error("username taken!");
   } else {
@@ -95,13 +95,13 @@ const editUser = async (req, res) => {
     user = await User.findOne({ username: req.body.username });
   }
 
-  if(req.body.password) {
+  if (req.body.password) {
     req.body.password = await bcrypt.hash(req.body.password, 10);
   }
 
   if (!user || user._id == id) {
     var editedUser = await User.findByIdAndUpdate(id, req.body);
-    if(editedUser) {
+    if (editedUser) {
       editedUser = await User.findById(id);
       res.send(editedUser);
     } else {
@@ -113,19 +113,25 @@ const editUser = async (req, res) => {
 };
 
 const TopUp = async (req, res) => {
-  if (user && user.role === "user") {
+  // Check if user is logged in
+  const user = auth.authToken(req, res);
+  const problem = user.nullToken | user.tokenError;
+
+  if (!problem && user.role === "user") {
     const body = req.body;
     const { email } = user.email;
     const filter = { username: email };
     const update = { $inc: { balance: body.value } };
 
-    await User.findOneAndUpdate(filter, update, (err, result) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(result);
+    await User.findOneAndUpdate(filter, update, { new: true }).exec(
+      (err, result) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(result);
+        }
       }
-    });
+    );
   } else {
     res.status(404).send("user not found");
   }
@@ -136,23 +142,33 @@ const transfer = async (req, res) => {
   const receiverName = req.body.receiverName;
   const amount = req.body.amount;
 
-  const sender = await User.findOne({username: senderName});
-  const receiver = await User.findOne({username: receiverName});
+  const sender = await User.findOne({ username: senderName });
+  const receiver = await User.findOne({ username: receiverName });
 
-  
   if (!sender) {
-    res.status(400).send({senderError: true});
+    res.status(400).send({ senderError: true });
   } else if (!receiver) {
-    res.status(400).send({receiverError: true});
+    res.status(400).send({ receiverError: true });
   } else {
-    const sufficient = (sender.balance.bytes - amount) >= 0;
+    const sufficient = sender.balance.bytes - amount >= 0;
 
     if (!sufficient) {
-      res.status(400).send({balanceError: true});
+      res.status(400).send({ balanceError: true });
     } else {
-      const newSender = await User.findOneAndUpdate({username: senderName}, { $inc: { balance: -amount } }, { new: true });
-      const newReceiver = await User.findOneAndUpdate({username: receiverName}, { $inc: { balance: amount } }, { new: true });
-      res.send({senderBalance: newSender.balance.bytes, receiverBalance: newReceiver.balance.bytes})
+      const newSender = await User.findOneAndUpdate(
+        { username: senderName },
+        { $inc: { balance: -amount } },
+        { new: true }
+      );
+      const newReceiver = await User.findOneAndUpdate(
+        { username: receiverName },
+        { $inc: { balance: amount } },
+        { new: true }
+      );
+      res.send({
+        senderBalance: newSender.balance.bytes,
+        receiverBalance: newReceiver.balance.bytes,
+      });
     }
   }
 };
@@ -161,7 +177,7 @@ module.exports = {
   TopUp,
 
   getUser: async (_, res) => {
-    await User.find({}).limit(10).exec(function (err, result) {
+    await User.find({}).exec(function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -185,11 +201,10 @@ module.exports = {
   registerUser: async (req, res) => {
     const body = req.body;
     // try {
-      const user = await addUser(body, res);
-      if(user)
-        res.json(user);
+    const user = await addUser(body, res);
+    if (user) res.json(user);
     // } catch (err) {
-      // res.status(400).send({ problem: err.message });
+    // res.status(400).send({ problem: err.message });
     // }
   },
 
@@ -204,7 +219,7 @@ module.exports = {
   },
 
   getAllUsersInfo: async (req, res) => {
-    const info = await User.find({}, {firstname: 1, email: 1, _id: 0});
+    const info = await User.find({}, { firstname: 1, email: 1, _id: 0 });
     res.status(200).json(info);
   },
 

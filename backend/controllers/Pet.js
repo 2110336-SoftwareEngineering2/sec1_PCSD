@@ -5,11 +5,11 @@ const Pet = require("../models/User/Pet-model");
 module.exports = {
   addPet: (req, res) => {
     // Check if user is logged in
-    checkAuth.validateAccessToken(req, res);
-    const user = req.decoded;
+    const user = checkAuth.authToken(req, res);
+    const problem = user.nullToken | user.tokenError;
 
     // user is logged in and has "user" role
-    if (user && user.role === "user") {
+    if (!problem && user.role === "user") {
       const petInfo = req.body;
       const { email } = user.email;
       // create new pet
@@ -23,10 +23,11 @@ module.exports = {
   },
   removePet: async (req, res) => {
     // Check if user is logged in
-    checkAuth.validateAccessToken(req, res);
-    const user = req.decoded;
+    const user = checkAuth.authToken(req, res);
+    const problem = user.nullToken | user.tokenError;
+
     // user is logged in and has "user" role
-    if (user && user.role === "user") {
+    if (!problem && user.role === "user") {
       const petId = req.body.source;
       const { email } = user.email;
       // remove pet
@@ -47,11 +48,11 @@ module.exports = {
   },
   getPet: (req, res) => {
     // Check if user is logged in
-    checkAuth.validateAccessToken(req, res);
-    const user = req.decoded;
+    const user = checkAuth.authToken(req, res);
+    const problem = user.nullToken | user.tokenError;
 
     // user is logged in and has "user" role
-    if (user && user.role === "user") {
+    if (!problem && user.role === "user") {
       const { email } = user.email;
       // find pet
       Pet.find({ owner: email },
