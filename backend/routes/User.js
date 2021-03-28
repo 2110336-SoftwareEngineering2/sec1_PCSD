@@ -1,11 +1,14 @@
 const express = require("express");
+const { default: axios } = require("axios");
+const multer = require("multer");
+
 const router = express.Router();
+
 const UserController = require("../controllers/User");
 const PetController = require("../controllers/Pet");
 const CaretakerController = require("../controllers/Caretaker");
+const PaymentController = require("../controllers/Payment");
 const userprofile = require("../controllers/userprofile");
-const multer = require("multer");
-const { default: axios } = require("axios");
 const ReserveCaretakerController = require("../controllers/Reserve_Caretaker");
 
 
@@ -88,11 +91,15 @@ router.post("/edit/caretaker", (req, res) => {
 });
 
 router.post("/topup", (req, res) => {
-  UserController.TopUp(req,res);
+  PaymentController.topUp(req,res);
 });
 
 router.post("/transfer", (req, res) => {
-  UserController.transfer(req, res);
+  PaymentController.transfer(req, res);
+});
+
+router.get("/payment", (req, res) => {
+  PaymentController.getPayment(req, res);
 });
 
 const storage = multer.diskStorage({
