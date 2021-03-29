@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const paymentSchema = new Schema({
   petownerEmail: String,
   caretakerEmail: String,
-  transferStatus: Boolean,
+  transferStatus: String,
   amount: {
     type: mongoose.Decimal128,
     get: (v) => new mongoose.Types.Decimal128((+v.toString()).toFixed(2)),
