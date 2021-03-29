@@ -150,7 +150,7 @@ module.exports = {
   },
 
   deleteUser: async (req, res) => {
-    const id = req.params.id;
+    const id = req.body.id;
     const result = await deleteUserById(id);
     res.status(result.status).send(result.message);
   },

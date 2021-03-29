@@ -45,16 +45,16 @@ router.post("/register", (req, res) => {
   UserController.registerUser(req, res);
 });
 
-router.post("/caretaker", (req, res) => {
-  CaretakerController.addCaretaker(req, res);
-});
-
-router.post("/caretaker", (req, res) => {
-  CaretakerController.addCaretaker(req, res);
-});
-
 router.post("/caretaker/rate", (req, res) => {
   CaretakerController.rate(req.body, res);
+});
+
+router.post("/caretaker", (req, res) => {
+  CaretakerController.addCaretaker(req, res);
+});
+
+router.post("/caretaker", (req, res) => {
+  CaretakerController.addCaretaker(req, res);
 });
 
 router.post("/caretaker/search", (req, res) => {
@@ -66,7 +66,11 @@ router.post("/caretaker/find", (req, res) => {
 });
 
 // For testing, currently unused
-router.delete("/account/:id", (req, res) => {
+// router.delete("/account/:id", (req, res) => {
+//   UserController.deleteUser(req, res);
+// });
+
+router.delete("/account", (req, res) => {
   UserController.deleteUser(req, res);
 });
 
