@@ -43,13 +43,22 @@ export const BanTable = () => {
   };
 
   const deleteUser = async (data) => {
-    // console.log(data._id);
-    // await axios
-    //   .delete("http://localhost:4000/user/account/:id", data)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log("err", err));
+    await axios
+      .delete("http://localhost:4000/user/account", {
+        data: {
+          id: data._id,
+        },
+      })
+      .then((res) => {
+        console.log("res", res);
+      })
+      .catch((err) => console.log("err", err));
+    axios
+      .get("http://localhost:4000/User")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => console.log("err", err));
   };
 
   const {
@@ -138,7 +147,9 @@ export const BanTable = () => {
                             width: "40px",
                           }}
                         >
-                          <CancelIcon />
+                          <CancelIcon
+                            onClick={() => deleteUser(row.original)}
+                          />
                         </IconButton>
                         {/* <hr className="ban_line" /> */}
                       </td>
