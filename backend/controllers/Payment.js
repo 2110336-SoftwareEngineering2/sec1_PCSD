@@ -5,18 +5,20 @@ const Payment = require("../models/User/Payment-model");
 
 const getPayment = async (req, res) => {
   const decoded = auth.authToken(req, res);
-  const problem = decoded.nullToken | decoded.tokenError;
+  const problem = decoded.nullToken | decoded.tokenError | (decoded.role !== "user");
 
   if (problem) {
-    res.status(400).send({ senderError: true });
+    res.status(400).send({ tokenError: true });
   }
 
   const payments = await Payment.find(
     {
-      petownerEmail: decoded.email,
-      transferStatus: false,
+      $or: [
+        { petownerEmail: decoded.email },
+        { caretakerEmail: decoded.email },
+      ],
     },
-    { _id: 0, __v: 0 }
+    { __v: 0 }
   );
 
   res.status(200).send(payments);
@@ -30,21 +32,27 @@ const topUp = async (req, res) => {
   if (!problem && user.role === "user") {
     const body = req.body;
     const email = user.email;
-    const filter = { email: email };
-    const update = { $inc: { balance: body.value } };
 
-    await User.findOneAndUpdate(filter, update, { new: true }).exec(
-      (err, result) => {
-        if (err) {
-          res.status(404).send(err);
-        } else {
-          res.send(result);
-        }
-      }
-    );
+    const result = await addBalance(email, body.value);
+
+    if(result.error) {
+        res.status(400).send(result.error);
+    } else {
+        res.status(200).send(result);
+    }
+
   } else {
-    res.status(404).send("user not found");
+    res.status(400).send("user not found");
   }
+};
+
+const addBalance = async (email, value) => {
+    const filter = { email: email };
+    const update = { $inc: { balance: value } };
+
+    const result = await User.findOneAndUpdate(filter, update, { new: true })
+
+    return result;
 };
 
 const transfer = async (req, res) => {
@@ -81,7 +89,7 @@ const transfer = async (req, res) => {
       const newPayment = new Payment({
         petownerEmail: sender.email,
         caretakerEmail: receiver.email,
-        transferStatus: false,
+        transferStatus: "WAITING",
         amount: amount,
       });
       newPayment.save();
@@ -93,8 +101,41 @@ const transfer = async (req, res) => {
   }
 };
 
+const modifyPayment = async (req, res, status) => {
+    const paymentId = req.body.paymentId;
+
+    const decoded = auth.authToken(req, res);
+    const problem =
+        decoded.nullToken | decoded.tokenError | (decoded.role !== "user");
+    if (problem) {
+        res.status(400).send({ tokenError: true });
+    }
+
+    const payment = await Payment.findOneAndUpdate(
+      { _id: paymentId, transferStatus: { $eq: "WAITING" } },
+      { transferStatus: status },
+      { new: true }
+    );
+    if(payment) {
+      const result = await addBalance(decoded.email, payment.amount.bytes);
+      if(result.error) {
+          res.status(400).send(result.error);
+      } else {
+          res.status(200).send(result);
+      }
+    } else {
+      res.status(400).send("No payment met the requirements");
+    }
+};
+
 module.exports = {
   topUp,
   transfer,
   getPayment,
+  receivePayment: async (req, res) => {
+    modifyPayment(req, res, "DONE")
+  },
+  cancelPayment: async (req, res) => {
+    modifyPayment(req, res, "CANCELLED")
+  },
 };
