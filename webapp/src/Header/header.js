@@ -76,6 +76,15 @@ function Header() {
               {" "}
               Payment
             </Dropdown.Item>
+            <Dropdown.Item
+              eventKey="6"
+              onClick={() => {
+                history.push({ pathname: "/test" });
+              }}
+            >
+              {" "}
+              Secret
+            </Dropdown.Item>
             {user.username == "admin" ? (
               <Dropdown.Item
                 eventKey="2"
