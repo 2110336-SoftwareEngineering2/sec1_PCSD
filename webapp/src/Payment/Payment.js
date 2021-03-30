@@ -23,7 +23,7 @@ function Payment() {
                 </div>
             </div>
             <div className="d-flex justify-content-between px-3 pt-4 pb-3">
-                <div><span className="back">Cancle</span></div> <button type="button" class="btn btn-primary button pay">Pay amount</button>
+                <div><span className="back">Cancel</span></div> <button type="button" class="btn btn-primary button pay">Pay amount</button>
             </div>
         </div>
     </div>

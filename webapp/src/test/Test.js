@@ -59,13 +59,22 @@ function Test(_) {
     if (user.role === "caretaker") {
       if (payment.transferStatus === "WAITING") {
         return (
-          <ReceiveButton
-            payment={payment}
-            accessToken={cookie.accessToken}
-            setState={setState}
-            state={state}
-            index={index}
-          />
+          <div>
+            <ReceiveButton
+              payment={payment}
+              accessToken={cookie.accessToken}
+              setState={setState}
+              state={state}
+              index={index}
+            />
+            <CancelButton
+              payment={payment}
+              accessToken={cookie.accessToken}
+              setState={setState}
+              state={state}
+              index={index}
+              />
+          </div>
         );
       }
     } else {

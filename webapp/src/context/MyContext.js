@@ -116,7 +116,8 @@ function ContextProvider(props) {
 
   function login(userData) {
     // localStorage.setItem("jwtToken", userData.accessToken);
-    setCookie("accessToken", userData.accessToken, { path: "/" });
+    if(cookie.accessToken === undefined)
+      setCookie("accessToken", userData.accessToken, { path: "/" });
     dispatch({
       type: "LOGIN",
       payload: userData,
