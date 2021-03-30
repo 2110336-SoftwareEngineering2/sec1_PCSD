@@ -62,7 +62,11 @@ function Chatbox({roomId}){
 
     async function getChatRoomDetail () {
         if (roomId != null) {
-            const res = await axios.get(`http://localhost:4000/chat/rooms/${roomId}`);
+            const res = await axios.get(`http://localhost:4000/chat/rooms/${roomId}`, {
+                headers: {
+                    "authorization": "Bearer " + token
+                }
+            });
             const data = res.data;
             // console.log(data)
             setMessage(data.messages);
