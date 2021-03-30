@@ -13,6 +13,6 @@ export const COLUMNS = [
     accessor: "banStatus",
   },
   {
-    Header: "Ban/Unban",
+    Header: "Ban/Delete",
   },
 ];
