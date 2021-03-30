@@ -12,7 +12,7 @@ import UpdateCaretaker from "./Update/Caretaker";
 import UpdatePetowner from "./Update/Petowner";
 import SearchPage from "./SearchPage/SearchPage";
 import ReservePage from "./ReserveCaretaker";
-import Test from "./Test";
+import Test from "./test/Test";
 import SearchResult from "./SearchPage/SearchResult";
 import { RegisterContext, UserContext } from "./context/MyContext";
 import AuthRoute from "./util/AuthRoute";
