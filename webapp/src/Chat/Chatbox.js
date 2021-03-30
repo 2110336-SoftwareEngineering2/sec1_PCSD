@@ -135,7 +135,11 @@ function Chatbox({roomId}){
     }
     // function handleOnClickSendMessage() {
     // }
-    
+    function scrollToBottom (id) {
+        var div = document.getElementById(id);
+        div.scrollTop = div.scrollHeight - div.clientHeight;
+     }
+
     return (
         <div className = "Chatbox">
             {/*
@@ -159,11 +163,15 @@ function Chatbox({roomId}){
                         width = {300}
                     >*/}
                         <div className = "Chat_Messages" style = {{overflowY :"auto"}}>
+                            {//scroll this rewrite this section script
+                            }
                             {messages.map((mDetail, idx) => {
                                 return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
                             })}
                             {/* to implement more 
                              <div ref={messagesEndRef} />*/}
+                            {//scrollToBottom("Message_Box")
+                            }
                         </div>
                     </div>
                     {/*</List>*/}
@@ -175,6 +183,7 @@ function Chatbox({roomId}){
                     </div>
                 </Container>
         </div>
+
     )
 }
 export default Chatbox;

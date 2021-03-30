@@ -104,13 +104,20 @@
   width: 80%;
   height: 80%;
   border-radius: 5px;
-  overflow-y: auto;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 .Send_Chat{
   margin-top: 1%;
   height: 80%;
   width: 17%;
   border-radius: 5px;
+}
+.User_Message{
+  background-color: black;
+  }
+.Iteracter_Message{
+  background-color: azure;
 }
 /*  html,
    
