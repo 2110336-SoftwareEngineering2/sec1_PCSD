@@ -117,7 +117,11 @@ const modifyPayment = async (req, res, status) => {
       { new: true }
     );
     if(payment) {
-      const result = await addBalance(decoded.email, payment.amount.bytes);
+      var des = payment.caretakerEmail;
+      if(status === "CANCELLED") {
+        des = payment.petownerEmail;
+      }
+      const result = await addBalance(des, payment.amount.bytes);
       if(result.error) {
           res.status(400).send(result.error);
       } else {
