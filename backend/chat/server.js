@@ -52,6 +52,8 @@ const chatServer = {
                 if (checkToken.status == true) {
                     try {
                         const res = await Chatrooms.findOneAndUpdate({_id: room}, {$push: {messages: message}}, { "new": true, "upsert": true });
+                        const err = await ChatController.updateUnreadMessage(room);
+                        if (err) throw err;
                         io.to(room).emit('new-message-status', { status: checkToken.status, message: data.message, user: data.user, email: data.email, time: data.time });
                     } catch (err) {
                         io.to(room).emit('exception', { errMessage: err });
