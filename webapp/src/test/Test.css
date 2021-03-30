@@ -1,0 +1,11 @@
+.DONE {
+    background-color: rgb(139, 194, 57);
+}
+
+.WAITING {
+    background-color: orange;
+}
+
+.CANCELLED {
+    background-color: rgb(253, 66, 32);
+}

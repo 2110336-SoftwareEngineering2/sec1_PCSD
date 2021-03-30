@@ -1,0 +1,11 @@
+.updategcaretaker {
+    display: block;
+    align-items: center;
+}
+.info {
+    padding-top: 30px;
+    display: flex;
+    background-color: #F1F1F1;
+    height: 830px;
+}
+

@@ -1,0 +1,97 @@
+.addmoney > .container {
+    width: 600px;
+    background-color: #fff;
+    padding-top: 100px;
+    padding-bottom: 100px
+}
+
+.card {
+    background-color: #fff;
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.name {
+    font-size: 15px;
+    color: #403f3f;
+    font-weight: bold
+}
+
+.cross {
+    font-size: 11px;
+    color: #b0aeb7
+}
+
+.pin {
+    font-size: 14px;
+    color: #b0aeb7
+}
+
+
+.second {
+    margin-top: 13px;
+    border-radius: 8px;
+    border: 1px solid #acacb0;
+    color: #000;
+    background-color: #fff
+}
+
+.dot {
+    top: -12px;
+}
+
+.head {
+    color: #137ff3;
+    font-size: 12px
+}
+
+.dollar {
+    font-size: 18px;
+    color: #097bf7;
+}
+
+.amount {
+    color: #007bff;
+    font-weight: bold;
+    font-size: 18px
+}
+.form-control {
+    font-size: 18px;
+    font-weight: bold;
+    width: 100px;
+    height: 28px
+}
+
+.addmoney > .back {
+    color: #aba4a4;
+    font-size: 15px;
+    line-height: 73px;
+    font-weight: 400
+}
+
+.acard > .button {
+    width: 150px;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 17px;
+    margin: 30px 70px;
+    background-color: #BD6A43;
+    border-color:#BD6A43;
+}
+
+.acard > .button:hover {
+    width: 150px;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 17px;
+    margin: 30px 70px;
+    background-color: #137ff3;
+    border-color:#137ff3;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

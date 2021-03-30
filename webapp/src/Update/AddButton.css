@@ -1,0 +1,48 @@
+.addbutton {
+    height: 100px;
+    display: grid;
+    float: right;
+    padding: 30px;
+}
+
+.addbutton button {
+    border: none;
+    outline: none;
+    background-color: #644D3C;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 35px;
+}
+
+.S > .SaveButton{
+    border: none;
+    outline: none;
+    background-color: gray;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 35px;
+    float: center;
+    margin-left: 170px;
+    margin-top: 120px;
+}
+
+.S > .SaveButton{
+    border: none;
+    outline: none;
+    background-color: #BD6A43;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 35px;
+    float: center;
+    margin-left: 170px;
+    margin-top: 120px;
+}
