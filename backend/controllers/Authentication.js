@@ -76,8 +76,9 @@ module.exports = {
       res.status(401).send("Token is null.");
     } else if(decoded.tokenError) {
       res.status(403).send("Validate token error or token has expired");
+    } else {
+      res.status(200).json(decoded);
     }
-    res.status(200).json(decoded);
   },
 
   authToken,
