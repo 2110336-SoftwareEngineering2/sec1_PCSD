@@ -32,8 +32,8 @@ router.post("/read", UserMiddleware, (req, res) => {
     ChatController.readMessage(req, res);
 });
 
-router.post("/update/unread/:id", UserMiddleware, (req, res) => {
-    ChatController.updateUnreadMessage(req, res);
-});
+// router.post("/update/unread/:id", UserMiddleware, (req, res) => {
+//     ChatController.updateUnreadMessage(req, res);
+// });
 
 module.exports = router;
