@@ -36,6 +36,7 @@ function AddButton() {
         breed: input.breed,
         age: input.age,
         gender: input.gender,
+        
       };
 
       console.log(newPet);

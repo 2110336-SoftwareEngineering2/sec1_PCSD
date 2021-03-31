@@ -78,6 +78,7 @@ function AddButton() {
         breed: input.breed,
         age: input.age,
         gender: input.gender,
+        owner: user.email,
       };
       axios
       .post("http://localhost:4000/user/pet", newPet, {

@@ -13,7 +13,7 @@ import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import LocalAirportIcon from "@material-ui/icons/LocalAirport";
 import useStyles from "./styles";
-import SumPet from '../Update/SumPet';
+import SumPet from './SumPet';
 import image from "./../userpic.png";
 function ReserveForm( {name}) {
     const { user } = useContext(UserContext);
@@ -122,8 +122,8 @@ function ReserveForm( {name}) {
   }
 
 
-  function deletePet(petId) {
-    axios.delete("http://localhost:4000/user/pet", {
+  function CheckPet(petId) {
+    /*axios.delete("http://localhost:4000/user/pet", {
       headers: {
         Authorization: `Bearer ${user.accessToken}`
       },
@@ -133,7 +133,7 @@ function ReserveForm( {name}) {
     }).then((res) => {
       console.log(res.data);
       setPetlists(pet_lists.filter((pet) => pet._id !== petId));
-    }).catch((err) => console.log(err));
+    }).catch((err) => console.log(err)); */
   }
     return (
         <div className="ReserveForm">
@@ -163,7 +163,7 @@ function ReserveForm( {name}) {
             />
           </BottomNavigation>
           </div>     
-          <SumPet pet_lists={pet_lists} deletePet={deletePet} />
+          <SumPet pet_lists={pet_lists} CheckPet={CheckPet} />
         </div>
     )
 }
