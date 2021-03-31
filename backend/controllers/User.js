@@ -6,11 +6,10 @@ const Payment = require("../models/User/Payment-model");
 
 const { authToken } = require("./Authentication");
 
-// Please set response status code
-const findUserByEmail = async (email) => {
-  const user = await User.findOne({ email: email });
+const findUserByUsername = async (username) => {
+  const user = await User.findOne({ username: username });
   if (!user) {
-    return "User with this email does not exist";
+    return "User with this username does not exist";
   } else {
     return user;
   }
@@ -133,9 +132,9 @@ module.exports = {
     res.json(user);
   },
 
-  getUserByEmail: async (req, res) => {
-    const email = req.body.email;
-    const user = await findUserByEmail(email);
+  getUserByUsername: async (req, res) => {
+    const username = req.params.username;
+    const user = await findUserByUsername(username);
     res.json(user);
   },
 

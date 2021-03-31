@@ -18,8 +18,8 @@ router.get("/", (req, res) => {
 });
 
 // For testing, currently unused
-router.post("/", (req, res) => {
-  UserController.getUserByEmail(req, res);
+router.get("/:username", (req, res) => {
+  UserController.getUserByUsername(req, res);
 });
 
 router.get("/usersinfo", (req, res) => {
