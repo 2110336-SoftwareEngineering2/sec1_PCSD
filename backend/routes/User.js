@@ -17,7 +17,6 @@ router.get("/", (req, res) => {
   UserController.getUser(req, res);
 });
 
-// For testing, currently unused
 router.get("/:username", (req, res) => {
   UserController.getUserByUsername(req, res);
 });
@@ -31,7 +30,6 @@ router.get("/emails", (req, res) => {
   UserController.getAllEmails(req, res);
 });
 
-// For testing, currently unused
 router.post("/email", (req, res) => {
   UserController.getUserByEmail(req, res);
 });

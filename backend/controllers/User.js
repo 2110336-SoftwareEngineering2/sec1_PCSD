@@ -15,6 +15,15 @@ const findUserByUsername = async (username) => {
   }
 };
 
+const findUserByEmail = async (email) => {
+  const user = await User.findOne({ email: email });
+  if (!user) {
+    return "User with this email does not exist";
+  } else {
+    return user;
+  }
+};
+
 // Please set response status code
 const findUserById = async (id) => {
   const user = await User.findById(id);
@@ -135,6 +144,12 @@ module.exports = {
   getUserByUsername: async (req, res) => {
     const username = req.params.username;
     const user = await findUserByUsername(username);
+    res.json(user);
+  },
+
+  getUserByEmail: async (req, res) => {
+    const email = req.body.email;
+    const user = await findUserByEmail(email);
     res.json(user);
   },
 
