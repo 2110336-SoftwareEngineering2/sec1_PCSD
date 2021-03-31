@@ -25,7 +25,7 @@ function Test(_) {
         })
         .then((res) => {
           axios
-            .post("http://localhost:4000/user", {email: (res.data).email})
+            .post("http://localhost:4000/user/email", {email: (res.data).email})
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
               getPayment(header);
