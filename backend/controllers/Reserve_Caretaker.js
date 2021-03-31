@@ -19,6 +19,7 @@ const reserveCaretaker = async (req, res , id) => {
     if(caretaker.role === "caretaker" && caretaker.reserved === "False"){
       //Update that caretaker's caretaker.reserved to "True"
       await caretaker.updateOne({reserved:"True"}, body);
+      res.status(200).send("Reserve Successful");
     }
     }
     };
@@ -33,8 +34,19 @@ if (!problem && user.role === "caretaker") {
   //Unreserve themselves
   //Change reserved to "False"
   await user.updateOne({reserved:"False"}, body);
+  res.status(200).send("Unreserve Successful");
  }
 };
+
+const calculatePrice = async (req, res) => {
+  //req.body.starttime
+  //req.body.endtime
+  //req.body.rate (baht/hour)
+
+  //Calculate Time In Hour
+  //Hour * rate = Price
+  return res.status(200).send("OK");
+}
     
   
 
