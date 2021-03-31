@@ -23,6 +23,7 @@ import UserLogin from "./component/login-component";
 import AddMoneyPage from "./Payment/AddMoneyPage";
 import PaymentPage from "./Payment/PaymentPage";
 import UserPage from "./UserPage/UserPage";
+import ReserveForm from "./ReserveForm/ReserveForm";
 function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
@@ -58,7 +59,7 @@ function Routes() {
         <Route path="/user/:username" exact component={UserPage} />
         <Route path="/test" exact component={Test} />
         <AuthRoute path="/addmoney" exact component={AddMoneyPage} />
-        <AuthRoute path="/payment" exact component={PaymentPage} />
+        <AuthRoute path="/payment" exact component={ReserveForm} />
       </Switch>
     </Router>
   );

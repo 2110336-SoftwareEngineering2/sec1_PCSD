@@ -2,15 +2,21 @@ import React, {useState, useEffect, useContext} from 'react'
 import axios from "axios"
 import ChatRoom from "./ChatRoom"
 import { UserContext, ChatContext } from "../context/MyContext";
+import { useCookies } from "react-cookie";
 
 function ChatList(){
 
     const [chatPeoples,setPeoples] = useState([])
     const [people, setPeople] = useState([])
     const myData = useContext(UserContext)
+    const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
 
     useEffect(async () => {
-        const res = await axios.get(`http://localhost:4000/chat/${myData.user.email}`);
+        const res = await axios.get(`http://localhost:4000/chat/${myData.user.email}`, {
+            headers: {
+                "authorization": "Bearer " + cookie.accessToken
+            }
+        });
         const allinfo = []
         for (var i=0; i<(res.data).length; i++) {
             // console.log(res.data)

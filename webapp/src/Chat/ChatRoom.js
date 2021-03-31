@@ -1,15 +1,23 @@
 import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
-import { ChatContext } from "../context/MyContext";
-import { UserContext } from "../context/MyContext";
+import { ChatContext, UserContext } from "../context/MyContext";
 import axios from "axios"
+import { useCookies } from "react-cookie";
 
 function ChatRoom({info}){
     const chatContext = useContext(ChatContext);
     const { user } = useContext(UserContext);
-    function handleOnClickChatPeople() {
+    const userContext = useContext(UserContext);
+    const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
+
+    async function handleOnClickChatPeople() {
         chatContext.changeChatRoom(info.roomId)
         // console.log(chatContext)
+        await axios.post(`http://localhost:4000/chat/read`, {id: chatContext.currentChatRoom, email: userContext.user.email}, {
+            headers: {
+                "authorization": "Bearer " + cookie.accessToken
+            }
+        });
     }
 
     return(
