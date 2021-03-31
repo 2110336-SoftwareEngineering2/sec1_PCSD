@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
   UserController.getUser(req, res);
 });
 
-router.get("/:username", (req, res) => {
+router.get("/profile/:username", (req, res) => {
   UserController.getUserByUsername(req, res);
 });
 
