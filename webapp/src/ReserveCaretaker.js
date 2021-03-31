@@ -83,6 +83,12 @@ function ReserveCaretaker() {
             console.log(err);
             });
     }, []);
+
+    function createChatRoom(){
+        console.log("Hello world");
+        axios
+        .post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]});
+    }
     
     return (
         <div className="reserve">
@@ -120,7 +126,8 @@ function ReserveCaretaker() {
                     </div>
                     <div className="row">
                         <div className="col-12 reserve_button">
-                            <button>Reserve</button>
+                            <button className = "RButton" onClick = {() =>createChatRoom()}  >Chat</button>
+                            <button className = "RButton">Reserve</button>
                         </div>
                     </div>
                 </div>

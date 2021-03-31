@@ -1,18 +1,22 @@
 import React,{useState} from "react"
 
-function amesage({username,message,is_user}){
+function Amesage({email,message,timestamp,is_user}){
     if(is_user){
         return(
             <div className = "User_Message">
+               {email}
                {message}
+               {timestamp}
             </div>
         );
     }else{
         return(
             <div className = "Iteracter_Message">
-                {message}
+               {email}
+               {message}
+               {timestamp}
             </div>
         );
     }
 }
-export default amesage;
+export default Amesage;

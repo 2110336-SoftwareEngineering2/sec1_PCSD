@@ -2,12 +2,15 @@ import axios from "axios";
 import socketIOClient from 'socket.io-client';
 import React, { useEffect, useContext, useState, useRef } from "react"
 import { ChatContext, UserContext } from "../context/MyContext";
+//import ReactDOM from "react-dom";
 import {useWindowScroll} from 'react'
 //import {FixedSizeList as List} from 'react-window';
 import {Container} from "react-bootstrap"
 import Icon from "@material-ui/core/Icon"
+import Amesage from "./amesage";
 //import classNames from 'classnames';
 //const dump_chat = []
+
 
 function Chatbox({roomId}){
     // const chatContext = useContext(ChatContext);
@@ -62,11 +65,7 @@ function Chatbox({roomId}){
 
     async function getChatRoomDetail () {
         if (roomId != null) {
-            const res = await axios.get(`http://localhost:4000/chat/rooms/${roomId}`, {
-                headers: {
-                    "authorization": "Bearer " + token
-                }
-            });
+            const res = await axios.get(`http://localhost:4000/chat/rooms/${roomId}`);
             const data = res.data;
             // console.log(data)
             setMessage(data.messages);
@@ -109,7 +108,7 @@ function Chatbox({roomId}){
         }
         // socket.disconnect();
     }
-
+    
     // function response (){
     //     // const { endpoint, message } = this.state
     //     const socket = socketIOClient(endpoint, {
@@ -170,7 +169,8 @@ function Chatbox({roomId}){
                             {//scroll this rewrite this section script
                             }
                             {messages.map((mDetail, idx) => {
-                                return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
+                                return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {true} />
+                                //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
                             })}
                             {/* to implement more 
                              <div ref={messagesEndRef} />*/}
