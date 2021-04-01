@@ -148,30 +148,29 @@ function Addpet({ onChange, input }) {
               <label>Gender</label>
               <br />
               <br />
-              
-      <div>
-        <label className="radio">
-          Female&nbsp;
-          <input
-            type="radio"
-            value="female"
-            checked={input.gender === "female"}
-            name="gender"
-            onChange={onChange}
-          />
-        </label>
-        &nbsp;
-        <label className="radio">
-          Male&nbsp;
-          <input
-            type="radio"
-            value="male"
-            checked={input.gender === "male"}
-            name="gender"
-            onChange={onChange}
-          />
-        </label>
-      </div>
+              <div>
+                <label className="radio">
+                  Female&nbsp;
+                  <input
+                    type="radio"
+                    value="female"
+                    checked={input.gender === "female"}
+                    name="gender"
+                    onChange={onChange}
+                  />
+                </label>
+                &nbsp;
+                <label className="radio">
+                  Male&nbsp;
+                  <input
+                    type="radio"
+                    value="male"
+                    checked={input.gender === "male"}
+                    name="gender"
+                    onChange={onChange}
+                  />
+                </label>
+              </div>
             </div>
           </div>
         </form>
@@ -181,44 +180,3 @@ function Addpet({ onChange, input }) {
 }
 
 export default Addpet;
-
-class RadioGender extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { selectedOption: null };
-    this.onValueChange = this.onValueChange.bind(this);
-  }
-
-  onValueChange(event) {
-    this.setState({ selectedOption: event.target.value });
-    this.props.onChange(event);
-  }
-
-  render() {
-    return (
-      <div>
-        <label className="radio">
-          Female&nbsp;
-          <input
-            type="radio"
-            value="female"
-            checked={this.state.selectedOption === "female"}
-            name="gender"
-            onChange={this.onValueChange}
-          />
-        </label>
-        &nbsp;
-        <label className="radio">
-          Male&nbsp;
-          <input
-            type="radio"
-            value="male"
-            checked={this.state.selectedOption === "male"}
-            name="gender"
-            onChange={this.onValueChange}
-          />
-        </label>
-      </div>
-    );
-  }
-}
