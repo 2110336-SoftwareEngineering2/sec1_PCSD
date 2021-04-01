@@ -35,5 +35,8 @@ router.post("/read", UserMiddleware, (req, res) => {
 // router.post("/update/unread/:id", UserMiddleware, (req, res) => {
 //     ChatController.updateUnreadMessage(req, res);
 // });
+router.get("/rooms/unread/:id/:email", UserMiddleware, (req, res) => {
+    ChatController.getUnreadMessage(req, res);
+})
 
 module.exports = router;
