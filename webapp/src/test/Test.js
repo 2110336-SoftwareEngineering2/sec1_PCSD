@@ -112,7 +112,8 @@ function Test(_) {
         {state.payments.map((payment, index) => (
           <Card style={{ width: '18rem' }} key={payment._id}>
             <Card.Body>
-            <Card.Title>Payment</Card.Title>
+            { user.role == "caretaker" ? <Card.Title>Job</Card.Title> :  <Card.Title>Payment</Card.Title>
+            }
             {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
             <Card.Text>
               <p>petowner's email: {payment.petownerEmail}</p>
