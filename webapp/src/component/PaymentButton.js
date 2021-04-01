@@ -26,6 +26,28 @@ function ReceiveButton({payment, accessToken, setState, state, index}) {
     );
 };
 
+function AcceptButton({payment, accessToken, setState, state, index}) {
+    const onClick = () => {
+        const header = {"authorization": "Bearer " + accessToken};
+        axios
+        .post("http://localhost:4000/user/transfer?type=accept", {paymentId: payment._id}, {
+            headers: header
+        })
+        .then((res) => {
+            const newPayment = state.payments.slice();
+            newPayment[index].transferStatus = res.data.transferStatus;
+            setState({payments: newPayment});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+
+    return(
+        <Button variant="primary" onClick={onClick}>accept</Button>
+    );
+};
+
 function CancelButton({payment, accessToken, setState, state, index}) {
     const onClick = () => {
         const header = {"authorization": "Bearer " + accessToken};
@@ -48,4 +70,4 @@ function CancelButton({payment, accessToken, setState, state, index}) {
     );
 }
 
-export {ReceiveButton, CancelButton};
+export {ReceiveButton, CancelButton, AcceptButton};

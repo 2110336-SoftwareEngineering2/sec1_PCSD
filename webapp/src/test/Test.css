@@ -10,6 +10,10 @@
     background-color: rgb(253, 66, 32);
 }
 
+.ACCEPTED {
+    background-color: rgb(145, 152, 255);
+}
+
 
 .Cardd > .card-deck {
     display: flex;
