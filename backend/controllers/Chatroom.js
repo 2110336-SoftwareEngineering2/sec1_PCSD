@@ -39,7 +39,17 @@ const findUserChatroomsByEmail = async (req, res) => {
 
 const createChatroom = (req, res) => {
     // send req.body => { members : [email_user_1, email_user_2 ] }
-    const newChatRoom = new Chatrooms({ ...req.body, });
+    var defaultUnread = [
+        {
+            email: req.body.members[0],
+            unreadMessage: 0
+        },
+        {
+            email: req.body.members[1],
+            unreadMessage: 0
+        }
+    ]
+    const newChatRoom = new Chatrooms({ ...req.body, unreadMessages:defaultUnread });
     newChatRoom.save( (err) => {
         if (err) {
             // Create char room failed
@@ -73,38 +83,71 @@ const createMessage = async (roomId, message) => {
     return res;
 }
 
-const readMessage = async (req, res) => {
-    const roomId = req.body.id;
-    const email = req.body.email;
-    const query = {_id: roomId, "unreadMessages.email": email}
+const readMessage = async (id, email) => {
+    const query = {_id: id, "unreadMessages.email": email}
     const updateDoc = {
         "$set": {"unreadMessages.$.unreadMessage": 0}
     }
-    await Chatrooms.updateOne(query, updateDoc, (err, result) => {
-        if (err) {
-            res.status(404).send(err);
-        } else {
-            res.status(200).json(result);
-        }
-    })
+    try {
+        await Chatrooms.updateOne(query, updateDoc);
+    } catch (err) {
+        console.log(err)
+        return false;
+    }
+    return true;
 }
 
 const updateUnreadMessage = async (roomId) => {
-    // const roomId = req.params.id;
     const query = {_id: roomId};
     const updateDoc = {
         "$inc": {"unreadMessages.$[].unreadMessage": 1}
     };
     try {
         const result = await Chatrooms.updateMany(query, updateDoc);
-        // res.json(result);
-        // return true;
         return;
     } catch (err) {
-        // res.send(err);
         return err;
     }
-    // return res;
+}
+
+const getUnreadMessage = async (req, res) => {
+    // const query = {};
+    const query = {
+        "_id": req.params.id
+        // "unreadMessages": {"$elemMatch": {"email": req.params.email}}
+    }
+    await Chatrooms.findOne(query, (err, result) => {
+        if (err) {
+            res.status(404).send(err);
+        } else {
+            // console.log(result)
+            var found = false;
+            result.unreadMessages.forEach((elem) => {
+                if (elem.email === req.params.email) {
+                    res.status(200).json(elem);
+                    found = true;
+                    return;
+                }
+            });
+            if (!found) res.status(404).send("Cannot found this email.");
+        }
+    });
+}
+
+const getSumUnreadMessage = async (email) => {
+    const query = {
+        "members": {"$in": [email]} 
+    };
+    const result = await Chatrooms.find(query, (err, result) => {
+        if (err) {
+            console.log(err);
+            return null;
+        } else {
+            return result;
+        }
+    });
+    // console.log(result)
+    return result;
 }
 
 module.exports = {
@@ -132,11 +175,20 @@ module.exports = {
         await clearMessages(req, res);
     },
 
-    readMessage: async (req, res) => {
-        await readMessage(req, res);
+    readMessage: async (id, email) => {
+        await readMessage(id, email);
     },
 
     updateUnreadMessage: async (roomId) => {
         await updateUnreadMessage(roomId);
-    }
+    },
+
+    getUnreadMessage: async (req, res) => {
+        await getUnreadMessage(req, res);
+    },
+
+    // getSumUnreadMessage: (email) => {
+    //     getSumUnreadMessage(email);
+    // }
+    getSumUnreadMessage
 }

@@ -2,6 +2,7 @@
 const checkAuth = require("./Authentication");
 const checkUser = require("./User");
 const User = require("../models/User/User-model");
+const Reserve = require("../models/User/Reserve-model");
 
 
 //IF role=="user" find caretaker by id --> reserved ? ;  reserve = 1: out(reserved)?
@@ -19,7 +20,8 @@ const reserveCaretaker = async (req, res , id) => {
     if(caretaker.role === "caretaker" && caretaker.reserved === "False"){
       //Update that caretaker's caretaker.reserved to "True"
       await caretaker.updateOne({reserved:"True"}, body);
-      res.status(200).send("Reserve Successful");
+      res.status(200).send(caretaker);
+      //res.status(200).send("Reserve Successful");
     }
     }
     };
