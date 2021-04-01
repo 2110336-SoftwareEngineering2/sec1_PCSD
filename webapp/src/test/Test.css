@@ -1,11 +1,28 @@
 .DONE {
-    background-color: rgb(139, 194, 57);
+    background-color: #BFFF36;
 }
 
 .WAITING {
-    background-color: orange;
+    background-color: #FFDF36;
 }
 
 .CANCELLED {
-    background-color: rgb(253, 66, 32);
+    background-color: #FF4236;
+}
+
+.ACCEPTED {
+    background-color: rgb(145, 152, 255);
+}
+
+
+.Cardd > .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10px;
+}
+
+.Cardd > .card-deck > .card {
+ flex: none;
+ margin-top: 30px;
+ margin-left: 10px;
 }

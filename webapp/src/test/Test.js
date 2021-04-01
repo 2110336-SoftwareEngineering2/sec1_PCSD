@@ -4,7 +4,7 @@ import { CardDeck, Card, Button } from "react-bootstrap";
 import axios from "axios";
 
 import { UserContext } from "../context/MyContext";
-import {ReceiveButton, CancelButton} from "../component/PaymentButton";
+import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentButton";
 import "./Test.css";
 import Test2 from "./Test2";
 
@@ -60,7 +60,7 @@ function Test(_) {
       if (payment.transferStatus === "WAITING") {
         return (
           <div>
-            <ReceiveButton
+            <AcceptButton
               payment={payment}
               accessToken={cookie.accessToken}
               setState={setState}
@@ -76,6 +76,16 @@ function Test(_) {
               />
           </div>
         );
+      } else if(payment.transferStatus === "ACCEPTED") {
+        return(
+          <ReceiveButton
+              payment={payment}
+              accessToken={cookie.accessToken}
+              setState={setState}
+              state={state}
+              index={index}
+              />
+        )
       }
     } else {
       if (payment.transferStatus === "WAITING") {
@@ -97,18 +107,20 @@ function Test(_) {
       {loading ? (
         <h1> Loading... </h1>
       ) : (
+          <div className="Cardd">
         <CardDeck>
         {state.payments.map((payment, index) => (
           <Card style={{ width: '18rem' }} key={payment._id}>
             <Card.Body>
-            <Card.Title>Payment</Card.Title>
+            { user.role == "caretaker" ? <Card.Title>Job</Card.Title> :  <Card.Title>Payment</Card.Title>
+            }
             {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
             <Card.Text>
               <p>petowner's email: {payment.petownerEmail}</p>
               <p>caretaker's email: {payment.caretakerEmail}</p>
               <p>amount: {payment.amount.$numberDecimal}</p>
               <p>
-                status: <span className={payment.transferStatus}>{payment.transferStatus}</span>
+                status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "PAID" : payment.transferStatus}</span>
               </p>
             </Card.Text>
             { getButton(payment, index) }
@@ -116,6 +128,7 @@ function Test(_) {
           </Card>
         ))}
       </CardDeck>
+      </div>
       )}
         
     </div>
