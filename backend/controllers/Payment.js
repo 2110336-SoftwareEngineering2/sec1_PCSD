@@ -116,7 +116,7 @@ const modifyPayment = async (req, res, status) => {
       { transferStatus: status },
       { new: true }
     );
-    if(payment) {
+    if(payment && (status !== "ACCEPTED")) {
       var des = payment.caretakerEmail;
       if(status === "CANCELLED") {
         des = payment.petownerEmail;
@@ -142,4 +142,7 @@ module.exports = {
   cancelPayment: async (req, res) => {
     modifyPayment(req, res, "CANCELLED")
   },
+  acceptCommission: async (req, res) => {
+    modifyPayment(req, res, "ACCEPTED")
+  }
 };

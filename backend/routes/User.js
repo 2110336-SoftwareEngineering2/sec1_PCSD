@@ -106,6 +106,8 @@ router.post("/transfer", (req, res) => {
     PaymentController.transfer(req, res);
   } else if(type === "receive") {
     PaymentController.receivePayment(req, res);
+  } else if(type === "accept") {
+    PaymentController.acceptCommission(req, res);
   } else {
     PaymentController.cancelPayment(req, res);
   }
