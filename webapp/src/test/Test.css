@@ -1,13 +1,13 @@
 .DONE {
-    background-color: rgb(139, 194, 57);
+    background-color: #BFFF36;
 }
 
 .WAITING {
-    background-color: orange;
+    background-color: #FFDF36;
 }
 
 .CANCELLED {
-    background-color: rgb(253, 66, 32);
+    background-color: #FF4236;
 }
 
 .ACCEPTED {

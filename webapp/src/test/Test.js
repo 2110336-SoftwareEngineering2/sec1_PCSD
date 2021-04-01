@@ -120,7 +120,7 @@ function Test(_) {
               <p>caretaker's email: {payment.caretakerEmail}</p>
               <p>amount: {payment.amount.$numberDecimal}</p>
               <p>
-                status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "ควยไอสัสเรื่องมากชิบหายเลยนะมึงอะ" : payment.transferStatus}</span>
+                status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "PAID" : payment.transferStatus}</span>
               </p>
             </Card.Text>
             { getButton(payment, index) }
