@@ -19,8 +19,8 @@ const reserveCaretaker = async (req, res , id) => {
     if(caretaker.role === "caretaker" && caretaker.reserved === "False"){
       //Update that caretaker's caretaker.reserved to "True"
       await caretaker.updateOne({reserved:"True"}, body);
-      res.send(caretaker);
-      res.status(200).send("Reserve Successful");
+      res.status(200).send(caretaker);
+      //res.status(200).send("Reserve Successful");
     }
     }
     };
