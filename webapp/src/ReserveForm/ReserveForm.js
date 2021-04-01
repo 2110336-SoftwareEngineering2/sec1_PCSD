@@ -172,7 +172,7 @@ function ReserveForm( {name}) {
               id="datetime-local"
               label="From"
               type="datetime-local"
-              defaultValue="2017-05-24T10:30"
+              defaultValue="2021-01-01T10:30"
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
@@ -187,7 +187,7 @@ function ReserveForm( {name}) {
               id="datetime-local"
               label="To"
               type="datetime-local"
-              defaultValue="2017-05-24T10:30"
+              defaultValue="2021-01-01T10:30"
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,

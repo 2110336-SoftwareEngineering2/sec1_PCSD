@@ -4,6 +4,7 @@ import history from "./../history";
 import "./Payment.css";
 function Payment() {
     const { user } = useContext(UserContext);
+    const money = 0;
     return (
         <div>
              <div className="container d-flex justify-content-center mt-5">
@@ -19,7 +20,7 @@ function Payment() {
             <div class="first pl-2 d-flex py-2">
                     <div className="form-check"> <input type="radio" name="optradio" className="form-check-input mt-3 dot" checked/> </div>
                     <div className="border-left pl-2"><span className="head">Total amount due</span>
-                        <div><span className="dollar">฿ </span><span className="amount">8245</span></div>
+                        <div><span className="dollar">฿ </span><span className="amount">{money}</span></div>
                     </div>
                 </div>
             </div>
