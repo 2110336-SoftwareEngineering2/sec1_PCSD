@@ -49,6 +49,12 @@ const rate = async (body,res) =>{
   }
 };
 
+const rate_av = function(rate_point){
+  if(rate_point.rate_count==0) return -1;
+  var rate_data = JSON.parse(JSON.stringify(rate_point));
+  return parseFloat(rate_data.sum_rate.$numberDecimal)/rate_point.rate_count;
+}
+
 const SearchCaretaker = async (body,res) =>{
   const fillter = {
      rate : {$gte:0},
@@ -75,8 +81,22 @@ const SearchCaretaker = async (body,res) =>{
       {country:{ $regex: body.address , $options: "i"}}  ];
   }
   // console.log("is run");
+  if (body.date){
+    var start_date = new Date(body.date.start);
+    var end_date = new Date(body.date.end);
+    let diff_in_week = Math.min(7,(end_date-start_date)/(86400000)+1); //24*60*60*1000
+    const week =  ['sun','mon','tue','wed','thu','fri','sat'];
+    var result = [];
+    let start_date_in_week = start_date.getDay();
 
-  await Caretaker.find(fillter, '-_id caretaker rate city province country description rate_point', (err, result) => {
+    for (i = 0; i < diff_in_week; i++) {
+      result.push(week[(start_date_in_week+i)%7])
+    }
+    // console.log(result)
+    fillter.available_day = { $all : result };
+  }
+
+  await Caretaker.find(fillter, '-_id caretaker rate city province country description rate_point available_day', (err, result) => {
     if (err) {
       res.status(400).send("not found");
     } else {
@@ -84,13 +104,24 @@ const SearchCaretaker = async (body,res) =>{
       // console.log(fillter);
       const emaillist = [];
       const response = {};
+
+      result.sort(function(a,b){
+          // console.log(rate_av(a.rate_point));
+          return rate_av(b.rate_point)-rate_av(a.rate_point);
+        });
+
       for (var email of result){
-        var rate_data = JSON.parse(JSON.stringify(email.rate_point));
         emaillist.push(email.caretaker);
         response[email.caretaker] = {user: "" ,
         caretaker : email,
-        rate_point_av : parseFloat(rate_data.sum_rate.$numberDecimal)/email.rate_point.rate_count,};
+        rate_point_av : rate_av(email.rate_point),};
+        // console.log(email.caretaker,rate_av(email.rate_point));
       }
+      // emaillist.sort(function(a,b){
+      //   console.log();
+      //   return a.rate_point_av-b.rate_point_av
+      // });
+      
       ///email.rate_point.rate_count
       // console.log(emaillist);
 
