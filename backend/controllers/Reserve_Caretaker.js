@@ -2,6 +2,7 @@
 const checkAuth = require("./Authentication");
 const checkUser = require("./User");
 const User = require("../models/User/User-model");
+const Reserve = require("../models/User/Reserve-model");
 
 
 //IF role=="user" find caretaker by id --> reserved ? ;  reserve = 1: out(reserved)?
