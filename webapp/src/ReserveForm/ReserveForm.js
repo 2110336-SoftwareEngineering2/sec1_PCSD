@@ -34,7 +34,9 @@ function ReserveForm( {name}) {
     gender: "",
     petImg: image,
   });
-  
+  function onClick() {
+    history.push({ pathname: "/payment" });
+  }
   useEffect(() => {
     return () => {
       componentIsMounted.current = false;
@@ -197,9 +199,7 @@ function ReserveForm( {name}) {
           <SumPet pet_lists={pet_lists} CheckPet={CheckPet} />
           <button
             className="Reserve__Button"
-            onClick={() => {
-              history.push({ pathname: "/payment" });
-            }}
+            onClick={onClick}
           >
             Reserve
           </button>
