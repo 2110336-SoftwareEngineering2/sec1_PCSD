@@ -36,6 +36,7 @@ function ReserveForm( {name}) {
   });
   function onClick() {
     history.push({ pathname: "/payment" });
+
   }
   useEffect(() => {
     return () => {

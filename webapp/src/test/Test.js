@@ -97,6 +97,7 @@ function Test(_) {
       {loading ? (
         <h1> Loading... </h1>
       ) : (
+          <div className="Cardd">
         <CardDeck>
         {state.payments.map((payment, index) => (
           <Card style={{ width: '18rem' }} key={payment._id}>
@@ -116,6 +117,7 @@ function Test(_) {
           </Card>
         ))}
       </CardDeck>
+      </div>
       )}
         
     </div>
