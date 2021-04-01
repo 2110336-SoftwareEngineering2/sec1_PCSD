@@ -34,7 +34,10 @@ function ReserveForm( {name}) {
     gender: "",
     petImg: image,
   });
-  
+  function onClick() {
+    history.push({ pathname: "/payment" });
+
+  }
   useEffect(() => {
     return () => {
       componentIsMounted.current = false;
@@ -172,7 +175,7 @@ function ReserveForm( {name}) {
               id="datetime-local"
               label="From"
               type="datetime-local"
-              defaultValue="2017-05-24T10:30"
+              defaultValue="2021-01-01T10:30"
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
@@ -187,7 +190,7 @@ function ReserveForm( {name}) {
               id="datetime-local"
               label="To"
               type="datetime-local"
-              defaultValue="2017-05-24T10:30"
+              defaultValue="2021-01-01T10:30"
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
@@ -197,9 +200,7 @@ function ReserveForm( {name}) {
           <SumPet pet_lists={pet_lists} CheckPet={CheckPet} />
           <button
             className="Reserve__Button"
-            onClick={() => {
-              history.push({ pathname: "/payment" });
-            }}
+            onClick={onClick}
           >
             Reserve
           </button>

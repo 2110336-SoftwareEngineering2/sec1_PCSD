@@ -3,10 +3,13 @@ import "./Addpet.css";
 import "./Register_info.css";
 
 function Addpet({ onChange, input }) {
-
+  const image = (typeof input.petImg == 'string')? 
+    input.petImg: URL.createObjectURL(input.petImg);
   function uploadImage(event) {
-    const url = URL.createObjectURL(event.target.files[0]);
-    onChange({target: {name: "petImg", value: url}});
+    onChange({target: {
+      name: "petImg", 
+      value: event.target.files[0]
+    }});
   }
 
   function handleChange(event) {
@@ -16,7 +19,7 @@ function Addpet({ onChange, input }) {
   return (
     <div className="addpet">
       <div className="picture">
-        <img src={input.petImg} />
+        <img src={image} />
         <label id="uploadpic">
           Upload Photo{" "}
           <input
