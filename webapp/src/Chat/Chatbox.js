@@ -10,11 +10,13 @@ import Icon from "@material-ui/core/Icon"
 import Amesage from "./amesage";
 //import classNames from 'classnames';
 //const dump_chat = []
+import { useCookies } from "react-cookie";
 
 
 function Chatbox({roomId}){
     // const chatContext = useContext(ChatContext);
     const userContext = useContext(UserContext);
+    const chatContext = useContext(ChatContext);
     const [messages, setMessage] = useState([]);
     const [inputMessage, setInputMessage] = useState("");
     const socketRef = useRef();
@@ -23,24 +25,18 @@ function Chatbox({roomId}){
     const endpoint = "http://localhost:4000";
     //to scroll to buttom
     const endRef = useRef(null);
+    const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
 
     
     useEffect(() => {
-        // console.log(roomId)
         if (roomId != null) {
-            // await getChatRoomDetail();
-            // response();
             socketRef.current = socketIOClient(endpoint, {
                 query: {
                     room: roomId
                 }
             });
 
-            // socketRef.current.on('new-message')
             socketRef.current.on('new-message-status', (res) => {
-                // var tmp = messages;
-
-                // tmp.push();
                 if (res.status == false) {
                     window.alert(res.message);
                 } else {
@@ -65,7 +61,11 @@ function Chatbox({roomId}){
 
     async function getChatRoomDetail () {
         if (roomId != null) {
-            const res = await axios.get(`http://localhost:4000/chat/rooms/${roomId}`);
+            const res = await axios.get(`http://localhost:4000/chat/rooms/${roomId}`, {
+                headers: {
+                    authorization: 'Bearer ' + cookie.accessToken
+                }
+            });
             const data = res.data;
             // console.log(data)
             setMessage(data.messages);
@@ -87,13 +87,9 @@ function Chatbox({roomId}){
     }
 
     function send () {
-        // console.log(email)
-        // const { endpoint, input, token, email } = this.state
-        // const socket = socketIOClient(endpoint, {
-        //     query: {
-        //         room: chatContext.currentChatRoom
-        //     }
-        // });
+        // var unreadMessage = chatContext.unreadMessage[chatContext.currentChatRoom];
+        // unreadMessage++;
+        // console.log(unreadMessage)
         
         if (inputMessage.length !== 0) {
             const data = {
@@ -104,40 +100,15 @@ function Chatbox({roomId}){
                 time: Date.now()
             }
             socketRef.current.emit('sent-message', data);
+            socketRef.current.emit('update-unread-message', {email: email, unreadMessge: 1});
             setInputMessage("");
         }
-        // socket.disconnect();
     }
-    
-    // function response (){
-    //     // const { endpoint, message } = this.state
-    //     const socket = socketIOClient(endpoint, {
-    //         query: {
-    //             "room": chatContext.currentChatRoom
-    //         }
-    //     })
-    //     // console.log(socket)
-    //     socket.on('new-message-status', (res) => {
-    //         // console.log(res)
-    //         messages.push({message: res.message, email: res.email, time: res.time});
-    //         if (res.status == false) {
-    //             window.alert(res.message);
-    //         } else {
-    //             setMessage(messages);
-    //         }
-    //     });
-
-    //     socket.on('exception', (err) => {
-    //         throw (err)
-    //     });
-
-    // }
     
     function handleChangeInputMessage(e) {
         setInputMessage(e.target.value)
     }
-    // function handleOnClickSendMessage() {
-    // }
+
     function scrollToBottom (id) {
         var div = document.getElementById(id);
         div.scrollTop = div.scrollHeight - div.clientHeight;

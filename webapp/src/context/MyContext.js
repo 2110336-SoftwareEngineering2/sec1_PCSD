@@ -22,7 +22,9 @@ const RegisterContext = React.createContext({
 // Chat context
 const ChatContext = React.createContext({
   currentChatRoom: "",
+  unreadMessage: {},
   changeChatRoom: (roomId) => {},
+  updateUnreadMessage: (roomId, unreadMessage) => {},
 });
 
 // Reducer for Chat Context
@@ -33,6 +35,11 @@ function ChatContextReducer(state, action) {
         ...state,
         currentChatRoom: action.payload,
       };
+    case "UPDATE_UNREAD":
+      return {
+        ...state,
+        unreadMessage: {...state.unreadMessage, [action.payload.roomId]: action.payload.unread}
+      }
     default:
       return state;
   }
@@ -143,6 +150,7 @@ function ContextProvider(props) {
 function ChatProvider(props) {
   const [state, dispatch] = React.useReducer(ChatContextReducer, {
     currentChatRoom: null,
+    unreadMessage: {},
   });
 
   function changeChatRoom(chatRoomId) {
@@ -152,9 +160,19 @@ function ChatProvider(props) {
     });
   }
 
+  function updateUnreadMessage(roomId, unread) {
+    dispatch({
+      type: "UPDATE_UNREAD",
+      payload: {
+        roomId: roomId,
+        unread: unread
+      }
+    });
+  }
+
   return (
     <ChatContext.Provider
-      value={{ currentChatRoom: state.currentChatRoom, changeChatRoom }}
+      value={{ currentChatRoom: state.currentChatRoom, unreadMessage: state.unreadMessage, updateUnreadMessage, changeChatRoom }}
       {...props}
     />
   );
