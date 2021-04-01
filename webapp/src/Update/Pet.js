@@ -6,7 +6,7 @@ function Pet({ info, deletePet }) {
     console.log(info);
     return (
         <div className="pet">
-            <img className="Pet__image" src={"https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.owner + info._id} />
+            <img className="Pet__image" src={"https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.owner + '_' + info._id} />
             <div className="col-5">
             <div className="Pet__name">{info.petName}, {info.age}, {info.gender} </div>
    

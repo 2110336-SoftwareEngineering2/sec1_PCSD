@@ -7,7 +7,6 @@ import history from "../history";
 import "./AddButton.css";
 
 import { UserContext } from "../context/MyContext";
-let id = 1;
 
 function AddButton() {
   const { user } = useContext(UserContext);
@@ -84,9 +83,7 @@ function AddButton() {
         headers: { Authorization: `Bearer ${user.accessToken}` },
       })
       .then((res) => {
-        console.log(res.data);
         uploadPetPic(res.data);
-        setPageState(1);
       })
       .catch((err) => console.log(err));
     }
@@ -94,17 +91,13 @@ function AddButton() {
 
   function uploadPetPic(pet) {
     const data = new FormData();
-    data.append("email", pet.owner + pet._id);
+    data.append("email", pet.owner + '_' + pet._id);
     data.append("file", input.petImg);
     console.log(data);
-    axios
-      .post("http://localhost:4000/user/profilepic", data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+    axios.post("http://localhost:4000/user/profilepic", data)
       .then(res => {
         console.log(res);
+        setPageState(1);
       })
       .catch(err => {
         console.log(err);
@@ -125,6 +118,8 @@ function AddButton() {
       setPetlists(pet_lists.filter((pet) => pet._id !== petId));
     }).catch((err) => console.log(err));
   }
+
+  console.log('PageState: ' + pageState);
 
   return (
     <div>
