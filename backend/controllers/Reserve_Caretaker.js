@@ -53,4 +53,5 @@ const calculatePrice = async (req, res) => {
 module.exports = {
   reserveCaretaker,
   unreserveCaretaker,
+  calculatePrice,
 };
