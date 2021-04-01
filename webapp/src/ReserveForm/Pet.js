@@ -13,7 +13,7 @@ function Pet({ info, CheckPet }) {
     let btn_class = click? "clickedButton" : "unclickedButton";
     return (
         <div className="Rpet">
-            <img className="RPet__image" src={"https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.owner + info._id} />
+            <img className="RPet__image" src={"https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.owner + '_' + info._id} />
             <div className="col-5">
             <div className="RPet__name">{info.petName}, {info.age}, {info.gender} </div>
             </div>
