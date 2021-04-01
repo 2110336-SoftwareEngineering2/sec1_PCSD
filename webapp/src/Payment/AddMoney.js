@@ -63,6 +63,7 @@ function Addmoney() {
                     type="radio"
                     name="optradio"
                     className="form-check-input mt-3 dot"
+                    checked
                   />{" "}
                 </div>
                 <div className="border-left pl-2">

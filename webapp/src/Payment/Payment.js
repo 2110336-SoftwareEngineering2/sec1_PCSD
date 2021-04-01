@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from "../context/MyContext";
+import history from "./../history";
 import "./Payment.css";
 function Payment() {
     const { user } = useContext(UserContext);
@@ -23,7 +24,9 @@ function Payment() {
                 </div>
             </div>
             <div className="d-flex justify-content-between px-3 pt-4 pb-3">
-                <div><span className="back">Cancel</span></div> <button type="button" class="btn btn-primary button pay">Pay amount</button>
+                <div><span className="backk"  onClick={() => {
+              history.push({ pathname: "/" });
+            }}>Cancel</span></div> <button type="button" class="btn btn-primary button pay">Pay amount</button>
             </div>
         </div>
     </div>
