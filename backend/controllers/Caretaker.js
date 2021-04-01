@@ -21,6 +21,15 @@ const updateCaretaker = async (req, res) => {
     res.send("Edit caretaker successful");
 };
 
+const comment = async (body,res) =>{
+  await Caretaker.updateOne({caretaker:body.email}, 
+    { $push: {comment : {
+        email: body.email,
+        text: body.comment}
+      }
+    });
+  res.send("comment successful");
+};
 const rate = async (body,res) =>{
   if(body.rate<=5 && body.rate>=0 ){
     Caretaker.updateOne({caretaker:body.caretaker}, 
@@ -148,4 +157,5 @@ module.exports = {
     getCaretaker,
     SearchCaretaker,
     rate,
+    comment,
 }

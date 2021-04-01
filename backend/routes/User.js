@@ -63,6 +63,10 @@ router.post("/caretaker/find", (req, res) => {
   CaretakerController.getCaretaker(req, res);
 });
 
+router.post("/comment/caretaker", (req, res) => {
+  CaretakerController.comment(req.body, res);
+});
+
 // For testing, currently unused
 // router.delete("/account/:id", (req, res) => {
 //   UserController.deleteUser(req, res);
