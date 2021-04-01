@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ReserveCaretaker.css";
+import history from "./history";
 import blankImage from "./userpic.png";
 import Header from "./Header/header";
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
@@ -127,7 +128,9 @@ function ReserveCaretaker() {
                     <div className="row">
                         <div className="col-12 reserve_button">
                             <button className = "RButton" onClick = {() =>createChatRoom()}  >Chat</button>
-                            <button className = "RButton">Reserve</button>
+                            <button className = "RButton" onClick={() => {
+              history.push({ pathname: "/reserveform" });
+            }}>Reserve</button>
                         </div>
                     </div>
                 </div>
