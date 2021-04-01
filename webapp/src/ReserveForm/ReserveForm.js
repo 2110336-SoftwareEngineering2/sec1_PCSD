@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
 import axios, { CancelToken }  from "axios";
+import Header from '../Header/header';
 import { UserContext } from "../context/MyContext";
 import "./ReserveForm.css";
 import {
@@ -8,7 +9,7 @@ import {
     BottomNavigationAction,
     TextField,
   } from "@material-ui/core";
-  
+import history from "./../history";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import LocalAirportIcon from "@material-ui/icons/LocalAirport";
@@ -137,7 +138,10 @@ function ReserveForm( {name}) {
   }
     return (
         <div className="ReserveForm">
-            <div className={classes.serviceTypeBox}>
+          <Header />
+          <br></br>
+          <br></br>
+            <div className={classes.serviceTypeBoxx}>
           <h2 className={classes.h2}>Reserve {name}</h2>
           <BottomNavigation
             value={value}
@@ -162,8 +166,39 @@ function ReserveForm( {name}) {
               icon={<WbSunnyIcon />}
             />
           </BottomNavigation>
-          </div>     
+          </div>
+          <form className={classes.container} id="datetimepicker" noValidate>
+            <TextField
+              id="datetime-local"
+              label="From"
+              type="datetime-local"
+              defaultValue="2017-05-24T10:30"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
+            <TextField
+              id="datetime-local"
+              label="To"
+              type="datetime-local"
+              defaultValue="2017-05-24T10:30"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </form>
           <SumPet pet_lists={pet_lists} CheckPet={CheckPet} />
+          <button
+            className="Reserve__Button"
+            onClick={() => {
+              history.push({ pathname: "/payment" });
+            }}
+          >
+            Reserve
+          </button>
         </div>
     )
 }

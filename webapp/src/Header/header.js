@@ -88,7 +88,7 @@ function Header() {
             <Dropdown.Item
               eventKey="7"
               onClick={() => {
-                history.push({ pathname: "/payment" });
+                history.push({ pathname: "/reserveform" });
               }}
             >
               {" "}

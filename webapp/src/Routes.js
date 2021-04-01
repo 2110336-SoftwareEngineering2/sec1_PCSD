@@ -59,7 +59,8 @@ function Routes() {
         <Route path="/user/:username" exact component={UserPage} />
         <Route path="/test" exact component={Test} />
         <AuthRoute path="/addmoney" exact component={AddMoneyPage} />
-        <AuthRoute path="/payment" exact component={ReserveForm} />
+        <AuthRoute path="/payment" exact component={PaymentPage} />
+        <AuthRoute path="/reserveform" exact component={ReserveForm} />
       </Switch>
     </Router>
   );

@@ -41,8 +41,8 @@ export default makeStyles((theme) => ({
     height: "40%",
     display: "flex",
   },
-  serviceTypeBox: {
-    width: "65%",
+  serviceTypeBoxx: {
+      marginBottom: "40px",
   },
   serviceBox: {
     border: "1px solid grey",
