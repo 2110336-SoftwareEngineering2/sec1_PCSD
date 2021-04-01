@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import "./Pet.css";
 
 function Pet({ info, deletePet }) {
-    
     return (
         <div className="pet">
             <img className="Pet__image" src={info.img} />

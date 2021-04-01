@@ -3,23 +3,27 @@ import "./Addpet.css";
 import "./Register_info.css";
 
 function Addpet({ onChange, input }) {
-  const image = (typeof input.petImg == 'string')? 
-    input.petImg: URL.createObjectURL(input.petImg);
+  const petImg = !input.petImg
+    ? input.imgURL
+    : URL.createObjectURL(input.petImg);
+
   function uploadImage(event) {
-    onChange({target: {
-      name: "petImg", 
-      value: event.target.files[0]
-    }});
+    onChange({
+      target: {
+        name: "petImg",
+        value: event.target.files[0],
+      },
+    });
   }
 
   function handleChange(event) {
     onChange(event);
   }
-  
+
   return (
     <div className="addpet">
       <div className="picture">
-        <img src={image} />
+        <img src={petImg} />
         <label id="uploadpic">
           Upload Photo{" "}
           <input
@@ -31,68 +35,75 @@ function Addpet({ onChange, input }) {
       </div>
       <div className="pettype">
         <label>Pet Type</label>
-        <br /><br/>
+        <br />
+        <br />
         <div className="row">
           <div className="col-2" id="type">
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="petType"
                 value="dog"
                 onChange={handleChange}
-              />{" "}
+                checked={input.petType === "dog"}
+              />
               Dog
             </label>
             <br />
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="petType"
                 value="cat"
                 onChange={handleChange}
-              />{" "}
+                checked={input.petType === "cat"}
+              />
               Cat
             </label>
           </div>
           <div className="col-2" id="type">
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="petType"
                 value="rabbit"
                 onChange={handleChange}
-              />{" "}
+                checked={input.petType === "rabbit"}
+              />
               Rabbit
             </label>
             <br />
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="petType"
                 value="bird"
                 onChange={handleChange}
-              />{" "}
+                checked={input.petType === "bird"}
+              />
               Bird
             </label>
           </div>
           <div className="col-3" id="type">
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="petType"
                 value="hamster"
                 onChange={handleChange}
-              />{" "}
+                checked={input.petType === "hamster"}
+              />
               Hamster
             </label>
             <br />
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="petType"
                 value="turtle"
                 onChange={handleChange}
-              />{" "}
+                checked={input.petType === "turtle"}
+              />
               Turtle
             </label>
           </div>
@@ -137,7 +148,30 @@ function Addpet({ onChange, input }) {
               <label>Gender</label>
               <br />
               <br />
-              <RadioGender onChange={onChange} />
+              
+      <div>
+        <label className="radio">
+          Female&nbsp;
+          <input
+            type="radio"
+            value="female"
+            checked={input.gender === "female"}
+            name="gender"
+            onChange={onChange}
+          />
+        </label>
+        &nbsp;
+        <label className="radio">
+          Male&nbsp;
+          <input
+            type="radio"
+            value="male"
+            checked={input.gender === "male"}
+            name="gender"
+            onChange={onChange}
+          />
+        </label>
+      </div>
             </div>
           </div>
         </form>
