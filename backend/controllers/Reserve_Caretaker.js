@@ -47,6 +47,9 @@ const calculatePrice = async (req, res) => {
 
   //Calculate Time In Hour
   //Hour * rate = Price
+  const startDate = res.body.startDate;
+  const endDate = res.body.endDate;
+  
   return res.status(200).send("OK");
 }
     
