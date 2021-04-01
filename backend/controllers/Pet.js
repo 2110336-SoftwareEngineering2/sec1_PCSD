@@ -14,7 +14,10 @@ module.exports = {
       const email = user.email;
       // create new pet
       const newPet = new Pet({ ...petInfo, owner: email });
-
+      if (petInfo.hasImg) {
+        newPet.imgURL =
+          "https://pcsdimage.s3-us-west-1.amazonaws.com/" + newPet._id;
+      }
       newPet.save((err) => {
         if (err) console.log(err);
         res.send(newPet);
@@ -55,15 +58,30 @@ module.exports = {
     if (!problem && user.role === "user") {
       const email = user.email;
       // find pet
-      Pet.find({ owner: email },
-        (err, docs) => {
-          if (err) {
-            res.send(err);
-          } else {
-            res.send(docs);
-          }
+      Pet.find({ owner: email }, (err, docs) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(docs);
         }
-      );
+      });
+    }
+  },
+  editPet: (req, res) => {
+    // Check if user is logged in
+    const user = checkAuth.authToken(req, res);
+    const problem = user.nullToken | user.tokenError;
+    // user is logged in and has "user" role
+    if (!problem && user.role === "user") {
+      // find and update pet
+      console.log("Editing");
+      Pet.findByIdAndUpdate(req.body._id, req.body, (err, docs) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(docs);
+        }
+      });
     }
   },
 };

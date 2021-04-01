@@ -84,6 +84,10 @@ router.post("/pet", (req, res) => {
   PetController.addPet(req, res);
 });
 
+router.post("/pet/edit", (req, res) => {
+  PetController.editPet(req, res);
+});
+
 router.delete("/pet", (req, res) => {
   PetController.removePet(req, res);
 });
