@@ -11,7 +11,7 @@ module.exports = {
     // user is logged in and has "user" role
     if (!problem && user.role === "user") {
       const petInfo = req.body;
-      const { email } = user.email;
+      const email = user.email;
       // create new pet
       const newPet = new Pet({ ...petInfo, owner: email });
 
@@ -29,7 +29,7 @@ module.exports = {
     // user is logged in and has "user" role
     if (!problem && user.role === "user") {
       const petId = req.body.source;
-      const { email } = user.email;
+      const email = user.email;
       // remove pet
       await Pet.findOneAndDelete(
         {
@@ -53,7 +53,7 @@ module.exports = {
 
     // user is logged in and has "user" role
     if (!problem && user.role === "user") {
-      const { email } = user.email;
+      const email = user.email;
       // find pet
       Pet.find({ owner: email },
         (err, docs) => {

@@ -12,7 +12,7 @@ const reserveCaretaker = async (req, res , id) => {
       // user is logged in and has "user" role
   if (!problem && user.role === "user") {
     const petInfo = req.body;
-    const { email } = user.email;
+    const email = user.email;
     //Find User by email and reserve
     caretaker = checkUser.findUserById(id);
     //Check if user is caretaker and not reserved;
