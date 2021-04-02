@@ -61,9 +61,8 @@ const calculateHour = async (req, res) => {
 const getReservedPet = async (req, res) => {
   let numReservedPet = 0;
   const pets = req.body.pets;
-  //var myArray = ['1','2',3,4]
-
   res.setHeader('Content-Type', 'text/plain');
+
   pets.forEach(function(value){
     //console.log(value);
     if(value.checked === "True" || value.checked === true ) {
@@ -71,6 +70,7 @@ const getReservedPet = async (req, res) => {
       numReservedPet += 1;
     }
   });
+
   if (numReservedPet === 0){
     res.status(204).end("No Content");
   } else {
