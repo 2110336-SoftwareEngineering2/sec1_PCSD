@@ -109,6 +109,7 @@ function MyPets(props) {
   return (
     <div>
       <Header />
+      <h1>My Pets</h1>
       {isFormPage ? (
         <PetForm currentPet={currentPet} savePet={savePet} />
       ) : petList === null || !isImgReady ? (
