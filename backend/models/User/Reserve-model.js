@@ -3,9 +3,13 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const reserveSchema = new Schema({
-  type: [],
-  startDate: String,
-  endDate: String,
+  type: String,
+  caretaker: String,
+  petowner: String,
+  startDate: Number,
+  endDate: Number,
+  status: Number,
+  rate: Number,
   pets: []
 });
 
