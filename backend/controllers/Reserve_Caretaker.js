@@ -59,15 +59,22 @@ const calculateHour = async (req, res) => {
 };
 
 const getReservedPet = async (req, res) => {
+  let numReservedPet = 0;
   const pets = req.body.pets;
   //var myArray = ['1','2',3,4]
 
   pets.forEach(function(value){
     //console.log(value);
-    res.write(value);
+    if(value.checked === "True" || value.checked === true ) {
+      res.write(value);
+      numReservedPet += 1;
+    }
   });
-
+  if (numReservedPet === 0){
+    res.status(404).end();
+  } else {
   res.status(200).end();
+  }
 };
 
 module.exports = {
