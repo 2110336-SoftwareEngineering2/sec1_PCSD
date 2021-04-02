@@ -63,6 +63,7 @@ const getReservedPet = async (req, res) => {
   const pets = req.body.pets;
   //var myArray = ['1','2',3,4]
 
+  res.setHeader('Content-Type', 'text/plain');
   pets.forEach(function(value){
     //console.log(value);
     if(value.checked === "True" || value.checked === true ) {
@@ -71,7 +72,7 @@ const getReservedPet = async (req, res) => {
     }
   });
   if (numReservedPet === 0){
-    res.status(404).end();
+    res.status(204).end("No Content");
   } else {
   res.status(200).end();
   }
