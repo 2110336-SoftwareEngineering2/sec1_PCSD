@@ -84,6 +84,10 @@ router.post("/pet", (req, res) => {
   PetController.addPet(req, res);
 });
 
+router.post("/pet/edit", (req, res) => {
+  PetController.editPet(req, res);
+});
+
 router.delete("/pet", (req, res) => {
   PetController.removePet(req, res);
 });
@@ -106,6 +110,8 @@ router.post("/transfer", (req, res) => {
     PaymentController.transfer(req, res);
   } else if(type === "receive") {
     PaymentController.receivePayment(req, res);
+  } else if(type === "accept") {
+    PaymentController.acceptCommission(req, res);
   } else {
     PaymentController.cancelPayment(req, res);
   }
