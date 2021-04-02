@@ -5,6 +5,7 @@ import {
   InputText,
   InputGender,
 } from "./FormComponents";
+import Button from '@material-ui/core/Button';
 import defaultPetImg from "../petpic.png";
 import "./PetForm.css";
 function PetForm({ currentPet, savePet, cancelForm }) {
@@ -47,7 +48,7 @@ function PetForm({ currentPet, savePet, cancelForm }) {
       <div className="row">
         <InputType petType={input.petType} onChange={handleChange} />
       </div>
-      <div className="row">
+      <div className="row textinput">
         <InputText
           label="Pet Name"
           infoName="petName"
@@ -61,7 +62,7 @@ function PetForm({ currentPet, savePet, cancelForm }) {
           onChange={handleChange}
         />
       </div>
-      <div className="row">
+      <div className="row textinput">
         <InputText
           label="Pet Age"
           infoName="age"
@@ -70,12 +71,12 @@ function PetForm({ currentPet, savePet, cancelForm }) {
         />
         <InputGender petGender={input.gender} onChange={handleChange} />
       </div>
-      <div className="row">
-        <button className="canclebutton" onClick={cancelForm}>
-          Cancle
-        </button>
-        <div className="addbutton">
-          <input className="submit" type="submit" value="Save Pet" />
+      <div className="row button">
+        <Button onClick={cancelForm}>
+          Cancel
+        </Button>
+        <div className="addbuttonn">
+          <input className="submit" type="submit" value="SAVE PET" />
         </div>
       </div>
     </form>

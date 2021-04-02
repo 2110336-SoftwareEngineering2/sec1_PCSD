@@ -5,7 +5,8 @@ import Header from "../Header/header";
 import PetForm from "./PetForm";
 import PetSummaries from "./PetSummaries";
 import { UserContext } from "../context/MyContext";
-
+import background from "./EditBg.jpg";
+import "./MyPets.css";
 function MyPets(props) {
   console.log("Hello Test");
   const { user } = useContext(UserContext);
@@ -107,7 +108,9 @@ function MyPets(props) {
   }
 
   return (
-    <div>
+    <div className="mypets" style={{ 
+      backgroundImage: `url(${background})`
+    }}> 
       <Header />
       <h1>My Pets</h1>
       {isFormPage ? (
