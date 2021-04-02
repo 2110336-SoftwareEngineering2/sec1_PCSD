@@ -40,6 +40,7 @@ if (!problem && user.role === "caretaker") {
  }
 };
 
+//not used
 const calculatePrice = async (req, res) => {
   //req.body.starttime
   //req.body.endtime
@@ -49,14 +50,30 @@ const calculatePrice = async (req, res) => {
   //Hour * rate = Price
   const startDate = res.body.startDate;
   const endDate = res.body.endDate;
-  
+
   return res.status(200).send("OK");
-}
+};
     
-  
+const calculateHour = async (req, res) => {
+  return res.status(200).send("OK");
+};
+
+const getReservedPet = async (req, res) => {
+  const pets = req.body.pets;
+  //var myArray = ['1','2',3,4]
+
+  pets.forEach(function(value){
+    //console.log(value);
+    res.write(value);
+  });
+
+  res.status(200).end();
+};
 
 module.exports = {
   reserveCaretaker,
   unreserveCaretaker,
   calculatePrice,
+  calculateHour,
+  getReservedPet,
 };
