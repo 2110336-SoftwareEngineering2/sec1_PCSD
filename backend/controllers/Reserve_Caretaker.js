@@ -32,6 +32,7 @@ const reserveCaretaker = async (req, res) => {
   // if (!problem && user.role === "user") {
     // const petInfo = req.body;
 
+    console.log(req.body)
   var data = {
     petowner: req.body.petowner,
     caretaker:req.body.caretaker, // email
@@ -47,7 +48,7 @@ const reserveCaretaker = async (req, res) => {
   // caretaker = checkUser.findUserById(id);
   const caretakerInfo = await Caretaker.findOne({caretaker:req.body.caretaker});
   if (caretakerInfo.reserved === 'false') {
-    Caretaker.updateOne({caretaker: data.caretaker}, {reserved: 'true'});
+    // Caretaker.updateOne({caretaker: data.caretaker}, {reserved: 'true'});
     const newReserve = new Reserve(data);
     newReserve.save((err) => {
       if (err) {

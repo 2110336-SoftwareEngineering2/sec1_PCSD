@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const reserveSchema = new Schema({
-  type: String,
+  service: String,
   caretaker: String,
   petowner: String,
   startDate: Number,
