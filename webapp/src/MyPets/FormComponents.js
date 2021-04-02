@@ -37,10 +37,11 @@ function InputType({ petType, onChange }) {
 
   return (
     <div className="pettype">
-      <label>Pet Type</label>
-      <br />
-      <br />
       <div className="row">
+      <label>Pet Type</label>
+      </div>
+      <div className="row">
+      <div className="row typepet">
         <div className="col-2" id="type">
           <PetType label="Dog" />
           <br />
@@ -55,6 +56,7 @@ function InputType({ petType, onChange }) {
           <PetType label="Hamster" />
           <br />
           <PetType label="Turtle" />
+        </div>
         </div>
       </div>
     </div>
