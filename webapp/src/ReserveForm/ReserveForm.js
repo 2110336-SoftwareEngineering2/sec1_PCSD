@@ -16,12 +16,19 @@ import LocalAirportIcon from "@material-ui/icons/LocalAirport";
 import useStyles from "./styles";
 import SumPet from './SumPet';
 import image from "./../userpic.png";
+import { useCookies } from "react-cookie";
+
 function ReserveForm( {name}) {
     const { user } = useContext(UserContext);
     const classes = useStyles();
     const [value, setValue] = useState(0);
-    const [selectedDate, handleDateChange] = useState(new Date());
+    // const [selectedDate, handleDateChange] = useState(new Date());
     const [pet_lists, setPetlists] = useState([]);
+
+    const [cookie, setCookie, removeCookie] = useCookies();
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    // const [service, setService] = useState("");
 
   const componentIsMounted = useRef(true);
   // 0: AddPetForm, 1: AddButtonClicked, 2: SumPet
@@ -35,8 +42,32 @@ function ReserveForm( {name}) {
     petImg: image,
   });
   function onClick() {
-    history.push({ pathname: "/payment" });
-
+    const reserveTmp = cookie.reserveTmp;
+    const selectedPets = cookie.selectedPets;
+    // console.log(reserveTmp)
+    // console.log(selectedPets)
+    var reserveData = {
+      caretaker: reserveTmp.caretaker,
+      petowner: reserveTmp.petowner,
+      pets: selectedPets,
+      rate: reserveTmp.rate.rate,
+      status: 0,
+      startDate: startDate,
+      endDate: endDate,
+      service: serviceString(value)
+    }
+    // console.log(reserveData)
+    // console.log(cookie.accessToken)
+    axios.post(`http://localhost:4000/reserve/caretaker`, reserveData, {
+      headers: {
+        "authorization": cookie.accessToken
+      }
+    }).then((res) => {
+      console.log(res)
+      history.push({ pathname: "/payment" });
+    }).catch(err => {
+      console.log(err);
+    })
   }
   useEffect(() => {
     return () => {
@@ -45,6 +76,7 @@ function ReserveForm( {name}) {
   }, []);
 
   useEffect(() => {
+    // console.log(pet_lists)
     const cancelTokenSource = CancelToken.source();
     try {
       if (pageState === 1) {
@@ -79,8 +111,41 @@ function ReserveForm( {name}) {
   }, [pageState, pet_lists]);
   
 
+  function serviceString(num) {
+    switch (num) {
+      case 0:
+        return "House Sitting";
+      case 1:
+        return "Boarding"
+      default:
+        return "Day Care";
+    }
+  }
   function onChange(event) {
     setInput({ ...input, [event.target.name]: event.target.value });
+  }
+
+  function toTimestamp(strDate){
+    var datum = Date.parse(strDate);
+    return datum/1000;
+  }
+
+  function onChangeService(event) {
+    const service = event.target.label;
+    console.log(service)
+  }
+
+  function onChangeStartDate(event) {
+    // setStartDate(Date(event.target.value));
+    var dateString = event.target.value;
+    dateString = dateString.replace('T', ' ')
+    setStartDate(dateString)
+  }
+
+  function onChangeEndDate(event) {
+    var dateString = event.target.value;
+    dateString = dateString.replace('T', ' ');
+    setEndDate(dateString);
   }
 
   function clickedAdd() {
@@ -176,6 +241,7 @@ function ReserveForm( {name}) {
               label="From"
               type="datetime-local"
               defaultValue="2021-01-01T10:30"
+              onChange={onChangeStartDate}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
@@ -192,6 +258,7 @@ function ReserveForm( {name}) {
               type="datetime-local"
               defaultValue="2021-01-01T10:30"
               className={classes.textField}
+              onChange={onChangeEndDate}
               InputLabelProps={{
                 shrink: true,
               }}

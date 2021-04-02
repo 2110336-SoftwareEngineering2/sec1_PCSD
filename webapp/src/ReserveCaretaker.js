@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ReserveCaretaker.css";
 import history from "./history";
 import blankImage from "./userpic.png";
@@ -7,9 +7,12 @@ import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import MailOutlinedIcon from '@material-ui/icons/MailOutlined';
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import { UserContext } from "./context/MyContext";
 
 function ReserveCaretaker() {
     const userEmail = "testtttt@gmail.com";
+    const caretaker = "maxwell123@email.com";
     const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ userEmail;
     const [name, setName] = useState({firstname: null, lastname: null});
     const [contact, setContact] = useState({email: null, phone: null});
@@ -19,10 +22,12 @@ function ReserveCaretaker() {
     const [serviceType, setServiceType] = useState({serviceType: null});
     const [petType, setPetType] = useState({petType: null});
     const [availDays, setAvailDays] = useState({availDays: null});
+    const [cookie, setCookie, removeCookie] = useCookies();
+    const userContext = useContext(UserContext);
     
     useEffect(() => {
         axios
-        .post("http://localhost:4000/user/email", {email: userEmail})
+        .post("http://localhost:4000/user/email", {email: "maxwell123@email.com"})
         .then((res) => {
 //            console.log(res);
             const data = res.data;
@@ -34,7 +39,7 @@ function ReserveCaretaker() {
             });
         
         axios
-        .post("http://localhost:4000/user/caretaker/find", {caretaker: "testtttt@gmail.com"})
+        .post("http://localhost:4000/user/caretaker/find", {caretaker: "maxwell123@email.com"})
         .then((res) => {
 //            console.log(res);
             const data = res.data;
@@ -90,6 +95,20 @@ function ReserveCaretaker() {
         axios
         .post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]});
     }
+
+    const saveToCookies = () => {
+        const data = {
+            caretaker: caretaker,
+            petowner: userContext.user.email,
+            // petowner: petowner,
+            rate: rate,
+            petType: petType,
+            serviceType: serviceType,
+            availDays: availDays
+        }
+        setCookie("reserveTmp", data, { path: "/" });
+        // console.log(cookie.ReserveTmp)
+    }
     
     return (
         <div className="reserve">
@@ -129,6 +148,7 @@ function ReserveCaretaker() {
                         <div className="col-12 reserve_button">
                             <button className = "RButton" onClick = {() =>createChatRoom()}  >Chat</button>
                             <button className = "RButton" onClick={() => {
+                                saveToCookies();
               history.push({ pathname: "/reserveform" });
             }}>Reserve</button>
                         </div>
