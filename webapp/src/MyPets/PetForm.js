@@ -6,7 +6,7 @@ import {
   InputGender,
 } from "./FormComponents";
 import defaultPetImg from "../petpic.png";
-
+import "./PetForm.css";
 function PetForm({ currentPet, savePet }) {
   const isNewPet = currentPet === null;
   const [input, setPetInfo] = useState(
@@ -70,8 +70,11 @@ function PetForm({ currentPet, savePet }) {
         />
         <InputGender petGender={input.gender} onChange={handleChange} />
       </div>
+      <div className="row">
+      <button className="canclebutton">Cancle</button>
       <div className="addbutton">
         <input className="submit" type="submit" value="Save Pet" />
+      </div>
       </div>
     </form>
   );
