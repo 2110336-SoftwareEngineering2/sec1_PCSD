@@ -36,8 +36,8 @@ const reserveCaretaker = async (req, res) => {
   var data = {
     petowner: req.body.petowner,
     caretaker:req.body.caretaker, // email
-    startTime: dateStringToTimeStamp(req.body.startDate),
-    endTime: dateStringToTimeStamp(req.body.endDate),
+    startDate: dateStringToTimeStamp(req.body.startDate),
+    endDate: dateStringToTimeStamp(req.body.endDate),
     rate : req.body.rate,
     service :req.body.service,
     status :req.body.status,
