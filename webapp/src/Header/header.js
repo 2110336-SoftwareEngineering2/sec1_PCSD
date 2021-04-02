@@ -123,7 +123,7 @@ function Header() {
               }}
             >
               {" "}
-              Edit your profile
+              My Profile
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="5"

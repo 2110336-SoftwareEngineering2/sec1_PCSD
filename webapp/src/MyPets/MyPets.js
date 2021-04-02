@@ -12,6 +12,7 @@ function MyPets(props) {
   const componentIsMounted = useRef(true);
   const [currentPet, setCurrentPet] = useState(null);
   const [petList, setPetList] = useState(null);
+  const [isImgReady, setImgReady] = useState(true);
   const [isFormPage, setIsFormPage] = useState(false);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ function MyPets(props) {
   function showFormPage() {
     setIsFormPage(true);
     setPetList(null);
+    setImgReady(false);
   }
 
   function editPet(pet) {
@@ -84,7 +86,8 @@ function MyPets(props) {
         headers: { Authorization: `Bearer ${user.accessToken}` },
       })
       .then((res) => {
-        pet.hasImg ? uploadPetPic(res.data, pet.petImg) : showSummaries();
+        if (pet.hasImg) uploadPetPic(res.data, pet.petImg);
+        showSummaries();
       })
       .catch((err) => console.log(err));
   }
@@ -98,7 +101,7 @@ function MyPets(props) {
       .post("http://localhost:4000/user/profilepic", data)
       .then((res) => {
         console.log(res);
-        showSummaries();
+        setImgReady(true);
       })
       .catch((err) => console.log(err));
   }
@@ -108,7 +111,7 @@ function MyPets(props) {
       <Header />
       {isFormPage ? (
         <PetForm currentPet={currentPet} savePet={savePet} />
-      ) : petList === null ? (
+      ) : petList === null || !isImgReady ? (
         "Loading"
       ) : (
         <PetSummaries
