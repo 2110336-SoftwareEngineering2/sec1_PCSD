@@ -58,7 +58,6 @@ function MyPets(props) {
   function showFormPage() {
     setIsFormPage(true);
     setPetList(null);
-    setIsImgReady(false);
   }
 
   function editPet(pet) {
@@ -86,13 +85,14 @@ function MyPets(props) {
         headers: { Authorization: `Bearer ${user.accessToken}` },
       })
       .then((res) => {
-        pet.hasImg? uploadPetPic(res.data, pet.petImg): setIsImgReady(true);
+        if (pet.hasImg) uploadPetPic(res.data, pet.petImg);
         showSummaries();
       })
       .catch((err) => console.log(err));
   }
 
   function uploadPetPic(pet, img) {
+    setIsImgReady(false);
     const data = new FormData();
     data.append("email", pet._id);
     data.append("file", img);
@@ -111,7 +111,11 @@ function MyPets(props) {
       <Header />
       <h1>My Pets</h1>
       {isFormPage ? (
-        <PetForm currentPet={currentPet} savePet={savePet} />
+        <PetForm
+          currentPet={currentPet}
+          savePet={savePet}
+          cancelForm={showSummaries}
+        />
       ) : petList === null || !isImgReady ? (
         "Loading"
       ) : (
