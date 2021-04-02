@@ -21,10 +21,11 @@ function AuthRoute({ component: Component, ...rest }) {
         })
         .then((res) => {
           axios
-            .post("http://localhost:4000/user", {email: (res.data).email})
+            .post("http://localhost:4000/user/email", {email: (res.data).email})
             .then((res) => {
               userContext.login({...res.data, accessToken: cookie.accessToken});
-            })
+            });
+            console.log(userContext)
         })
         .catch((err) => {
           console.log(err);

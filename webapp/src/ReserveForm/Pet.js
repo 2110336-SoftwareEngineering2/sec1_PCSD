@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./Pet.css";
+import { useCookies } from "react-cookie";
 
 function Pet({ info, CheckPet }) {
   const [click, setClick] = useState(false);
+  const [cookie, setCookie, removeCookie] = useCookies();
+  useEffect(() => {
+    setCookie("selectedPets", [], {path: "/"});
+  }, []);
+
   function onClicked() {
     setClick(!click);
     console.log(!click);
     CheckPet(info._id);
+    var selectedPets = cookie.selectedPets;
+    // console.log(selectedPets)
+    if (!click) {
+      // var data = 
+      setCookie("selectedPets", [...selectedPets, info], {path: "/"});
+    } else {
+      var filtered = selectedPets.filter((value, idx, arr) => {
+        return value.petName !== info.petName;
+      });
+      setCookie("selectedPets", filtered, {path: "/"});
+    }
   }
   let btn_class = click ? "clickedButton" : "unclickedButton";
   return (
