@@ -127,7 +127,7 @@ function ReserveForm( {name}) {
 
 
   function CheckPet(petId) {
-    /*axios.delete("http://localhost:4000/user/pet", {
+   /* axios.delete("http://localhost:4000/user/pet", {
       headers: {
         Authorization: `Bearer ${user.accessToken}`
       },
@@ -136,8 +136,8 @@ function ReserveForm( {name}) {
       }
     }).then((res) => {
       console.log(res.data);
-      setPetlists(pet_lists.filter((pet) => pet._id !== petId));
-    }).catch((err) => console.log(err)); */
+      setPetlists(pet_lists.filter((pet) => pet._id == petId));
+    }).catch((err) => console.log(err));  */
   }
     return (
         <div className="ReserveForm">

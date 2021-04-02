@@ -7,14 +7,15 @@ function Pet({ pet, editPet, deletePet }) {
   return (
     <div className="pet">
       <img className="Pet__image" src={pet.imgURL} />
-      <div className="col-5">
+      <div className="col-5 pet_info">
         <div className="Pet__name">
           {pet.petName}, {pet.age}, {pet.gender}
         </div>
-      </div>
-      <button className="" onClick={editPet}>
-        I
+        <button className="Pet__edit" onClick={editPet}>
+        Edit
       </button>
+      </div>
+      
       <button className="Pet__delete" onClick={deletePet}>
         X
       </button>
