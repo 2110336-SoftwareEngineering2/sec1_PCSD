@@ -10,6 +10,7 @@ const reserveSchema = new Schema({
   endDate: Number,
   status: Number,
   rate: Number,
+  amount: Number,
   pets: []
 });
 

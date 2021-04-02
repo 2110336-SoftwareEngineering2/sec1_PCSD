@@ -31,17 +31,23 @@ const reserveCaretaker = async (req, res) => {
       // user is logged in and has "user" role
   // if (!problem && user.role === "user") {
     // const petInfo = req.body;
+  const startDate = dateStringToTimeStamp(req.body.startDate);
+  const endDate = dateStringToTimeStamp(req.body.endDate);
+  const rate = req.body.rate;
+  const hours = (endDate - startDate) / (1000*3600);
+  const amount = rate * hours;
 
-    console.log(req.body)
+  // console.log(req.body)
   var data = {
     petowner: req.body.petowner,
     caretaker:req.body.caretaker, // email
-    startDate: dateStringToTimeStamp(req.body.startDate),
-    endDate: dateStringToTimeStamp(req.body.endDate),
+    startDate: startDate,
+    endDate: endDate,
     rate : req.body.rate,
     service :req.body.service,
     status :req.body.status,
-    pets :req.body.pets
+    pets :req.body.pets,
+    amount: amount
   }
 
   //Find User by email and reserve
