@@ -46,6 +46,10 @@ function ReserveForm( {name}) {
     const selectedPets = cookie.selectedPets;
     // console.log(reserveTmp)
     // console.log(selectedPets)
+    if (startDate === "" || endDate === "") {
+      console.log("please select date");
+      return;
+    }
     var reserveData = {
       caretaker: reserveTmp.caretaker,
       petowner: reserveTmp.petowner,
