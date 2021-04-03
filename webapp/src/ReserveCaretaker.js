@@ -115,6 +115,11 @@ function ReserveCaretaker(props) {
         setCookie("reserveTmp", data, { path: "/" });
         // console.log(cookie.ReserveTmp)
     }
+
+    function onclick() {
+        createChatRoom() 
+        history.push( {pathname: "/chat"});
+    }
     
     return (
         <div className="reserve">
@@ -152,7 +157,7 @@ function ReserveCaretaker(props) {
                     </div>
                     <div className="row">
                         <div className="col-12 reserve_button">
-                            <button className = "RButton" onClick = {() =>createChatRoom()}  >Chat</button>
+                            <button className = "RButton" onClick = {() => onclick()}  >Chat</button>
                             <button className = "RButton" onClick={() => {
                                 saveToCookies();
                                 axios.post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
