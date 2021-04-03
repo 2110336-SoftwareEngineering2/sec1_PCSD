@@ -21,29 +21,29 @@ const Result = (props) => {
         <div className={classes.info}>
           <Typography className={classes.nameSection} variant="h4">
             {/* 1. */}
-            <span className={classes.name}>{[props.userInfo[1].user.firstname,props.userInfo[1].user.lastname].join(' ')}</span>
+            <span className={classes.name}>{[props.userInfo.user.firstname,props.userInfo.user.lastname].join(' ')}</span>
           </Typography>
           <Typography className={classes.description} variant="h5">
-            {props.userInfo[1].caretaker.description}
+            {props.userInfo.caretaker.description}
           </Typography>
           <Typography className={classes.address} variant="h6">
-            {[props.userInfo[1].caretaker.province,props.userInfo[1].caretaker.city,props.userInfo[1].caretaker.country].join(", ")}
+            {[props.userInfo.caretaker.province,props.userInfo.caretaker.city,props.userInfo.caretaker.country].join(", ")}
           </Typography>
           <Rating
             className={classes.star}
             name="read-only"
-            value={props.userInfo[1].caretaker.rate_point.sum_rate.$numberDecimal}
+            value={props.userInfo.caretaker.rate_point.sum_rate.$numberDecimal}
             precision={0.5}
             readOnly
           />
           <Typography className={classes.rating} variant="h6">
-            Review {props.userInfo[1].caretaker.rate_point.sum_rate.$numberDecimal}/5 ({props.userInfo[1].caretaker.rate_point.rate_count}){" "}
+            Review {props.userInfo.caretaker.rate_point.sum_rate.$numberDecimal}/5 ({props.userInfo.caretaker.rate_point.rate_count}){" "}
           </Typography>
         </div>
         <div className={classes.priceSection}>
           <h6 className={classes.h6}>from</h6>
           <Typography className={classes.price} variant="h6">
-            {props.userInfo[1].caretaker.rate.$numberDecimal}
+            {props.userInfo.caretaker.rate.$numberDecimal}
           </Typography>
           <h6 className={classes.h6}>per day</h6>
         </div>

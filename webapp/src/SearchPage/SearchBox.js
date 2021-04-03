@@ -18,12 +18,16 @@ import useStyles from "./styles";
 
 const SearchBox = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState({
+    minrate: "",
+    maxrate: ""
+  });
 
   const searchHandle = () => {
+    const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
     axios.post("http://localhost:4000/user/caretaker/search", {
-      minrate: 100,
-      maxrate: 10000,
+      minrate: minmax[0] > 0 ? minmax[0] : null,
+      maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
     })
     .then((res) => {
       console.log(res.data);
@@ -33,6 +37,10 @@ const SearchBox = () => {
       console.log(err);
     })
   };
+
+  const onChange = (event) => {
+    setValue({...value, [event.target.name]: event.target.value})
+  }
 
   return (
     <div className={classes.searchBox}>
@@ -125,6 +133,9 @@ const SearchBox = () => {
               variant="outlined"
               size="small"
               placeholder="Min"
+              name="minrate"
+              value={value.minrate}
+              onChange={onChange}
             />
             <h3
               style={{
@@ -140,6 +151,9 @@ const SearchBox = () => {
               variant="outlined"
               size="small"
               placeholder="Max"
+              name="maxrate"
+              value={value.maxrate}
+              onChange={onChange}
             />
             <h4 style={{ margin: "10px 0px 0px 10px", opacity: "0.5" }}>
               Baht

@@ -9,7 +9,7 @@ const Results = (props) => {
   return (
     <div className={classes.root}>
       {Object.entries(props.state).map((userInfo, index) => (
-        <Result userInfo={userInfo} index={index} />
+        <Result userInfo={userInfo[1]} index={index} key={userInfo[0]} />
       ))}
     </div>
   );
