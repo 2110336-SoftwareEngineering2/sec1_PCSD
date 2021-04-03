@@ -8,8 +8,8 @@ const Results = (props) => {
 
   return (
     <div className={classes.root}>
-      {props.state.map((user, index) => (
-        <Result user={user} index={index} />
+      {Object.entries(props.state).map((userInfo, index) => (
+        <Result userInfo={userInfo} index={index} />
       ))}
     </div>
   );

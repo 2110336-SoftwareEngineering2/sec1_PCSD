@@ -11,8 +11,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import LocalAirportIcon from "@material-ui/icons/LocalAirport";
-import history from "../history";
+import axios from "axios";
 
+import history from "../history";
 import useStyles from "./styles";
 
 const SearchBox = () => {
@@ -20,16 +21,17 @@ const SearchBox = () => {
   const [value, setValue] = React.useState(0);
 
   const searchHandle = () => {
-    history.push( {pathname: "/searchresult", state: [
-      {
-        firstname: "helo",
-        lastname: "holo"
-      },
-      {
-        firstname: "heema",
-        lastname: "hamee"
-      }
-    ]});
+    axios.post("http://localhost:4000/user/caretaker/search", {
+      minrate: 100,
+      maxrate: 10000,
+    })
+    .then((res) => {
+      console.log(res.data);
+      history.push( {pathname: "/searchresult", state: res.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   };
 
   return (

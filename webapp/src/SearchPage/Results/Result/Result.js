@@ -21,29 +21,29 @@ const Result = (props) => {
         <div className={classes.info}>
           <Typography className={classes.nameSection} variant="h4">
             {/* 1. */}
-            <span className={classes.name}>{props.user.firstname+' '+props.user.lastname}</span>
+            <span className={classes.name}>{[props.userInfo[1].user.firstname,props.userInfo[1].user.lastname].join(' ')}</span>
           </Typography>
           <Typography className={classes.description} variant="h5">
-            Love dog love num love pla love sakura
+            {props.userInfo[1].caretaker.description}
           </Typography>
           <Typography className={classes.address} variant="h6">
-            Rama 9, Bangkok, 10500
+            {[props.userInfo[1].caretaker.province,props.userInfo[1].caretaker.city,props.userInfo[1].caretaker.country].join(", ")}
           </Typography>
           <Rating
             className={classes.star}
             name="read-only"
-            value={4.5}
+            value={props.userInfo[1].caretaker.rate_point.sum_rate.$numberDecimal}
             precision={0.5}
             readOnly
           />
           <Typography className={classes.rating} variant="h6">
-            Review 4.5/5 (7){" "}
+            Review {props.userInfo[1].caretaker.rate_point.sum_rate.$numberDecimal}/5 ({props.userInfo[1].caretaker.rate_point.rate_count}){" "}
           </Typography>
         </div>
         <div className={classes.priceSection}>
           <h6 className={classes.h6}>from</h6>
           <Typography className={classes.price} variant="h6">
-            325 Baht
+            {props.userInfo[1].caretaker.rate.$numberDecimal}
           </Typography>
           <h6 className={classes.h6}>per day</h6>
         </div>
