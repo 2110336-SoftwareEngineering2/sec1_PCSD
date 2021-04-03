@@ -80,10 +80,11 @@ function ReserveForm(props) {
       }
     }).then((res) => {
       console.log(res)
-      history.push({ pathname: "/payment" });
+      history.push({ pathname: "/payment", reserve: res.data});
     }).catch(err => {
       console.log(err);
     })
+
   }
   useEffect(() => {
     return () => {

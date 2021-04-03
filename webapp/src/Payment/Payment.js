@@ -5,18 +5,23 @@ import axios from "axios";
 import { UserContext } from "../context/MyContext";
 import history from "./../history";
 import "./Payment.css";
-function Payment() {
+function Payment({receiverEmail, amountt}) {
   const { user } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
   // strub
+ console.log(amountt);
   const [state, setState] = useState({
-    receiverEmail: "akiraz@gmail.com",
-    amount: 100,
+    receiverEmail: {receiverEmail} ,
+    amount: 500,
   });
 
   const onClick = () => {
+    console.log("pay");
     axios
-      .post("http://localhost:4000/user/transfer?type=transfer", state, {
+      .post("http://localhost:4000/user/transfer?type=transfer", {
+        receiverEmail: {receiverEmail} ,
+        amount: 500,
+      }, {
         headers: { authorization: "Bearer " + cookie.accessToken },
       })
       .then((res) => {
@@ -68,7 +73,7 @@ function Payment() {
                   <span className="head">Total amount due</span>
                   <div>
                     <span className="dollar">฿ </span>
-                    <span className="amount">{state.amount}</span>
+                    <span className="amount">{amountt}</span>
                   </div>
                 </div>
               </div>
