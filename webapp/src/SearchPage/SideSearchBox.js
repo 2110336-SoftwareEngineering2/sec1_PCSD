@@ -24,11 +24,11 @@ const SideSearchBox = (props) => {
   }
   
   const getSearchData = () => {
-    // const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
+    const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
     // const pet_type = getPetType();
     const data = {
-      // minrate: minmax[0] > 0 ? minmax[0] : null,
-      // maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
+      minrate: minmax[0] > 0 ? minmax[0] : null,
+      maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
       // pet_type: pet_type,
       type: value.type !== "" ? value.type : null,
       // date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
@@ -96,6 +96,10 @@ const SideSearchBox = (props) => {
           className={classes.sidePriceInput}
           variant="outlined"
           size="small"
+          type="number"
+          name="minrate"
+          value={value.minrate}
+          onChange={onChange}
         />
         <p
           style={{
@@ -110,6 +114,10 @@ const SideSearchBox = (props) => {
           className={classes.sidePriceInput}
           variant="outlined"
           size="small"
+          type="number"
+          name="maxrate"
+          value={value.maxrate}
+          onChange={onChange}
         />
       </div>
       <Typography className={classes.header} variant="h4">
