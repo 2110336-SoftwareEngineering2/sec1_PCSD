@@ -139,8 +139,9 @@ function Chatbox({roomId}){
                         <div className = "Chat_Messages" style = {{overflowY :"auto"}}>
                             {//scroll this rewrite this section script
                             }
+                            <Amesage email = "nsn@email.com" message = "Hello" timestamp = "07:08:10" is_user = {true} />
                             {messages.map((mDetail, idx) => {
-                                return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {true} />
+                                return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
                                 //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
                             })}
                             {/* to implement more 
