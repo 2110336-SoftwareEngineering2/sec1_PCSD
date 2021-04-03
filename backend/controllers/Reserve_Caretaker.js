@@ -82,23 +82,32 @@ const reserveCaretaker = async (req, res) => {
 
 const removeReserveCaretaker = async (req, res) => {
   // Check if user is logged in
-  const startDate = dateStringToTimeStamp(req.body.startDate);
-  const endDate = dateStringToTimeStamp(req.body.endDate);
-  const rate = req.body.rate;
-  const hours = (endDate - startDate) / (1000*3600);
-  const amount = rate * hours;
+  const user = checkAuth.authToken(req, res);
+  const problem = user.nullToken | user.tokenError;
+
+  //const startDate = dateStringToTimeStamp(req.body.startDate);
+  //const endDate = dateStringToTimeStamp(req.body.endDate);
+  //const rate = req.body.rate;
+  //const hours = (endDate - startDate) / (1000*3600);
+  //const amount = rate * hours;
+    
+  if (!problem && user.role === "user") {
+    const reserveId = req.body.source;
+    //const email = user.email;
     // remove reserve
     await Reserve.findOneAndDelete(
       {
-        service: req.body.service,
-        caretaker: req.body.caretaker,
-        petowner: req.body.petowner,
-        startDate: startDate,
-        endDate: endDate,
-        status: req.body.status,
-        rate: req.body.rate,
-        amount: amount,
-        pets: [],
+        _id: reserveId,
+        //owner: email
+        //service: req.body.service,
+        //caretaker: req.body.caretaker,
+        //petowner: req.body.petowner,
+        //startDate: startDate,
+        //endDate: endDate,
+        //status: req.body.status,
+        //rate: req.body.rate,
+        //amount: amount,
+        //pets: [],
       },
       (err) => {
         if (err) {
@@ -108,6 +117,7 @@ const removeReserveCaretaker = async (req, res) => {
         }
       }
     );
+  }
   };
 
 
