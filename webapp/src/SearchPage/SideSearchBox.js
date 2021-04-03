@@ -285,12 +285,14 @@ const SideSearchBox = (props) => {
           label="Turtle"
         />
       </FormGroup>
+      <div className="row">
       <Button className={classes.sideButton} variant="contained" onClick={searchHandle}>
         Search
       </Button>
       <Button className={classes.sideButton} variant="contained" onClick={resetHandle}>
         Reset
       </Button>
+      </div>
     </div>
   );
 };
