@@ -11,7 +11,8 @@ router.get("/:email", (req, res) => {
     ReserveController.getReserveByEmail(req, res);
 });
 
-router.post("/delete", (req, res) => {
+//router.delete("/delete/:id, (req, res) => {...})
+router.delete("/delete/:id", (req, res) => {
     ReserveController.removeReserveCaretaker(req, res);
 });
 
