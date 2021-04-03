@@ -12,13 +12,20 @@ import useStyles from "./styles";
 const SideSearchBox = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(props.data.value);
-  const [pet_type, setPetType] = React.useState({
+  const [pet_type, setPetType] = React.useState(props.data.pet_type ? {
     dog: props.data.pet_type.find(petType => petType == "dog") ? true : false,
     cat: props.data.pet_type.find(petType => petType == "cat") ? true : false,
     rabbit: props.data.pet_type.find(petType => petType == "rabbit") ? true : false,
     bird: props.data.pet_type.find(petType => petType == "bird") ? true : false,
     hamster: props.data.pet_type.find(petType => petType == "hamster") ? true : false,
     turtle: props.data.pet_type.find(petType => petType == "turtle") ? true : false
+  } : {
+    dog: false,
+    cat: false,
+    rabbit: false,
+    bird: false,
+    hamster: false,
+    turtle: false,
   })
 
   useEffect(() => {
