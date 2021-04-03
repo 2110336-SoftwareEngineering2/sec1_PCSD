@@ -2,11 +2,12 @@ import React from 'react'
 import Header from './../Header/header';
 import Payment from "./Payment";
 import "./PaymentPage.css";
-function PaymentPage() {
+function PaymentPage(props) {
+    console.log(props);
     return (
         <div>
             <Header />
-            <Payment />
+            <Payment receiverEmail={props.location.reserve.caretaker} amount={props.location.reserve.amount}/>
         </div>
     )
 }

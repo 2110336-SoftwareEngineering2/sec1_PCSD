@@ -21,20 +21,33 @@ const SearchBox = () => {
   const [value, setValue] = React.useState({
     minrate: "",
     maxrate: "",
-    type: ""
+    type: "",
+    date: {
+      start: "",
+      end: ""
+    },
+    address: "",
   });
 
-  const searchHandle = () => {
+  const getSearchData = () => {
     const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
     const pet_type = getPetType();
-    axios.post("http://localhost:4000/user/caretaker/search", {
+    const data = {
       minrate: minmax[0] > 0 ? minmax[0] : null,
       maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
       pet_type: pet_type,
-      type: value.type !== "" ? value.type : null
-    })
+      type: value.type !== "" ? value.type : null,
+      date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
+      address: (value.address !== "") ? value.address : null
+    }
+    return data;
+  }
+
+  const searchHandle = () => {
+    const data = getSearchData();
+    axios.post("http://localhost:4000/user/caretaker/search", data)
     .then((res) => {
-      history.push( {pathname: "/searchresult", state: res.data});
+      history.push( {pathname: "/searchresult", state: res.data, data: {value: value, pet_type: data.pet_type}});
     })
     .catch((err) => {
       console.log(err);
@@ -57,6 +70,16 @@ const SearchBox = () => {
   const onChange = (event) => {
     setValue({...value, [event.target.name]: event.target.value})
   }
+
+  const getToday = () => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + "-" + mm + "-" + dd;
+    return today;
+  };
 
   return (
     <div className={classes.searchBox}>
@@ -191,6 +214,9 @@ const SearchBox = () => {
             variant="outlined"
             size="small"
             placeholder="Zip Code or Address"
+            name="address"
+            value={value.address}
+            onChange={onChange}
           />
         </div>
         <div className={classes.dateBox}>
@@ -199,6 +225,7 @@ const SearchBox = () => {
             <TextField
               inputProps={{
                 style: { opacity: 0.5 },
+                min: getToday(),
               }}
               variant="outlined"
               type="date"
@@ -208,6 +235,14 @@ const SearchBox = () => {
                 shrink: true,
               }}
               size="small"
+              value={value.date.start}
+              onChange={(event) => {
+                if(new Date(event.target.value) > new Date(value.date.end)) {
+                  setValue({...value, date: {start: event.target.value, end: ""}})
+                } else {
+                  setValue({...value, date: {start: event.target.value, end: value.date.end}})
+                }
+              }}
             />
             <p
               style={{
@@ -221,11 +256,16 @@ const SearchBox = () => {
             <TextField
               inputProps={{
                 style: { opacity: 0.5 },
+                min: (value.date.start === "") ? getToday() : value.date.start
               }}
               variant="outlined"
               type="date"
               className={classes.dateInput}
               size="small"
+              value={value.date.end}
+              onChange={(event) => {
+                setValue({...value, date: {start: value.date.start, end: event.target.value}})
+              }}
             />
           </div>
         </div>

@@ -7,13 +7,13 @@ import useStyles from "./styles";
 
 const SearchResult = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [state, setState] = React.useState(props.location.state);
   return (
     <div>
       <Header />
       <div className={classes.searchResult}>
-        <SideSearchBox />
-        <Results state={props.location.state} />
+        <SideSearchBox data={props.location.data} setState={setState} />
+        <Results state={state} />
       </div>
     </div>
   );

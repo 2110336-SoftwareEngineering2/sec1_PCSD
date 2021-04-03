@@ -10,10 +10,12 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { UserContext } from "./context/MyContext";
 
-function ReserveCaretaker() {
-    const userEmail = "testtttt@gmail.com";
-    const caretaker = "maxwell123@email.com";
-    const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ userEmail;
+function ReserveCaretaker(props) {
+    const { user } = useContext(UserContext);
+    const userEmail = user.email;
+    const caretaker = props.location.state.caretaker;
+    console.log(caretaker);
+    const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ caretaker;
     const [name, setName] = useState({firstname: null, lastname: null});
     const [contact, setContact] = useState({email: null, phone: null});
     const [description, setDesc] = useState({desc: null});
@@ -27,7 +29,7 @@ function ReserveCaretaker() {
     
     useEffect(() => {
         axios
-        .post("http://localhost:4000/user/email", {email: "maxwell123@email.com"})
+        .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
 //            console.log(res);
             const data = res.data;
@@ -39,7 +41,7 @@ function ReserveCaretaker() {
             });
         
         axios
-        .post("http://localhost:4000/user/caretaker/find", {caretaker: "maxwell123@email.com"})
+        .post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
         .then((res) => {
 //            console.log(res);
             const data = res.data;
@@ -87,13 +89,17 @@ function ReserveCaretaker() {
             })
         .catch((err) => {
             console.log(err);
+            console.log("what");
             });
     }, []);
 
     function createChatRoom(){
-        console.log("Hello world");
-        axios
-        .post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]});
+        //console.log("Hello world");
+        axios.post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]},{
+            headers: {
+                "authorization": "Bearer " + cookie.accessToken
+            }
+        });
     }
 
     const saveToCookies = () => {
@@ -108,6 +114,11 @@ function ReserveCaretaker() {
         }
         setCookie("reserveTmp", data, { path: "/" });
         // console.log(cookie.ReserveTmp)
+    }
+
+    function onclick() {
+        createChatRoom() 
+        history.push( {pathname: "/chat"});
     }
     
     return (
@@ -146,10 +157,16 @@ function ReserveCaretaker() {
                     </div>
                     <div className="row">
                         <div className="col-12 reserve_button">
-                            <button className = "RButton" onClick = {() =>createChatRoom()}  >Chat</button>
+                            <button className = "RButton" onClick = {() => onclick()}  >Chat</button>
                             <button className = "RButton" onClick={() => {
                                 saveToCookies();
-              history.push({ pathname: "/reserveform" });
+                                axios.post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
+    .then((res) => {
+      history.push( {pathname: "/reserveform", state: res.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    })
             }}>Reserve</button>
                         </div>
                     </div>

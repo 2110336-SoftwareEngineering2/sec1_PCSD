@@ -164,7 +164,7 @@ export default makeStyles((theme) => ({
     backgroundColor: "#bd6a43",
     color: "white",
     fontSize: "20px",
-    margin: "10px 0 50px 100px",
+    margin: "10px 20px 50px 35px",
   },
   sideCityInput: {
     width: "270px",

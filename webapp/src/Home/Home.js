@@ -8,7 +8,9 @@ import "./Home.css";
 import background from "./bg.jpg";
 import SearchBox from "./../SearchPage/SearchBox";
 import { useCookies } from "react-cookie";
-
+import gif from "./petgif.gif";
+import gif2 from "./petgif2.gif";
+import gif3 from "./petgif3.gif";
 function Home() {
   const { user } = useContext(UserContext);
   const userContext = useContext(UserContext);
@@ -45,6 +47,9 @@ function Home() {
 <h2> Book trusted caretakers who’ll treat 
 your pets like family.</h2>
         <SearchBox />
+        <img src={gif} />
+        <img id="gif2" src={gif2} /> 
+        <img id="gif3" src={gif3} /> 
     </div>
 
   );
