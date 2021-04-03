@@ -20,20 +20,20 @@ const SearchBox = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState({
     minrate: "",
-    maxrate: ""
+    maxrate: "",
+    type: ""
   });
 
   const searchHandle = () => {
     const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
     const pet_type = getPetType();
-    console.log(pet_type)
     axios.post("http://localhost:4000/user/caretaker/search", {
       minrate: minmax[0] > 0 ? minmax[0] : null,
       maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
-      pet_type: pet_type
+      pet_type: pet_type,
+      type: value.type !== "" ? value.type : null
     })
     .then((res) => {
-      console.log(res.data);
       history.push( {pathname: "/searchresult", state: res.data});
     })
     .catch((err) => {
@@ -117,9 +117,12 @@ const SearchBox = () => {
         <div className={classes.serviceTypeBox}>
           <h2 className={classes.h2}>For When You're Away</h2>
           <BottomNavigation
-            value={value}
+            value={value.type}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              if(value.type === "" | value.type !== newValue)
+                setValue({...value, type: newValue});
+              else
+              setValue({...value, type: ""});
             }}
             showLabels
           >
@@ -127,16 +130,19 @@ const SearchBox = () => {
               className={classes.serviceBox}
               label="House Sitting"
               icon={<NightsStayIcon />}
+              value="housesitting"
             />
             <BottomNavigationAction
               className={classes.serviceBox}
               label="Boarding"
               icon={<LocalAirportIcon />}
+              value="boarding"
             />
             <BottomNavigationAction
               className={classes.serviceBox}
               label="Day Care"
               icon={<WbSunnyIcon />}
+              value="daycare"
             />
           </BottomNavigation>
         </div>
