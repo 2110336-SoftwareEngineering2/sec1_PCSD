@@ -22,9 +22,7 @@ const Result = (props) => {
         <div className={classes.profile}>
           <img
             className={classes.media}
-            src={
-              "https://i0.wp.com/popdose.com/wp-content/uploads/hide-the-pain-harold-trying-to-smile-meme-mobile-wallpaper-800x1280-20331-1387213964.jpg?ssl=1"
-            }
+            src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ props.userInfo.user.email}
           />
         </div>
         <div className={classes.info}>
