@@ -11,11 +11,18 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import LocalAirportIcon from "@material-ui/icons/LocalAirport";
+import history from "../history";
+
 import useStyles from "./styles";
 
 const SearchBox = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+
+  const searchHandle = () => {
+    history.push( {pathname: "/searchresult"});
+  };
+
   return (
     <div className={classes.searchBox}>
       <div className={classes.animalType}>
@@ -103,6 +110,7 @@ const SearchBox = () => {
           <div className={classes.priceBoxLine2}>
             <TextField
               className={classes.priceInput}
+              type="number"
               variant="outlined"
               size="small"
               placeholder="Min"
@@ -117,6 +125,7 @@ const SearchBox = () => {
             ></h3>
             <TextField
               className={classes.priceInput}
+              type="number"
               variant="outlined"
               size="small"
               placeholder="Max"
@@ -174,7 +183,7 @@ const SearchBox = () => {
           </div>
         </div>
       </div>
-      <Button className={classes.button} variant="contained">
+      <Button className={classes.button} variant="contained" onClick={searchHandle}>
         Search
       </Button>
     </div>
