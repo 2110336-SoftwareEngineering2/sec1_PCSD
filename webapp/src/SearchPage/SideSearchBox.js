@@ -11,8 +11,17 @@ import useStyles from "./styles";
 
 const SideSearchBox = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(props.data.value);
-  const [pet_type, setPetType] = React.useState(props.data.pet_type ? {
+  const [value, setValue] = React.useState(props.data ? props.data.value : {
+    minrate: "",
+    maxrate: "",
+    type: "",
+    date: {
+      start: "",
+      end: ""
+    },
+    address: "",
+  });
+  const [pet_type, setPetType] = React.useState(props.data && props.data.pet_type ? {
     dog: props.data.pet_type.find(petType => petType == "dog") ? true : false,
     cat: props.data.pet_type.find(petType => petType == "cat") ? true : false,
     rabbit: props.data.pet_type.find(petType => petType == "rabbit") ? true : false,
@@ -31,7 +40,7 @@ const SideSearchBox = (props) => {
   useEffect(() => {
     const petChecker = document.getElementsByName("checkedA");
 
-    if(props.data.pet_type) {
+    if(props.data && props.data.pet_type) {
       for(var i=0; i<petChecker.length; i++) {
         const found = props.data.pet_type.find(petType => petType == petChecker[i].value)
         console.log(petChecker[i].value+" "+found)
