@@ -1,15 +1,22 @@
 import React from "react";
 import { Card, CardMedia, Typography, Box } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-
+import history from "./../../../history";
 import useStyles from "./styles";
-
+import axios from "axios";
 const Result = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const onClick = () => {
     console.log(props.userInfo);
+    axios.post("http://localhost:4000/user/caretaker/find", {caretaker: props.userInfo.caretaker.caretaker})
+    .then((res) => {
+      history.push( {pathname: "/reservepage", state: res.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   };
 
   return (
@@ -22,7 +29,7 @@ const Result = (props) => {
         <div className={classes.profile}>
           <img
             className={classes.media}
-            src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ props.userInfo.user.email}
+            src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ props.userInfo.caretaker.caretaker}
           />
         </div>
         <div className={classes.info}>
