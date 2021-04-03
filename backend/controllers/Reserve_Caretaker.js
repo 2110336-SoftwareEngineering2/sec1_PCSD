@@ -14,7 +14,7 @@ const dateStringToTimeStamp = (date) => {
 
 const getReserveByEmail = async (req, res) => {
   const email = req.params.email;
-  await Reserve.find({caretaker: email}, (err, result) => {
+  await Reserve.find({"$or": [{caretaker: email}, {petowner: email}]}, (err, result) => {
     if (err) {
       res.status(404).send(err);
     } else {
