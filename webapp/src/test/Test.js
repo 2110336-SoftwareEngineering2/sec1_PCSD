@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { CardDeck, Card, Button } from "react-bootstrap";
 import axios from "axios";
-
+import Header from "./../Header/header";
 import { UserContext } from "../context/MyContext";
 import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentButton";
 import "./Test.css";
@@ -59,7 +59,7 @@ function Test(_) {
     if (user.role === "caretaker") {
       if (payment.transferStatus === "WAITING") {
         return (
-          <div>
+          <div className="watingbutton">
             <AcceptButton
               payment={payment}
               accessToken={cookie.accessToken}
@@ -78,6 +78,7 @@ function Test(_) {
         );
       } else if(payment.transferStatus === "ACCEPTED") {
         return(
+          <div className="acceptedbutton">
           <ReceiveButton
               payment={payment}
               accessToken={cookie.accessToken}
@@ -85,11 +86,13 @@ function Test(_) {
               state={state}
               index={index}
               />
+          </div>
         )
       }
     } else {
       if (payment.transferStatus === "WAITING") {
-        return (
+        return ( 
+        <div className="watingcanbutton"> 
           <CancelButton
             payment={payment}
             accessToken={cookie.accessToken}
@@ -97,6 +100,7 @@ function Test(_) {
             state={state}
             index={index}
           />
+        </div>
         );
       }
     }
@@ -108,9 +112,10 @@ function Test(_) {
         <h1> Loading... </h1>
       ) : (
           <div className="Cardd">
+             <Header />
         <CardDeck>
         {state.payments.map((payment, index) => (
-          <Card style={{ width: '18rem' }} key={payment._id}>
+          <Card style={{ width: '400px' }} key={payment._id}>
             <Card.Body>
             { user.role == "caretaker" ? <Card.Title>Job</Card.Title> :  <Card.Title>Payment</Card.Title>
             }
@@ -119,18 +124,18 @@ function Test(_) {
               <p>petowner's email: {payment.petownerEmail}</p>
               <p>caretaker's email: {payment.caretakerEmail}</p>
               <p>amount: {payment.amount.$numberDecimal}</p>
+              <div className="row cardstatus">
               <p>
                 status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "PAID" : payment.transferStatus}</span>
               </p>
+              { getButton(payment, index) } </div>
             </Card.Text>
-            { getButton(payment, index) }
           </Card.Body>
           </Card>
         ))}
       </CardDeck>
       </div>
       )}
-        
     </div>
   );
 }

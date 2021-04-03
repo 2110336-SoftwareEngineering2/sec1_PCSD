@@ -18,11 +18,27 @@
 .Cardd > .card-deck {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 10px;
+    margin-left: 15%;
 }
 
 .Cardd > .card-deck > .card {
  flex: none;
  margin-top: 30px;
  margin-left: 10px;
+}
+.cardstatus {
+    align-items: center;
+    margin-left: 2px;
+}
+
+.watingbutton {
+    display: flex;
+    margin-left: 180px;
+}
+.watingcanbutton {
+    margin-left: 160px;
+}
+
+.acceptedbutton {
+    margin-left: 160px;
 }
