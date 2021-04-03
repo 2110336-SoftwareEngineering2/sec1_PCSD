@@ -47,7 +47,7 @@ const SearchBox = () => {
     const data = getSearchData();
     axios.post("http://localhost:4000/user/caretaker/search", data)
     .then((res) => {
-      history.push( {pathname: "/searchresult", state: res.data, data: value});
+      history.push( {pathname: "/searchresult", state: res.data, data: {value: value, pet_type: data.pet_type}});
     })
     .catch((err) => {
       console.log(err);
