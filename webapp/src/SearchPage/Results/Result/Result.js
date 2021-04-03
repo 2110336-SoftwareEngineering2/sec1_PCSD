@@ -4,7 +4,7 @@ import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./styles";
 
-const Result = () => {
+const Result = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   return (
@@ -21,7 +21,7 @@ const Result = () => {
         <div className={classes.info}>
           <Typography className={classes.nameSection} variant="h4">
             {/* 1. */}
-            <span className={classes.name}>Itsara Potibuatong</span>
+            <span className={classes.name}>{props.user.firstname+' '+props.user.lastname}</span>
           </Typography>
           <Typography className={classes.description} variant="h5">
             Love dog love num love pla love sakura

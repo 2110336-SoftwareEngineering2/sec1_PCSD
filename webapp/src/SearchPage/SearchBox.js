@@ -20,7 +20,16 @@ const SearchBox = () => {
   const [value, setValue] = React.useState(0);
 
   const searchHandle = () => {
-    history.push( {pathname: "/searchresult"});
+    history.push( {pathname: "/searchresult", state: [
+      {
+        firstname: "helo",
+        lastname: "holo"
+      },
+      {
+        firstname: "heema",
+        lastname: "hamee"
+      }
+    ]});
   };
 
   return (
