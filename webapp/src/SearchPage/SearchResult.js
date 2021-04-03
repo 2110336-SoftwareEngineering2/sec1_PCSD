@@ -5,7 +5,7 @@ import Results from "./Results/Results";
 import { Paper } from "@material-ui/core";
 import useStyles from "./styles";
 
-const SearchResult = () => {
+const SearchResult = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   return (
@@ -13,7 +13,7 @@ const SearchResult = () => {
       <Header />
       <div className={classes.searchResult}>
         <SideSearchBox />
-        <Results />
+        <Results state={props.location.state} />
       </div>
     </div>
   );

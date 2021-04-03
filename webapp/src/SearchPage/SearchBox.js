@@ -11,11 +11,53 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import LocalAirportIcon from "@material-ui/icons/LocalAirport";
+import axios from "axios";
+
+import history from "../history";
 import useStyles from "./styles";
 
 const SearchBox = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState({
+    minrate: "",
+    maxrate: "",
+    type: ""
+  });
+
+  const searchHandle = () => {
+    const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
+    const pet_type = getPetType();
+    axios.post("http://localhost:4000/user/caretaker/search", {
+      minrate: minmax[0] > 0 ? minmax[0] : null,
+      maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
+      pet_type: pet_type,
+      type: value.type !== "" ? value.type : null
+    })
+    .then((res) => {
+      history.push( {pathname: "/searchresult", state: res.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  };
+
+  const getPetType = () => {
+    const pet_type = []
+    const petChecker = document.getElementsByName("checkedA")
+
+    for(var i = 0; i<petChecker.length; i++) {
+      if(petChecker[i].checked == true) {
+        pet_type.push(petChecker[i].value);
+      }
+    }
+
+    return pet_type.length > 0 ? pet_type : null
+  }
+
+  const onChange = (event) => {
+    setValue({...value, [event.target.name]: event.target.value})
+  }
+
   return (
     <div className={classes.searchBox}>
       <div className={classes.animalType}>
@@ -23,32 +65,32 @@ const SearchBox = () => {
         <FormGroup row>
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="dog" />}
             label="Dog"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="cat" />}
             label="Cat"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="rabbit" />}
             label="Rabbit"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="bird" />}
             label="Bird"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="hamster" />}
             label="Hamster"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="turtle" />}
             label="Turtle"
           />
         </FormGroup>
@@ -75,9 +117,12 @@ const SearchBox = () => {
         <div className={classes.serviceTypeBox}>
           <h2 className={classes.h2}>For When You're Away</h2>
           <BottomNavigation
-            value={value}
+            value={value.type}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              if(value.type === "" | value.type !== newValue)
+                setValue({...value, type: newValue});
+              else
+              setValue({...value, type: ""});
             }}
             showLabels
           >
@@ -85,16 +130,19 @@ const SearchBox = () => {
               className={classes.serviceBox}
               label="House Sitting"
               icon={<NightsStayIcon />}
+              value="housesitting"
             />
             <BottomNavigationAction
               className={classes.serviceBox}
               label="Boarding"
               icon={<LocalAirportIcon />}
+              value="boarding"
             />
             <BottomNavigationAction
               className={classes.serviceBox}
               label="Day Care"
               icon={<WbSunnyIcon />}
+              value="daycare"
             />
           </BottomNavigation>
         </div>
@@ -103,9 +151,13 @@ const SearchBox = () => {
           <div className={classes.priceBoxLine2}>
             <TextField
               className={classes.priceInput}
+              type="number"
               variant="outlined"
               size="small"
               placeholder="Min"
+              name="minrate"
+              value={value.minrate}
+              onChange={onChange}
             />
             <h3
               style={{
@@ -117,9 +169,13 @@ const SearchBox = () => {
             ></h3>
             <TextField
               className={classes.priceInput}
+              type="number"
               variant="outlined"
               size="small"
               placeholder="Max"
+              name="maxrate"
+              value={value.maxrate}
+              onChange={onChange}
             />
             <h4 style={{ margin: "10px 0px 0px 10px", opacity: "0.5" }}>
               Baht
@@ -174,7 +230,7 @@ const SearchBox = () => {
           </div>
         </div>
       </div>
-      <Button className={classes.button} variant="contained">
+      <Button className={classes.button} variant="contained" onClick={searchHandle}>
         Search
       </Button>
     </div>
