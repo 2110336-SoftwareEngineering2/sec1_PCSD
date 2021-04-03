@@ -28,3 +28,24 @@
 .home > .makeStyles-searchBox-3 {
     margin-top: 0px;
 }
+
+.home > img {
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 2%;
+}
+
+#gif2 {
+    height: 150px;
+    position: absolute;
+    top: 15%;
+    left: 63%;
+}
+
+#gif3 {
+    height: 150px;
+    position: absolute;
+    top: 60%;
+    left: 75%;
+}
