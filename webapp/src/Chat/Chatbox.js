@@ -67,19 +67,12 @@ function Chatbox({roomId}){
                 }
             });
             const data = res.data;
-            // console.log(data)
+             console.log(data)
             setMessage(data.messages);
         }
     } 
     
-    //to implement more
-    async function addRoom({members}){
-        const url = 'http://localhost:4000/chat/create'
-        const member = {
-            member : {members}
-        }
-        axios.post(url,member)
-    }
+    
 
     function timeStampToDateStr (timestamp) {
         const dateObj = new Date(timestamp);
@@ -115,42 +108,22 @@ function Chatbox({roomId}){
      }
 
     return (
-        <div className = "Chatbox">
-            {/*
-                {}
-            </div>
-            
-                <input ></input>
-                <button >Send</button>*/}
-            
-            
-            
+        <div className = "Chatbox">            
                 <Container fixed = 'md' className = "d-flex flex-column py-2" style ={{height:"90vh"}} >
                     <div className = "Messages">
                         <h1>ChatBox</h1>
                     {/* <h2>{roomId}</h2> */}
-                    {/*<List
-                        className = 'Messages_List'
-                        height = {150} 
-                        itemCount = {1000}
-                        itemSize = {35}
-                        width = {300}
-                    >*/}
                         <div className = "Chat_Messages" style = {{overflowY :"auto"}}>
                             {//scroll this rewrite this section script
+                            
+                            //<Amesage email = "nsn@email.com" message = "Hello" timestamp = "07:08:10" is_user = {true} />
                             }
-                            <Amesage email = "nsn@email.com" message = "Hello" timestamp = "07:08:10" is_user = {true} />
                             {messages.map((mDetail, idx) => {
                                 return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
                                 //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
                             })}
-                            {/* to implement more 
-                             <div ref={messagesEndRef} />*/}
-                            {//scrollToBottom("Message_Box")
-                            }
                         </div>
                     </div>
-                    {/*</List>*/}
                     <div className = "Downside_Bar">
                         <input className = "Message_Box" onChange={handleChangeInputMessage} value = {inputMessage}/>
                         <button className = "Send_Chat" onClick={() => send()}>

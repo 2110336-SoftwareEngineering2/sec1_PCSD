@@ -94,9 +94,12 @@ function ReserveCaretaker(props) {
     }, []);
 
     function createChatRoom(){
-        console.log("Hello world");
-        axios
-        .post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]});
+        //console.log("Hello world");
+        axios.post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]},{
+            headers: {
+                "authorization": "Bearer " + cookie.accessToken
+            }
+        });
     }
 
     const saveToCookies = () => {
