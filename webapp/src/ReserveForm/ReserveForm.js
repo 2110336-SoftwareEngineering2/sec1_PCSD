@@ -18,8 +18,9 @@ import SumPet from './SumPet';
 import image from "./../userpic.png";
 import { useCookies } from "react-cookie";
 
-function ReserveForm( {name}) {
+function ReserveForm(props) {
     const { user } = useContext(UserContext);
+    const caretaker = props.location.state.caretaker;
     const classes = useStyles();
     const [value, setValue] = useState(0);
     // const [selectedDate, handleDateChange] = useState(new Date());
@@ -28,8 +29,19 @@ function ReserveForm( {name}) {
     const [cookie, setCookie, removeCookie] = useCookies();
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [lname, setLname] = useState("");
+    const [fname, setFname] = useState("");
     // const [service, setService] = useState("");
-
+    axios.post("http://localhost:4000/user/email", {email: caretaker})
+    .then((res) => {
+      const data = res.data;
+      setFname(data.firstname);
+      setLname(data.lastname);
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   const componentIsMounted = useRef(true);
   // 0: AddPetForm, 1: AddButtonClicked, 2: SumPet
   const [pageState, setPageState] = useState(1);
@@ -68,10 +80,12 @@ function ReserveForm( {name}) {
       }
     }).then((res) => {
       console.log(res)
-      history.push({ pathname: "/payment" });
+      history.push({ pathname: "/payment", reserve: res.data});
     }).catch(err => {
+      console.log("whatttttt");
       console.log(err);
     })
+
   }
   useEffect(() => {
     return () => {
@@ -152,47 +166,6 @@ function ReserveForm( {name}) {
     setEndDate(dateString);
   }
 
-  function clickedAdd() {
-    if (pageState === 2) {
-      setPageState(0);
-    } else {
-      const newPet = {
-        petName: input.petName,
-        breed: input.breed,
-        age: input.age,
-        gender: input.gender,
-      };
-      axios
-      .post("http://localhost:4000/user/pet", newPet, {
-        headers: { Authorization: `Bearer ${user.accessToken}` },
-      })
-      .then((res) => {
-        console.log(res.data);
-        uploadPetPic(res.data);
-        setPageState(1);
-      })
-      .catch((err) => console.log(err));
-    }
-  }
-
-  function uploadPetPic(pet) {
-    const data = new FormData();
-    data.append("email", pet.owner + pet._id);
-    data.append("file", input.petImg);
-    console.log(data);
-    axios
-      .post("http://localhost:4000/user/profilepic", data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
 
 
   function CheckPet(petId) {
@@ -214,7 +187,7 @@ function ReserveForm( {name}) {
           <br></br>
           <br></br>
             <div className={classes.serviceTypeBoxx}>
-          <h2 className={classes.h2}>Reserve {name}</h2>
+          <h2 className={classes.h2}>Reserve {fname} {lname}</h2>
           <BottomNavigation
             value={value}
             onChange={(event, newValue) => {

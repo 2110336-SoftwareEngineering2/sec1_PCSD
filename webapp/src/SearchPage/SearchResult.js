@@ -5,15 +5,15 @@ import Results from "./Results/Results";
 import { Paper } from "@material-ui/core";
 import useStyles from "./styles";
 
-const SearchResult = () => {
+const SearchResult = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [state, setState] = React.useState(props.location.state);
   return (
     <div>
       <Header />
       <div className={classes.searchResult}>
-        <SideSearchBox />
-        <Results />
+        <SideSearchBox data={props.location.data} setState={setState} />
+        <Results state={state} />
       </div>
     </div>
   );

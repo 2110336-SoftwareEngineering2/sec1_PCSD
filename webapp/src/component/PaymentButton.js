@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-
+import "./PaymentButton.css";
 import { user } from "../context/MyContext";
 
 function ReceiveButton({payment, accessToken, setState, state, index}) {
@@ -22,7 +22,9 @@ function ReceiveButton({payment, accessToken, setState, state, index}) {
     };
 
     return(
+        <div className="receivebutton">
         <Button variant="primary" onClick={onClick}>receive</Button>
+        </div>
     );
 };
 
@@ -44,7 +46,9 @@ function AcceptButton({payment, accessToken, setState, state, index}) {
     };
 
     return(
+        <div className="acceptbutton">
         <Button variant="primary" onClick={onClick}>accept</Button>
+        </div>
     );
 };
 
@@ -66,7 +70,9 @@ function CancelButton({payment, accessToken, setState, state, index}) {
     };
 
     return(
+        <div className="cancelbutton">
         <Button variant="primary" onClick={onClick}>cancel</Button>
+        </div>
     );
 }
 

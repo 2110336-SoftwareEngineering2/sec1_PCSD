@@ -8,6 +8,7 @@ function Addpet({ onChange, input }) {
     : URL.createObjectURL(input.petImg);
 
   function uploadImage(event) {
+    console.log(event.target.value);
     onChange({
       target: {
         name: "petImg",

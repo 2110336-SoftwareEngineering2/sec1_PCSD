@@ -92,9 +92,7 @@ function Header() {
       </div>
       <div className="header__right">
         <IconButton>
-          <NotificationsIcon onClick={() => {
-            history.push({ pathname: "/reservepage" });
-          }}/>
+          <NotificationsIcon/>
         </IconButton>
         <IconButton>
           <MailIcon
@@ -123,7 +121,7 @@ function Header() {
               }}
             >
               {" "}
-              Edit your profile
+              My Profile
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="5"
@@ -132,7 +130,7 @@ function Header() {
               }}
             >
               {" "}
-              Payment
+              Add Money
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="6"
@@ -141,16 +139,16 @@ function Header() {
               }}
             >
               {" "}
-              Secret
+              {user.role == "caretaker" ? "Job Cards" : "Payment Cards"}
             </Dropdown.Item>
             <Dropdown.Item
-              eventKey="7"
+              eventKey="8"
               onClick={() => {
-                history.push({ pathname: "/reserveform" });
+                history.push({ pathname: "/pets" });
               }}
             >
               {" "}
-              Secret2
+              Secret3
             </Dropdown.Item>
             {user.username == "admin" ? (
               <Dropdown.Item

@@ -1,0 +1,74 @@
+.petform {
+    margin: 0 20%;
+}
+.petform > .row > .picture > #uploadpic {
+    text-align: center;
+    height: fit-content;
+    width: 150px;
+}
+
+.petform > .row > .pettype {
+   margin-left: 40px;
+   align-items: center;
+   text-align: center;
+}
+
+.radio {
+    text-align: center;
+}
+.petform > .row > .pettype > .row > label {
+    margin-left: 100px;
+ }
+
+.row > .typepet {
+    margin-left: auto;
+    margin-bottom: 50px;
+ }
+
+.petform > .row.textinput {
+     margin-bottom: 20px;
+ }
+
+.petform > .row.button {
+    align-items: center;
+    margin-left: 50%;
+}
+.petform > .row.button > button{
+    cursor: pointer;
+    background-color: #B5B3B3;
+    color: white;
+    border-radius: 8px;
+    padding: 18px 25px;
+    height: 25px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+.petform > .row.button > button:hover {
+    cursor: pointer;
+    background-color: #872935;
+    color: white;
+    border-radius: 8px;
+    padding: 18px 25px;
+    height: 25px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+.petform > .row.button > .addbuttonn > input {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 0px;
+    text-align: center;
+    width: 120px;
+    margin-left: 20px;
+    height: 37px;
+    margin-bottom: 20px;
+}
+
+
+   
