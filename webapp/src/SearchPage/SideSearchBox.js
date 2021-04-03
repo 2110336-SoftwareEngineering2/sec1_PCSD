@@ -22,15 +22,6 @@ const SideSearchBox = (props) => {
   const onChange = (event) => {
     setValue({...value, [event.target.name]: event.target.value})
   }
-
-  const getSelectedType = () => {
-    const typeSelection = document.getElementsByName("type")[0];
-    for(var i=0; i<typeSelection.length; i++) {
-      if(typeSelection[i].selected) {
-        setValue({...value, type: typeSelection[i].value});
-      }
-    }
-  }
   
   const getSearchData = () => {
     // const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
@@ -41,7 +32,7 @@ const SideSearchBox = (props) => {
       // pet_type: pet_type,
       type: value.type !== "" ? value.type : null,
       // date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
-      // address: (value.address !== "") ? value.address : null
+      address: (value.address !== "") ? value.address : null
     }
     return data;
   }
@@ -93,6 +84,9 @@ const SideSearchBox = (props) => {
         }}
         variant="outlined"
         size="small"
+        name="address"
+        value={value.address}
+        onChange={onChange}
       />
       <Typography className={classes.header} variant="h4">
         Rate
