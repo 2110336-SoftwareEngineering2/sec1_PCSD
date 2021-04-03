@@ -9,6 +9,10 @@ router.post("/caretaker", (req, res) => {
 
 router.get("/:email", (req, res) => {
     ReserveController.getReserveByEmail(req, res);
-})
+});
+
+router.post("/delete", (req, res) => {
+    ReserveController.removeReserveCaretaker(req, res);
+});
 
 module.exports = router;
