@@ -7,15 +7,17 @@ import { UserContext } from "../context/MyContext";
 import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentButton";
 import "./Test.css";
 import Test2 from "./Test2";
+import SumPet from "./SumPet";
 
 function Test(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState({
-    payments: []
+    payments: [],
+    reserves: []
   })
-
+  
   useEffect(() => {
     if (!user && cookie.accessToken !== undefined) {
       const header = {"authorization": "Bearer " + cookie.accessToken};
@@ -29,6 +31,7 @@ function Test(_) {
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
               getPayment(header);
+              getReserve((res.data).email);
             })
         })
         .catch((err) => {
@@ -48,13 +51,62 @@ function Test(_) {
       })
       .then((res) => {
         setState({payments: res.data});
+        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  const getReserve = (email) => {
+    axios
+      .get(`http://localhost:4000/reserve/${email}`, {
+      headers: {
+        "authorization": "Bearer " + cookie.accessToken
+    }
+    })
+      .then((res) => {
+        setState({reserves: res.data});
+        console.log(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+ 
+/*
+      axios
+        .post("http://localhost:4000/user/email", {email: caretaker})
+        .then((res) => {
+            const data = res.data;
+            setName({firstname: data.firstname, lastname: data.lastname});
+            setContact({email: data.email, phone: data.mobileNumber});
+            })
+        .catch((err) => {
+            console.log(err);
+            });
+*/
+ 
+  const getPet = (email) => {
+    const pet_lists = null;
+    axios
+    .get(`http://localhost:4000/reserve/${email}`, {
+      headers: {
+        "authorization": "Bearer " + cookie.accessToken
+    }
+    })
+    .then((res) => {
+      console.log(res.data.pets);
+      return (
+        <SumPet pet_lists= {res.data.pets}/>
+      );
+    })
+    .catch((err) => {
+      console.log("pet", err);
+    });
+     
+  };
   const getButton = (payment, index) => {
     if (user.role === "caretaker") {
       if (payment.transferStatus === "WAITING") {
@@ -105,7 +157,6 @@ function Test(_) {
       }
     }
   };
-
   return (
     <div className="test">
       {loading ? (
@@ -119,11 +170,11 @@ function Test(_) {
             <Card.Body>
             { user.role == "caretaker" ? <Card.Title>Job</Card.Title> :  <Card.Title>Payment</Card.Title>
             }
-            {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
             <Card.Text>
-              <p>petowner's email: {payment.petownerEmail}</p>
-              <p>caretaker's email: {payment.caretakerEmail}</p>
+              <p>Petowner's name: {payment.petownerFname} {payment.petownerLname}</p>
+              <p>Caretaker's name: {payment.caretakerFname} {payment.caretakerLname}</p>
               <p>amount: {payment.amount.$numberDecimal}</p>
+              {getPet(payment.caretakerEmail)}
               <div className="row cardstatus">
               <p>
                 status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "PAID" : payment.transferStatus}</span>

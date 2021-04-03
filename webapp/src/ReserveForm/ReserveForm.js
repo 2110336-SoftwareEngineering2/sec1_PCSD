@@ -82,6 +82,7 @@ function ReserveForm(props) {
       console.log(res)
       history.push({ pathname: "/payment", reserve: res.data});
     }).catch(err => {
+      console.log("whatttttt");
       console.log(err);
     })
 
