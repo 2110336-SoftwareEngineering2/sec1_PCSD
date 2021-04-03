@@ -29,19 +29,25 @@ const SearchBox = () => {
     address: "",
   });
 
-  const searchHandle = () => {
+  const getSearchData = () => {
     const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
     const pet_type = getPetType();
-    axios.post("http://localhost:4000/user/caretaker/search", {
+    const data = {
       minrate: minmax[0] > 0 ? minmax[0] : null,
       maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
       pet_type: pet_type,
       type: value.type !== "" ? value.type : null,
       date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
       address: (value.address !== "") ? value.address : null
-    })
+    }
+    return data;
+  }
+
+  const searchHandle = () => {
+    const data = getSearchData();
+    axios.post("http://localhost:4000/user/caretaker/search", data)
     .then((res) => {
-      history.push( {pathname: "/searchresult", state: res.data});
+      history.push( {pathname: "/searchresult", state: res.data, data: {value: value, pet_type: data.pet_type}});
     })
     .catch((err) => {
       console.log(err);
@@ -219,7 +225,7 @@ const SearchBox = () => {
             <TextField
               inputProps={{
                 style: { opacity: 0.5 },
-                min: getToday()
+                min: getToday(),
               }}
               variant="outlined"
               type="date"
@@ -231,7 +237,11 @@ const SearchBox = () => {
               size="small"
               value={value.date.start}
               onChange={(event) => {
-                setValue({...value, date: {start: event.target.value, end: value.date.end}})
+                if(new Date(event.target.value) > new Date(value.date.end)) {
+                  setValue({...value, date: {start: event.target.value, end: ""}})
+                } else {
+                  setValue({...value, date: {start: event.target.value, end: value.date.end}})
+                }
               }}
             />
             <p
@@ -246,7 +256,7 @@ const SearchBox = () => {
             <TextField
               inputProps={{
                 style: { opacity: 0.5 },
-                min: value.date.start
+                min: (value.date.start === "") ? getToday() : value.date.start
               }}
               variant="outlined"
               type="date"
