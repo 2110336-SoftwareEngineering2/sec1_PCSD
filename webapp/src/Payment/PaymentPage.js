@@ -7,7 +7,7 @@ function PaymentPage(props) {
     return (
         <div>
             <Header />
-            <Payment receiverEmail={props.location.reserve.caretaker} amountt={props.location.reserve.amount}/>
+            <Payment receiverEmail={props.location.reserve.caretaker} amount={props.location.reserve.amount}/>
         </div>
     )
 }
