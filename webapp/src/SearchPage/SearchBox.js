@@ -225,7 +225,7 @@ const SearchBox = () => {
             <TextField
               inputProps={{
                 style: { opacity: 0.5 },
-                min: getToday()
+                min: getToday(),
               }}
               variant="outlined"
               type="date"
@@ -237,7 +237,11 @@ const SearchBox = () => {
               size="small"
               value={value.date.start}
               onChange={(event) => {
-                setValue({...value, date: {start: event.target.value, end: value.date.end}})
+                if(new Date(event.target.value) > new Date(value.date.end)) {
+                  setValue({...value, date: {start: event.target.value, end: ""}})
+                } else {
+                  setValue({...value, date: {start: event.target.value, end: value.date.end}})
+                }
               }}
             />
             <p
@@ -252,7 +256,7 @@ const SearchBox = () => {
             <TextField
               inputProps={{
                 style: { opacity: 0.5 },
-                min: value.date.start
+                min: (value.date.start === "") ? getToday() : value.date.start
               }}
               variant="outlined"
               type="date"
