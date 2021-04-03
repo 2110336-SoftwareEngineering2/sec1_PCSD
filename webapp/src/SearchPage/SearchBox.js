@@ -25,9 +25,12 @@ const SearchBox = () => {
 
   const searchHandle = () => {
     const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
+    const pet_type = getPetType();
+    console.log(pet_type)
     axios.post("http://localhost:4000/user/caretaker/search", {
       minrate: minmax[0] > 0 ? minmax[0] : null,
       maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
+      pet_type: pet_type
     })
     .then((res) => {
       console.log(res.data);
@@ -37,6 +40,19 @@ const SearchBox = () => {
       console.log(err);
     })
   };
+
+  const getPetType = () => {
+    const pet_type = []
+    const petChecker = document.getElementsByName("checkedA")
+
+    for(var i = 0; i<petChecker.length; i++) {
+      if(petChecker[i].checked == true) {
+        pet_type.push(petChecker[i].value);
+      }
+    }
+
+    return pet_type.length > 0 ? pet_type : null
+  }
 
   const onChange = (event) => {
     setValue({...value, [event.target.name]: event.target.value})
@@ -49,32 +65,32 @@ const SearchBox = () => {
         <FormGroup row>
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="dog" />}
             label="Dog"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="cat" />}
             label="Cat"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="rabbit" />}
             label="Rabbit"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="bird" />}
             label="Bird"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="hamster" />}
             label="Hamster"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" />}
+            control={<Checkbox name="checkedA" color="primary" value="turtle" />}
             label="Turtle"
           />
         </FormGroup>
