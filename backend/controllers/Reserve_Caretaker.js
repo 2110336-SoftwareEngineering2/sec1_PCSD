@@ -79,7 +79,41 @@ const reserveCaretaker = async (req, res) => {
     // }
   // }
 };
-    
+
+const removeReserveCaretaker = async (req, res) => {
+  // Check if user is logged in
+  const startDate = dateStringToTimeStamp(req.body.startDate);
+  const endDate = dateStringToTimeStamp(req.body.endDate);
+  const rate = req.body.rate;
+  const hours = (endDate - startDate) / (1000*3600);
+  const amount = rate * hours;
+    // remove reserve
+    await Reserve.findOneAndDelete(
+      {
+        service: req.body.service,
+        caretaker: req.body.caretaker,
+        petowner: req.body.petowner,
+        startDate: startDate,
+        endDate: endDate,
+        status: req.body.status,
+        rate: req.body.rate,
+        amount: amount,
+        pets: [],
+      },
+      (err) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(200).send("Remove reserve successful");
+        }
+      }
+    );
+  };
+
+
+
+
+     
     // UnReserve Caretaker is the function when user logged in is caretaker and what to unreserve themself.
 // const unreserveCaretaker = async (req, res) => {
 // // Check if user is logged in
