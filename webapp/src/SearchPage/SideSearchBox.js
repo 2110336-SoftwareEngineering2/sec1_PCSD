@@ -2,20 +2,61 @@ import React from "react";
 import { TextField, Typography, Button } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import useStyles from "./styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import axios from "axios";
 
-const SideSearchBox = () => {
+import useStyles from "./styles";
+
+const SideSearchBox = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(props.data);
   const [state, setState] = React.useState({
     checkedDog: false,
     checkedB: true,
     checkedF: true,
     checkedG: true,
   });
+
+  const onChange = (event) => {
+    setValue({...value, [event.target.name]: event.target.value})
+  }
+
+  const getSelectedType = () => {
+    const typeSelection = document.getElementsByName("type")[0];
+    for(var i=0; i<typeSelection.length; i++) {
+      if(typeSelection[i].selected) {
+        setValue({...value, type: typeSelection[i].value});
+      }
+    }
+  }
+  
+  const getSearchData = () => {
+    // const minmax = [parseInt(value.minrate), parseInt(value.maxrate)];
+    // const pet_type = getPetType();
+    const data = {
+      // minrate: minmax[0] > 0 ? minmax[0] : null,
+      // maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
+      // pet_type: pet_type,
+      type: value.type !== "" ? value.type : null,
+      // date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
+      // address: (value.address !== "") ? value.address : null
+    }
+    return data;
+  }
+
+  const searchHandle = () => {
+    const data = getSearchData();
+    axios.post("http://localhost:4000/user/caretaker/search", data)
+    .then((res) => {
+      props.setState(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className={classes.sideSearchBox}>
       <Typography className={classes.header} variant="h4">
@@ -33,10 +74,13 @@ const SideSearchBox = () => {
             },
           }}
           variant="outlined"
+          name="type"
+          onChange={onChange}
         >
-          <option>House Siting</option>
-          <option>Boarding</option>
-          <option>Day Care</option>
+          <option value="housesitting" selected={value.type === "housesitting"}>House Siting</option>
+          <option value="boarding" selected={value.type === "boarding"}>Boarding</option>
+          <option value="daycare" selected={value.type === "daycare"}>Day Care</option>
+          <option value="" selected={value.type === ""}>---</option>
         </Select>
       </FormControl>
       <Typography className={classes.header} variant="h4">
@@ -145,7 +189,7 @@ const SideSearchBox = () => {
           label="Turtle"
         />
       </FormGroup>
-      <Button className={classes.sideButton} variant="contained">
+      <Button className={classes.sideButton} variant="contained" onClick={searchHandle}>
         Search
       </Button>
     </div>
