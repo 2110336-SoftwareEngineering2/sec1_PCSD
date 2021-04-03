@@ -127,6 +127,8 @@ const modifyPayment = async (req, res, status) => {
       } else {
           res.status(200).send(payment);
       }
+    } else if(payment && (status === "ACCEPTED")) {
+      res.status(200).send(payment);
     } else {
       res.status(400).send("No payment met the requirements");
     }
