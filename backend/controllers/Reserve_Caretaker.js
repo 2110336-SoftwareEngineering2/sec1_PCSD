@@ -171,6 +171,9 @@ module.exports = {
   },
   getReserveByEmail: async (req, res) => {
     await getReserveByEmail(req, res);
+  },
+  removeReserveCaretaker: async (req, res) => {
+    await removeReserveCaretaker(req, res);
   }
   // reserveCaretaker,
   // unreserveCaretaker,
