@@ -130,7 +130,7 @@ function Header() {
               }}
             >
               {" "}
-              Payment
+              Add Money
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="6"
@@ -139,7 +139,7 @@ function Header() {
               }}
             >
               {" "}
-            Job Cards
+              {user.role == "caretaker" ? "Job Cards" : "Payment Cards"}
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="8"
