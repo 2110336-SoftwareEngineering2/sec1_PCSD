@@ -92,9 +92,7 @@ function Header() {
       </div>
       <div className="header__right">
         <IconButton>
-          <NotificationsIcon onClick={() => {
-            history.push({ pathname: "/reservepage" });
-          }}/>
+          <NotificationsIcon/>
         </IconButton>
         <IconButton>
           <MailIcon
@@ -141,16 +139,7 @@ function Header() {
               }}
             >
               {" "}
-              Secret
-            </Dropdown.Item>
-            <Dropdown.Item
-              eventKey="7"
-              onClick={() => {
-                history.push({ pathname: "/reserveform" });
-              }}
-            >
-              {" "}
-              Secret2
+            Job Cards
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="8"

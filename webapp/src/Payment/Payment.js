@@ -11,7 +11,7 @@ function Payment({receiverEmail, amount}) {
   
   // strub
  console.log(receiverEmail);
- 
+
   const [state, setState] = useState({
     receiverEmail: receiverEmail ,
     amount: amount,
@@ -30,7 +30,9 @@ function Payment({receiverEmail, amount}) {
       })
       .catch((err) => {
         console.log(err);
+        window.alert(`ERROR!!!!`);
       });
+      history.push({ pathname: "/" });
   };
 
   return (
