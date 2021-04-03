@@ -4,7 +4,11 @@ const { Schema } = mongoose;
 
 const paymentSchema = new Schema({
   petownerEmail: String,
+  petownerFname: String,
+  petownerLname: String,
   caretakerEmail: String,
+  caretakerFname: String,
+  caretakerLname: String,
   transferStatus: String,
   amount: {
     type: mongoose.Decimal128,

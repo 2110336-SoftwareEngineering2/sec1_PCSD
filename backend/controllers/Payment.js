@@ -88,7 +88,11 @@ const transfer = async (req, res) => {
       );
       const newPayment = new Payment({
         petownerEmail: sender.email,
+        petownerFname: sender.firstname,
+        petownerLname: sender.lastname,
         caretakerEmail: receiver.email,
+        caretakerFname: receiver.firstname,
+        caretakerLname: receiver.lastname,
         transferStatus: "WAITING",
         amount: amount,
       });
