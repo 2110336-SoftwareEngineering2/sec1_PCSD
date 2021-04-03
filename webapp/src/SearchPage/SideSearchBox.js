@@ -31,7 +31,7 @@ const SideSearchBox = (props) => {
       maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
       // pet_type: pet_type,
       type: value.type !== "" ? value.type : null,
-      // date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
+      date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
       address: (value.address !== "") ? value.address : null
     }
     return data;
@@ -47,6 +47,16 @@ const SideSearchBox = (props) => {
       console.log(err);
     })
   }
+
+  const getToday = () => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + "-" + mm + "-" + dd;
+    return today;
+  };
 
   return (
     <div className={classes.sideSearchBox}>
@@ -126,14 +136,23 @@ const SideSearchBox = (props) => {
       <div className={classes.sidePriceSection}>
         <TextField
           className={classes.sideDateInput}
-          InputProps={{
+          inputProps={{
             classes: {
               input: classes.datePlaceHolder,
             },
+            min: getToday(),
           }}
           type="date"
           variant="outlined"
           size="small"
+          value={value.date.start}
+          onChange={(event) => {
+            if(new Date(event.target.value) > new Date(value.date.end)) {
+              setValue({...value, date: {start: event.target.value, end: ""}})
+            } else {
+              setValue({...value, date: {start: event.target.value, end: value.date.end}})
+            }
+          }}
         />
         <p
           style={{
@@ -146,14 +165,19 @@ const SideSearchBox = (props) => {
         </p>
         <TextField
           className={classes.sideDateInput}
-          InputProps={{
+          inputProps={{
             classes: {
               input: classes.datePlaceHolder,
             },
+            min: (value.date.start === "") ? getToday() : value.date.start
           }}
           type="date"
           variant="outlined"
           size="small"
+          value={value.date.end}
+          onChange={(event) => {
+            setValue({...value, date: {start: value.date.start, end: event.target.value}})
+          }}
         />
       </div>
       <Typography className={classes.header} variant="h4">
