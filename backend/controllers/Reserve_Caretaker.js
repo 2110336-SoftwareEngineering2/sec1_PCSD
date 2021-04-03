@@ -92,7 +92,7 @@ const removeReserveCaretaker = async (req, res) => {
   //const amount = rate * hours;
     
   if (!problem && user.role === "user") {
-    const reserveId = req.body.source;
+    const reserveId = req.params.id;
     //const email = user.email;
     // remove reserve
     await Reserve.findOneAndDelete(
