@@ -1,94 +1,102 @@
-.first {
+.payment .first {
     border-radius: 8px;
-    border: 1.5px solid #78b9ff;
+    border: 1.5px solid #F6BEBE;
     color: #000;
-    background-color: #eaf4ff;
+    background-color: #FEF0F0;
     margin-top: 13px;
 }
 
-.card {
+.payment .card {
     background-color: #fff;
-    width: 300px;
+    width: 350px;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
-
-.name {
-    font-size: 15px;
-    color: #403f3f;
+.payment #header{
+    background-color:#872935;
+    border-radius: 15px 15px 0px 0px;
+    border-color: #872935;
+    height: 110px;
+}
+.payment .MuiAvatar-root {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+.payment .name {
+    font-size: 25px;
+    color: white;
     font-weight: bold
 }
 
-.cross {
-    font-size: 11px;
-    color: #b0aeb7
+.payment .cross {
+    font-size: 15px;
+    color:  #b0aeb7 ;
 }
-
-.pin {
+.payment .crosss {
+    margin-top: 10px;
+}
+.payment .pin {
     font-size: 14px;
-    color: #b0aeb7
+    color: #FFF4F1;
 }
 
-.second {
+.payment .second {
     border-radius: 8px;
     border: 1px solid #acacb0;
     color: #000;
-    background-color: #fff
+    background-color: #fff;
 }
 
 .dot {}
 
-.head {
-    color: #137ff3;
+.payment .head {
+    color: #872935;
     font-size: 12px
 }
 
-.dollar {
+.payment .dollar {
     font-size: 18px;
-    color: #097bf7
+    color: #872935
 }
 
-.amount {
-    color: #007bff;
+.payment .amount {
+    color: #872935;
     font-weight: bold;
     font-size: 18px
 }
 
-.form-control {
+.payment .form-control {
     font-size: 18px;
     font-weight: bold;
     width: 60px;
     height: 28px
 }
 
-.backk {
+.payment .backk {
     color: #aba4a4;
     font-size: 15px;
     line-height: 73px;
     font-weight: 400;
     cursor: pointer;
 }
-.backk:hover {
-    color: #137ff3;
+.payment .backk:hover {
+    color: #872935;
     font-size: 15px;
     line-height: 73px;
     font-weight: 400;
     cursor: pointer;
 }
 
-.pay {
+.payment .pay {
     width: 150px;
     height: 60px;
     border-radius: 8px;
     font-size: 17px;
-    background-color: #BD6A43;
-    border-color:#BD6A43;
+    background-color: #acacb0;
+    border-color:#acacb0;
 }
-.pay:hover {
-    width: 150px;
-    height: 60px;
-    border-radius: 8px;
-    font-size: 17px;
-    background-color: #137ff3;
-    border-color:#137ff3;
+.payment .pay:hover {
+    background-color: #872935;
+    border-color:#872935;
 }
