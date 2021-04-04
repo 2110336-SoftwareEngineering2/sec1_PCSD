@@ -5,31 +5,44 @@
     padding-bottom: 100px
 }
 
-.card {
+.addmoney .card {
     background-color: #fff;
+    max-width: 450px;
+    min-width: 380px;
     width: 300px;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
-
-.name {
-    font-size: 15px;
-    color: #403f3f;
+.addmoney #headerr {
+    background-color:#872935;
+    border-radius: 15px 15px 0px 0px;
+    border-color: #872935;
+    height: 110px;
+}
+.addmoney .MuiAvatar-root {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+.addmoney .name {
+    font-size: 25px;
+    color: white;
     font-weight: bold
 }
 
-.cross {
-    font-size: 11px;
-    color: #b0aeb7
+.addmoney .cross {
+    font-size: 15px;
+    color:  #b0aeb7 ;
 }
-
-.pin {
+.addmoney .crosss {
+    margin-top: 10px;
+}
+.addmoney .pin {
     font-size: 14px;
-    color: #b0aeb7
+    color: #FFF4F1;
 }
 
-
-.second {
+.addmoney .second {
     margin-top: 13px;
     border-radius: 8px;
     border: 1px solid #acacb0;
@@ -37,26 +50,27 @@
     background-color: #fff
 }
 
-.dot {
+.addmoney .dot {
     top: -12px;
 }
 
-.head {
-    color: #137ff3;
+.addmoney .head {
+    color: #872935;
     font-size: 12px
 }
 
-.dollar {
+.addmoney .dollar {
     font-size: 18px;
-    color: #097bf7;
+    margin-top: 3px;
+    color: #872935;
 }
 
-.amount {
-    color: #007bff;
+.addmoney .amount {
+    color: #872935;
     font-weight: bold;
     font-size: 18px
 }
-.form-control {
+.addmoney .form-control {
     font-size: 18px;
     font-weight: bold;
     width: 100px;
@@ -70,24 +84,19 @@
     font-weight: 400
 }
 
-.acard > .button {
+.addmoney .acard > .button {
     width: 150px;
     height: 60px;
     border-radius: 8px;
     font-size: 17px;
-    margin: 30px 70px;
-    background-color: #BD6A43;
-    border-color:#BD6A43;
+    margin: 30px 100px;
+    background-color: #acacb0;
+    border-color:#acacb0;
 }
 
-.acard > .button:hover {
-    width: 150px;
-    height: 60px;
-    border-radius: 8px;
-    font-size: 17px;
-    margin: 30px 70px;
-    background-color: #137ff3;
-    border-color:#137ff3;
+.addmoney .acard > .button:hover {
+    background-color: #872935;
+    border-color:#872935;
 }
 
 input::-webkit-outer-spin-button,

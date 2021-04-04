@@ -89,6 +89,14 @@
     cursor: pointer;
 }
 
+.payment .backk:active  {
+    color: #872935;
+    font-size: 15px;
+    line-height: 73px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
 .payment .pay {
     width: 150px;
     height: 60px;
