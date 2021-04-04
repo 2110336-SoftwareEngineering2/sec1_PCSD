@@ -54,7 +54,7 @@ function Test(_) {
     } else {
       const header = {"authorization": "Bearer " + cookie.accessToken};
       //getPayment(header);
-      getReserve(user.email);
+      getReserve(user.email,header);
     }
   }, []);
 
@@ -80,12 +80,10 @@ function Test(_) {
         console.log(err);
       });
   };
-  const getReserve = (email) => {
+  const getReserve = (email,header) => {
     axios
       .get(`http://localhost:4000/reserve/${email}`, {
-      headers: {
-        "authorization": "Bearer " + cookie.accessToken
-    }
+      headers: header
     })
       .then((res) => {
         setState({reserves: res.data});
@@ -99,7 +97,6 @@ function Test(_) {
  
  
   const getPet = (pet_lists) => {
-    console.log("ss",pet_lists);
     return (
     <SumPet pet_lists={pet_lists}/>
     );
