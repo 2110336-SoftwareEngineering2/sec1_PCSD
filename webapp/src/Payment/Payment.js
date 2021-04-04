@@ -32,7 +32,7 @@ function Payment() {
       })
       .then((res) => {
         console.log(res.data);
-        window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
+        // window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
         history.push({pathname: "/"});
       })
       .catch(err =>{
