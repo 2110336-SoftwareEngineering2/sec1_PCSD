@@ -116,7 +116,7 @@ const modifyPayment = async (req, res, status) => {
     }
 
     const payment = await Payment.findOneAndUpdate(
-      { _id: paymentId, transferStatus: { $eq: "WAITING" } },
+      { _id: paymentId, $or: [{transferStatus: { $eq: "WAITING" } }, {transferStatus: { $eq: "ACCEPTED" } }]},
       { transferStatus: status },
       { new: true }
     );
