@@ -3,11 +3,11 @@ import { UserContext } from "../context/MyContext";
 
 import Header from "../Header/header";
 import ProfileCard from "./ProfileCard";
-import ProfileForm from "./EditForm";
+import ProfileForm from "./ProfileForm";
 import "./UserProfile.css";
 import "./FormComponents.css";
 
-import history from "./../history";
+import history from "../history";
 import axios from "axios";
 
 function UserProfile() {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, InputGroup, FormControl, Button } from "react-bootstrap";
+import { Form, Col, InputGroup, Button } from "react-bootstrap";
 
 function InputForm({ id, label, children }) {
   return (
@@ -13,7 +13,7 @@ function InputForm({ id, label, children }) {
 function FirstName({ input, onChange }) {
   return (
     <InputForm id="firstname" label="First Name">
-      <FormControl
+      <Form.Control
         type="text"
         name="firstname"
         placeholder="First Name"
@@ -28,7 +28,7 @@ function FirstName({ input, onChange }) {
 function LastName({ input, onChange }) {
   return (
     <InputForm id="lastname" label="Last Name">
-      <FormControl
+      <Form.Control
         type="text"
         name="lastname"
         placeholder="Last Name"
@@ -43,7 +43,7 @@ function LastName({ input, onChange }) {
 function NewPassword({ input, onChange }) {
   return (
     <InputForm id="new_password" label="New Password">
-      <FormControl
+      <Form.Control
         autoComplete="new-password"
         pattern={"^" + input.confirm_password + "$"}
         type="password"
@@ -62,7 +62,7 @@ function NewPassword({ input, onChange }) {
 function ConfirmPassword({ input, onChange }) {
   return (
     <InputForm id="confirm_password" label="Confirm Password">
-      <FormControl
+      <Form.Control
         autoComplete="new-password"
         pattern={"^" + input.new_password + "$"}
         type="password"
@@ -81,7 +81,7 @@ function ConfirmPassword({ input, onChange }) {
 function Email({ input }) {
   return (
     <InputForm id="email" label="Email Address">
-      <FormControl
+      <Form.Control
         type="email"
         name="email"
         placeholder="Email Address"
@@ -100,7 +100,7 @@ function Username({ input, onChange, valid }) {
         <InputGroup.Prepend>
           <InputGroup.Text>@</InputGroup.Text>
         </InputGroup.Prepend>
-        <FormControl
+        <Form.Control
           className={valid ? "valid" : "invalid"}
           type="text"
           name="username"
@@ -117,7 +117,7 @@ function Username({ input, onChange, valid }) {
 function MobileNumber({ input, onChange }) {
   return (
     <InputForm id="mobileNumber" label="Mobile Number">
-      <FormControl
+      <Form.Control
         type="tel"
         pattern="[0-9]{10}"
         name="mobileNumber"

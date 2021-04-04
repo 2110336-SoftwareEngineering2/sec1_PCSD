@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, Card, Button, FormFile } from "react-bootstrap";
-import { UserContext } from "../context/MyContext";
 
 function ProfileCard({ info, updateImage }) {
-  const { user } = useContext(UserContext);
+  const role = info.role == "petowner" ? "Pet Owner" : "Caretaker";
   const user_fullname = info.firstname + " " + info.lastname;
   const imgURL = info.userImg
     ? URL.createObjectURL(info.userImg)
     : "https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.email;
-  console.log(user);
 
   function uploadImage(event) {
     updateImage({ ...info, userImg: event.target.files[0] });
@@ -17,7 +15,7 @@ function ProfileCard({ info, updateImage }) {
   return (
     <Container className="my-card">
       <Card className="text-center mx-auto" style={{ width: "100%" }}>
-        <Card.Header className="h4">Pet Owner</Card.Header>
+        <Card.Header className="h4">{role}</Card.Header>
         <Card.Body>
           <Card.Title as="h3">{user_fullname}</Card.Title>
           <Card.Subtitle className="text-muted">@{info.username}</Card.Subtitle>
