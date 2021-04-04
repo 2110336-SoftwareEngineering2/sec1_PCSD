@@ -31,7 +31,7 @@ function Test(_) {
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
               getPayment(header);
-              getReserve((res.data).email);
+             // getReserve((res.data).email);
             })
         })
         .catch((err) => {
@@ -174,7 +174,7 @@ function Test(_) {
               <p>Petowner's name: {payment.petownerFname} {payment.petownerLname}</p>
               <p>Caretaker's name: {payment.caretakerFname} {payment.caretakerLname}</p>
               <p>amount: {payment.amount.$numberDecimal}</p>
-              {getPet(payment.caretakerEmail)}
+              {/*getPet(payment.caretakerEmail)*/}
               <div className="row cardstatus">
               <p>
                 status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "PAID" : payment.transferStatus}</span>

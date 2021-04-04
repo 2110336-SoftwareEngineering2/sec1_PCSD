@@ -9,8 +9,7 @@ import history from "./../history";
 import { UserContext, ChatContext } from "../context/MyContext";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import "bootstrap/dist/css/bootstrap.min.css";
-import socketIOClient from 'socket.io-client';
+import socketIOClient from "socket.io-client";
 import { useCookies } from "react-cookie";
 
 // const getHash = (str, algo = "SHA-256") => {
@@ -32,35 +31,32 @@ function Header() {
   const [sumUnread, setSumUnread] = useState(0);
   const chatContext = useContext(ChatContext);
   // const roomId = getHash(user.email);
-  const endpoint = "http://localhost:4000"
+  const endpoint = "http://localhost:4000";
   const socketRef = useRef();
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
   socketRef.current = socketIOClient(endpoint, {
     query: {
-      room: user.email
-    }
-  }) ;
-
+      room: user.email,
+    },
+  });
 
   useEffect(() => {
     // setSumUnread(getSumUnreadChat());
 
-    socketRef.current.on('get-sum-unread', (res) => {
+    socketRef.current.on("get-sum-unread", (res) => {
       // console.log(res)
       setSumUnread(res.sum);
     });
 
     return () => {
       socketRef.current.disconnect();
-    }
-
+    };
   }, [sumUnread]);
 
   useEffect(() => {
-    socketRef.current.emit('get-sum-unread', user.email);
+    socketRef.current.emit("get-sum-unread", user.email);
   });
   // Hash email for create unique socket server
-  
 
   // const getSumUnreadChat = () => {
   //   var sum = 0;
@@ -83,9 +79,12 @@ function Header() {
           <img src={petidcare} alt="" />
           <h4>Petidcare</h4>
         </div>
-        <div className="header__input" onClick={() => {
+        <div
+          className="header__input"
+          onClick={() => {
             history.push({ pathname: "/searchpage" });
-          }}>
+          }}
+        >
           <SearchIcon />
           <label className="header__label">Search for caketakers</label>
         </div>
@@ -100,7 +99,7 @@ function Header() {
               history.push({ pathname: "/chat" });
             }}
           />
-           {sumUnread === 0 ? null : `(${sumUnread})`}
+          {sumUnread === 0 ? null : `(${sumUnread})`}
         </IconButton>
         <hr />
         <div className="header__profile">
@@ -109,7 +108,12 @@ function Header() {
             title={
               <div className="user_infoo">
                 {" "}
-                <Avatar src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ user.email}/> &nbsp; {user.username}{" "}
+                <Avatar
+                  src={
+                    "https://pcsdimage.s3-us-west-1.amazonaws.com/" + user.email
+                  }
+                />{" "}
+                &nbsp; {user.username}{" "}
               </div>
             }
             id="dropdown-menu-align-right"
@@ -130,7 +134,7 @@ function Header() {
               }}
             >
               {" "}
-              Payment
+              Add Money
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="6"
@@ -139,7 +143,7 @@ function Header() {
               }}
             >
               {" "}
-            Job Cards
+              {user.role == "caretaker" ? "Job Cards" : "Payment Cards"}
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="8"
@@ -148,7 +152,16 @@ function Header() {
               }}
             >
               {" "}
-              Secret3
+              My Pets
+            </Dropdown.Item>
+            <Dropdown.Item
+              eventKey="101"
+              onClick={() => {
+                history.push({ pathname: "/profile" });
+              }}
+            >
+              {" "}
+              My Profile (New)
             </Dropdown.Item>
             {user.username == "admin" ? (
               <Dropdown.Item

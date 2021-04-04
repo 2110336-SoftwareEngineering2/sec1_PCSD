@@ -94,10 +94,13 @@ function ReserveCaretaker(props) {
             });
     }, []);
 
-    function createChatRoom() {
-        console.log("Hello world");
-        axios
-        .post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]});
+    function createChatRoom () {
+        //console.log("Hello world");
+        axios.post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]},{
+            headers: {
+                "authorization": "Bearer " + cookie.accessToken
+            }
+        });
     }
 
     const saveToCookies = () => {
@@ -112,6 +115,11 @@ function ReserveCaretaker(props) {
         }
         setCookie("reserveTmp", data, { path: "/" });
         // console.log(cookie.ReserveTmp)
+    }
+
+    function onclick() {
+        createChatRoom() 
+        history.push( {pathname: "/chat"});
     }
     
     return (
@@ -150,7 +158,7 @@ function ReserveCaretaker(props) {
                     </div>
                     <div className="row">
                         <div className="col-12 reserve_button">
-                            <button className="RButton" onClick = {() => createChatRoom()}  >Chat</button>
+                            <button className="RButton" onClick = {() => onclick()}  >Chat</button>
                             <button className="RButton" onClick = {() => {
                                     if (!clickReview.clicked) {
                                         setClickReview({clicked: true});
