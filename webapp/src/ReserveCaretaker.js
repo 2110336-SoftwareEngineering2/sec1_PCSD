@@ -128,16 +128,16 @@ function ReserveCaretaker(props) {
             <div className="reserve_background">
                 <div className="reserve_container">
                     <div className="row">
-                        <div className="col-3 reserve_img">
+                        <div className="col--3 reserve_img">
                             <img className="reserveimg" src={img} alt={blankImage}/>
                         </div>
-                        <div className="col-9 reserve_userinfo">
+                        <div className="col--9 reserve_userinfo">
                             <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label><br/>
                             <label className="greylabel">{description.desc}</label>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-5 reserve_contact">
+                        <div className="col--5 reserve_contact">
                             <RoomOutlinedIcon fontSize="large"/>
                             <label className="datalabel">{serviceArea.area}</label><br/>
                             <PhoneRoundedIcon fontSize="large"/>
@@ -145,7 +145,7 @@ function ReserveCaretaker(props) {
                             <MailOutlinedIcon fontSize="large"/>
                             <label className="datalabel">{contact.email}</label>
                         </div>
-                        <div className="col-7 reserve_service">
+                        <div className="col--7 reserve_service">
                             <label className="greylabel">Service Type:</label>
                             <label className="datalabel">{serviceType.serviceType}</label><br/>
                             <label className="greylabel">Pet Type:</label>
@@ -157,7 +157,7 @@ function ReserveCaretaker(props) {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-12 reserve_button">
+                        <div className="col--12 reserve_button">
                             <button className="RButton" onClick = {() => onclick()}  >Chat</button>
                             <button className="RButton" onClick = {() => {
                                     if (!clickReview.clicked) {
@@ -181,7 +181,7 @@ function ReserveCaretaker(props) {
                     {!clickReview.clicked ? null : 
                     <div>
                         <div className="row">
-                            <div className="col-12 comment_section">
+                            <div className="col--12 comment_section">
                                 <textarea placeHolder="Comments..."/><br/>
                                 <button className="RButton">Submit</button>
                             </div>
