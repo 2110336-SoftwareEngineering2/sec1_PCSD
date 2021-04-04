@@ -9,6 +9,7 @@ import MailOutlinedIcon from '@material-ui/icons/MailOutlined';
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { UserContext } from "./context/MyContext";
+import Rating from '@material-ui/lab/Rating';
 
 function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
@@ -27,12 +28,13 @@ function ReserveCaretaker(props) {
     const [cookie, setCookie, removeCookie] = useCookies();
     const userContext = useContext(UserContext);
     const [clickReview, setClickReview] = useState({clicked: false});
+    const [rating, setRating] = useState({sum: 0, count: 0});
     
     useEffect(() => {
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
-//            console.log(res);
+        //    console.log(res);
             const data = res.data;
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
@@ -44,7 +46,7 @@ function ReserveCaretaker(props) {
         axios
         .post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
         .then((res) => {
-//            console.log(res);
+        //    console.log(res);
             const data = res.data;
             setDesc({desc: data.description});
             const area = data.city + ", " + data.province + ", " + data.country;
@@ -87,6 +89,7 @@ function ReserveCaretaker(props) {
                 }
             }
             setAvailDays({availDays: availDays});
+            setRating({sum: data.rate_point.sum_rate.$numberDecimal, count: data.rate_point.rate_count});
             })
         .catch((err) => {
             console.log(err);
@@ -132,7 +135,9 @@ function ReserveCaretaker(props) {
                             <img className="reserveimg" src={img} alt={blankImage}/>
                         </div>
                         <div className="col--9 reserve_userinfo">
-                            <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label><br/>
+                            <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label>
+                            <Rating value={rating.sum} size="large" readOnly/>
+                            <label className="rating_label">({rating.count})</label><br/>
                             <label className="greylabel">{description.desc}</label>
                         </div>
                     </div>
