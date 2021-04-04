@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./Pet.css";
 import { useCookies } from "react-cookie";
-
+import {Avatar} from "@material-ui/core";
 function Pet({ info, CheckPet }) {
   const [click, setClick] = useState(false);
   const [cookie, setCookie, removeCookie] = useCookies();
@@ -29,7 +29,7 @@ function Pet({ info, CheckPet }) {
   let btn_class = click ? "clickedButton" : "unclickedButton";
   return (
     <div className="Rpet">
-      <img className="RPet__image" src={info.imgURL} />
+      <Avatar className="RPet__image" src={info.imgURL} />
       <div className="col-5">
         <div className="RPet__name">
           {info.petName}, {info.age}, {info.gender}{" "}
