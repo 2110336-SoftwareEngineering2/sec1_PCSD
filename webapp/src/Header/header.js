@@ -157,7 +157,8 @@ function Header() {
             <Dropdown.Item
               eventKey="101"
               onClick={() => {
-                history.push({ pathname: "/profile" });
+                history.push({ pathname: "/profile" });    
+                history.go();
               }}
             >
               {" "}

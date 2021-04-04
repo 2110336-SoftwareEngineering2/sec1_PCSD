@@ -1,136 +1,182 @@
 import React from "react";
-import { Form, Col, InputGroup, FormControl } from "react-bootstrap";
+import { Form, Col, InputGroup, FormControl, Button } from "react-bootstrap";
 
-function InputForm({ id, label, type, value, required, readOnly, onChange }) {
+function InputForm({ id, label, children }) {
   return (
     <Form.Group as={Col} className="mx-lg-3" controlId={id}>
       <Form.Label>{label}</Form.Label>
-      <Form.Control
-        type={type}
-        name={id}
-        placeholder={label}
-        defaultValue={value}
-        onChange={onChange}
-        readOnly={readOnly}
-        required={required}
-      />
+      {children}
     </Form.Group>
   );
 }
 
-function InputName({ input, onChange }) {
+function FirstName({ input, onChange }) {
   return (
-    <Form.Row>
-      <InputForm
-        id="firstname"
-        label="First Name"
-        value={input.firstname}
+    <InputForm id="firstname" label="First Name">
+      <FormControl
+        type="text"
+        name="firstname"
+        placeholder="First Name"
+        defaultValue={input.firstname}
         onChange={onChange}
         required
       />
-      <InputForm
-        id="lastname"
-        label="Last Name"
-        value={input.lastname}
+    </InputForm>
+  );
+}
+
+function LastName({ input, onChange }) {
+  return (
+    <InputForm id="lastname" label="Last Name">
+      <FormControl
+        type="text"
+        name="lastname"
+        placeholder="Last Name"
+        defaultValue={input.lastname}
         onChange={onChange}
         required
       />
-    </Form.Row>
+    </InputForm>
   );
 }
 
-function InputPassword({ onChange }) {
+function NewPassword({ input, onChange }) {
   return (
-    <Form.Row>
-      <InputForm
-        id="password"
-        label="New Password"
+    <InputForm id="new_password" label="New Password">
+      <FormControl
+        autoComplete="new-password"
+        pattern={"^" + input.confirm_password + "$"}
         type="password"
+        name="new_password"
+        placeholder="New Password"
         onChange={onChange}
+        required={!!input.confirm_password}
       />
-      <InputForm
-        id="confirm"
-        label="Confirm Password"
-        type="password"
-        onChange={onChange}
-      />
-    </Form.Row>
+      <Form.Control.Feedback type="invalid">
+        Passwords do not match.
+      </Form.Control.Feedback>
+    </InputForm>
   );
 }
 
-function InputEmail({ input, onChange }) {
+function ConfirmPassword({ input, onChange }) {
   return (
-    <Form.Row>
-      <InputForm
-        id="email"
-        label="Email Address"
+    <InputForm id="confirm_password" label="Confirm Password">
+      <FormControl
+        autoComplete="new-password"
+        pattern={"^" + input.new_password + "$"}
+        type="password"
+        name="confirm_password"
+        placeholder="Confirm Password"
+        onChange={onChange}
+        required={!!input.new_password}
+      />
+      <Form.Control.Feedback type="invalid">
+        Passwords do not match.
+      </Form.Control.Feedback>
+    </InputForm>
+  );
+}
+
+function Email({ input }) {
+  return (
+    <InputForm id="email" label="Email Address">
+      <FormControl
         type="email"
-        value={input.email}
+        name="email"
+        placeholder="Email Address"
+        defaultValue={input.email}
         readOnly
         required
       />
-      <Form.Group as={Col} className="mx-lg-3" controlId="username">
-        <Form.Label>Username</Form.Label>
-        <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text>@</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            type="text"
-            name="username"
-            placeholder="Username"
-            defaultValue={input.username}
-            onChange={onChange}
-            required
-          />
-        </InputGroup>
-      </Form.Group>
-    </Form.Row>
+    </InputForm>
   );
 }
 
-function InputDetail({ input, onChange }) {
+function Username({ input, onChange, valid }) {
   return (
-    <Form.Row>
-      <InputForm
-        id="mobileNumber"
-        label="Phone Number"
-        value={input.mobileNumber}
+    <InputForm id="username" label="Username">
+      <InputGroup>
+        <InputGroup.Prepend>
+          <InputGroup.Text>@</InputGroup.Text>
+        </InputGroup.Prepend>
+        <FormControl
+          className={valid ? "valid" : "invalid"}
+          type="text"
+          name="username"
+          placeholder="Username"
+          defaultValue={input.username}
+          onChange={onChange}
+          required
+        />
+      </InputGroup>
+    </InputForm>
+  );
+}
+
+function MobileNumber({ input, onChange }) {
+  return (
+    <InputForm id="mobileNumber" label="Mobile Number">
+      <FormControl
+        type="tel"
+        pattern="[0-9]{10}"
+        name="mobileNumber"
+        placeholder="0991239876"
+        defaultValue={input.mobileNumber}
         onChange={onChange}
         required
       />
-
-      <Form.Group as={Col} className="mx-lg-3">
-        <Form.Label>Gender</Form.Label>
-        <Form.Row>
-          <Form.Check
-            inline
-            className="col px-2"
-            type="radio"
-            label="Male"
-            name="gender"
-            id="male"
-            value="male"
-            onChange={onChange}
-            checked={input.gender === "male"}
-            required
-          />
-          <Form.Check
-            inline
-            className="col px-2"
-            type="radio"
-            label="Female"
-            name="gender"
-            id="female"
-            value="female"
-            onChange={onChange}
-            checked={input.gender === "female"}
-            required
-          />
-        </Form.Row>
-      </Form.Group>
-    </Form.Row>
+    </InputForm>
   );
 }
 
-export { InputName, InputPassword, InputEmail, InputDetail };
+function Gender({ input, onChange }) {
+  function GenderRadio({ gender }) {
+    return (
+      <Form.Check
+        className={
+          "col px-2 " + (input.gender === null ? "unfilled" : "filled")
+        }
+        type="radio"
+        name="gender"
+        label={gender}
+        id={gender}
+        value={gender}
+        onChange={onChange}
+        checked={input.gender === gender}
+        inline
+        required
+      />
+    );
+  }
+  return (
+    <InputForm id="gender" label="Gender">
+      <Form.Row>
+        <GenderRadio gender="male" />
+        <GenderRadio gender="female" />
+      </Form.Row>
+    </InputForm>
+  );
+}
+
+function Submit({ modified }) {
+  return (
+    <div className="text-right mx-lg-3">
+      <Button disabled={!modified} type="submit">
+        Save Changes
+      </Button>
+    </div>
+  );
+}
+
+export default {
+  FirstName,
+  LastName,
+  NewPassword,
+  ConfirmPassword,
+  Email,
+  Username,
+  MobileNumber,
+  Gender,
+  Submit,
+};

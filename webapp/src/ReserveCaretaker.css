@@ -71,9 +71,13 @@
     padding: 70px 50px 50px 0;
 }
 
+.rating_section {
+    padding: 0 0 20px 60px;
+}
+
 .comment_section {
     text-align: center;
-    padding: 50px;
+    padding: 0 50px 50px 50px;
 }
 
 /* label ----------------------------------------*/
@@ -143,4 +147,8 @@
 .MuiRating-icon {
     margin: 0 0 0 3px;
     color: black;
+}
+
+.MuiRating-label {
+    margin: 0 0 0 3px;
 }

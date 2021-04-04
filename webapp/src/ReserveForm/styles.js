@@ -44,7 +44,7 @@ export default makeStyles((theme) => ({
   serviceTypeBoxx: {
       marginBottom: "40px",
   },
-  serviceBox: {
+  serviceBoxx: {
     border: "1px solid grey",
     marginLeft: "18px",
     fontSize: "16px",
@@ -55,7 +55,7 @@ export default makeStyles((theme) => ({
     },
     "& .Mui-selected": {
       fontSize: "18px",
-      iconColor: "#BD6A43",
+      iconColor: "#FF5733",
     },
     "& .MuiBottomNavigationAction-root": {
       color: "red",
@@ -97,10 +97,9 @@ export default makeStyles((theme) => ({
   },
   searchResult: {
     backgroundColor: "#F1F1F1",
-    hegith: "100%",
+    height: "100%",
     display: "flex",
   },
-
   sideSearchBox: {
     margin: "10px",
     width: "350px",

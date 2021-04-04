@@ -1,5 +1,6 @@
 import React from "react";
 import "./PetSummaries.css";
+import {Avatar} from "@material-ui/core";
 function PetSummaries({ pets, addPet, editPet, deletePet }) {
   return (
     <div className="petsum">
@@ -28,7 +29,7 @@ function PetBanner({ pet, editPet, deletePet }) {
   console.log(pet);
   return (
     <div className="pet">
-      <img className="Pet__image" src={pet.imgURL} />
+      <Avatar className="Pet__image" src={pet.imgURL} />
       <div className="col-5 pet_info">
         <div className="Pet__name">
           {pet.petName}, {pet.age}, {pet.gender}
