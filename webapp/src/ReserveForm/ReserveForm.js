@@ -59,32 +59,43 @@ function ReserveForm(props) {
     // console.log(reserveTmp)
     // console.log(selectedPets)
     if (startDate === "" || endDate === "") {
-      console.log("please select date");
+      // console.log("please select date");
+      window.alert("Please select date");
       return;
     }
-    var reserveData = {
-      caretaker: reserveTmp.caretaker,
-      petowner: reserveTmp.petowner,
-      pets: selectedPets,
-      rate: reserveTmp.rate.rate,
-      status: 0,
-      startDate: startDate,
-      endDate: endDate,
-      service: serviceString(value)
+    console.log(reserveTmp);
+    try {
+      const rate = reserveTmp.rate; 
+      console.log(rate)
+      var reserveData = {
+        caretaker: reserveTmp.caretaker,
+        petowner: reserveTmp.petowner,
+        pets: selectedPets,
+        rate: rate,
+        startDate: startDate,
+        endDate: endDate,
+        service: serviceString(value)
+      }
+
+      setCookie("reserveTmp", reserveData, { path: "/" });
+      history.push({pathname: "/payment", reserve: cookie.reserveTmp});
+    } catch (err) {
+      window.alert("Please select caretaker again");
+      history.push({pathname: "/"});
     }
     // console.log(reserveData)
     // console.log(cookie.accessToken)
-    axios.post(`http://localhost:4000/reserve/caretaker`, reserveData, {
-      headers: {
-        "authorization": cookie.accessToken
-      }
-    }).then((res) => {
-      console.log(res)
-      history.push({ pathname: "/payment", reserve: res.data});
-    }).catch(err => {
-      console.log("whatttttt");
-      console.log(err);
-    })
+    // axios.post(`http://localhost:4000/reserve/caretaker`, reserveData, {
+    //   headers: {
+    //     "authorization": cookie.accessToken
+    //   }
+    // }).then((res) => {
+    //   console.log(res)
+    //   history.push({ pathname: "/payment", reserve: res.data});
+    // }).catch(err => {
+    //   console.log("whatttttt");
+    //   console.log(err);
+    // })
 
   }
   useEffect(() => {
@@ -143,27 +154,31 @@ function ReserveForm(props) {
     setInput({ ...input, [event.target.name]: event.target.value });
   }
 
-  function toTimestamp(strDate){
-    var datum = Date.parse(strDate);
-    return datum/1000;
-  }
-
   function onChangeService(event) {
     const service = event.target.label;
     console.log(service)
   }
 
+  const dateStringToTimeStamp = (date) => {
+    // var x = date.replace(' ', 'T');
+    date += ':00Z';
+    var d = new Date(date);
+    return d.getTime();
+  }
+
   function onChangeStartDate(event) {
     // setStartDate(Date(event.target.value));
     var dateString = event.target.value;
-    dateString = dateString.replace('T', ' ')
-    setStartDate(dateString)
+    // dateString = dateString.replace('T', ' ')
+    var timestamp = dateStringToTimeStamp(dateString);
+    setStartDate(timestamp)
   }
 
   function onChangeEndDate(event) {
     var dateString = event.target.value;
-    dateString = dateString.replace('T', ' ');
-    setEndDate(dateString);
+    // dateString = dateString.replace('T', ' ');
+    var timestamp = dateStringToTimeStamp(dateString);
+    setEndDate(timestamp);
   }
 
 
