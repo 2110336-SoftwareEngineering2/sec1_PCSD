@@ -20,13 +20,17 @@ function UserProfile() {
   const [invalidUsername, setInvalidUsername] = useState(null);
 
   function saveInfo() {
-    const editedUser = { ...info, id: info._id, password: (info.new_password || info.password) };
+    const editedUser = { ...info, id: info._id, password: info.new_password };
+    if (!editedUser.password) delete editedUser.password;
     axios
       .post("http://localhost:4000/user/edit", editedUser)
       .then((res) => {
         login(res.data);
-        history.push("/profile");
-        history.go();
+        if (info.userImg) uploadPetPic(res.data, info.userImg);
+        else {
+          history.push("/profile");
+          history.go();
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -34,6 +38,21 @@ function UserProfile() {
         setInvalidUsername(info.username);
       });
     console.log("submitted");
+  }
+
+  function uploadPetPic(user, img) {
+    const data = new FormData();
+    data.append("email", user.email);
+    data.append("file", img);
+    console.log(data);
+    axios
+      .post("http://localhost:4000/user/profilepic", data)
+      .then((res) => {
+        console.log(res);
+        history.push("/profile");
+        history.go();
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
