@@ -121,6 +121,10 @@ router.get("/payment", (req, res) => {
   PaymentController.getPayment(req, res);
 });
 
+router.get("/payment/:id", (req, res) => {
+  PaymentController.getPaymentById(req, res);
+});
+
 const storage = multer.diskStorage({
   destination: function(req,file,cb){
     cb(null,'./uploads/');

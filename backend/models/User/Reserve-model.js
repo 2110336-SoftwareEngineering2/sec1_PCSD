@@ -8,10 +8,10 @@ const reserveSchema = new Schema({
   petowner: String,
   startDate: Number,
   endDate: Number,
-  status: Number,
   rate: Number,
   amount: Number,
-  pets: []
+  pets: [],
+  paymentId: String,
 });
 
 module.exports = mongoose.model("Reserve", reserveSchema, "Reservations");

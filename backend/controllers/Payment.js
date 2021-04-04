@@ -3,6 +3,23 @@ const auth = require("./Authentication");
 const User = require("../models/User/User-model");
 const Payment = require("../models/User/Payment-model");
 
+const getPaymentById = async (req, res) => {
+  const id = req.params.id;
+  const decoded = auth.authToken(req, res);
+  const problem = decoded.nullToken | decoded.tokenError | (decoded.role !== "user");
+  if (problem) {
+    res.status(400).send({ tokenError: true});
+  } else {
+    await Payment.findOne({_id: id}, (err, result) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(200).json(result);
+      }
+    })
+  }
+}
+
 const getPayment = async (req, res) => {
   const decoded = auth.authToken(req, res);
   const problem = decoded.nullToken | decoded.tokenError | (decoded.role !== "user");
@@ -142,6 +159,9 @@ module.exports = {
   topUp,
   transfer,
   getPayment,
+  getPaymentById: async (req, res) => {
+    await getPaymentById(req, res);
+  },
   receivePayment: async (req, res) => {
     modifyPayment(req, res, "DONE")
   },
