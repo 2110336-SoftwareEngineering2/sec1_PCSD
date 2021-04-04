@@ -51,8 +51,8 @@
 }
 
 .reserve_userinfo {
-    padding: 115px 0 0 0;
-    line-height: 2.5rem;
+    padding: 110px 0 0 0;
+    line-height: 3rem;
 }
 
 .reserve_contact {
@@ -71,14 +71,18 @@
     padding: 70px 50px 50px 0;
 }
 
+.rating_section {
+    padding: 0 0 20px 60px;
+}
+
 .comment_section {
     text-align: center;
-    padding: 50px;
+    padding: 0 50px 50px 50px;
 }
 
 /* label ----------------------------------------*/
 .namelabel {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
 }
 
@@ -92,6 +96,13 @@
     font-size: 18px;
     font-weight: 600;
     padding-left: 20px;
+}
+
+.rating_label {
+    font-size: 18px;
+    font-weight: 500;
+    position: absolute;
+    margin-top: 2px;
 }
 
 /* button ----------------------------------------*/
@@ -126,4 +137,18 @@
 
 .comment_section textarea::placeholder {
     color: #8e8e8e;
+}
+
+/* rating ---------------------------------------*/
+.MuiRating-root {
+    margin-left: 40px;
+}
+
+.MuiRating-icon {
+    margin: 0 0 0 3px;
+    color: black;
+}
+
+.MuiRating-label {
+    margin: 0 0 0 3px;
 }

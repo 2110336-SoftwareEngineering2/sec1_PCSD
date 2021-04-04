@@ -75,7 +75,7 @@ const Result = (props) => {
           <Typography className={classes.price} variant="h6">
             {props.userInfo.caretaker.rate.$numberDecimal}
           </Typography>
-          <h6 className={classes.h6}>per day</h6>
+          <h6 className={classes.h6}>per hour</h6>
         </div>
       </Card>
       <hr />
