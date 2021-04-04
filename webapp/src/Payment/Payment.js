@@ -16,15 +16,10 @@ function Payment() {
   
   // strub
  console.log(receiverEmail);
-
-  // const [state, setState] = useState({
-  //   receiverEmail: receiverEmail ,
-  //   amount: amount,
-  // });
   const [state, setState] = useState(reserveData);
   
   const onClick = () => {
-    console.log("pay");
+    // console.log("pay");
     console.log(state);
     axios
       .post("http://localhost:4000/reserve/caretaker", state, {
@@ -32,7 +27,7 @@ function Payment() {
       })
       .then((res) => {
         console.log(res.data);
-        // window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
+        window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
         history.push({pathname: "/"});
       })
       .catch(err =>{
