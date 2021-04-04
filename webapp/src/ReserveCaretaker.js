@@ -29,6 +29,7 @@ function ReserveCaretaker(props) {
     const userContext = useContext(UserContext);
     const [clickReview, setClickReview] = useState({clicked: false});
     const [rating, setRating] = useState({sum: 0, count: 0});
+    const [review, setReview] = useState({rating: 0, comment: null});
     
     useEffect(() => {
         axios
@@ -185,6 +186,13 @@ function ReserveCaretaker(props) {
                     </div>
                     {!clickReview.clicked ? null : 
                     <div>
+                        <div className="row">
+                            <div className="col--12 rating_section">
+                                <Rating value={review.rating} size="large" onChange={(event, newVal) => {
+                                    setReview({rating: newVal});
+                                }}/>
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col--12 comment_section">
                                 <textarea placeHolder="Comments..."/><br/>
