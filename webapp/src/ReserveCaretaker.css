@@ -26,13 +26,6 @@
     width: 100%;
 }
 
-/*Button------------------------------------------*/
-.RButton{
-    margin-left: 5px;
-}
-
-
-
 /* container -------------------------------------*/
 .reserve_background {
     background-color: #f1f1f1;
@@ -80,6 +73,11 @@
     padding: 50px 50px 50px 0;
 }
 
+.comment_section {
+    text-align: center;
+    padding: 50px;
+}
+
 /* label ----------------------------------------*/
 .namelabel {
     font-size: 32px;
@@ -99,7 +97,7 @@
 }
 
 /* button ----------------------------------------*/
-.reserve_button button {
+.RButton {
     border: none;
     outline: none;
     background-color: #bd6a43;
@@ -109,4 +107,25 @@
     cursor: pointer;
     border-radius: 4px;
     padding: 12px 30px;
+}
+
+.reserve_button button {
+    margin-left: 40px;
+}
+
+.comment_section button {
+    margin-top: 40px;
+}
+
+/* input ----------------------------------------*/
+.comment_section textarea {
+    padding: 10px;
+    width: 1000px;
+    height: 200px;
+    border-color: #8e8e8e;
+    border-radius: 7px;
+}
+
+.comment_section textarea::placeholder {
+    color: #8e8e8e;
 }

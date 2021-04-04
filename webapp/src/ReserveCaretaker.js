@@ -26,6 +26,7 @@ function ReserveCaretaker(props) {
     const [availDays, setAvailDays] = useState({availDays: null});
     const [cookie, setCookie, removeCookie] = useCookies();
     const userContext = useContext(UserContext);
+    const [clickReview, setClickReview] = useState({clicked: false});
     
     useEffect(() => {
         axios
@@ -93,7 +94,7 @@ function ReserveCaretaker(props) {
             });
     }, []);
 
-    function createChatRoom(){
+    function createChatRoom() {
         console.log("Hello world");
         axios
         .post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]});
@@ -149,19 +150,35 @@ function ReserveCaretaker(props) {
                     </div>
                     <div className="row">
                         <div className="col-12 reserve_button">
-                            <button className = "RButton" onClick = {() =>createChatRoom()}  >Chat</button>
-                            <button className = "RButton" onClick={() => {
+                            <button className="RButton" onClick = {() => createChatRoom()}  >Chat</button>
+                            <button className="RButton" onClick = {() => {
+                                    if (!clickReview.clicked) {
+                                        setClickReview({clicked: true});
+                                    } else {
+                                        setClickReview({clicked: false});
+                                    }
+                                }}>Review</button>
+                            <button className="RButton" onClick={() => {
                                 saveToCookies();
                                 axios.post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
-    .then((res) => {
-      history.push( {pathname: "/reserveform", state: res.data});
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-            }}>Reserve</button>
+                                .then((res) => {
+                                  history.push( {pathname: "/reserveform", state: res.data});
+                                })
+                                .catch((err) => {
+                                  console.log(err);
+                                })
+                                }}>Reserve</button>
                         </div>
                     </div>
+                    {!clickReview.clicked ? null : 
+                    <div>
+                        <div className="row">
+                            <div className="col-12 comment_section">
+                                <textarea placeHolder="Comments..."/><br/>
+                                <button className="RButton">Submit</button>
+                            </div>
+                        </div>
+                    </div>}
                 </div>
             </div>
         </div>
