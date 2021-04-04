@@ -23,7 +23,7 @@ function ReceiveButton({payment, accessToken, setState, state, index}) {
 
     return(
         <div className="receivebutton">
-        <Button variant="primary" onClick={onClick}>receive</Button>
+        <Button variant="primary" onClick={onClick}>done</Button>
         </div>
     );
 };

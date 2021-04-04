@@ -1,3 +1,7 @@
+.test {
+    background-color: #F1F1F1;
+    height: 100vh;
+}
 .DONE {
     background-color: #BFFF36;
 }
@@ -13,32 +17,59 @@
 .ACCEPTED {
     background-color: rgb(145, 152, 255);
 }
+.test .card {
+    border-radius: 15px;
+}
 
-
-.Cardd > .card-deck {
+.test .cardtitle {
+    background-color:#872935;
+    border-radius: 15px 15px 0px 0px;
+    border-color: #872935;
+    padding: 15px;
+    color: white;
+    
+}
+.test .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: auto;
+}
+.test .cardtitle .modal-header {
+    text-align: center;
+    border: none;
+   
+}
+.test .cardtitle .modal-header span {
+    color: white;
+}
+.test .Cardd .card-deck {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 15%;
+    align-items: center;
 }
-
-.Cardd > .card-deck > .card {
+.test .Cardd {
+    max-height: 100vh;
+    background-color: #F1F1F1;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+.test .Cardd > .card-deck > .card {
  flex: none;
- margin-top: 30px;
- margin-left: 10px;
+ margin: 30px auto;
 }
-.cardstatus {
+.test .cardstatus {
     align-items: center;
     margin-left: 2px;
 }
 
-.watingbutton {
+.test .watingbutton {
     display: flex;
-    margin-left: 180px;
+    margin-left: 200px;
 }
-.watingcanbutton {
+.test .watingcanbutton {
     margin-left: 160px;
 }
 
-.acceptedbutton {
+.test .acceptedbutton {
     margin-left: 160px;
 }
