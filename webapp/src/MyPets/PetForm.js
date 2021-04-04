@@ -10,7 +10,7 @@ import defaultPetImg from "../petpic.png";
 import "./PetForm.css";
 function PetForm({ currentPet, savePet, cancelForm }) {
   const isNewPet = currentPet === null;
-  const [input, setPetInfo] = useState(
+  const [input, setInput] = useState(
     currentPet || {
       petType: "",
       petName: "",
@@ -24,7 +24,7 @@ function PetForm({ currentPet, savePet, cancelForm }) {
 
   function handleChange(event) {
     const name = event.target.name;
-    setPetInfo({
+    setInput({
       ...input,
       [name]: name === "petImg" ? event.target.files[0] : event.target.value,
     });

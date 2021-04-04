@@ -9,6 +9,7 @@ import MailOutlinedIcon from '@material-ui/icons/MailOutlined';
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { UserContext } from "./context/MyContext";
+import Rating from '@material-ui/lab/Rating';
 
 function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
@@ -26,12 +27,15 @@ function ReserveCaretaker(props) {
     const [availDays, setAvailDays] = useState({availDays: null});
     const [cookie, setCookie, removeCookie] = useCookies();
     const userContext = useContext(UserContext);
+    const [clickReview, setClickReview] = useState({clicked: false});
+    const [rating, setRating] = useState({sum: 0, count: 0});
+    const [review, setReview] = useState({rating: 0, comment: null});
     
     useEffect(() => {
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
-//            console.log(res);
+        //    console.log(res);
             const data = res.data;
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
@@ -43,7 +47,7 @@ function ReserveCaretaker(props) {
         axios
         .post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
         .then((res) => {
-//            console.log(res);
+        //    console.log(res);
             const data = res.data;
             setDesc({desc: data.description});
             const area = data.city + ", " + data.province + ", " + data.country;
@@ -86,6 +90,7 @@ function ReserveCaretaker(props) {
                 }
             }
             setAvailDays({availDays: availDays});
+            setRating({sum: data.rate_point.sum_rate.$numberDecimal, count: data.rate_point.rate_count});
             })
         .catch((err) => {
             console.log(err);
@@ -93,7 +98,7 @@ function ReserveCaretaker(props) {
             });
     }, []);
 
-    function createChatRoom(){
+    function createChatRoom () {
         //console.log("Hello world");
         axios.post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]},{
             headers: {
@@ -127,16 +132,18 @@ function ReserveCaretaker(props) {
             <div className="reserve_background">
                 <div className="reserve_container">
                     <div className="row">
-                        <div className="col-3 reserve_img">
+                        <div className="col--3 reserve_img">
                             <img className="reserveimg" src={img} alt={blankImage}/>
                         </div>
-                        <div className="col-9 reserve_userinfo">
-                            <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label><br/>
+                        <div className="col--9 reserve_userinfo">
+                            <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label>
+                            <Rating value={rating.sum} size="large" readOnly/>
+                            <label className="rating_label">({rating.count})</label><br/>
                             <label className="greylabel">{description.desc}</label>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-5 reserve_contact">
+                        <div className="col--5 reserve_contact">
                             <RoomOutlinedIcon fontSize="large"/>
                             <label className="datalabel">{serviceArea.area}</label><br/>
                             <PhoneRoundedIcon fontSize="large"/>
@@ -144,7 +151,7 @@ function ReserveCaretaker(props) {
                             <MailOutlinedIcon fontSize="large"/>
                             <label className="datalabel">{contact.email}</label>
                         </div>
-                        <div className="col-7 reserve_service">
+                        <div className="col--7 reserve_service">
                             <label className="greylabel">Service Type:</label>
                             <label className="datalabel">{serviceType.serviceType}</label><br/>
                             <label className="greylabel">Pet Type:</label>
@@ -156,20 +163,43 @@ function ReserveCaretaker(props) {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-12 reserve_button">
-                            <button className = "RButton" onClick = {() => onclick()}  >Chat</button>
-                            <button className = "RButton" onClick={() => {
+                        <div className="col--12 reserve_button">
+                            <button className="RButton" onClick = {() => onclick()}  >Chat</button>
+                            <button className="RButton" onClick = {() => {
+                                    if (!clickReview.clicked) {
+                                        setClickReview({clicked: true});
+                                    } else {
+                                        setClickReview({clicked: false});
+                                    }
+                                }}>Review</button>
+                            <button className="RButton" onClick={() => {
                                 saveToCookies();
                                 axios.post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
-    .then((res) => {
-      history.push( {pathname: "/reserveform", state: res.data});
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-            }}>Reserve</button>
+                                .then((res) => {
+                                  history.push( {pathname: "/reserveform", state: res.data});
+                                })
+                                .catch((err) => {
+                                  console.log(err);
+                                })
+                                }}>Reserve</button>
                         </div>
                     </div>
+                    {!clickReview.clicked ? null : 
+                    <div>
+                        <div className="row">
+                            <div className="col--12 rating_section">
+                                <Rating value={review.rating} size="large" onChange={(event, newVal) => {
+                                    setReview({rating: newVal});
+                                }}/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col--12 comment_section">
+                                <textarea placeHolder="Comments..."/><br/>
+                                <button className="RButton">Submit</button>
+                            </div>
+                        </div>
+                    </div>}
                 </div>
             </div>
         </div>
