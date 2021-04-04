@@ -2,6 +2,7 @@
     width: 100%;
     text-align: center;
     align-items: center;
+    background-color: #F1F1F1;
 }
 
 #datetimepicker {
@@ -80,13 +81,13 @@
 }
 
 #ReserveForm h3 {
-    color: #C70039;
+    color: #872935;
     font-size: 20px;
     padding-right: 85%;
 }
 #ReserveForm #Form1 {
-    border: 1px solid #C70039;
-    background-color: #C70039;
+    border: 1px solid #872935;
+    background-color: #872935;
     width: 800px;
     margin: auto;
     padding: 30px;
@@ -98,4 +99,10 @@
     margin: auto;
     padding: 30px;
     border-radius: 0px 0px 12px 12px;
+    background-color: white;
+}
+
+#ReserveForm .footer {
+    margin: 20px;
+    color: #F1F1F1;
 }

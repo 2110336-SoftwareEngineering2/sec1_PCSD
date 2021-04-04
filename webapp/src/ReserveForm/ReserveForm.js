@@ -250,6 +250,11 @@ function ReserveForm(props) {
             Reserve
           </button>
           </div>
+          <footer>
+            <div className="footer">
+              <p>Powered by P.C.S.D.</p>
+            </div>
+          </footer>
         </div>
     )
 }
