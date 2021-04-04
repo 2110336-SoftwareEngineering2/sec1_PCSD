@@ -17,6 +17,7 @@ function Test(_) {
     payments: [],
     reserves: []
   })
+  const data = useState([]);
   
   useEffect(() => {
     if (!user && cookie.accessToken !== undefined) {
@@ -30,8 +31,19 @@ function Test(_) {
             .post("http://localhost:4000/user/email", {email: (res.data).email})
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
-              getPayment(header);
-             // getReserve((res.data).email);
+              // getPayment(header);
+              getReserve((res.data).email);
+              console.log(state.reserves)
+              var x = [];
+              for (var i =0; i<(state.reserves).length; i++) {
+                var reserve = (state.reserves)[i];
+                var id = reserve.paymentId;
+                console.log(id)
+                var payment = getPaymentById(id);
+                console.log(payment)
+                x.push({...reserve, payment});
+              }
+              console.log(x)
             })
         })
         .catch((err) => {
@@ -43,6 +55,14 @@ function Test(_) {
       getPayment(header);
     }
   }, []);
+
+  const getPaymentById = (id) => {
+    var x = axios.get(`http://localhost:4000/user/payment/${id}`, {headers: {authorization: cookie.accessToken}})
+    .then(res => {
+      return res;
+    })
+    return x;
+  }
 
   const getPayment = (header) => {
     axios

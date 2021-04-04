@@ -111,7 +111,7 @@ function ReserveCaretaker(props) {
             caretaker: caretaker,
             petowner: userContext.user.email,
             // petowner: petowner,
-            rate: rate,
+            rate: rate.rate,
             petType: petType,
             serviceType: serviceType,
             availDays: availDays

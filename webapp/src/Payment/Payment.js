@@ -5,34 +5,53 @@ import axios from "axios";
 import { UserContext } from "../context/MyContext";
 import history from "./../history";
 import "./Payment.css";
-function Payment({receiverEmail, amount}) {
+// function Payment({receiverEmail, amount}) {
+function Payment() {
   const { user } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
+  var reserveData = cookie.reserveTmp;
+  const receiverEmail = reserveData.caretaker;
+  const amount = (reserveData.endDate - reserveData.startDate) * reserveData.rate / (3600 * 1000);
+  reserveData["amount"] = amount;
   
   // strub
  console.log(receiverEmail);
 
-  const [state, setState] = useState({
-    receiverEmail: receiverEmail ,
-    amount: amount,
-  });
+  // const [state, setState] = useState({
+  //   receiverEmail: receiverEmail ,
+  //   amount: amount,
+  // });
+  const [state, setState] = useState(reserveData);
   
   const onClick = () => {
     console.log("pay");
     console.log(state);
     axios
-      .post("http://localhost:4000/user/transfer?type=transfer", state, {
-        headers: { authorization: "Bearer " + cookie.accessToken },
+      .post("http://localhost:4000/reserve/caretaker", state, {
+        headers: {authorization: "Bearer " + cookie.accessToken}
       })
       .then((res) => {
         console.log(res.data);
         window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
+        history.push({pathname: "/"});
       })
-      .catch((err) => {
+      .catch(err =>{
         console.log(err);
-        window.alert(`ERROR!!!!`);
-      });
-      history.push({ pathname: "/" });
+        window.alert(err);
+      })
+    // axios
+    //   .post("http://localhost:4000/user/transfer?type=transfer", state, {
+    //     headers: { authorization: "Bearer " + cookie.accessToken },
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     window.alert(`ERROR!!!!`);
+    //   });
+    //   history.push({ pathname: "/" });
   };
 
   return (
