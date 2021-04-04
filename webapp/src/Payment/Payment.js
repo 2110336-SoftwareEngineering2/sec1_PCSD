@@ -27,7 +27,7 @@ function Payment() {
       })
       .then((res) => {
         console.log(res.data);
-        window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
+        window.alert(`$${state.amount} has been sent to ${state.caretaker}`);
         history.push({pathname: "/"});
       })
       .catch(err =>{
