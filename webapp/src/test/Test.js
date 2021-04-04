@@ -8,6 +8,7 @@ import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentBu
 import "./Test.css";
 import Test2 from "./Test2";
 import SumPet from "./SumPet";
+import Pet from "./Pet";
 import Modal from 'react-bootstrap/Modal';
 
 function Test(_) {
@@ -98,7 +99,10 @@ function Test(_) {
  
  
   const getPet = (pet_lists) => {
-    <SumPet pet_lists={pet_lists} />;
+    console.log("ss",pet_lists);
+    return (
+    <SumPet pet_lists={pet_lists}/>
+    );
   };
   const getButton = (payment, index) => {
     if (user.role === "caretaker") {
@@ -160,8 +164,7 @@ function Test(_) {
              
         <CardDeck>
         {state.reserves.map((reserve, index) => (
-          <Card style={{ width: '400px' }} key={reserve._id}>
-            
+          <Card style={{ width: '400px' }} key={reserve.payment._id}>
               <div className="cardtitle">
                 <Modal.Header closeButton>
             { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
@@ -172,9 +175,9 @@ function Test(_) {
             <Card.Text>
               <p>Petowner's name: {reserve.payment.petownerFname} {reserve.payment.petownerLname}</p>
               <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
-              <p>amount: {reserve.payment.amount.$numberDecimal}</p>
-              {/*getPet(payment.pets)*/}
               <p>service type: {reserve.service}</p>
+              <p>amount: {reserve.payment.amount.$numberDecimal}</p>
+              { getPet(reserve.pets)}
               <div className="row cardstatus">
               <p>
                 status: <span className={reserve.payment.transferStatus}>{(user.role === "petowner") && (reserve.payment.transferStatus === "ACCEPTED") ? "PAID" : reserve.payment.transferStatus}</span>

@@ -1,9 +1,10 @@
 import React from 'react'
 import Pet from "./Pet";
+import "./SumPets.css";
 function SumPet({pet_lists}) {
-    console.log("top",pet_lists);
     return (
-        <div>
+        <div className="petcard">
+            <p>Pets: </p>
             {pet_lists.map((pet) => (
             <Pet info={pet}/>
             ))} 

@@ -1,0 +1,19 @@
+.tpet {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 1px solid hsl(216, 8%, 88%);
+    padding: 10px;
+    width: 350px;
+    margin: 25px auto;
+    background-color: #ffffff;
+}
+
+.tPet__image {
+    margin-right: 20px;
+}
+
+.tpet .MuiAvatar-root {
+    width: 80px;
+    height: 80px;
+}
