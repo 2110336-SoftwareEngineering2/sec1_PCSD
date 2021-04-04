@@ -182,12 +182,15 @@ function ReserveForm(props) {
     }).catch((err) => console.log(err));  */
   }
     return (
-        <div className="ReserveForm">
+        <div className="ReserveForm" id="ReserveForm">
           <Header />
           <br></br>
           <br></br>
-            <div className={classes.serviceTypeBoxx}>
+          <div className="col-12" id="Form1">
           <h2 className={classes.h2}>Reserve {fname} {lname}</h2>
+          </div>
+          <div className="col-12" id="Form">
+        <div className={classes.serviceTypeBoxx}>
           <BottomNavigation
             value={value}
             onChange={(event, newValue) => {
@@ -196,17 +199,17 @@ function ReserveForm(props) {
             showLabels
           >
             <BottomNavigationAction
-              className={classes.serviceBox}
+              className={classes.serviceBoxx}
               label="House Sitting"
               icon={<NightsStayIcon />}
             />
             <BottomNavigationAction
-              className={classes.serviceBox}
+              className={classes.serviceBoxx}
               label="Boarding"
               icon={<LocalAirportIcon />}
             />
             <BottomNavigationAction
-              className={classes.serviceBox}
+              className={classes.serviceBoxx}
               label="Day Care"
               icon={<WbSunnyIcon />}
             />
@@ -215,32 +218,30 @@ function ReserveForm(props) {
           <form className={classes.container} id="datetimepicker" noValidate>
             <TextField
               id="datetime-local"
-              label="From"
+              label="When would you like to drop off?"
               type="datetime-local"
-              defaultValue="2021-01-01T10:30"
+              defaultValue="2021-04-01T10:30"
               onChange={onChangeStartDate}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}
             />
-            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <TextField
               id="datetime-local"
-              label="To"
+              label="When would you like to pick up?"
               type="datetime-local"
-              defaultValue="2021-01-01T10:30"
+              defaultValue="2021-04-01T10:30"
               className={classes.textField}
               onChange={onChangeEndDate}
               InputLabelProps={{
                 shrink: true,
               }}
             />
+
           </form>
+          <h3>Pets</h3>
           <SumPet pet_lists={pet_lists} CheckPet={CheckPet} />
           <button
             className="Reserve__Button"
@@ -248,6 +249,7 @@ function ReserveForm(props) {
           >
             Reserve
           </button>
+          </div>
         </div>
     )
 }

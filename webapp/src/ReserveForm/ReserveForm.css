@@ -23,12 +23,79 @@
 
 .Reserve__Button:hover {
     border: none;
-    background-color: #BD6A43;
+    background-color: #C70039;
     color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
     padding: 10px 35px;
-    margin-top: 40px;
+
+}
+
+.ReserveForm  h2 {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+}
+#ReserveForm  .MuiBottomNavigationAction-root {
+    max-width: 220px;
+    min-width: 168px;
+    min-height: 60px;
+    margin-left: 9px;
+    margin-right: 9px;
+}
+#ReserveForm  .MuiBottomNavigationAction-root.Mui-selected {
+    color: #C70039;
+    border-color: #C70039;
+}
+
+#ReserveForm .MuiFormLabel-root {
+    color: rgb(64, 72, 79);
+    max-width: 100%;
+    display: inline-block;
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+#ReserveForm .MuiInputBase-root  {
+    margin-top: 30px;
+    width: 340px;
+    border: 1px solid rgb(207, 215, 222);
+    border-radius: 4px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+#ReserveForm .MuiInputBase-input {
+    width: 95%;
+    padding-bottom: 15px;
+}
+
+#ReserveForm #datetimepicker {
+    width: 100%;
+    margin: auto;
+
+}
+
+#ReserveForm h3 {
+    color: #C70039;
+    font-size: 20px;
+    padding-right: 85%;
+}
+#ReserveForm #Form1 {
+    border: 1px solid #C70039;
+    background-color: #C70039;
+    width: 800px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px 12px 0px 0px;
+}
+#ReserveForm #Form {
+    border: 1px solid rgb(207, 215, 222);
+    width: 800px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 0px 0px 12px 12px;
 }

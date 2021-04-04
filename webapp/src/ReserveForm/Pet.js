@@ -42,9 +42,4 @@ function Pet({ info, CheckPet }) {
   );
 }
 
-Pet.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  deletePost: PropTypes.func.isRequired,
-};
 export default Pet;
