@@ -35,16 +35,16 @@ function Test(_) {
               login({...res.data, accessToken: cookie.accessToken});
               getReserve((res.data).email);
               console.log(state.reserves)
-              var x = [];
-              for (var i =0; i<(state.reserves).length; i++) {
-                var reserve = (state.reserves)[i];
-                var id = reserve.paymentId;
-                console.log(id)
-                var payment = getPaymentById(id);
-                console.log(payment)
-                x.push({...reserve, payment});
-              }
-              console.log(x)
+              // var x = [];
+              // for (var i =0; i<(state.reserves).length; i++) {
+              //   var reserve = (state.reserves)[i];
+              //   var id = reserve.paymentId;
+              //   console.log(id)
+              //   var payment = getPaymentById(id);
+              //   console.log(payment)
+              //   x.push({...reserve, payment});
+              // }
+              // console.log(x)
             })
         })
         .catch((err) => {
