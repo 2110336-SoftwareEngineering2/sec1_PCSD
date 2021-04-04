@@ -16,7 +16,7 @@ function Test(_) {
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState({
     payments: [],
-    reserves: []
+    reserves: [],
   })
   const data = useState([]);
   
@@ -32,7 +32,6 @@ function Test(_) {
             .post("http://localhost:4000/user/email", {email: (res.data).email})
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
-              // getPayment(header);
               getReserve((res.data).email);
               console.log(state.reserves)
               var x = [];
@@ -53,7 +52,8 @@ function Test(_) {
         });
     } else {
       const header = {"authorization": "Bearer " + cookie.accessToken};
-      getPayment(header);
+      //getPayment(header);
+      getReserve(user.email);
     }
   }, []);
 
@@ -72,7 +72,7 @@ function Test(_) {
       })
       .then((res) => {
         setState({payments: res.data});
-        console.log(res.data);
+        console.log("s",res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -88,7 +88,7 @@ function Test(_) {
     })
       .then((res) => {
         setState({reserves: res.data});
-        console.log(res.data);
+        console.log("ssssss",res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -96,37 +96,9 @@ function Test(_) {
       });
   };
  
-/*
-      axios
-        .post("http://localhost:4000/user/email", {email: caretaker})
-        .then((res) => {
-            const data = res.data;
-            setName({firstname: data.firstname, lastname: data.lastname});
-            setContact({email: data.email, phone: data.mobileNumber});
-            })
-        .catch((err) => {
-            console.log(err);
-            });
-*/
  
-  const getPet = (email) => {
-    const pet_lists = null;
-    axios
-    .get(`http://localhost:4000/reserve/${email}`, {
-      headers: {
-        "authorization": "Bearer " + cookie.accessToken
-    }
-    })
-    .then((res) => {
-      console.log(res.data.pets);
-      return (
-        <SumPet pet_lists= {res.data.pets}/>
-      );
-    })
-    .catch((err) => {
-      console.log("pet", err);
-    });
-     
+  const getPet = (pet_lists) => {
+    <SumPet pet_lists={pet_lists} />;
   };
   const getButton = (payment, index) => {
     if (user.role === "caretaker") {
@@ -187,8 +159,8 @@ function Test(_) {
           <div className="Cardd">
              
         <CardDeck>
-        {state.payments.map((payment, index) => (
-          <Card style={{ width: '400px' }} key={payment._id}>
+        {state.reserves.map((reserve, index) => (
+          <Card style={{ width: '400px' }} key={reserve._id}>
             
               <div className="cardtitle">
                 <Modal.Header closeButton>
@@ -198,15 +170,16 @@ function Test(_) {
             </div>
             <Card.Body>
             <Card.Text>
-              <p>Petowner's name: {payment.petownerFname} {payment.petownerLname}</p>
-              <p>Caretaker's name: {payment.caretakerFname} {payment.caretakerLname}</p>
-              <p>amount: {payment.amount.$numberDecimal}</p>
-              {/*getPet(payment.caretakerEmail)*/}
+              <p>Petowner's name: {reserve.payment.petownerFname} {reserve.payment.petownerLname}</p>
+              <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
+              <p>amount: {reserve.payment.amount.$numberDecimal}</p>
+              {/*getPet(payment.pets)*/}
+              <p>service type: {reserve.service}</p>
               <div className="row cardstatus">
               <p>
-                status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "PAID" : payment.transferStatus}</span>
+                status: <span className={reserve.payment.transferStatus}>{(user.role === "petowner") && (reserve.payment.transferStatus === "ACCEPTED") ? "PAID" : reserve.payment.transferStatus}</span>
               </p>
-              { getButton(payment, index) } </div>
+              { getButton(reserve.payment, index) } </div>
             </Card.Text>
           </Card.Body>
           </Card>

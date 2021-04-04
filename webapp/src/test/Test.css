@@ -50,7 +50,6 @@
 .test .Cardd {
     max-height: 100vh;
     background-color: #F1F1F1;
-    overflow: auto;
     scroll-behavior: smooth;
 }
 .test .Cardd > .card-deck > .card {
