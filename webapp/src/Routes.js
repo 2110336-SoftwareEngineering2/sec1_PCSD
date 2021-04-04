@@ -59,8 +59,8 @@ function Routes() {
               : UpdateCaretaker
           }
         />
-        <Route path="/user/:username" exact component={UserPage} />
-        <Route path="/test" exact component={Test} />
+        <AuthRoute path="/user/:username" exact component={UserPage} />
+        <AuthRoute path="/test" exact component={Test} />
         <AuthRoute path="/profile" exact component={UserProfile} />
         <AuthRoute path="/pets" exact component={MyPets} />
         <AuthRoute path="/services" exact component={MyServices} />
