@@ -4,7 +4,7 @@ import Addmoney from "./AddMoney";
 import "./AddMoneyPage.css";
 function AddMoneyPage() {
     return (
-        <div>
+        <div className="addmoneypage">
            <Header />
            <Addmoney />
         </div>

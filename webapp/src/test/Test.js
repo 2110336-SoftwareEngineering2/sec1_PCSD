@@ -8,6 +8,7 @@ import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentBu
 import "./Test.css";
 import Test2 from "./Test2";
 import SumPet from "./SumPet";
+import Modal from 'react-bootstrap/Modal';
 
 function Test(_) {
   const { user, login } = useContext(UserContext);
@@ -179,17 +180,23 @@ function Test(_) {
   };
   return (
     <div className="test">
+      <Header />
       {loading ? (
         <h1> Loading... </h1>
       ) : (
           <div className="Cardd">
-             <Header />
+             
         <CardDeck>
         {state.payments.map((payment, index) => (
           <Card style={{ width: '400px' }} key={payment._id}>
-            <Card.Body>
-            { user.role == "caretaker" ? <Card.Title>Job</Card.Title> :  <Card.Title>Payment</Card.Title>
+            
+              <div className="cardtitle">
+                <Modal.Header closeButton>
+            { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
             }
+            </Modal.Header>
+            </div>
+            <Card.Body>
             <Card.Text>
               <p>Petowner's name: {payment.petownerFname} {payment.petownerLname}</p>
               <p>Caretaker's name: {payment.caretakerFname} {payment.caretakerLname}</p>
