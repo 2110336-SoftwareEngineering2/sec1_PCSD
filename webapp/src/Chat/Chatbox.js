@@ -13,6 +13,8 @@ import Amesage from "./amesage";
 import { useCookies } from "react-cookie";
 
 
+
+
 function Chatbox({roomId}){
     // const chatContext = useContext(ChatContext);
     const userContext = useContext(UserContext);
@@ -59,6 +61,10 @@ function Chatbox({roomId}){
         await getChatRoomDetail();
     }, [roomId])
 
+    
+    
+    
+
     async function getChatRoomDetail () {
         if (roomId != null) {
             const res = await axios.get(`http://localhost:4000/chat/rooms/${roomId}`, {
@@ -102,10 +108,21 @@ function Chatbox({roomId}){
         setInputMessage(e.target.value)
     }
 
-    function scrollToBottom (id) {
-        var div = document.getElementById(id);
-        div.scrollTop = div.scrollHeight - div.clientHeight;
-     }
+    //prototype for scrolling
+    const AlwaysScrollToBottom = () => {
+        const elementRef = useRef();
+        useEffect(() => elementRef.current.scrollIntoView());
+        return <div ref={elementRef} />;
+    };
+    const Messages = ({ message }) => (
+        <ul>
+            {message.map((mDetail, idx) => {
+                return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
+                    //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
+            })}
+          <AlwaysScrollToBottom />
+        </ul>
+      )
 
     return (
         <div className = "Chatbox">            
@@ -118,10 +135,11 @@ function Chatbox({roomId}){
                             
                             //<Amesage email = "nsn@email.com" message = "Hello" timestamp = "07:08:10" is_user = {true} />
                             }
-                            {messages.map((mDetail, idx) => {
-                                return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
-                                //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
-                            })}
+                                <Messages message = {messages} />
+                                {/*messages.map((mDetail, idx) => {
+                                    return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
+                                    //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
+                                })*/}
                         </div>
                     </div>
                     <div className = "Downside_Bar">
