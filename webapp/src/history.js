@@ -1,7 +1,9 @@
-import { createBrowserHistory } from "history";
+/*import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory({
   forceRefresh: true,
-});
+});*/
 
-export default history;
+import { createBrowserHistory as history } from "history";
+
+export default history();
