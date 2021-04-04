@@ -97,10 +97,9 @@ export default makeStyles((theme) => ({
   },
   searchResult: {
     backgroundColor: "#F1F1F1",
-    hegith: "100%",
+    height: "100%",
     display: "flex",
   },
-
   sideSearchBox: {
     margin: "10px",
     width: "350px",
