@@ -2,6 +2,7 @@ const auth = require("./Authentication");
 
 const User = require("../models/User/User-model");
 const Payment = require("../models/User/Payment-model");
+const { findOneAndDelete } = require("../models/User/User-model");
 
 const getPaymentById = async (req, res) => {
   const id = req.params.id;
@@ -156,8 +157,14 @@ const modifyPayment = async (req, res, status) => {
 };
 
 const deletePayment = async (email) => {
-  await Payment.deleteMany({$or: [{caretakerEmail: email}, {petownerEmail: email}]})
-}
+  await Payment.deleteMany({
+    $or: [{ caretakerEmail: email }, { petownerEmail: email }],
+  });
+};
+
+const deletePaymentById = async (id) => {
+  await Payment.deleteOne({ _id: id });
+};
 
 module.exports = {
   topUp,
@@ -176,4 +183,5 @@ module.exports = {
     modifyPayment(req, res, "ACCEPTED")
   },
   deletePayment,
+  deletePaymentById,
 };
