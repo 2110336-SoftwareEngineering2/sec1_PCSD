@@ -107,8 +107,10 @@ function Test(_) {
   };
   const getDate = (sdate,edate) => {
     // DateRangeIcon
+    console.log(new Date(sdate).toLocaleDateString());
+    console.log(new Date(sdate).toLocaleTimeString());
     return (  <div className="date"> <DateRangeIcon />&nbsp;Date&nbsp;
-      <p style={{color: "#9D7F70" , marginLeft:"50px"}}>&nbsp;{moment(new Date(sdate)).format("l, h:mm a")} - {moment(new Date(edate)).format("l, h:mm a")} </p>
+      <p style={{color: "#9D7F70" , marginLeft:"30px"}}>&nbsp;{new Date(sdate).toLocaleDateString()}, {new Date(sdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}  - {new Date(edate).toLocaleDateString()}, {new Date(edate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} </p>
 
       </div>
     );

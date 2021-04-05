@@ -31,7 +31,6 @@ function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
-  
 
   return (
     <Router history={history}>

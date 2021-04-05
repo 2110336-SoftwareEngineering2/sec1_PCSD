@@ -9,9 +9,10 @@ import "./MyServices.css";
 import history from "../history";
 import axios from "axios";
 
-function MyServices() {
+function MyServices(props) {
   const { user } = useContext(UserContext);
   const [info, setInfo] = useState(null);
+  console.log(props);
 
   useEffect(() => {
     axios
@@ -26,6 +27,20 @@ function MyServices() {
       });
   }, []);
 
+  function saveInfo() {
+    axios
+      .post("http://localhost:4000/user/edit/caretaker", info)
+      .then((res) => {
+        console.log(res.data);
+        history.push("/services");
+        history.go();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+    console.log("summitted");
+  }
+
   return (
     <div>
       <Header />
@@ -36,7 +51,11 @@ function MyServices() {
           </Card.Header>
           <Card.Body>
             {info ? (
-              <ServiceForm input={info} updateInput={setInfo} />
+              <ServiceForm
+                input={info}
+                updateInput={setInfo}
+                submitForm={saveInfo}
+              />
             ) : (
               <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
