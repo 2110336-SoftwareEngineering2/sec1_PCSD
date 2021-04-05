@@ -43,6 +43,10 @@
     border: none;
    
 }
+.test .power {
+    margin: 15px 0px 20px 0px;
+}
+
 .test .cardtitle .modal-header span {
     color: white;
 }
@@ -67,14 +71,17 @@
     margin-left: 2px;
 }
 
-.test .watingbutton {
+.test .watingbutton{
     display: flex;
-    margin-left: 200px;
+    margin: auto;
 }
 .test .watingcanbutton {
-    margin-left: 160px;
+    margin-left: 90px;
 }
 
 .test .acceptedbutton {
-    margin-left: 160px;
+    margin-left: 140px;
+}
+.cardstatus .row {
+    margin: auto;
 }

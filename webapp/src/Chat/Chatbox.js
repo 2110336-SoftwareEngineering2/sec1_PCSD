@@ -128,16 +128,28 @@ function Chatbox({roomId}){
           <AlwaysScrollToBottom />
         </div>
       )
+    const getName = (email) => {
+        axios
+        .post("http://localhost:4000/user/email", {email: email})
+        .then((res) => {
+            return res.data;
+            })
+        .catch((err) => {
+            console.log(err);
+            });
+    }
     const Chat_Title = () =>{
         if({roomId}!=null){
-            console.log(members)
-            if(email==members[0])
-                return <h1>{members[1]}</h1>
-            else
+            console.log(members);
+            if(email==members[0]){
+                return <h1>{members[1]} </h1>
+            }
+            else {
                 return <h1>{members[0]}</h1>
+            }
         }else{
             return <h1>ChatBox</h1>
-            console.log("error")
+            console.log("error");
         }
 
     }

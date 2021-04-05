@@ -19,7 +19,6 @@ function ChatRoom({info}){
     axios
         .post("http://localhost:4000/user/email", {email: info.title})
         .then((res) => {
-            console.log(res);
             const data = res.data;
             setFname(data.firstname);
             setLname(data.lastname);
