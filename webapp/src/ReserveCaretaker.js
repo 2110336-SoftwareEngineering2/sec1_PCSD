@@ -14,6 +14,7 @@ import Rating from '@material-ui/lab/Rating';
 function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
     const userEmail = user.email;
+    console.log(userEmail);
     const caretaker = props.location.state.caretaker;
     // console.log(caretaker);
     const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ caretaker;
@@ -28,15 +29,14 @@ function ReserveCaretaker(props) {
     const [cookie, setCookie, removeCookie] = useCookies();
     const userContext = useContext(UserContext);
     const [clickReview, setClickReview] = useState({clicked: false});
-    const [rating, setRating] = useState({sum: 0, count: 0});
-    const [review, setReview] = useState({rating: 0, comment: null});
+    const [rating, setRating] = useState({rating: 0, count: 0});
     const endPoint = "http://localhost:4000";
     
     useEffect(() => {
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
-        //    console.log(res);
+            console.log(res);
             const data = res.data;
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
@@ -48,7 +48,7 @@ function ReserveCaretaker(props) {
         axios
         .post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
         .then((res) => {
-        //    console.log(res);
+            console.log(res);
             const data = res.data;
             setDesc({desc: data.description});
             const area = data.city + ", " + data.province + ", " + data.country;
@@ -91,7 +91,8 @@ function ReserveCaretaker(props) {
                 }
             }
             setAvailDays({availDays: availDays});
-            setRating({sum: data.rate_point.sum_rate.$numberDecimal, count: data.rate_point.rate_count});
+            const rating = data.rate_point.sum_rate.$numberDecimal / data.rate_point.rate_count;
+            setRating({rating: rating, count: data.rate_point.rate_count});
             })
         .catch((err) => {
             console.log(err);
@@ -146,6 +147,39 @@ function ReserveCaretaker(props) {
         createChatRoom() 
         // history.push( {pathname: "/chat"});
     }
+
+    const [ratingVal, setRatingVal] = useState(0);
+    const [commentVal, setCommentVal] = useState("");
+
+    function onSubmit(e) {
+        e.preventDefault();
+
+        const sentRating = {caretaker: caretaker, rater: userEmail, rate: ratingVal};
+        const sentComment = {email: caretaker, comment: commentVal};
+        console.log(sentRating);
+        console.log(sentComment);
+        
+        axios
+        .post("http://localhost:4000/user/caretaker/rate", sentRating)
+        .then((res) => {
+            console.log(res.data);
+        })
+        .catch((err) => {
+            console.log(err.response.data);
+        });
+
+        axios
+        .post("http://localhost:4000/user/comment/caretaker", sentComment)
+        .then((res) => {
+            console.log(res.data);
+        })
+        .catch((err) => {
+            console.log(err.response.data);
+        });
+
+        window.alert("Review sent!");
+        window.location.reload();
+    }
     
     return (
         <div className="reserve">
@@ -158,7 +192,7 @@ function ReserveCaretaker(props) {
                         </div>
                         <div className="col--9 reserve_userinfo">
                             <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label>
-                            <Rating value={rating.sum} size="large" readOnly/>
+                            <Rating value={rating.rating} precision={0.5} size="large" readOnly/>
                             <label className="rating_label">({rating.count})</label><br/>
                             <label className="greylabel">{description.desc}</label>
                         </div>
@@ -207,19 +241,23 @@ function ReserveCaretaker(props) {
                     </div>
                     {!clickReview.clicked ? null : 
                     <div>
-                        <div className="row">
-                            <div className="col--12 rating_section">
-                                <Rating value={review.rating} size="large" onChange={(event, newVal) => {
-                                    setReview({rating: newVal});
-                                }}/>
+                        <form onSubmit={onSubmit}>
+                            <div className="row">
+                                <div className="col--12 rating_section">
+                                    <Rating name="controlled-rating" value={ratingVal} size="large" onChange={(event, newVal) => {
+                                        setRatingVal(newVal);
+                                    }}/>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col--12 comment_section">
-                                <textarea placeHolder="Comments..."/><br/>
-                                <button className="RButton">Submit</button>
+                            <div className="row">
+                                <div className="col--12 comment_section">
+                                    <textarea placeholder="Comments..." value={commentVal} onChange={(event) => {
+                                        setCommentVal(event.target.value);
+                                    }}/><br/>
+                                    <button className="RButton" type="submit">Submit</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>}
                 </div>
             </div>
