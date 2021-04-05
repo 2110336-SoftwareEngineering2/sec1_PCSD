@@ -103,8 +103,8 @@ function Test(_) {
       return  <ProgressBar striped variant="success" now={100} label={`DONE`}/>;
       case "ACCEPTED" :
         if(role === "petowner")
-        return  <ProgressBar animated variant="info" now={60} label={`ACCEPTED`}/>;
-        else return  <ProgressBar animated variant="info" now={60} label={`PAID`}/>;
+        return  <ProgressBar animated variant="info" now={60} label={`PAID`}/>;
+        else return  <ProgressBar animated variant="info" now={60} label={`WORKING`}/>;
       case "WAITING":
         return <ProgressBar animated variant="warning" now={30} label={`WAITING`}/> ;
     }
@@ -197,7 +197,7 @@ function Test(_) {
               { getPet(reserve.pets)}
               <div className="cardstatus">
               <div className="power">
-                {getStatus(reserve.payment.transferStatus, user.AcceptButtonrole)}
+                {getStatus(reserve.payment.transferStatus, user.role)}
               </div>
               { getButton(reserve.payment, index) } </div>
             </Card.Text>
