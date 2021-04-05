@@ -20,6 +20,7 @@ function Chatbox({roomId}){
     const userContext = useContext(UserContext);
     const chatContext = useContext(ChatContext);
     const [messages, setMessage] = useState([]);
+    const [members,setMember] = useState([])
     const [inputMessage, setInputMessage] = useState("");
     const socketRef = useRef();
     const email = userContext.user.email;
@@ -78,6 +79,7 @@ function Chatbox({roomId}){
             const data = res.data;
             //  console.log(data)
             setMessage(data.messages);
+            setMember(data.members);
         }
     } 
     
@@ -128,7 +130,11 @@ function Chatbox({roomId}){
       )
     const Chat_Title = () =>{
         if({roomId}!=null){
-            return <h1>{roomId}</h1>
+            console.log(members)
+            if(email==members[0])
+                return <h1>{members[1]}</h1>
+            else
+                return <h1>{members[0]}</h1>
         }else{
             return <h1>ChatBox</h1>
             console.log("error")
