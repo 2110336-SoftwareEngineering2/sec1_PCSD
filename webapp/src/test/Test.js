@@ -198,11 +198,11 @@ function Test(_) {
         <CardDeck>
         {state.reserves.map((reserve, index) => (
           <Card style={{ width: '400px' }} key={reserve.payment._id}>
-              <div className="cardtitle">
+              <div className="cardtitle" id="cardtitle">
                 <Modal.Header>
             { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
             }
-          <Button onClick={() => deleteCard(reserve._id)}>X</Button>
+          <Modal.Title id="delete" onClick={() => deleteCard(reserve._id)}>X</Modal.Title>
             </Modal.Header>
             </div>
             <Card.Body>

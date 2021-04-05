@@ -33,6 +33,15 @@
     color: white;
     
 }
+.test #cardtitle #delete {
+    font-weight: bold;
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+}
+.test #cardtitle #delete:hover {
+    color: white;
+}
 .test .modal-title {
     font-size: 20px;
     font-weight: bold;
