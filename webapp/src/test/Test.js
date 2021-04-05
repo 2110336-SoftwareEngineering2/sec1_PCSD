@@ -6,11 +6,10 @@ import Header from "./../Header/header";
 import { UserContext } from "../context/MyContext";
 import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentButton";
 import "./Test.css";
-import Test2 from "./Test2";
 import SumPet from "./SumPet";
-import Pet from "./Pet";
 import Modal from 'react-bootstrap/Modal';
 import { ProgressBar } from 'react-bootstrap';
+import moment from "moment";
 function Test(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -94,6 +93,10 @@ function Test(_) {
         console.log(err);
       });
   };
+  const getDate = (date) => {
+    return ( moment(new Date(date)).format("MMMM Do YYYY, h:mm a")
+    );
+  };
  const getStatus = (status, role) => {
    const text = "";
     switch(status) {
@@ -168,6 +171,7 @@ function Test(_) {
     }
   };
   
+
   return (
     <div className="test">
       <Header />
@@ -192,6 +196,8 @@ function Test(_) {
               <p>Petowner's name: {reserve.payment.petownerFname} {reserve.payment.petownerLname}</p>
               <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
               <p>service type: {reserve.service}</p>
+              <p>From: {getDate(reserve.startDate)} </p>
+              <p>To: {getDate(reserve.endDate)} </p>
               <p>amount: {reserve.payment.amount.$numberDecimal}</p>
               <p>Pets:</p>
               { getPet(reserve.pets)}
@@ -201,7 +207,7 @@ function Test(_) {
               </div>
               { getButton(reserve.payment, index) } </div>
             </Card.Text>
-          
+
           </Card.Body>
           </Card>
         ))}
