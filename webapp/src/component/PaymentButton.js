@@ -3,9 +3,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import "./PaymentButton.css";
 import { user } from "../context/MyContext";
-import { sentNotification } from "../Notification/NotificationUtils";
-import socketIOClient from "socket.io-client";
-
+import { ProgressBar } from 'react-bootstrap';
 function ReceiveButton({payment, accessToken, setState, state, index}) {
     const onClick = () => {
         const header = {"authorization": "Bearer " + accessToken};
@@ -47,9 +45,6 @@ function AcceptButton({payment, accessToken, setState, state, index}) {
             headers: header
         })
         .then((res) => {
-            // const newPayment = state.payments.slice();
-            // newPayment[index].transferStatus = res.data.transferStatus;
-            // setState({payments: newPayment});
             const newState = state.reserves.slice();
             newState[index].payment.transferStatus = res.data.transferStatus;
             setState({reserves: newState});

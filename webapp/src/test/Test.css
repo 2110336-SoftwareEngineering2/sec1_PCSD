@@ -1,6 +1,10 @@
 .test {
     background-color: #F1F1F1;
     height: 100vh;
+  
+}
+.test h1 {
+    text-align: center;
 }
 .DONE {
     background-color: #BFFF36;
@@ -39,6 +43,10 @@
     border: none;
    
 }
+.test .power {
+    margin: 15px 0px 20px 0px;
+}
+
 .test .cardtitle .modal-header span {
     color: white;
 }
@@ -48,9 +56,11 @@
     align-items: center;
 }
 .test .Cardd {
-    max-height: 100vh;
+    max-height: 650px;
+    min-width: none;
     background-color: #F1F1F1;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 .test .Cardd > .card-deck > .card {
  flex: none;
@@ -61,14 +71,17 @@
     margin-left: 2px;
 }
 
-.test .watingbutton {
+.test .watingbutton{
     display: flex;
-    margin-left: 200px;
+    margin: auto;
 }
 .test .watingcanbutton {
-    margin-left: 160px;
+    margin-left: 90px;
 }
 
 .test .acceptedbutton {
-    margin-left: 160px;
+    margin-left: 140px;
+}
+.cardstatus .row {
+    margin: auto;
 }

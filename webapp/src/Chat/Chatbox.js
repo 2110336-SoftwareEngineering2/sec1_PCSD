@@ -20,6 +20,7 @@ function Chatbox({roomId}){
     const userContext = useContext(UserContext);
     const chatContext = useContext(ChatContext);
     const [messages, setMessage] = useState([]);
+    const [members,setMember] = useState([])
     const [inputMessage, setInputMessage] = useState("");
     const socketRef = useRef();
     const email = userContext.user.email;
@@ -78,6 +79,7 @@ function Chatbox({roomId}){
             const data = res.data;
             //  console.log(data)
             setMessage(data.messages);
+            setMember(data.members);
         }
     } 
     
@@ -118,20 +120,45 @@ function Chatbox({roomId}){
         return <div ref={elementRef} />;
     };
     const Messages = ({ message }) => (
-        <ul>
+        <div>
             {message.map((mDetail, idx) => {
                 return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
                     //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
             })}
           <AlwaysScrollToBottom />
-        </ul>
+        </div>
       )
+    const getName = (email) => {
+        axios
+        .post("http://localhost:4000/user/email", {email: email})
+        .then((res) => {
+            return res.data;
+            })
+        .catch((err) => {
+            console.log(err);
+            });
+    }
+    const Chat_Title = () =>{
+        if({roomId}!=null){
+            console.log(members);
+            if(email==members[0]){
+                return <h1>{members[1]} </h1>
+            }
+            else {
+                return <h1>{members[0]}</h1>
+            }
+        }else{
+            return <h1>ChatBox</h1>
+            console.log("error");
+        }
 
+    }
+    
     return (
         <div className = "Chatbox">            
                 <Container fixed = 'md' className = "d-flex flex-column py-2" style ={{height:"90vh"}} >
                     <div className = "Messages">
-                        <h1>ChatBox</h1>
+                        <Chat_Title />
                     {/* <h2>{roomId}</h2> */}
                         <div className = "Chat_Messages" style = {{overflowY :"auto"}}>
                             {//scroll this rewrite this section script

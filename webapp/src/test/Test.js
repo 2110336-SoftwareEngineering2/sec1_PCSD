@@ -10,7 +10,7 @@ import Test2 from "./Test2";
 import SumPet from "./SumPet";
 import Pet from "./Pet";
 import Modal from 'react-bootstrap/Modal';
-
+import { ProgressBar } from 'react-bootstrap';
 function Test(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -84,8 +84,21 @@ function Test(_) {
         console.log(err);
       });
   };
- 
- 
+ const getStatus = (status, role) => {
+   const text = "";
+    switch(status) {
+      case "CANCELLED" : 
+        return  <ProgressBar striped variant="danger" now={100} label={`CANCELLED`}/>;
+      case "DONE" : 
+      return  <ProgressBar striped variant="success" now={100} label={`DONE`}/>;
+      case "ACCEPTED" :
+        if(role === "petowner")
+        return  <ProgressBar animated variant="info" now={60} label={`PAID`}/>;
+        else return  <ProgressBar animated variant="info" now={60} label={`WORKING`}/>;
+      case "WAITING":
+        return <ProgressBar animated variant="warning" now={30} label={`WAITING`}/> ;
+    }
+ }
   const getPet = (pet_lists) => {
     return (
     <SumPet pet_lists={pet_lists}/>
@@ -95,14 +108,16 @@ function Test(_) {
     if (user.role === "caretaker") {
       if (payment.transferStatus === "WAITING") {
         return (
-          <div className="watingbutton">
+          <div className="row watingbutton">
+            <div className="col-6">
             <AcceptButton
               payment={payment}
               accessToken={cookie.accessToken}
               setState={setState}
               state={state}
               index={index}
-            />
+            /> </div>
+             <div className="col-6">
             <CancelButton
               payment={payment}
               accessToken={cookie.accessToken}
@@ -110,6 +125,7 @@ function Test(_) {
               state={state}
               index={index}
               />
+              </div>
           </div>
         );
       } else if(payment.transferStatus === "ACCEPTED") {
@@ -141,9 +157,12 @@ function Test(_) {
       }
     }
   };
+  
   return (
     <div className="test">
       <Header />
+      <h1>{ user.role == "caretaker" ? "Job " :  "Payment "
+            } &nbsp;Histories</h1>
       {loading ? (
         <h1> Loading... </h1>
       ) : (
@@ -164,13 +183,15 @@ function Test(_) {
               <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
               <p>service type: {reserve.service}</p>
               <p>amount: {reserve.payment.amount.$numberDecimal}</p>
+              <p>Pets:</p>
               { getPet(reserve.pets)}
-              <div className="row cardstatus">
-              <p>
-                status: <span className={reserve.payment.transferStatus}>{(user.role === "petowner") && (reserve.payment.transferStatus === "ACCEPTED") ? "PAID" : reserve.payment.transferStatus}</span>
-              </p>
+              <div className="cardstatus">
+              <div className="power">
+                {getStatus(reserve.payment.transferStatus, user.role)}
+              </div>
               { getButton(reserve.payment, index) } </div>
             </Card.Text>
+          
           </Card.Body>
           </Card>
         ))}
