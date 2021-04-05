@@ -1,8 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
+import socketIOClient from "socket.io-client";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import {Avatar} from "@material-ui/core";
 import { UserContext } from "../context/MyContext";
+import { sentNotification } from "../Notification/NotificationUtils";
 import history from "./../history";
 import "./Payment.css";
 // function Payment({receiverEmail, amount}) {
@@ -11,15 +13,36 @@ function Payment() {
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
   var reserveData = cookie.reserveTmp;
   const receiverEmail = reserveData.caretaker;
+  const socketRef = useRef();
   const amount = (reserveData.endDate - reserveData.startDate) * reserveData.rate / (3600 * 1000);
+  const notiEndPoint = "http://localhost:5000";
   reserveData["amount"] = amount;
   
+  useEffect(async () => {
+    // console.log(reserveData)
+    socketRef.current = socketIOClient(notiEndPoint, {
+        query: {
+            user: user.email
+        }
+    });
+
+    return () => {
+        socketRef.current.disconnect();
+    };
+  });
   // strub
- console.log(receiverEmail);
+//  console.log(receiverEmail);
+  console.log(user)
   const [state, setState] = useState(reserveData);
+
+  const sentReserveNotification= () => {
+    const sender = user.email;
+    const receiver = receiverEmail;
+    const type = "RESERVE"
+    sentNotification(socketRef.current, sender, receiver, type);
+  }
   
   const onClick = () => {
-    // console.log("pay");
     console.log(state);
     axios
       .post("http://localhost:4000/reserve/caretaker", state, {
@@ -27,6 +50,7 @@ function Payment() {
       })
       .then((res) => {
         console.log(res.data);
+        sentReserveNotification();
         window.alert(`$${state.amount} has been sent to ${state.caretaker}`);
         history.push({pathname: "/"});
       })
@@ -34,19 +58,6 @@ function Payment() {
         console.log(err);
         window.alert(err);
       })
-    // axios
-    //   .post("http://localhost:4000/user/transfer?type=transfer", state, {
-    //     headers: { authorization: "Bearer " + cookie.accessToken },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     window.alert(`$${state.amount} has been sent to ${state.receiverEmail}`);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     window.alert(`ERROR!!!!`);
-    //   });
-    //   history.push({ pathname: "/" });
   };
 
   return (
