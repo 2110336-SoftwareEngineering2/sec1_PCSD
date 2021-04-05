@@ -15,7 +15,7 @@ function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
     const userEmail = user.email;
     const caretaker = props.location.state.caretaker;
-    console.log(caretaker);
+    // console.log(caretaker);
     const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ caretaker;
     const [name, setName] = useState({firstname: null, lastname: null});
     const [contact, setContact] = useState({email: null, phone: null});
@@ -30,6 +30,7 @@ function ReserveCaretaker(props) {
     const [clickReview, setClickReview] = useState({clicked: false});
     const [rating, setRating] = useState({sum: 0, count: 0});
     const [review, setReview] = useState({rating: 0, comment: null});
+    const endPoint = "http://localhost:4000";
     
     useEffect(() => {
         axios
@@ -100,11 +101,31 @@ function ReserveCaretaker(props) {
 
     function createChatRoom () {
         //console.log("Hello world");
-        axios.post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]},{
+        axios.get(`${endPoint}/chat/rooms/?members=${userEmail}&members=${caretaker}`, {
             headers: {
-                "authorization": "Bearer " + cookie.accessToken
+                authorization: "Bearer " + cookie.accessToken
             }
-        });
+        }).then((res) => {
+            setCookie("chatroomTmp", (res.data)._id, {path: "/"});
+            history.push({pathname: "/chat"})
+        }).catch(err => {
+            console.log(err)
+            axios.post(`${endPoint}/chat/create`, {"members": [contact.email, userEmail]}, {
+                headers: {
+                    authorization: "Bearer " + cookie.accessToken
+                }
+            })
+            .then((newChatroom) => {
+                setCookie("chatroomTmp", (newChatroom.data)._id, {path: "/"});
+                history.push({pathname: "/chat"});
+            })
+            .catch((newErr) => console.log(newErr))
+        })
+        // axios.post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]},{
+        //     headers: {
+        //         "authorization": "Bearer " + cookie.accessToken
+        //     }
+        // });
     }
 
     const saveToCookies = () => {
@@ -123,7 +144,7 @@ function ReserveCaretaker(props) {
 
     function onclick() {
         createChatRoom() 
-        history.push( {pathname: "/chat"});
+        // history.push( {pathname: "/chat"});
     }
     
     return (

@@ -73,7 +73,7 @@ function Chatbox({roomId}){
                 }
             });
             const data = res.data;
-             console.log(data)
+            //  console.log(data)
             setMessage(data.messages);
         }
     } 

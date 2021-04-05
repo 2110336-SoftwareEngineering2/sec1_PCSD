@@ -60,6 +60,7 @@ function ChatRoom({info}){
     }, [])
 
     async function handleOnClickChatPeople() {
+        setCookie("chatroomTmp", info.roomId, {path: "/"});
         chatContext.changeChatRoom(info.roomId)
         read();
     }
