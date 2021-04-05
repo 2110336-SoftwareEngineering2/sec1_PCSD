@@ -111,3 +111,12 @@ function InputGender({ petGender, onChange }) {
 }
 
 export { InputImage, InputType, InputText, InputGender };
+
+
+
+
+
+
+
+
+export default {};
