@@ -1,6 +1,10 @@
 .test {
     background-color: #F1F1F1;
     height: 100vh;
+  
+}
+.test h1 {
+    text-align: center;
 }
 .DONE {
     background-color: #BFFF36;
@@ -48,9 +52,11 @@
     align-items: center;
 }
 .test .Cardd {
-    max-height: 100vh;
+    max-height: 650px;
+    min-width: none;
     background-color: #F1F1F1;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 .test .Cardd > .card-deck > .card {
  flex: none;
