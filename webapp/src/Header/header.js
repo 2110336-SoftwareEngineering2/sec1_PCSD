@@ -11,6 +11,7 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import socketIOClient from "socket.io-client";
 import { useCookies } from "react-cookie";
+import NotificationBtn from "../Notification/NotificationBtn";
 
 // const getHash = (str, algo = "SHA-256") => {
 //     let strBuf = new TextEncoder('utf-8').encode(str);
@@ -90,9 +91,10 @@ function Header() {
         </div>
       </div>
       <div className="header__right">
-        <IconButton>
+        {/* <IconButton>
           <NotificationsIcon />
-        </IconButton>
+        </IconButton> */}
+        <NotificationBtn />
         <IconButton>
           <MailIcon
             onClick={() => {
@@ -126,9 +128,11 @@ function Header() {
             <Dropdown.Item
               eventKey="8"
               onClick={() =>
-                history.push({
-                  pathname: user.role === "caretaker" ? "/services" : "/pets",
-                })
+                history.push(
+                  {
+                    pathname: user.role === "caretaker" ? "/services" : "/pets",
+                  },
+                )
               }
             >
               {user.role === "caretaker" ? "My Services" : "My Pets"}
