@@ -15,8 +15,8 @@ const NotificationBtn = () => {
     const socketRef = useRef();
     const endPoint = "http://localhost:5000";
     const [notifications, setNotifications] = useState([]);
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
+    const [unread, setUnread] = useState(0);
+    // const [y, setY] = useState(0);
 
     useEffect(async () => {
         socketRef.current = socketIOClient(endPoint, {
@@ -25,11 +25,17 @@ const NotificationBtn = () => {
             }
         });
 
+        socketRef.current.on("new-unread-noti", (currentUnread) => {
+            console.log(currentUnread);
+            setUnread(currentUnread);
+        })
+
         socketRef.current.on("new-noti", (res) => {
             var newNoti = [res, ...notifications];
             setNotifications(newNoti);
+            setUnread(unread+1);
             console.log(notifications)
-        })
+        });
 
         return () => {
             socketRef.current.disconnect();
@@ -38,35 +44,26 @@ const NotificationBtn = () => {
 
     const onClick = () => {
         console.log("Notit");
-        // console.log(Date.now())
-        var req = {
-            detail: `Stack-${x}`,
-            targetUser: "caretaker@email.com"
-        }
-        socketRef.current.emit("sent-noti", req);
-        setX(x+1);
+        socketRef.current.emit("read", {user: userContext.email});
     }
 
-    const testclick = () => {
-        var data = {
-            x: x,
-            targetUser: "petowner@email.com"
-        }
-        socketRef.current.emit("test", data);
-        setY(y+1);
+    const testclick= () => {
+
     }
 
     return (
         <IconButton >
             <NotificationsIcon onClick={() => onClick()} />
 
-            {userContext.user.email === "caretaker@email.com" ? x : 0}
-            {/* <Button onClick={() => testclick()}>Rsd</Button> */}
+            {/* {userContext.user.email === "caretaker@email.com" ? x : 0} */}
+            {unread}
+            <Button onClick={() => testclick()}>Rsd</Button>
             <DropdownButton
                 title={
                     <div>
                         <NotificationsIcon />
-                        {userContext.user.email === "caretaker@email.com" ? x : 0}
+                        {/* {userContext.user.email === "caretaker@email.com" ? x : 0} */}
+                        {unread}
                     </div>
                 }
             >

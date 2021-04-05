@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { CardDeck, Card, Button } from "react-bootstrap";
 import axios from "axios";
@@ -11,6 +11,8 @@ import SumPet from "./SumPet";
 import Pet from "./Pet";
 import Modal from 'react-bootstrap/Modal';
 import { ProgressBar } from 'react-bootstrap';
+import socketIOClient from "socket.io-client";
+
 function Test(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -19,6 +21,9 @@ function Test(_) {
     payments: [],
     reserves: [],
   })
+
+  const socketRef = useRef();
+  const notiEndPoint = "http://localhost:5000";
   const data = useState([]);
   
   useEffect(() => {
@@ -47,6 +52,19 @@ function Test(_) {
       getReserve(user.email,header);
     }
   }, []);
+
+  useEffect(async () => {
+    // console.log(reserveData)
+    socketRef.current = socketIOClient(notiEndPoint, {
+        query: {
+            user: user.email
+        }
+    });
+
+    return () => {
+        socketRef.current.disconnect();
+    };
+  });
 
   const getPaymentById = (id) => {
     var x = axios.get(`http://localhost:4000/user/payment/${id}`, {headers: {authorization: cookie.accessToken}})
@@ -116,6 +134,7 @@ function Test(_) {
               setState={setState}
               state={state}
               index={index}
+              socket={socketRef.current}
             /> </div>
              <div className="col-6">
             <CancelButton
@@ -124,6 +143,7 @@ function Test(_) {
               setState={setState}
               state={state}
               index={index}
+              socket={socketRef.current}
               />
               </div>
           </div>
@@ -137,6 +157,7 @@ function Test(_) {
               setState={setState}
               state={state}
               index={index}
+              socket={socketRef.current}
               />
           </div>
         )
@@ -151,6 +172,7 @@ function Test(_) {
             setState={setState}
             state={state}
             index={index}
+            socket={socketRef.current}
           />
         </div>
         );
