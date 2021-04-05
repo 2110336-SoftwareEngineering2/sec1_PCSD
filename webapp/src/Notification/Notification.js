@@ -20,26 +20,28 @@ import "./Notification.css";
 //         detail: "Pet Owner has reserved you.",
 //         timestamp: 1617618603000,
 //     }
-const Notification = ({notification}) => {
-
-    return (
-        <Dropdown.Item>
-            <div className="notification-item">
-                <Avatar
-                    className="notification-item-pic"
-                    src={
-                    "https://pcsdimage.s3-us-west-1.amazonaws.com/" + notification.sender.email
-                    }
-                />
-                <div className="notification-item-detail">
-                    <h3>{notification.title} </h3>
-                    <p>{notification.detail}</p>
-                    <span style={{fontSize: '0.8rem'}}>{Date(notification.timestamp).slice(0, 24)}</span>
-                </div>
-            </div>
-            
-        </Dropdown.Item>
-    )
-} 
+const Notification = ({ notification }) => {
+  return (
+    <Dropdown.Item>
+      <div className="notification-item">
+        <Avatar
+          className="notification-item-pic"
+          src={
+            "https://pcsdimage.s3-us-west-1.amazonaws.com/" +
+            notification.sender.email
+          }
+        />
+        <div className="notification-item-detail">
+          <h3>{notification.title} </h3>
+          <p>{notification.detail}</p>
+          <span style={{ fontSize: "0.8rem" }}>
+            {Date(notification.timestamp).slice(0, 24)}
+          </span>
+        </div>
+      </div>
+      <hr />
+    </Dropdown.Item>
+  );
+};
 
 export default Notification;
