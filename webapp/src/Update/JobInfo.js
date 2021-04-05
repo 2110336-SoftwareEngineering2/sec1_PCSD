@@ -6,34 +6,36 @@ import { UserContext } from "../context/MyContext";
 import history from "./../history";
 
 function JobInfo() {
-    const { user } = useContext(UserContext);
-    
-    useEffect(() => {
-        axios
-        .post("http://localhost:4000/user/caretaker/find", {caretaker: user.email})
-        .then((res) => {
-            const data = res.data;
-            setValue({...data, rate: data.rate.$numberDecimal});
-            var _tmp = {};
-            for (var i = 0; i < data.type.length; i++) {
-                _tmp[data.type[i]] = true;
-            };
-            setService({...service, ..._tmp,});
-            _tmp = {}
-            for (var i = 0; i < data.pet_type.length; i++) {
-                _tmp[data.pet_type[i]] = true;
-            }
-            setPetType({...petType, ..._tmp});
-            _tmp = {}
-            for (var i = 0; i < data.available_day.length; i++) {
-                _tmp[data.available_day[i]] = data.available_day[i];
-            }
-            setAvailday({...availdays, ..._tmp});
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  const { user } = useContext(UserContext);
 
+  useEffect(() => {
+    axios
+      .post("http://localhost:4000/user/caretaker/find", {
+        caretaker: user.email,
+      })
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        setValue({ ...data, rate: data.rate.$numberDecimal });
+        var _tmp = {};
+        for (var i = 0; i < data.type.length; i++) {
+          _tmp[data.type[i]] = true;
+        }
+        setService({ ...service, ..._tmp });
+        _tmp = {};
+        for (var i = 0; i < data.pet_type.length; i++) {
+          _tmp[data.pet_type[i]] = true;
+        }
+        setPetType({ ...petType, ..._tmp });
+        _tmp = {};
+        for (var i = 0; i < data.available_day.length; i++) {
+          _tmp[data.available_day[i]] = data.available_day[i];
+        }
+        setAvailday({ ...availdays, ..._tmp });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const [values, setValue] = useState({});
@@ -44,7 +46,7 @@ function JobInfo() {
     daycare: false,
   };
   const [service, setService] = useState({
-    ...serviceType
+    ...serviceType,
   });
 
   const currentPetType = {
@@ -131,7 +133,7 @@ function JobInfo() {
         console.log(err.response.data);
       });
 
-    window.alert("Change(s) saved!")
+    window.alert("Change(s) saved!");
     history.push({ pathname: "/" });
   };
 
@@ -317,23 +319,22 @@ function JobInfo() {
 export default JobInfo;
 
 function AvailableDays(props) {
-
   const startColor = () => {
-    for(const day in props.availdays) {
+    for (const day in props.availdays) {
       var element = document.getElementById(day);
-        const val = props.availdays[day];
-        if (val !== null) {
-            element.style.backgroundColor = "#9d7f70";
-            element.style.color = "white";
-        } else {
-            element.style.backgroundColor = "white";
-            element.style.color = "#8e8e8e";
-        }
+      const val = props.availdays[day];
+      if (val !== null) {
+        element.style.backgroundColor = "#9d7f70";
+        element.style.color = "white";
+      } else {
+        element.style.backgroundColor = "white";
+        element.style.color = "#8e8e8e";
       }
-  }
+    }
+  };
 
   useEffect(() => {
-    startColor()
+    startColor();
   }, [props]);
 
   const handleOnClicked = (event) => {
@@ -348,7 +349,7 @@ function AvailableDays(props) {
       event.target.style.color = "white";
       props.setAvailday({ ...props.availdays, [name]: name });
     }
-  }
+  };
 
   return (
     <div className="availdays">

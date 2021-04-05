@@ -1,28 +1,41 @@
-import React, { useContext } from "react";
-import { Container, Card, Button } from "react-bootstrap";
-import { UserContext } from "../context/MyContext";
-import "./ProfileCard.css";
+import React from "react";
+import { Container, Card, Button, FormFile } from "react-bootstrap";
 
-function ProfileCard(props) {
-  const { user } = useContext(UserContext);
-  const user_fullname = user.firstname + " " + user.lastname;
-  const imgURL = "https://pcsdimage.s3-us-west-1.amazonaws.com/" + user.email;
-  console.log(user);
+function ProfileCard({ info, updateImage }) {
+  const role = info.role == "petowner" ? "Pet Owner" : "Caretaker";
+  const user_fullname = info.firstname + " " + info.lastname;
+  const imgURL = info.userImg
+    ? URL.createObjectURL(info.userImg)
+    : "https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.email;
+
+  function uploadImage(event) {
+    updateImage({ ...info, userImg: event.target.files[0] });
+  }
+
   return (
     <Container className="my-card">
       <Card className="text-center mx-auto" style={{ width: "100%" }}>
-        <Card.Header className="h4">Pet Owner</Card.Header>
+        <Card.Header className="h4">{role}</Card.Header>
         <Card.Body>
           <Card.Title as="h3">{user_fullname}</Card.Title>
-          <Card.Subtitle className="text-muted">@{user.username}</Card.Subtitle>
+          <Card.Subtitle className="text-muted">@{info.username}</Card.Subtitle>
         </Card.Body>
         <Card.Body>
           <div>
             <Card.Img src={imgURL} />
           </div>
-          <Button variant="danger">
-            <b>Choose Photo</b>
-          </Button>
+          <div>
+            <Button onClick={() => document.getElementById("uImg").click()}>
+              Choose Photo
+            </Button>
+            <FormFile
+              id="uImg"
+              accept="image/png, image/jpeg"
+              name="uImg"
+              onChange={uploadImage}
+              hidden
+            />
+          </div>
         </Card.Body>
         <Card.Body>
           <Card.Text className="text-muted small">

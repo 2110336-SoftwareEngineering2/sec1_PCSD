@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import "./Pet.css";
-
+import {Avatar} from "@material-ui/core";
 function Pet({ info, deletePet }) {
     return (
         <div className="pet">
-            <img className="Pet__image" src={info.img} />
+            <Avatar className="Pet__image" src={info.img} />
             <div className="col-5">
             <div className="Pet__name">{info.name}, {info.age}, {info.gender} </div>
    

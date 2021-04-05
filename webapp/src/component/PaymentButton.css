@@ -10,11 +10,12 @@
 
 .acceptbutton > .btn {
     background-color: gray;
+    margin-left: 0px;
     border: none;
 }
 
 .acceptbutton > .btn:hover {
-    background-color: #87BD43;
+    background-color: #007bff;
     border: none;
 }
 
@@ -26,6 +27,6 @@
 }
 
 .receivebutton > .btn:hover {
-    background-color: #007bff;
+    background-color: #87BD43;
     border: none;
 }

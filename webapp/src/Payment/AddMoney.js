@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext } from "react";
-
+import {Avatar} from "@material-ui/core";
 import { UserContext } from "../context/MyContext";
 
 import "./AddMoney.css";
@@ -35,21 +35,19 @@ function Addmoney() {
       <div className="container d-flex justify-content-center mt-5">
         <div className="card">
           <div className="acard">
-            <div className="d-flex pt-3 pl-3">
+            <div className="d-flex pt-3 pl-3" id="headerr">
               <div>
-                <img
+                <Avatar
                   src={
                     "https://pcsdimage.s3-us-west-1.amazonaws.com/" + user.email
                   }
-                  width="80"
-                  height="80"
                 />{" "}
               </div>
               <div className="mt-3 pl-2">
                 <span className="name">
                   {user.firstname} {user.lastname}
                 </span>
-                <div>
+                <div className="crosss">
                   <span className="cross">Account Balance :</span>
                   <span className="pin ml-2">{user.balance.$numberDecimal}</span>
                 </div>
@@ -59,12 +57,6 @@ function Addmoney() {
               <div className="second pl-2 d-flex py-2">
                 <div className="form-check">
                   {" "}
-                  <input
-                    type="radio"
-                    name="optradio"
-                    className="form-check-input mt-3 dot"
-                    checked
-                  />{" "}
                 </div>
                 <div className="border-left pl-2">
                   <span className="head">Amount</span>

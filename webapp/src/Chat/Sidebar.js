@@ -19,16 +19,17 @@ function Sidebar(){
                 <div className = 'Chat_Title'>
                     Chat
                 </div>
-                <div className = 'Chat_Menu'>
-                    <Button>+</Button>
-                </div>
+                
             </div>
             <div className = "Searchbar">
-                {/*<SearchIcon />   Diew Ma Sai Thee lang*/}
+                <SearchIcon /> 
                 <input className = "Search_input" placeholder = "Search Chat" value = {searchContent} onChange = {onChange}></input>
             </div>
             <ChatList />
         </div>
     );
 }
+/*<div className = 'Chat_Menu'>
+                    <Button>+</Button>
+                </div>*/
 export default Sidebar;
