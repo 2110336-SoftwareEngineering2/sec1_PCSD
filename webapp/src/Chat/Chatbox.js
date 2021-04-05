@@ -59,6 +59,9 @@ function Chatbox({roomId}){
 
     useEffect(async() => {
         await getChatRoomDetail();
+        return () => {
+            setMessage([]);
+        }
     }, [roomId])
 
     
