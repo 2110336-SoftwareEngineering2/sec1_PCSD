@@ -53,7 +53,8 @@
   box-shadow: 0 0 8px rgba(189, 86, 67, 0.6);
   outline: 0 none;
 }
-#service_info .was-validated input:focus:valid {
+#service_info .was-validated input:focus:valid,
+#service_info .was-validated textarea:focus:valid {
   border-color: #28a745;
 }
 #service_info .was-validated .valid {
