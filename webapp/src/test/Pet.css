@@ -2,18 +2,21 @@
     display: flex;
     align-items: center;
     font-weight: bold;
-    border-bottom: 1px solid hsl(216, 8%, 88%);
     padding: 10px;
-    width: 350px;
+    width: 400px;
     margin: 25px auto;
-    background-color: #ffffff;
+    background-color: none;
+    font-size: 14px;
 }
-
+.tpet .breed {
+    color: #646464;
+}
 .tPet__image {
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-left: 35px;
 }
 
 .tpet .MuiAvatar-root {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }

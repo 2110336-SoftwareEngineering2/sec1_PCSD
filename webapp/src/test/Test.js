@@ -154,6 +154,8 @@ function Test(_) {
   return (
     <div className="test">
       <Header />
+      <h1>{ user.role == "caretaker" ? "Job " :  "Payment "
+            } &nbsp;Histories</h1>
       {loading ? (
         <h1> Loading... </h1>
       ) : (
@@ -174,6 +176,7 @@ function Test(_) {
               <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
               <p>service type: {reserve.service}</p>
               <p>amount: {reserve.payment.amount.$numberDecimal}</p>
+              <p>Pets:</p>
               { getPet(reserve.pets)}
               <div className="row cardstatus">
               <p>

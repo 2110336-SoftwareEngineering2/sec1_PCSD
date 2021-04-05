@@ -1,8 +1,18 @@
 .petcard {
         width: 100%;
         border: none;
-        max-height: 400px;
+        max-height: 170px;
         overflow: auto;
         scroll-behavior: smooth;
-        margin-top: 35px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #EBEBEB;
+        border-radius: 4px;
+}
+
+.petcard  .carousel-control-prev-icon {
+       
+}
+.petcard  .carousel-control-next-icon {
+  
 }
