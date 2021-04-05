@@ -198,7 +198,7 @@ function Test(_) {
         {state.reserves.map((reserve, index) => (
           <Card style={{ width: '400px' }} key={reserve.payment._id}>
               <div className="cardtitle">
-                <Modal.Header closeButton onClick={/*deleteCard()*/}>
+                <Modal.Header closeButton>
             { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
             }
             </Modal.Header>
