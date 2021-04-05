@@ -91,7 +91,7 @@ function Header() {
       </div>
       <div className="header__right">
         <IconButton>
-          <NotificationsIcon/>
+          <NotificationsIcon />
         </IconButton>
         <IconButton>
           <MailIcon
@@ -107,33 +107,45 @@ function Header() {
             menuAlign="right"
             title={
               <div className="user_infoo">
-                {" "}
                 <Avatar
                   src={
                     "https://pcsdimage.s3-us-west-1.amazonaws.com/" + user.email
                   }
-                />{" "}
-                &nbsp; {user.username}{" "}
+                />
+                &nbsp; {user.username}
               </div>
             }
             id="dropdown-menu-align-right"
           >
             <Dropdown.Item
               eventKey="1"
-              onClick={() => {
-                history.push({ pathname: "/updateinfo" });
-              }}
+              onClick={() => history.push({ pathname: "/profile" })}
             >
-              {" "}
               My Profile
             </Dropdown.Item>
+            <Dropdown.Item
+              eventKey="8"
+              onClick={() =>
+                history.push({
+                  pathname: user.role === "caretaker" ? "/services" : "/pets",
+                })
+              }
+            >
+              {user.role === "caretaker" ? "My Services" : "My Pets"}
+            </Dropdown.Item>
+            <Dropdown.Item
+              eventKey="101"
+              onClick={() => history.push({ pathname: "/updateinfo" })}
+            >
+              My Profile (Old)
+            </Dropdown.Item>
+            <Dropdown.Divider />
             <Dropdown.Item
               eventKey="5"
               onClick={() => {
                 history.push({ pathname: "/addmoney" });
               }}
             >
-              {" "}
               Add Money
             </Dropdown.Item>
             <Dropdown.Item
@@ -142,26 +154,7 @@ function Header() {
                 history.push({ pathname: "/test" });
               }}
             >
-              {" "}
               {user.role == "caretaker" ? "Job Cards" : "Payment Cards"}
-            </Dropdown.Item>
-            <Dropdown.Item
-              eventKey="8"
-              onClick={() => {
-                history.push({ pathname: "/pets" });
-              }}
-            >
-              {" "}
-              My Pets
-            </Dropdown.Item>
-            <Dropdown.Item
-              eventKey="101"
-              onClick={() => {
-                history.push({ pathname: "/profile" });
-              }}
-            >
-              {" "}
-              My Profile (New)
             </Dropdown.Item>
             {user.username == "admin" ? (
               <Dropdown.Item
@@ -170,7 +163,7 @@ function Header() {
                   history.push({ pathname: "/banpage" });
                 }}
               >
-                Ban Status{" "}
+                Ban Status
               </Dropdown.Item>
             ) : null}
 

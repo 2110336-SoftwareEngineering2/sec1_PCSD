@@ -59,6 +59,9 @@ function Chatbox({roomId}){
 
     useEffect(async() => {
         await getChatRoomDetail();
+        return () => {
+            setMessage([]);
+        }
     }, [roomId])
 
     
@@ -73,7 +76,7 @@ function Chatbox({roomId}){
                 }
             });
             const data = res.data;
-             console.log(data)
+            //  console.log(data)
             setMessage(data.messages);
         }
     } 

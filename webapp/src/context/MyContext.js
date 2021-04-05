@@ -80,7 +80,7 @@ function RegisterRuducer(state, action) {
 // Context provider for user context
 function ContextProvider(props) {
   const [state, dispatch] = React.useReducer(ContextReducer, { user: null });
-  const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
+  const [cookie, setCookie, removeCookie] = useCookies();
 
   // useEffect(() => {
     // if (localStorage.getItem("jwtToken")) {
@@ -133,7 +133,10 @@ function ContextProvider(props) {
 
   function logout() {
     // localStorage.removeItem("jwtToken");
-    removeCookie("accessToken", {path: "/"});
+    for (var key in cookie) {
+      removeCookie(key, {path: "/"});
+    }
+    // removeCookie("accessToken", {path: "/"});
 
     dispatch({ type: "LOGOUT" });
   }

@@ -8,6 +8,8 @@ import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentBu
 import "./Test.css";
 import Test2 from "./Test2";
 import SumPet from "./SumPet";
+import Pet from "./Pet";
+import Modal from 'react-bootstrap/Modal';
 
 function Test(_) {
   const { user, login } = useContext(UserContext);
@@ -15,8 +17,9 @@ function Test(_) {
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState({
     payments: [],
-    reserves: []
+    reserves: [],
   })
+  const data = useState([]);
   
   useEffect(() => {
     if (!user && cookie.accessToken !== undefined) {
@@ -30,8 +33,18 @@ function Test(_) {
             .post("http://localhost:4000/user/email", {email: (res.data).email})
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
-              getPayment(header);
-             // getReserve((res.data).email);
+              getReserve((res.data).email);
+              console.log(state.reserves)
+              // var x = [];
+              // for (var i =0; i<(state.reserves).length; i++) {
+              //   var reserve = (state.reserves)[i];
+              //   var id = reserve.paymentId;
+              //   console.log(id)
+              //   var payment = getPaymentById(id);
+              //   console.log(payment)
+              //   x.push({...reserve, payment});
+              // }
+              // console.log(x)
             })
         })
         .catch((err) => {
@@ -40,9 +53,18 @@ function Test(_) {
         });
     } else {
       const header = {"authorization": "Bearer " + cookie.accessToken};
-      getPayment(header);
+      //getPayment(header);
+      getReserve(user.email,header);
     }
   }, []);
+
+  const getPaymentById = (id) => {
+    var x = axios.get(`http://localhost:4000/user/payment/${id}`, {headers: {authorization: cookie.accessToken}})
+    .then(res => {
+      return res;
+    })
+    return x;
+  }
 
   const getPayment = (header) => {
     axios
@@ -51,23 +73,21 @@ function Test(_) {
       })
       .then((res) => {
         setState({payments: res.data});
-        console.log(res.data);
+        console.log("s",res.data);
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const getReserve = (email) => {
+  const getReserve = (email,header) => {
     axios
       .get(`http://localhost:4000/reserve/${email}`, {
-      headers: {
-        "authorization": "Bearer " + cookie.accessToken
-    }
+      headers: header
     })
       .then((res) => {
         setState({reserves: res.data});
-        console.log(res.data);
+        console.log("ssssss",res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -75,37 +95,11 @@ function Test(_) {
       });
   };
  
-/*
-      axios
-        .post("http://localhost:4000/user/email", {email: caretaker})
-        .then((res) => {
-            const data = res.data;
-            setName({firstname: data.firstname, lastname: data.lastname});
-            setContact({email: data.email, phone: data.mobileNumber});
-            })
-        .catch((err) => {
-            console.log(err);
-            });
-*/
  
-  const getPet = (email) => {
-    const pet_lists = null;
-    axios
-    .get(`http://localhost:4000/reserve/${email}`, {
-      headers: {
-        "authorization": "Bearer " + cookie.accessToken
-    }
-    })
-    .then((res) => {
-      console.log(res.data.pets);
-      return (
-        <SumPet pet_lists= {res.data.pets}/>
-      );
-    })
-    .catch((err) => {
-      console.log("pet", err);
-    });
-     
+  const getPet = (pet_lists) => {
+    return (
+    <SumPet pet_lists={pet_lists}/>
+    );
   };
   const getButton = (payment, index) => {
     if (user.role === "caretaker") {
@@ -159,27 +153,33 @@ function Test(_) {
   };
   return (
     <div className="test">
+      <Header />
       {loading ? (
         <h1> Loading... </h1>
       ) : (
           <div className="Cardd">
-             <Header />
+             
         <CardDeck>
-        {state.payments.map((payment, index) => (
-          <Card style={{ width: '400px' }} key={payment._id}>
-            <Card.Body>
-            { user.role == "caretaker" ? <Card.Title>Job</Card.Title> :  <Card.Title>Payment</Card.Title>
+        {state.reserves.map((reserve, index) => (
+          <Card style={{ width: '400px' }} key={reserve.payment._id}>
+              <div className="cardtitle">
+                <Modal.Header closeButton>
+            { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
             }
+            </Modal.Header>
+            </div>
+            <Card.Body>
             <Card.Text>
-              <p>Petowner's name: {payment.petownerFname} {payment.petownerLname}</p>
-              <p>Caretaker's name: {payment.caretakerFname} {payment.caretakerLname}</p>
-              <p>amount: {payment.amount.$numberDecimal}</p>
-              {/*getPet(payment.caretakerEmail)*/}
+              <p>Petowner's name: {reserve.payment.petownerFname} {reserve.payment.petownerLname}</p>
+              <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
+              <p>service type: {reserve.service}</p>
+              <p>amount: {reserve.payment.amount.$numberDecimal}</p>
+              { getPet(reserve.pets)}
               <div className="row cardstatus">
               <p>
-                status: <span className={payment.transferStatus}>{(user.role === "petowner") && (payment.transferStatus === "ACCEPTED") ? "PAID" : payment.transferStatus}</span>
+                status: <span className={reserve.payment.transferStatus}>{(user.role === "petowner") && (reserve.payment.transferStatus === "ACCEPTED") ? "PAID" : reserve.payment.transferStatus}</span>
               </p>
-              { getButton(payment, index) } </div>
+              { getButton(reserve.payment, index) } </div>
             </Card.Text>
           </Card.Body>
           </Card>

@@ -1,11 +1,12 @@
 import React from 'react'
-
+import "./Pet.css";
+import {Avatar} from "@material-ui/core";
 function Pet({info}) {
     return (
         <div className="tpet">
-        <img className="RPet__image" src={info.imgURL} />
+       <Avatar className="tPet__image" src={info.imgURL} />
         <div className="col-5">
-          <div className="RPet__name">
+          <div className="tPet__name">
             {info.petName}, {info.age}, {info.gender}{" "}
           </div>
         </div>
