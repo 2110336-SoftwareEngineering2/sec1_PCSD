@@ -155,6 +155,10 @@ const modifyPayment = async (req, res, status) => {
     }
 };
 
+const deletePayment = async (email) => {
+  await Payment.deleteMany({$or: [{caretakerEmail: email}, {petownerEmail: email}]})
+}
+
 module.exports = {
   topUp,
   transfer,
@@ -170,5 +174,6 @@ module.exports = {
   },
   acceptCommission: async (req, res) => {
     modifyPayment(req, res, "ACCEPTED")
-  }
+  },
+  deletePayment,
 };
