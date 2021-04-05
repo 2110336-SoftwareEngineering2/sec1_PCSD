@@ -10,7 +10,7 @@ import Test2 from "./Test2";
 import SumPet from "./SumPet";
 import Pet from "./Pet";
 import Modal from 'react-bootstrap/Modal';
-
+import { ProgressBar } from 'react-bootstrap';
 function Test(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -94,8 +94,18 @@ function Test(_) {
         console.log(err);
       });
   };
- 
- 
+ const getStatus = (status) => {
+    switch(status) {
+      case "CANCELLED" : 
+        return  <ProgressBar striped variant="danger" now={100}/>
+      case "DONE" : 
+      return  <ProgressBar striped variant="success" now={100}/>;
+      case "ACCEPTED" :
+        return  <ProgressBar animated variant="info" now={60}/>;
+      case "WAITING":
+        return <ProgressBar animated variant="warning" now={30}/> ;
+    }
+ }
   const getPet = (pet_lists) => {
     return (
     <SumPet pet_lists={pet_lists}/>
@@ -151,6 +161,7 @@ function Test(_) {
       }
     }
   };
+  
   return (
     <div className="test">
       <Header />
@@ -184,6 +195,7 @@ function Test(_) {
               </p>
               { getButton(reserve.payment, index) } </div>
             </Card.Text>
+          {getStatus(reserve.payment.transferStatus)}
           </Card.Body>
           </Card>
         ))}
