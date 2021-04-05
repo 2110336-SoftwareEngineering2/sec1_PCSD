@@ -10,6 +10,17 @@ const findAllChatrooms = async (req, res) => {
     });
 }
 
+const deleteChatroomById = async (req, res) => {
+    const id = req.params.id;
+    await Chatrooms.findOneAndDelete({_id: id}, (err, result) => {
+        if (err) {
+            res.status(404).send({err: err});
+        } else {
+            res.status(200).json(result);
+        }
+    });
+}
+
 const findChatRoomById = async (req, res) => {
     if (req.params.id !== null) {
         await Chatrooms.findById(req.params.id, (err, result) => {
@@ -25,6 +36,22 @@ const findChatRoomById = async (req, res) => {
 
 }
 
+const findChatRoomByMembers = async (req, res) => {
+    const members = req.query.members;
+    const chatroom = await Chatrooms.findOne({$or: [{members: [members[0], members[1]]}, {members: [members[1], members[0]]}]}, (err, result) => {
+        if (err) {
+            return null;
+        } else {
+            return result;
+        }
+    });
+    if (chatroom === null) {
+        res.status(404).send({err: "Cannot find chatrooms"});
+    } else {
+        res.status(200).json(chatroom);
+    }
+}
+
 const findUserChatroomsByEmail = async (req, res) => {
     // send url parameters
     const email = req.params.email;
@@ -37,8 +64,16 @@ const findUserChatroomsByEmail = async (req, res) => {
     });
 }
 
-const createChatroom = (req, res) => {
+const createChatroom = async (req, res) => {
     // send req.body => { members : [email_user_1, email_user_2 ] }
+    const members = req.body.members;
+    const chatroom = await Chatrooms.findOne({$or: [{members: [members[0], members[1]]}, {members: [members[1], members[0]]}]}, (err, result) => {
+        if (err) {
+            return null;
+        } else {
+            return result;
+        }
+    });
     var defaultUnread = [
         {
             email: req.body.members[0],
@@ -48,16 +83,21 @@ const createChatroom = (req, res) => {
             email: req.body.members[1],
             unreadMessage: 0
         }
-    ]
-    const newChatRoom = new Chatrooms({ ...req.body, unreadMessages:defaultUnread });
-    newChatRoom.save( (err) => {
-        if (err) {
-            // Create char room failed
-            return res.status(404).send(err);
-        } else {
-            return res.status(200).json(newChatRoom);
-        }
-    })
+    ];
+    if (chatroom === null) {
+        const newChatRoom = new Chatrooms({ ...req.body, unreadMessages:defaultUnread });
+        newChatRoom.save( (err) => {
+            if (err) {
+                // Create char room failed
+                return res.status(404).send(err);
+            } else {
+                return res.status(200).json(newChatRoom);
+            }
+        });
+    } else {
+        return res.status(400).send({err: "This room has been created."});
+    }
+   
 }
 
 const clearMessages = async (req, res) => {
@@ -185,6 +225,14 @@ module.exports = {
 
     getUnreadMessage: async (req, res) => {
         await getUnreadMessage(req, res);
+    },
+
+    getChatRoomByMembers: async (req, res) => {
+        await findChatRoomByMembers(req, res);
+    },
+
+    deleteChatroomById: async (req, res) => {
+        await deleteChatroomById(req, res);
     },
 
     // getSumUnreadMessage: (email) => {
