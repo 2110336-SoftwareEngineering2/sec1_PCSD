@@ -22,7 +22,7 @@ function Sidebar(){
                 
             </div>
             <div className = "Searchbar">
-                <SearchIcon /> 
+                <SearchIcon className = "SearchIcon" /> 
                 <input className = "Search_input" placeholder = "Search Chat" value = {searchContent} onChange = {onChange}></input>
             </div>
             <ChatList />

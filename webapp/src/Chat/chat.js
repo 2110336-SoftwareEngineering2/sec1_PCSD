@@ -8,7 +8,7 @@ import { ChatContext } from "../context/MyContext";
 import { useCookies } from "react-cookie";
 
 function ChatPage() {
-    const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
+    const [cookie, setCookie, removeCookie] = useCookies();
     const chatContext = useContext(ChatContext);
     useEffect(() => {
 

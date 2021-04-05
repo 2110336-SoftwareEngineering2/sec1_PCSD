@@ -38,6 +38,7 @@
 }
 .Seachbar{
   margin: 1px;
+  display: flex;
 }
 .Search_input{
   border-radius: 4px;
@@ -45,6 +46,12 @@
   height: 40px;
   width: 100% ;
   font-size: 16pt;
+}
+.SearchIcon{
+  z-index: 2;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 5px;
 }
 
 .People_Profile{
@@ -62,12 +69,11 @@
 .People_Name{
   grid-area: "People_Name";
   padding-top: 17px;
+  padding-left: 20px;
 }
 .Chat_People{
-  display: grid;
+  display: flex;
   padding: 10px;
-  grid:
-   'People_Profile People_Name';
   background-color: #eee;
   height: 70px ;
 }
@@ -115,16 +121,40 @@
   border-radius: 5px;
 }
 .User_Message{
-  background-color: black;
-  color:white;
+  width: fit-content;
+  align-self: left;
+  border-radius: 18px 18px 0px 18px;
+  background-color: #ddd;
+  margin: 5px;
   }
-.Iteracter_Message{
-  background-color: azure;
+.User_Message2{
+  padding-left: 10px;
 }
-
-/*Chat Message*/
-.ChatAvatar{
-
+.User_Message3{
+  display: flex;
+  padding: 5px 15px 5px 5px;
+  flex-direction: row;
+}
+.User_Message4{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.Interacter_Message{
+  width: fit-content;
+  border-radius: 18px 18px 18px 0px;
+  background-color: #555;
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+}
+.Interacter_Message2{
+  padding-right: 10px;
+  color:#fff;
+}
+.Interacter_Message3{
+  display: flex;
+  padding: 5px 5px 5px 15px;
+  flex-direction: row-reverse;
 }
 
 
