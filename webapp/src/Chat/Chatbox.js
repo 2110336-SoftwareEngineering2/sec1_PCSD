@@ -115,20 +115,29 @@ function Chatbox({roomId}){
         return <div ref={elementRef} />;
     };
     const Messages = ({ message }) => (
-        <ul>
+        <div>
             {message.map((mDetail, idx) => {
                 return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
                     //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
             })}
           <AlwaysScrollToBottom />
-        </ul>
+        </div>
       )
+    const Chat_Title = () =>{
+        if({roomId}!=null){
+            return <h1>{roomId}</h1>
+        }else{
+            return <h1>ChatBox</h1>
+            console.log("error")
+        }
 
+    }
+    
     return (
         <div className = "Chatbox">            
                 <Container fixed = 'md' className = "d-flex flex-column py-2" style ={{height:"90vh"}} >
                     <div className = "Messages">
-                        <h1>ChatBox</h1>
+                        <Chat_Title />
                     {/* <h2>{roomId}</h2> */}
                         <div className = "Chat_Messages" style = {{overflowY :"auto"}}>
                             {//scroll this rewrite this section script
