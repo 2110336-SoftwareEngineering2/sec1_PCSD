@@ -117,6 +117,18 @@ function Test(_) {
     <SumPet pet_lists={pet_lists}/>
     );
   };
+  const deleteCard = (id) => {
+    axios
+      .delete(`http://localhost:4000/reserve/delete/${id}`, {
+        headers: { Authorization: `Bearer ${user.accessToken}` },
+        _id: id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setState({reserves: res.data.filter((card) => card._id !== id)});
+      })
+      .catch((err) => console.log(err));
+  }
   const getButton = (payment, index) => {
     if (user.role === "caretaker") {
       if (payment.transferStatus === "WAITING") {
@@ -186,7 +198,7 @@ function Test(_) {
         {state.reserves.map((reserve, index) => (
           <Card style={{ width: '400px' }} key={reserve.payment._id}>
               <div className="cardtitle">
-                <Modal.Header closeButton>
+                <Modal.Header closeButton onClick={/*deleteCard()*/}>
             { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
             }
             </Modal.Header>
