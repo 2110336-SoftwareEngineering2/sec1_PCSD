@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { CardDeck, Card, Button } from "react-bootstrap";
+import FaceIcon from '@material-ui/icons/Face';
 import axios from "axios";
 import Header from "./../Header/header";
 import { UserContext } from "../context/MyContext";
@@ -10,6 +11,10 @@ import SumPet from "./SumPet";
 import Modal from 'react-bootstrap/Modal';
 import { ProgressBar } from 'react-bootstrap';
 import moment from "moment";
+import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
+import PetsIcon from '@material-ui/icons/Pets';
 function Test(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -93,8 +98,12 @@ function Test(_) {
         console.log(err);
       });
   };
-  const getDate = (date) => {
-    return ( moment(new Date(date)).format("MMMM Do YYYY, h:mm a")
+  const getDate = (sdate,edate) => {
+    // DateRangeIcon
+    return (  <div className="date"> <DateRangeIcon />&nbsp;Date&nbsp;
+      <p style={{color: "#9D7F70" , marginLeft:"50px"}}>&nbsp;{moment(new Date(sdate)).format("l, h:mm a")} - {moment(new Date(edate)).format("l, h:mm a")} </p>
+
+      </div>
     );
   };
  const getStatus = (status, role) => {
@@ -114,7 +123,10 @@ function Test(_) {
  }
   const getPet = (pet_lists) => {
     return (
+      <div>
+      <div className="pett"><PetsIcon />&nbsp;&nbsp;<p>Pets:</p>&nbsp; </div>
     <SumPet pet_lists={pet_lists}/>
+    </div>
     );
   };
   const deleteCard = (id) => {
@@ -130,6 +142,26 @@ function Test(_) {
       })
       .catch((err) => console.log(err));
   }
+  const getPName = (info) => {
+   return (
+    <div className="Pname"><FaceIcon /> &nbsp;Petowner's name&nbsp; <p style={{color: "#BD6A43", marginLeft: "70px"}}> {info.petownerFname} {info.petownerLname}</p></div>
+   );
+  }
+  const getCName = (info) => {
+    return (
+      <div className="Cname"><FaceIcon /> &nbsp;Caretaker's name&nbsp; <p style={{color: "#BD6A43", marginLeft:"70px"}}> {info.caretakerFname} {info.caretakerLname}</p> </div>
+    );
+   }
+   const getService = (info) => {
+    return (
+      <div className="Service"><WorkOutlineIcon />&nbsp;Service type&nbsp; <p style={{color: "#9D7F70", marginLeft:"105px"}}>{info.service}</p> </div>
+    );
+   }
+   const getAmount = (info) => {
+    return (
+      <div className="Amount"><MonetizationOnOutlinedIcon />&nbsp;Amount&nbsp; <p style={{color: "#9D7F70", marginLeft:"130px"}}>{info}</p> </div>
+    );
+   }
   const getButton = (payment, index) => {
     if (user.role === "caretaker") {
       if (payment.transferStatus === "WAITING") {
@@ -207,13 +239,16 @@ function Test(_) {
             </div>
             <Card.Body>
             <Card.Text>
-              <p>Petowner's name: {reserve.payment.petownerFname} {reserve.payment.petownerLname}</p>
-              <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
-              <p>service type: {reserve.service}</p>
-              <p>From: {getDate(reserve.startDate)} </p>
-              <p>To: {getDate(reserve.endDate)} </p>
-              <p>amount: {reserve.payment.amount.$numberDecimal}</p>
-              <p>Pets:</p>
+              {getPName(reserve.payment)}
+              <hr></hr>
+              {getCName(reserve.payment)}
+              <hr></hr>
+              {getService(reserve)}
+              <hr></hr>
+             {getDate(reserve.startDate, reserve.endDate)}
+              <hr></hr>
+              {getAmount(reserve.payment.amount.$numberDecimal)}
+              <hr></hr>
               { getPet(reserve.pets)}
               <div className="cardstatus">
               <div className="power">

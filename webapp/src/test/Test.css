@@ -55,7 +55,39 @@
 .test .power {
     margin: 15px 0px 20px 0px;
 }
-
+.test .Pname {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .Cname {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .Service {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .date {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .Amount {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .pett {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
 .test .cardtitle .modal-header span {
     color: white;
 }
