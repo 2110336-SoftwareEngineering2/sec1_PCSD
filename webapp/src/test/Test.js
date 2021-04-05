@@ -1,16 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { CardDeck, Card, Button } from "react-bootstrap";
+import FaceIcon from '@material-ui/icons/Face';
 import axios from "axios";
 import Header from "./../Header/header";
 import { UserContext } from "../context/MyContext";
 import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentButton";
 import "./Test.css";
-import Test2 from "./Test2";
 import SumPet from "./SumPet";
-import Pet from "./Pet";
 import Modal from 'react-bootstrap/Modal';
-
+import { ProgressBar } from 'react-bootstrap';
+import moment from "moment";
+import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
+import PetsIcon from '@material-ui/icons/Pets';
 function Test(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -35,16 +39,16 @@ function Test(_) {
               login({...res.data, accessToken: cookie.accessToken});
               getReserve((res.data).email);
               console.log(state.reserves)
-              var x = [];
-              for (var i =0; i<(state.reserves).length; i++) {
-                var reserve = (state.reserves)[i];
-                var id = reserve.paymentId;
-                console.log(id)
-                var payment = getPaymentById(id);
-                console.log(payment)
-                x.push({...reserve, payment});
-              }
-              console.log(x)
+              // var x = [];
+              // for (var i =0; i<(state.reserves).length; i++) {
+              //   var reserve = (state.reserves)[i];
+              //   var id = reserve.paymentId;
+              //   console.log(id)
+              //   var payment = getPaymentById(id);
+              //   console.log(payment)
+              //   x.push({...reserve, payment});
+              // }
+              // console.log(x)
             })
         })
         .catch((err) => {
@@ -94,25 +98,86 @@ function Test(_) {
         console.log(err);
       });
   };
- 
- 
-  const getPet = (pet_lists) => {
-    return (
-    <SumPet pet_lists={pet_lists}/>
+  const getDate = (sdate,edate) => {
+    // DateRangeIcon
+    console.log(new Date(sdate).toLocaleDateString());
+    console.log(new Date(sdate).toLocaleTimeString());
+    return (  <div className="date"> <DateRangeIcon />&nbsp;Date&nbsp;
+      <p style={{color: "#9D7F70" , marginLeft:"30px"}}>&nbsp;{new Date(sdate).toLocaleDateString()}, {new Date(sdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}  - {new Date(edate).toLocaleDateString()}, {new Date(edate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} </p>
+
+      </div>
     );
   };
+ const getStatus = (status, role) => {
+   const text = "";
+    switch(status) {
+      case "CANCELLED" : 
+        return  <ProgressBar striped variant="danger" now={100} label={`CANCELLED`}/>;
+      case "DONE" : 
+      return  <ProgressBar striped variant="success" now={100} label={`DONE`}/>;
+      case "ACCEPTED" :
+        if(role === "petowner")
+        return  <ProgressBar animated variant="info" now={60} label={`PAID`}/>;
+        else return  <ProgressBar animated variant="info" now={60} label={`WORKING`}/>;
+      case "WAITING":
+        return <ProgressBar animated variant="warning" now={30} label={`WAITING`}/> ;
+    }
+ }
+  const getPet = (pet_lists) => {
+    return (
+      <div>
+      <div className="pett"><PetsIcon />&nbsp;&nbsp;<p>Pets:</p>&nbsp; </div>
+    <SumPet pet_lists={pet_lists}/>
+    </div>
+    );
+  };
+  const deleteCard = (id) => {
+    console.log("sds",id); 
+    axios
+      .delete(`http://localhost:4000/reserve/delete/${id}`, {
+        headers: { Authorization: `Bearer ${user.accessToken}` },
+        _id: id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setState({reserves: res.data.filter((card) => card._id !== id)});
+      })
+      .catch((err) => console.log(err));
+  }
+  const getPName = (info) => {
+   return (
+    <div className="Pname"><FaceIcon /> &nbsp;Petowner's name&nbsp; <p style={{color: "#BD6A43", marginLeft: "70px"}}> {info.petownerFname} {info.petownerLname}</p></div>
+   );
+  }
+  const getCName = (info) => {
+    return (
+      <div className="Cname"><FaceIcon /> &nbsp;Caretaker's name&nbsp; <p style={{color: "#BD6A43", marginLeft:"70px"}}> {info.caretakerFname} {info.caretakerLname}</p> </div>
+    );
+   }
+   const getService = (info) => {
+    return (
+      <div className="Service"><WorkOutlineIcon />&nbsp;Service type&nbsp; <p style={{color: "#9D7F70", marginLeft:"105px"}}>{info.service}</p> </div>
+    );
+   }
+   const getAmount = (info) => {
+    return (
+      <div className="Amount"><MonetizationOnOutlinedIcon />&nbsp;Amount&nbsp; <p style={{color: "#9D7F70", marginLeft:"130px"}}>{info}</p> </div>
+    );
+   }
   const getButton = (payment, index) => {
     if (user.role === "caretaker") {
       if (payment.transferStatus === "WAITING") {
         return (
-          <div className="watingbutton">
+          <div className="row watingbutton">
+            <div className="col-6">
             <AcceptButton
               payment={payment}
               accessToken={cookie.accessToken}
               setState={setState}
               state={state}
               index={index}
-            />
+            /> </div>
+             <div className="col-6">
             <CancelButton
               payment={payment}
               accessToken={cookie.accessToken}
@@ -120,6 +185,7 @@ function Test(_) {
               state={state}
               index={index}
               />
+              </div>
           </div>
         );
       } else if(payment.transferStatus === "ACCEPTED") {
@@ -151,9 +217,13 @@ function Test(_) {
       }
     }
   };
+  
+
   return (
     <div className="test">
       <Header />
+      <h1>{ user.role == "caretaker" ? "Job " :  "Payment "
+            } &nbsp;Histories</h1>
       {loading ? (
         <h1> Loading... </h1>
       ) : (
@@ -162,25 +232,33 @@ function Test(_) {
         <CardDeck>
         {state.reserves.map((reserve, index) => (
           <Card style={{ width: '400px' }} key={reserve.payment._id}>
-              <div className="cardtitle">
-                <Modal.Header closeButton>
+              <div className="cardtitle" id="cardtitle">
+                <Modal.Header>
             { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
             }
+          <Modal.Title id="delete" onClick={() => deleteCard(reserve._id)}>X</Modal.Title>
             </Modal.Header>
             </div>
             <Card.Body>
             <Card.Text>
-              <p>Petowner's name: {reserve.payment.petownerFname} {reserve.payment.petownerLname}</p>
-              <p>Caretaker's name: {reserve.payment.caretakerFname} {reserve.payment.caretakerLname}</p>
-              <p>service type: {reserve.service}</p>
-              <p>amount: {reserve.payment.amount.$numberDecimal}</p>
+              {getPName(reserve.payment)}
+              <hr></hr>
+              {getCName(reserve.payment)}
+              <hr></hr>
+              {getService(reserve)}
+              <hr></hr>
+             {getDate(reserve.startDate, reserve.endDate)}
+              <hr></hr>
+              {getAmount(reserve.payment.amount.$numberDecimal)}
+              <hr></hr>
               { getPet(reserve.pets)}
-              <div className="row cardstatus">
-              <p>
-                status: <span className={reserve.payment.transferStatus}>{(user.role === "petowner") && (reserve.payment.transferStatus === "ACCEPTED") ? "PAID" : reserve.payment.transferStatus}</span>
-              </p>
+              <div className="cardstatus">
+              <div className="power">
+                {getStatus(reserve.payment.transferStatus, user.role)}
+              </div>
               { getButton(reserve.payment, index) } </div>
             </Card.Text>
+
           </Card.Body>
           </Card>
         ))}

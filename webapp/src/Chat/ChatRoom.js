@@ -14,7 +14,18 @@ function ChatRoom({info}){
     const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
     const socketRef = useRef();
     const roomId = info.roomId;
-
+    const [firstname, setFname] = useState("");
+    const [lastname, setLname] = useState("");
+    axios
+        .post("http://localhost:4000/user/email", {email: info.title})
+        .then((res) => {
+            const data = res.data;
+            setFname(data.firstname);
+            setLname(data.lastname);
+            })
+        .catch((err) => {
+            console.log(err);
+            });
     useEffect(() => {
         if (roomId != null) {
             socketRef.current = socketIOClient(endpoint, {
@@ -60,6 +71,7 @@ function ChatRoom({info}){
     }, [])
 
     async function handleOnClickChatPeople() {
+        setCookie("chatroomTmp", info.roomId, {path: "/"});
         chatContext.changeChatRoom(info.roomId)
         read();
     }
@@ -76,7 +88,7 @@ function ChatRoom({info}){
     return(
         <div className = "Chat_People" onClick={() => handleOnClickChatPeople()}>
             <img className = "People_Profile" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ info.title}/>
-            <div className = "People_Name">{info.title} ({chatContext.unreadMessage[roomId]})</div>
+            <div className = "People_Name">{firstname} {lastname} ({chatContext.unreadMessage[roomId]})</div>
         </div>
     );
 }

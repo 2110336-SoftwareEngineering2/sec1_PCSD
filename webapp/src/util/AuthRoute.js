@@ -25,7 +25,7 @@ function AuthRoute({ component: Component, ...rest }) {
             .then((res) => {
               userContext.login({...res.data, accessToken: cookie.accessToken});
             });
-            console.log(userContext)
+            // console.log(userContext)
         })
         .catch((err) => {
           console.log(err);

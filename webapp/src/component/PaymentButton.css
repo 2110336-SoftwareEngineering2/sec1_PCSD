@@ -1,8 +1,8 @@
 .cancelbutton > .btn {
     background-color: gray;
     border: none;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    margin: auto;
+    margin-left: 50px;
 }
 .cancelbutton > .btn:hover {
     background-color: #DA3535;
@@ -10,7 +10,7 @@
 
 .acceptbutton > .btn {
     background-color: gray;
-    margin-left: 0px;
+    margin-left: 30px;
     border: none;
 }
 
@@ -22,8 +22,7 @@
 .receivebutton > .btn {
     background-color: gray;
     border: none;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    margin: auto;
 }
 
 .receivebutton > .btn:hover {

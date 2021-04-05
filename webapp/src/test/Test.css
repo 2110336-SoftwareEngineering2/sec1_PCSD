@@ -1,6 +1,10 @@
 .test {
     background-color: #F1F1F1;
     height: 100vh;
+  
+}
+.test h1 {
+    text-align: center;
 }
 .DONE {
     background-color: #BFFF36;
@@ -29,6 +33,15 @@
     color: white;
     
 }
+.test #cardtitle #delete {
+    font-weight: bold;
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+}
+.test #cardtitle #delete:hover {
+    color: white;
+}
 .test .modal-title {
     font-size: 20px;
     font-weight: bold;
@@ -39,6 +52,42 @@
     border: none;
    
 }
+.test .power {
+    margin: 15px 0px 20px 0px;
+}
+.test .Pname {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .Cname {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .Service {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .date {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .Amount {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.test .pett {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
 .test .cardtitle .modal-header span {
     color: white;
 }
@@ -48,9 +97,11 @@
     align-items: center;
 }
 .test .Cardd {
-    max-height: 100vh;
+    max-height: 650px;
+    min-width: none;
     background-color: #F1F1F1;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 .test .Cardd > .card-deck > .card {
  flex: none;
@@ -61,14 +112,17 @@
     margin-left: 2px;
 }
 
-.test .watingbutton {
+.test .watingbutton{
     display: flex;
-    margin-left: 200px;
+    margin: auto;
 }
 .test .watingcanbutton {
-    margin-left: 160px;
+    margin-left: 90px;
 }
 
 .test .acceptedbutton {
-    margin-left: 160px;
+    margin-left: 140px;
+}
+.cardstatus .row {
+    margin: auto;
 }

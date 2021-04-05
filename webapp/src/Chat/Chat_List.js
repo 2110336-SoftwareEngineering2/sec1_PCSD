@@ -10,6 +10,7 @@ function ChatList(){
     const [people, setPeople] = useState([])
     const myData = useContext(UserContext)
     const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
+    const chatContext = useContext(ChatContext);
     const socketRef = useRef();
 
     useEffect(async () => {
@@ -23,6 +24,7 @@ function ChatList(){
             // console.log(res.data)
             allinfo.push((res.data)[i])
         }
+
         setPeoples(allinfo)
 
         // console.log(people)

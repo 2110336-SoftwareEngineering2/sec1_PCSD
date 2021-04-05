@@ -156,7 +156,7 @@ function Header() {
                 history.push({ pathname: "/test" });
               }}
             >
-              {user.role == "caretaker" ? "Job Cards" : "Payment Cards"}
+              {user.role == "caretaker" ? "Job Histories" : "Payment Histories"}
             </Dropdown.Item>
             {user.username == "admin" ? (
               <Dropdown.Item
