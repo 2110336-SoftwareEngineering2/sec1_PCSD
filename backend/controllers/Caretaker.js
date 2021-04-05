@@ -64,6 +64,10 @@ const rate_av = function(rate_point){
   return parseFloat(rate_data.sum_rate.$numberDecimal)/rate_point.rate_count;
 }
 
+const deleteCaretaker = async (caretaker) => {
+  await Caretaker.deleteOne({caretaker: caretaker});
+};
+
 const SearchCaretaker = async (body,res) =>{
   const fillter = {
      rate : {$gte:0},
@@ -158,4 +162,5 @@ module.exports = {
     SearchCaretaker,
     rate,
     comment,
+    deleteCaretaker,
 }
