@@ -3,13 +3,16 @@
 }
 
 #user_profile .card {
-  border-radius: 1rem;
   min-width: 200px;
+  border-radius: 1rem;
+  border-color: #872935;
+  box-shadow: 5px 5px 5px 0px rgba(83, 1, 1, 0.25);
 }
 
 #user_profile .card-header {
   color: #fff;
   background-color: #872935;
+  border-color: #872935;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }

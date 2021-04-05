@@ -130,30 +130,28 @@ function MobileNumber({ input, onChange }) {
   );
 }
 
+function GenderRadio({ gender, input, onChange }) {
+  return (
+    <Form.Check
+      className={"col px-2 " + (input.gender === null ? "unfilled" : "filled")}
+      type="radio"
+      name="gender"
+      label={gender}
+      id={gender}
+      value={gender}
+      onChange={onChange}
+      checked={input.gender === gender}
+      inline
+      required
+    />
+  );
+}
 function Gender({ input, onChange }) {
-  function GenderRadio({ gender }) {
-    return (
-      <Form.Check
-        className={
-          "col px-2 " + (input.gender === null ? "unfilled" : "filled")
-        }
-        type="radio"
-        name="gender"
-        label={gender}
-        id={gender}
-        value={gender}
-        onChange={onChange}
-        checked={input.gender === gender}
-        inline
-        required
-      />
-    );
-  }
   return (
     <InputForm id="gender" label="Gender">
       <Form.Row>
-        <GenderRadio gender="male" />
-        <GenderRadio gender="female" />
+        <GenderRadio gender="male" input={input} onChange={onChange} />
+        <GenderRadio gender="female" input={input} onChange={onChange} />
       </Form.Row>
     </InputForm>
   );

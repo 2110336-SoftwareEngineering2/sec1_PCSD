@@ -4,7 +4,6 @@ import { Container, Card, Form, Alert } from "react-bootstrap";
 import Input from "./FormComponents";
 
 function ProfileForm({ input, updateInput, submitForm, invalidUsername }) {
-  const [lastModified, setLastModified] = useState(null);
   const [modified, setModified] = useState(false);
   const [showAlert, setShowAlert] = useState(!!invalidUsername);
 
@@ -12,14 +11,8 @@ function ProfileForm({ input, updateInput, submitForm, invalidUsername }) {
     setShowAlert(!!invalidUsername);
   }, [invalidUsername]);
 
-  useEffect(() => {
-    const element = document.querySelector(`#${lastModified}`);
-    if (element) element.focus();
-  }, [lastModified]);
-
-  function modifyInput({ target: { id, name, value } }) {
+  function modifyInput({ target: { name, value } }) {
     updateInput({ ...input, [name]: value });
-    setLastModified(id);
     setModified(true);
   }
 
@@ -33,7 +26,8 @@ function ProfileForm({ input, updateInput, submitForm, invalidUsername }) {
     <Container className="my-card">
       {showAlert ? (
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-          Username '<b className='blockquote'>{invalidUsername}</b> ' is unavailable!
+          Username '<b className="blockquote">{invalidUsername}</b> ' is
+          unavailable!
         </Alert>
       ) : null}
       <Card className="mx-auto" style={{ width: "100%" }}>

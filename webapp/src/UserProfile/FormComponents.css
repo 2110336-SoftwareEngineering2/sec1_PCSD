@@ -8,7 +8,7 @@
   background-color: #872935;
   border-color: #872935;
 }
-#user_profile .btn-primary:hover {
+#user_profile .btn-primary:hover:enabled {
   background-color: brown;
   box-shadow: 0 0 5px 0px tomato;
 }
