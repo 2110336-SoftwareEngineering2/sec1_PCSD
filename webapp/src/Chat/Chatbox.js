@@ -6,6 +6,7 @@ import { ChatContext, UserContext } from "../context/MyContext";
 import {useWindowScroll} from 'react'
 //import {FixedSizeList as List} from 'react-window';
 import {Container} from "react-bootstrap"
+import {Avatar} from "@material-ui/core"
 import Icon from "@material-ui/core/Icon"
 import Amesage from "./amesage";
 //import classNames from 'classnames';
@@ -19,6 +20,8 @@ function Chatbox({roomId}){
     // const chatContext = useContext(ChatContext);
     const userContext = useContext(UserContext);
     const chatContext = useContext(ChatContext);
+    const [interactor,setInteractor] = useState("");
+    const [inter,setInter] = useState("")
     const [messages, setMessage] = useState([]);
     const [members,setMember] = useState([])
     const [inputMessage, setInputMessage] = useState("");
@@ -128,27 +131,41 @@ function Chatbox({roomId}){
           <AlwaysScrollToBottom />
         </div>
       )
-    const getName = (email) => {
+    const getName = () => {
+        if({roomId}!=null){
+            console.log(members);
+            var Inter = ""
+            if(email==members[0]){
+                //return <h1> <getName email = {members[1]} /> </h1>
+                Inter  = members[1];
+            }
+            else {
+                //return <h1> <getName email = {members[0]} /> </h1>
+                var Inter = members[0];
+        }}
+        setInter(Inter)
         axios
-        .post("http://localhost:4000/user/email", {email: email})
+        .post("http://localhost:4000/user/email", {email: Inter})
         .then((res) => {
+            console.log(res.data.firstname)
+            setInteractor(res.data.firstname + " " + res.data.lastname)
             return res.data;
             })
         .catch((err) => {
             console.log(err);
             });
+
     }
     const Chat_Title = () =>{
-        if({roomId}!=null){
-            console.log(members);
-            if(email==members[0]){
-                return <h1>{members[1]} </h1>
-            }
-            else {
-                return <h1>{members[0]}</h1>
-            }
+        if({roomId}!=email){
+            //console.log(members);
+            getName()
+            return (<div className = "Interacter">
+                        <Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + inter} />
+                        <div className = "Interacter2">{interactor}</div>
+                    </div>);
         }else{
-            return <h1>ChatBox</h1>
+            return <div className = "Interacter">ChatBox</div>
             console.log("error");
         }
 
