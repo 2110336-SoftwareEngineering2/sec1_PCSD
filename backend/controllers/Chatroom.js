@@ -158,18 +158,28 @@ const getUnreadMessage = async (req, res) => {
     }
     await Chatrooms.findOne(query, (err, result) => {
         if (err) {
-            res.status(404).send(err);
+            res.status(400).send(err);
         } else {
             // console.log(result)
-            var found = false;
-            result.unreadMessages.forEach((elem) => {
-                if (elem.email === req.params.email) {
-                    res.status(200).json(elem);
-                    found = true;
-                    return;
+            var found = null;
+            // var found  = result.unreadMessages.forEach((elem) => {
+            //     if (elem.email === req.params.email) {
+            //         // console.log(elem)
+            //         return elem;
+            //     }
+            // });
+            for (var i=0; i<(result.unreadMessages).length; i++) {
+                if ((result.unreadMessages)[i].email === req.params.email) {
+                    found = (result.unreadMessages)[i];
+                    break;
                 }
-            });
-            if (!found) res.status(404).send("Cannot found this email.");
+            }
+            if (found === null) {
+                res.status(404).send("Cannot found this email");
+            } else {
+                // console.log(found)
+                res.status(200).json(found);
+            }
         }
     });
 }
