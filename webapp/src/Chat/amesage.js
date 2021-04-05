@@ -1,8 +1,8 @@
 import React,{useState} from "react"
-import {Avatar} from "@material-ui/core"
-import axios from "axios";
+//import {Avatar} from "@material-ui/core"
+//import axios from "axios";
 function Amesage({email,message,timestamp,is_user}){
-    const [firstname, setFname] = useState("");
+    /*const [firstname, setFname] = useState("");
     const [lastname, setLname] = useState("");
     axios
         .post("http://localhost:4000/user/email", {email: email})
@@ -15,14 +15,17 @@ function Amesage({email,message,timestamp,is_user}){
         .catch((err) => {
             console.log(err);
             });
+    */
     if(is_user){
         return(
             <div className = "User_Message4">
+                {//<Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + email} />
+                }
             <div className = "User_Message">
                 <div className = "User_Message3">
-                    <Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + email} />
+                    
                     <div className = "User_Message2">
-                        <div>{firstname+"  "+lastname+" "+timestamp}</div>
+                        <div>{timestamp}</div>
                         <div>{message}</div>
                     </div>
                 </div>
@@ -33,9 +36,10 @@ function Amesage({email,message,timestamp,is_user}){
         return(
             <div className = "Interacter_Message">
                 <div className = "Interacter_Message3">
-                    <Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + email} />
+                    {//<Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + email} />
+                    }
                     <div className = "Interacter_Message2">
-                        <div>{firstname+"  "+lastname+" "+timestamp}</div>
+                        <div>{timestamp}</div>
                         <div>{message}</div>
                     </div>
                 </div>
