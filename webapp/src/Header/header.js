@@ -126,9 +126,11 @@ function Header() {
             <Dropdown.Item
               eventKey="8"
               onClick={() =>
-                history.push({
-                  pathname: user.role === "caretaker" ? "/services" : "/pets",
-                })
+                history.push(
+                  {
+                    pathname: user.role === "caretaker" ? "/services" : "/pets",
+                  },
+                )
               }
             >
               {user.role === "caretaker" ? "My Services" : "My Pets"}
