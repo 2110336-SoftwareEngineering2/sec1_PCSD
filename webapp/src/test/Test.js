@@ -118,6 +118,7 @@ function Test(_) {
     );
   };
   const deleteCard = (id) => {
+    console.log("sds",id); 
     axios
       .delete(`http://localhost:4000/reserve/delete/${id}`, {
         headers: { Authorization: `Bearer ${user.accessToken}` },
@@ -201,7 +202,7 @@ function Test(_) {
                 <Modal.Header>
             { user.role == "caretaker" ? <Modal.Title>Job</Modal.Title> :  <Modal.Title>Payment</Modal.Title>
             }
-            <Button onclick={deleteCard(reserve._id)}>X</Button>
+          <Button onClick={() => deleteCard(reserve._id)}>X</Button>
             </Modal.Header>
             </div>
             <Card.Body>
