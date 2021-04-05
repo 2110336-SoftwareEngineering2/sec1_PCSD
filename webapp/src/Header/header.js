@@ -139,9 +139,9 @@ function Header() {
             </Dropdown.Item>
             <Dropdown.Item
               eventKey="101"
-              onClick={() => history.push({ pathname: "/updateinfo" })}
+              onClick={() => history.push({ pathname: "/petform" })}
             >
-              My Profile (Old)
+              Pet Form (NEW)
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item
