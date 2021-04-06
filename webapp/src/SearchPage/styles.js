@@ -36,15 +36,14 @@ export default makeStyles((theme) => ({
     // left: "50%",
     // transform: "translate(-50%, -50%)",
 
-    position: "absolute",
-    // top: "0",
-    // bottom: "0",
+    position: "static",
+    top: "0",
+    bottom: "0",
     left: "0",
     right: "0",
 
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "0px",
 
     // marginTop: "-50px",
     // marginLeft: "-50px",
@@ -61,7 +60,7 @@ export default makeStyles((theme) => ({
   },
   button: {
     backgroundColor: "#b1767d",
-    width: "25%",
+    width: "190px",
     color: "white",
     position: "absolute",
     // top: "0",
