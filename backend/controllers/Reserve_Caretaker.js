@@ -101,7 +101,7 @@ const reserveCaretaker = async (req, res) => {
         console.log(err)
         res.status(400).send(err);
       } else {
-        console.log(newReserve)
+        // console.log(newReserve)
         res.status(200).json(newReserve);
       }
     });
@@ -114,19 +114,21 @@ const removeReserveCaretaker = async (req, res) => {
     
   // if (!problem && user.role === "user") {
   const reserveId = req.params.id;
-  const removed = await Reserve.findOneAndDelete(
+  console.log(reserveId)
+  await Reserve.findOneAndDelete(
     {
       _id: reserveId,
     },
-    (err) => {
+    (err, doc) => {
       if (err) {
         res.status(400).send(err);
       } else {
+        deletePaymentById(doc.paymentId);
         res.status(200).send("Remove reserve successful");
       }
-    }
+    },
+    {new: false}
   );
-  deletePaymentById(removed.paymentId);
   // }
 };
 
