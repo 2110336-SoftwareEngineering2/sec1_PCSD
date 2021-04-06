@@ -212,7 +212,6 @@ function Home() {
       </TimelineItem>
     </Timeline>
             </div>
-            
         </div>
     </div>
 
