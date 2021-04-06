@@ -42,8 +42,9 @@ export default makeStyles((theme) => ({
     left: "0",
     right: "0",
 
-    margin: "auto",
-    // marginTop: "0px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "0px",
 
     // marginTop: "-50px",
     // marginLeft: "-50px",
