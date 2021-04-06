@@ -170,7 +170,7 @@ function Home() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className="paper">
+          <Paper elevation={3} className="paper s">
             <Typography variant="h6" component="h1">
             Search
             </Typography>
@@ -186,7 +186,7 @@ function Home() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className="paper">
+          <Paper elevation={3} className="paper r">
             <Typography variant="h6" component="h1">
             Reserve & pay on Petidcare
             </Typography>
@@ -201,16 +201,18 @@ function Home() {
           </TimelineDot>
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className="paper">
+          <Paper elevation={3} className="paper re">
             <Typography variant="h6" component="h1">
               Relex
             </Typography>
-            <Typography>Get the Petidcare Guarantee, 24/7 support, and reservation protection.</Typography>
+            <Typography>Get the Petidcare Guarantee, 24/7 support,
+              <br></br> and reservation protection</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
     </Timeline>
             </div>
+            
         </div>
     </div>
 
