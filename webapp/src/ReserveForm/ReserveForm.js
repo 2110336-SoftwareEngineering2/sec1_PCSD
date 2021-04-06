@@ -235,7 +235,7 @@ function ReserveForm(props) {
               id="datetime-local"
               label="When would you like to drop off?"
               type="datetime-local"
-              defaultValue="2021-04-01T10:30"
+              useCurrent={true}
               onChange={onChangeStartDate}
               className={classes.textField}
               InputLabelProps={{
@@ -247,8 +247,8 @@ function ReserveForm(props) {
               id="datetime-local"
               label="When would you like to pick up?"
               type="datetime-local"
-              defaultValue="2021-04-01T10:30"
               className={classes.textField}
+              useCurrent={true}
               onChange={onChangeEndDate}
               InputLabelProps={{
                 shrink: true,
