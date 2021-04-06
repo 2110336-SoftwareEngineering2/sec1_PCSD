@@ -3,7 +3,7 @@
     height: 100vh;
 }
 
-.home  p {
+.home .row p {
     margin-top: 20px;
     margin-bottom: 0px;
     font-style: normal;
