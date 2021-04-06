@@ -1,86 +1,65 @@
-import React, { useContext, useState } from "react";
-import {
-  InputImage,
-  InputType,
-  InputText,
-  InputGender,
-} from "./FormComponents";
-import Button from '@material-ui/core/Button';
+import React, { useState } from "react";
+import { Form, Col } from "react-bootstrap";
+
+import Input from "./FormComponents";
 import defaultPetImg from "../petpic.png";
-import "./PetForm.css";
+
 function PetForm({ currentPet, savePet, cancelForm }) {
+  const [submitted, setSubmitted] = useState(false);
+  const [modified, setModified] = useState(false);
   const isNewPet = currentPet === null;
   const [input, setInput] = useState(
     currentPet || {
-      petType: "",
+      petType: null,
       petName: "",
       breed: "",
       age: "",
-      gender: "",
+      gender: null,
       imgURL: defaultPetImg,
       petImg: null,
     }
   );
 
-  function handleChange(event) {
-    const name = event.target.name;
+  function handleChange({ target: { name, value, files } }) {
     setInput({
       ...input,
-      [name]: name === "petImg" ? event.target.files[0] : event.target.value,
+      [name]: name === "petImg" ? files[0] : value,
     });
+    setModified(true);
   }
 
   function handleSubmit(event) {
     savePet({ ...input, hasImg: !!input.petImg }, isNewPet);
+    setSubmitted(true);
     event.preventDefault();
   }
 
   return (
-    <form className="petform" onSubmit={handleSubmit}>
-      <div className="row">
-        <InputImage
-          petImg={
-            input.petImg ? URL.createObjectURL(input.petImg) : input.imgURL
-          }
-          onChange={handleChange}
-        />
-      </div>
-      <div className="row">
-        <InputType petType={input.petType} onChange={handleChange} />
-      </div>
-      <div className="row textinput">
-        <InputText
-          label="Pet Name"
-          infoName="petName"
-          petInfo={input.petName}
-          onChange={handleChange}
-        />
-        <InputText
-          label="Pet Breed"
-          infoName="breed"
-          petInfo={input.breed}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="row textinput">
-        <InputText
-          label="Pet Age"
-          infoName="age"
-          petInfo={input.age}
-          onChange={handleChange}
-        />
-        <InputGender petGender={input.gender} onChange={handleChange} />
-      </div>
-      <div className="row button">
-        <Button onClick={cancelForm}>
-          Cancel
-        </Button>
-        <div className="addbuttonn">
-          <input className="submit" type="submit" value="SAVE PET" />
-        </div>
-      </div>
-    </form>
+    <Form validated={modified} onSubmit={handleSubmit}>
+      <fieldset disabled={submitted}>
+        <Form.Row>
+          <Col md>
+            <Form.Row>
+              <Input.PetImage input={input} onChange={handleChange} />
+            </Form.Row>
+            <Form.Row>
+              <Input.PetType input={input} onChange={handleChange} />
+              <Input.PetGender input={input} onChange={handleChange} />
+            </Form.Row>
+          </Col>
+          <Col md>
+            <Input.PetName input={input} onChange={handleChange} />
+            <Input.PetBreed input={input} onChange={handleChange} />
+            <Input.PetAge input={input} onChange={handleChange} />
+            <Input.Submit
+              modified={modified}
+              submitted={submitted}
+              onCancel={cancelForm}
+            />
+          </Col>
+        </Form.Row>
+      </fieldset>
+    </Form>
   );
 }
-
 export default PetForm;

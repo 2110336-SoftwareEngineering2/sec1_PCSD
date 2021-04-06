@@ -4,11 +4,13 @@ import { Container, Card, Form, Alert } from "react-bootstrap";
 import Input from "./FormComponents";
 
 function ProfileForm({ input, updateInput, submitForm, invalidUsername }) {
+  const [submitted, setSubmitted] = useState(false);
   const [modified, setModified] = useState(false);
-  const [showAlert, setShowAlert] = useState(!!invalidUsername);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     setShowAlert(!!invalidUsername);
+    if (invalidUsername) setSubmitted(false);
   }, [invalidUsername]);
 
   function modifyInput({ target: { name, value } }) {
@@ -19,7 +21,10 @@ function ProfileForm({ input, updateInput, submitForm, invalidUsername }) {
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
-    if (form.checkValidity()) submitForm();
+    if (form.checkValidity()) {
+      submitForm();
+      setSubmitted(true);
+    }
   }
 
   return (
@@ -34,27 +39,32 @@ function ProfileForm({ input, updateInput, submitForm, invalidUsername }) {
         <Card.Header className="h4">Edit Your Profile</Card.Header>
         <Card.Body>
           <Form validated={modified} onSubmit={handleSubmit}>
-            <Form.Row>
-              <Input.FirstName input={input} onChange={modifyInput} />
-              <Input.LastName input={input} onChange={modifyInput} />
-            </Form.Row>
-            <Form.Row>
-              <Input.NewPassword input={input} onChange={modifyInput} />
-              <Input.ConfirmPassword input={input} onChange={modifyInput} />
-            </Form.Row>
-            <Form.Row>
-              <Input.Email input={input} onChange={modifyInput} />
-              <Input.Username
-                input={input}
-                onChange={modifyInput}
-                valid={input.username !== invalidUsername}
+            <fieldset disabled={submitted}>
+              <Form.Row>
+                <Input.FirstName input={input} onChange={modifyInput} />
+                <Input.LastName input={input} onChange={modifyInput} />
+              </Form.Row>
+              <Form.Row>
+                <Input.NewPassword input={input} onChange={modifyInput} />
+                <Input.ConfirmPassword input={input} onChange={modifyInput} />
+              </Form.Row>
+              <Form.Row>
+                <Input.Email input={input} onChange={modifyInput} />
+                <Input.Username
+                  input={input}
+                  onChange={modifyInput}
+                  valid={input.username !== invalidUsername}
+                />
+              </Form.Row>
+              <Form.Row>
+                <Input.MobileNumber input={input} onChange={modifyInput} />
+                <Input.Gender input={input} onChange={modifyInput} />
+              </Form.Row>
+              <Input.Submit
+                modified={modified || input.userImg}
+                submitted={submitted}
               />
-            </Form.Row>
-            <Form.Row>
-              <Input.MobileNumber input={input} onChange={modifyInput} />
-              <Input.Gender input={input} onChange={modifyInput} />
-            </Form.Row>
-            <Input.Submit modified={modified || input.userImg} />
+            </fieldset>
           </Form>
         </Card.Body>
       </Card>

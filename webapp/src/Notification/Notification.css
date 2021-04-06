@@ -7,6 +7,12 @@
   margin-left: 0.7rem;
 }
 
+.Notification_Dropdown {
+  max-height: 50vh;
+  /*width: */
+  overflow-y: scroll;
+}
+
 /* .notification-item-detail h */
 
 #my_noti button {
@@ -16,4 +22,10 @@
 }
 #my_noti button:focus {
   box-shadow: none;
+}
+
+#my_noti .MuiBadge-badge {
+  height: 15px;
+  min-width: 15px;
+  background-color: rgba(255, 0, 0, 0.8);
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, InputGroup, Button } from "react-bootstrap";
+import { Form, Col, InputGroup, Button, Spinner } from "react-bootstrap";
 
 function InputForm({ id, label, children }) {
   return (
@@ -157,11 +157,20 @@ function Gender({ input, onChange }) {
   );
 }
 
-function Submit({ modified }) {
+function Submit({ modified, submitted }) {
   return (
     <div className="text-right mx-lg-3">
       <Button disabled={!modified} type="submit">
-        Save Changes
+        {submitted ? (
+          <Spinner
+            as="span"
+            animation="border"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />
+        ) : null}
+        {submitted ? " Saving..." : "Save Changes"}
       </Button>
     </div>
   );

@@ -1,8 +1,209 @@
-.mypets > h1 {
-    text-align: center;
+#my_pet_info {
+  padding: 1rem;
+  margin: auto;
+  max-width: 1000px;
 }
-.mypets {
-    background-Size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
+
+#my_pet_info .card {
+  min-width: 200px;
+  border-radius: 1rem;
+  border-color: #872935;
+  background-color: rgb(255, 255, 255, 0.85);
+  box-shadow: 5px 5px 5px 0px rgba(83, 1, 1, 0.25);
+}
+
+
+/* Check Radio */
+#my_pet_info input[type="radio"] {
+  margin-top: 4px;
+  filter: hue-rotate(140deg) brightness(1) saturate(0.5);
+}
+#my_pet_info .form-check {
+  margin: 5px 5px;
+  padding: 0px;
+}
+#my_pet_info input[type="radio"]:focus {
+  box-shadow: none;
+}
+#my_pet_info input[type="radio"]:focus-visible {
+  box-shadow: none;
+  border-radius: 50%;
+  outline: #288ea7 dotted 1px;
+}
+
+#my_pet_info .form-check-label {
+  width: 100%;
+  display: inline;
+  padding-left: 1.5rem;
+  text-transform: capitalize;
+  min-width: 200px;
+}
+#my_pet_info input[type="radio"],
+#my_pet_info .form-check-label:hover {
+  cursor: pointer;
+}
+
+#my_pet_info .was-validated .filled {
+  box-shadow: 0px 0px 0px 1px #28a745;
+}
+#my_pet_info .was-validated .unfilled {
+  box-shadow: 0px 0px 0px 1px #dc3545;
+}
+
+/* Input & Label */
+
+#my_pet_info input {
+  margin: 0px;
+}
+#my_pet_info input:focus,
+#my_pet_info textarea:focus {
+  border-color: rgba(189, 86, 67, 0.8);
+  box-shadow: 0 0 8px rgba(189, 86, 67, 0.6);
+  outline: 0 none;
+}
+#my_pet_info .was-validated input:focus:valid,
+#my_pet_info .was-validated textarea:focus:valid {
+  border-color: #28a745;
+}
+#my_pet_info .was-validated .valid {
+  border-color: #28a745;
+  background-image: none;
+}
+#my_pet_info .was-validated .invalid {
+  border-color: #dc3545;
+  background-image: none;
+}
+#my_pet_info label {
+  margin: 0px 0px 3px;
+  color: #662900;
+  font-weight: bold;
+  font-size: medium;
+  text-transform: capitalize;
+}
+#my_pet_info .form-group div label {
+  color: #8f5e48;
+  font-size: smaller;
+}
+
+/* Button */
+#my_pet_info .btn {
+  font-size: smaller;
+  font-weight: bold;
+}
+
+#my_pet_info .btn-primary {
+  background-color: #872935;
+  border-color: #872935;
+}
+
+#my_pet_info .btn-primary:hover:enabled {
+  background-color: brown;
+  box-shadow: 0px 0px 5px 0px tomato;
+}
+#my_pet_info .btn-primary:focus {
+  border-color: rgba(215, 40, 40, 0.8);
+  box-shadow: 0px 0px 0px 2.5px rgba(215, 40, 40, 0.5);
+}
+
+#my_pet_info .btn-danger,
+#my_pet_info .btn-info {
+  margin: 5px;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+}
+#my_pet_info .btn-danger {
+  color: rgba(194, 52, 52, 0.8);
+}
+#my_pet_info .btn-info {
+  color: rgba(136, 79, 15, 0.8);
+}
+
+#my_pet_info .btn-danger:hover:enabled,
+#my_pet_info .btn-info:hover:enabled {
+  box-shadow: 0px 0px 5px 0px tomato;
+}
+
+#my_pet_info .btn-danger:hover:enabled,
+#my_pet_info .btn-danger:focus {
+  box-shadow: 0px 0px 0px 2.5px rgba(194, 52, 52, 0.8);
+}
+#my_pet_info .btn-info:hover:enabled,
+#my_pet_info .btn-info:focus {
+  box-shadow: 0px 0px 0px 2.5px rgba(136, 79, 15, 0.8);
+}
+
+/* Toggle Button */
+
+#my_pet_info .btn-secondary {
+  color: #d8d0d0;
+  width: 100%;
+  min-width: 60px;
+  font-size: smaller;
+  margin-top: 6px;
+}
+#my_pet_info .btn-secondary {
+  background-color: #f3f2f2;
+  border-color: #d8d0d0;
+}
+#my_pet_info .btn-secondary:hover {
+  border-color: rgba(215, 40, 40, 0.8);
+}
+#my_pet_info .btn-secondary:focus {
+  border-color: rgba(215, 40, 40, 0.8);
+  box-shadow: none;
+}
+#my_pet_info .btn-secondary.active {
+  color: rgb(196, 49, 49);
+  box-shadow: 0px 0px 0px 2px rgba(218, 41, 18, 0.4);
+}
+
+/* Avatar */
+
+#my_pet_info .MuiAvatar-root {
+  width: 80px;
+  height: 80px;
+}
+
+/* Pet Summary */
+
+#my_pet_info #pet_summary > div:first-child {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border: none;
+  max-height: 60vh;
+  overflow: auto;
+  scroll-behavior: smooth;
+  box-shadow: 0px 0px 4px 3px rgba(78, 0, 0, 0.2) inset;
+}
+
+#my_pet_info #pet_summary .card {
+  min-width: 200px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+#my_pet_info #pet_summary .card div.row {
+  min-width: 200px;
+  border-radius: 1rem;
+  border: 1px solid #872935;
+  background-color: rgb(255, 255, 255, 0.15);
+  box-shadow: 5px 5px 5px 0px rgba(83, 1, 1, 0.25);
+}
+
+#my_pet_info #pet_summary .card-header {
+  position: relative;
+  top: 21px;
+  padding: 0px 10px;
+  height: 21px;
+  width: fit-content;
+  color: #fff;
+  background-color: #a7172b;
+  text-transform: capitalize;
+  border-radius: 0.5rem 0rem;
+  border-color: #872935;
+  box-shadow: 0px 0px 5px 0px rgba(51, 2, 2, 0.76) inset;
 }
