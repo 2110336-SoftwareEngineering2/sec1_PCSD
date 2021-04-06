@@ -1,69 +1,33 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
-import axios, { CancelToken } from "axios";
+import React, { useContext, useState, useEffect } from "react";
+import { Card } from "react-bootstrap";
+import { UserContext } from "../context/MyContext";
 
 import Header from "../Header/header";
 import PetForm from "./PetForm";
 import PetSummaries from "./PetSummaries";
-import { UserContext } from "../context/MyContext";
 import background from "./EditBg.jpg";
-import "./MyPets.css";
-function MyPets(props) {
-  console.log("Hello Test");
+
+import history from "../history";
+import axios from "axios";
+
+function MyPets() {
   const { user } = useContext(UserContext);
-  const componentIsMounted = useRef(true);
   const [currentPet, setCurrentPet] = useState(null);
   const [petList, setPetList] = useState(null);
-  const [isImgReady, setIsImgReady] = useState(true);
-  const [isFormPage, setIsFormPage] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    return () => {
-      componentIsMounted.current = false;
-    };
+    axios
+      .get("http://localhost:4000/user/pet", {
+        headers: { Authorization: `Bearer ${user.accessToken}` },
+      })
+      .then((res) => setPetList(res.data))
+      .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    if (isFormPage || petList !== null) return;
-    const cancelTokenSource = CancelToken.source();
-    try {
-      console.log("Get PetLists");
-      axios
-        .get("http://localhost:4000/user/pet", {
-          headers: { Authorization: `Bearer ${user.accessToken}` },
-        })
-        .then((res) => {
-          if (componentIsMounted.current) setPetList(res.data);
-        })
-        .catch((err) => {
-          if (componentIsMounted.current) console.log(err);
-        });
-    } catch (err) {
-      if (axios.isCancel(err)) {
-        return console.info(err);
-      }
-      console.error(err);
-    }
-    return () => {
-      // here we cancel preveous http request that did not complete yet
-      cancelTokenSource.cancel(
-        "Cancelling previous http call because a new one was made ;-)"
-      );
-    };
-  }, [isFormPage]);
-
-  function showSummaries() {
-    setIsFormPage(false);
-    setCurrentPet(null);
-  }
-
-  function showFormPage() {
-    setIsFormPage(true);
-    setPetList(null);
-  }
-
-  function editPet(pet) {
-    setCurrentPet(pet);
-    showFormPage();
+  function reloadPage() {
+    history.push("./pets");
+    history.go();
   }
 
   function deletePet(petId) {
@@ -72,10 +36,7 @@ function MyPets(props) {
         headers: { Authorization: `Bearer ${user.accessToken}` },
         data: { source: petId },
       })
-      .then((res) => {
-        console.log(res.data);
-        setPetList(petList.filter((pet) => pet._id !== petId));
-      })
+      .then(() => setPetList(petList.filter((pet) => pet._id !== petId)))
       .catch((err) => console.log(err));
   }
 
@@ -85,15 +46,13 @@ function MyPets(props) {
       .post(link, pet, {
         headers: { Authorization: `Bearer ${user.accessToken}` },
       })
-      .then((res) => {
-        if (pet.hasImg) uploadPetPic(res.data, pet.petImg);
-        showSummaries();
-      })
+      .then((res) =>
+        pet.hasImg ? uploadPetPic(res.data, pet.petImg) : reloadPage()
+      )
       .catch((err) => console.log(err));
   }
 
   function uploadPetPic(pet, img) {
-    setIsImgReady(false);
     const data = new FormData();
     data.append("email", pet._id);
     data.append("file", img);
@@ -102,33 +61,45 @@ function MyPets(props) {
       .post("http://localhost:4000/user/profilepic", data)
       .then((res) => {
         console.log(res);
-        setIsImgReady(true);
+        reloadPage();
       })
       .catch((err) => console.log(err));
   }
 
   return (
-    <div className="mypets" style={{ 
-      backgroundImage: `url(${background})`
-    }}> 
+    <div
+      style={{
+        height: "100vh",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundImage: `url(${background})`,
+      }}
+    >
       <Header />
-      <h1>My Pets</h1>
-      {isFormPage ? (
-        <PetForm
-          currentPet={currentPet}
-          savePet={savePet}
-          cancelForm={showSummaries}
-        />
-      ) : petList === null || !isImgReady ? (
-        "Loading"
-      ) : (
-        <PetSummaries
-          pets={petList}
-          addPet={showFormPage}
-          editPet={editPet}
-          deletePet={deletePet}
-        />
-      )}
+      <div id="my_pet_info">
+        <h1>My Pets</h1>
+        <Card>
+          <Card.Body>
+            {showForm ? (
+              <PetForm
+                currentPet={currentPet}
+                savePet={savePet}
+                cancelForm={reloadPage}
+              />
+            ) : (
+              <PetSummaries
+                pets={petList}
+                addPet={() => setShowForm(true)}
+                editPet={(pet) => {
+                  setCurrentPet(pet);
+                  setShowForm(true);
+                }}
+                deletePet={deletePet}
+              />
+            )}
+          </Card.Body>
+        </Card>
+      </div>
     </div>
   );
 }

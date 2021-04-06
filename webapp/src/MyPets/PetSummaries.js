@@ -1,10 +1,15 @@
 import React from "react";
-import "./PetSummaries.css";
-import {Avatar} from "@material-ui/core";
+import { Button, Card, Row, Col, Badge } from "react-bootstrap";
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { Avatar } from "@material-ui/core";
+
 function PetSummaries({ pets, addPet, editPet, deletePet }) {
-  return (
-    <div className="petsum">
-      <div className="sumpet">
+  return !pets ? (
+    <h1>Loading</h1>
+  ) : (
+    <div id="pet_summary">
+      <div>
         {pets.map((pet) => (
           <PetBanner
             key={pet._id}
@@ -14,10 +19,10 @@ function PetSummaries({ pets, addPet, editPet, deletePet }) {
           />
         ))}
       </div>
-      <div className="addbutton">
-        <button className="submit" onClick={addPet}>
+      <div className="text-right mt-3">
+        <Button className="submit" onClick={addPet}>
           Add Pet
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -28,20 +33,43 @@ export default PetSummaries;
 function PetBanner({ pet, editPet, deletePet }) {
   console.log(pet);
   return (
-    <div className="pet">
-      <Avatar className="Pet__image" src={pet.imgURL} />
-      <div className="col-5 pet_info">
-        <div className="Pet__name">
-          {pet.petName}, {pet.age}, {pet.gender}
-        </div>
-        <button className="Pet__edit" onClick={editPet}>
-          Edit
-        </button>
-      </div>
-
-      <button className="Pet__delete" onClick={deletePet}>
-        X
-      </button>
-    </div>
+    <Card>
+      <Card.Header>{pet.petType}</Card.Header>
+      <Row className="no-gutters align-items-center">
+        <Col xs="8" sm="4" md="3">
+          <Avatar className="mx-auto m-2" src={pet.imgURL} />
+        </Col>
+        <Col xs="4" sm="1" md className="text-center">
+          <Button style={{ display: "block" }} variant="info" onClick={editPet}>
+            <EditTwoToneIcon />
+          </Button>
+          <Button
+            style={{ display: "block" }}
+            variant="danger"
+            onClick={deletePet}
+          >
+            <DeleteIcon />
+          </Button>
+        </Col>
+        <Col xs="12" sm="7" md="8" className="px-5">
+          <Card.Body>
+            <Card.Title>
+              {pet.petName}&nbsp;
+              <Badge pill variant="secondary">
+                {pet.gender === "male" ? "♂" : "♀"}
+              </Badge>
+            </Card.Title>
+            <Card.Text className="my-1 text-secondary">
+              <b>Age: </b>
+              {pet.age}
+            </Card.Text>
+            <Card.Text className="my-1 text-secondary">
+              <b>Breed: </b>
+              {pet.breed}
+            </Card.Text>
+          </Card.Body>
+        </Col>
+      </Row>
+    </Card>
   );
 }

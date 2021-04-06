@@ -38,25 +38,25 @@ function InputType({ petType, onChange }) {
   return (
     <div className="pettype">
       <div className="row">
-      <label>Pet Type</label>
+        <label>Pet Type</label>
       </div>
       <div className="row">
-      <div className="row typepet">
-        <div className="col-2" id="type">
-          <PetType label="Dog" />
-          <br />
-          <PetType label="Cat" />
-        </div>
-        <div className="col-2" id="type">
-          <PetType label="Rabbit" />
-          <br />
-          <PetType label="Bird" />
-        </div>
-        <div className="col-2" id="type">
-          <PetType label="Hamster" />
-          <br />
-          <PetType label="Turtle" />
-        </div>
+        <div className="row typepet">
+          <div className="col-2" id="type">
+            <PetType label="Dog" />
+            <br />
+            <PetType label="Cat" />
+          </div>
+          <div className="col-2" id="type">
+            <PetType label="Rabbit" />
+            <br />
+            <PetType label="Bird" />
+          </div>
+          <div className="col-2" id="type">
+            <PetType label="Hamster" />
+            <br />
+            <PetType label="Turtle" />
+          </div>
         </div>
       </div>
     </div>
@@ -111,12 +111,3 @@ function InputGender({ petGender, onChange }) {
 }
 
 export { InputImage, InputType, InputText, InputGender };
-
-
-
-
-
-
-
-
-export default {};

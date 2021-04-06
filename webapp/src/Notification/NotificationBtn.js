@@ -4,7 +4,7 @@ import history from "./../history";
 import socketIOClient from "socket.io-client";
 import { Cookies, useCookies } from "react-cookie";
 import { UserContext } from "../context/MyContext";
-import { Avatar, Button, IconButton } from "@material-ui/core";
+import { Avatar, Button, IconButton, Badge } from "@material-ui/core";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import Notification from "./Notification";
@@ -67,15 +67,13 @@ const NotificationBtn = () => {
       <DropdownButton
         onClick={onClick}
         title={
-          <div style={{ display: "inline" }}>
+          <Badge badgeContent={unread} color="error">
             <NotificationsIcon />
-            {/* {userContext.user.email === "caretaker@email.com" ? x : 0} */}
-            <sub>({unread})</sub>
-          </div>
+          </Badge>
         }
       >
         {notifications.map((notification, idx) => {
-          return <Notification notification={notification} />;
+          return <Notification key={idx} notification={notification} />;
         })}
       </DropdownButton>
     </IconButton>

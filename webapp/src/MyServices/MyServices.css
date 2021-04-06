@@ -9,8 +9,7 @@
   color: #fff;
   background-color: #872935;
   border-color: #872935;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border-radius: 1rem 1rem 0px 0px;
 }
 
 /* Check Button */
