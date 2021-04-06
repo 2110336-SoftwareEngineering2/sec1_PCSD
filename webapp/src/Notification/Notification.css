@@ -17,3 +17,8 @@
 #my_noti button:focus {
   box-shadow: none;
 }
+.Notification_Dropdown{
+  height: 50vh;
+  /*width: */
+  overflow-y: scroll;
+}

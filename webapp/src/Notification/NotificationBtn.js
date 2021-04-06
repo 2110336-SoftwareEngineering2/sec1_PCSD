@@ -73,10 +73,11 @@ const NotificationBtn = () => {
             <sub>({unread})</sub>
           </div>
         }
-      >
+      > <div className = "Notification_Dropdown">
         {notifications.map((notification, idx) => {
           return <Notification notification={notification} />;
         })}
+        </div>
       </DropdownButton>
     </IconButton>
   );
