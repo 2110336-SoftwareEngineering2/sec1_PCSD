@@ -6,6 +6,7 @@ import Header from "../Header/header";
 import PetForm from "./PetForm";
 import PetSummaries from "./PetSummaries";
 import background from "./EditBg.jpg";
+import "./MyPets.css";
 
 import history from "../history";
 import axios from "axios";
@@ -77,7 +78,7 @@ function MyPets() {
     >
       <Header />
       <div id="my_pet_info">
-        <h1>My Pets</h1>
+        <h1 style={{ color: "brown" }}>My Pets</h1>
         <Card>
           <Card.Body>
             {showForm ? (
