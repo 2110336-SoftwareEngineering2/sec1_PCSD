@@ -7,7 +7,10 @@ export const COLUMNS = [
     Header: "Email",
     accessor: "email",
   },
-
+  {
+    Header: "Role",
+    accessor: "role",
+  },
   {
     Header: "Status",
     accessor: "banStatus",

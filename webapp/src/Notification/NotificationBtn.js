@@ -71,10 +71,11 @@ const NotificationBtn = () => {
             <NotificationsIcon />
           </Badge>
         }
-      >
+      > <div className = "Notification_Dropdown">
         {notifications.map((notification, idx) => {
           return <Notification key={idx} notification={notification} />;
         })}
+        </div>
       </DropdownButton>
     </IconButton>
   );

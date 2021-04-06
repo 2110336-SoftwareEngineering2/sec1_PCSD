@@ -147,7 +147,7 @@ function Test(_) {
       })
       .then((res) => {
         console.log(res.data);
-        setState({reserves: res.data.filter((card) => card._id !== id)});
+        setState({reserves: state.reserves.filter((card) => card._id !== id)});
       })
       .catch((err) => console.log(err));
   }

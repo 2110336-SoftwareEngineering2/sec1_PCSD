@@ -133,7 +133,7 @@ function Chatbox({roomId}){
       )
     const getName = () => {
         if({roomId}!=null){
-            console.log(members);
+            //console.log(members);
             var Inter = ""
             if(email==members[0]){
                 //return <h1> <getName email = {members[1]} /> </h1>
@@ -143,11 +143,12 @@ function Chatbox({roomId}){
                 //return <h1> <getName email = {members[0]} /> </h1>
                 var Inter = members[0];
         }}
-        setInter(Inter)
+        
         axios
         .post("http://localhost:4000/user/email", {email: Inter})
         .then((res) => {
-            console.log(res.data.firstname)
+            //console.log(res.data.firstname)
+            setInter(Inter)
             setInteractor(res.data.firstname + " " + res.data.lastname)
             return res.data;
             })
@@ -165,8 +166,8 @@ function Chatbox({roomId}){
                         <div className = "Interacter2">{interactor}</div>
                     </div>);
         }else{
-            return <div className = "Interacter">ChatBox</div>
             console.log("error");
+            return <div className = "Interacter">ChatBox</div>
         }
 
     }
