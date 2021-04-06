@@ -24,7 +24,7 @@ const SearchBox = () => {
     type: "",
     date: {
       start: "",
-      end: ""
+      end: "",
     },
     address: "",
   });
@@ -34,42 +34,49 @@ const SearchBox = () => {
     const pet_type = getPetType();
     const data = {
       minrate: minmax[0] > 0 ? minmax[0] : null,
-      maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
+      maxrate:
+        minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
       pet_type: pet_type,
       type: value.type !== "" ? value.type : null,
-      date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
-      address: (value.address !== "") ? value.address : null
-    }
+      date:
+        value.date.start !== "" && value.date.end !== "" ? value.date : null,
+      address: value.address !== "" ? value.address : null,
+    };
     return data;
-  }
+  };
 
   const searchHandle = () => {
     const data = getSearchData();
-    axios.post("http://localhost:4000/user/caretaker/search", data)
-    .then((res) => {
-      history.push( {pathname: "/searchresult", state: res.data, data: {value: value, pet_type: data.pet_type}});
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    axios
+      .post("http://localhost:4000/user/caretaker/search", data)
+      .then((res) => {
+        history.push({
+          pathname: "/searchresult",
+          state: res.data,
+          data: { value: value, pet_type: data.pet_type },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getPetType = () => {
-    const pet_type = []
-    const petChecker = document.getElementsByName("checkedA")
+    const pet_type = [];
+    const petChecker = document.getElementsByName("checkedA");
 
-    for(var i = 0; i<petChecker.length; i++) {
-      if(petChecker[i].checked == true) {
+    for (var i = 0; i < petChecker.length; i++) {
+      if (petChecker[i].checked == true) {
         pet_type.push(petChecker[i].value);
       }
     }
 
-    return pet_type.length > 0 ? pet_type : null
-  }
+    return pet_type.length > 0 ? pet_type : null;
+  };
 
   const onChange = (event) => {
-    setValue({...value, [event.target.name]: event.target.value})
-  }
+    setValue({ ...value, [event.target.name]: event.target.value });
+  };
 
   const getToday = () => {
     var today = new Date();
@@ -98,7 +105,9 @@ const SearchBox = () => {
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" value="rabbit" />}
+            control={
+              <Checkbox name="checkedA" color="primary" value="rabbit" />
+            }
             label="Rabbit"
           />
           <FormControlLabel
@@ -108,12 +117,16 @@ const SearchBox = () => {
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" value="hamster" />}
+            control={
+              <Checkbox name="checkedA" color="primary" value="hamster" />
+            }
             label="Hamster"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" value="turtle" />}
+            control={
+              <Checkbox name="checkedA" color="primary" value="turtle" />
+            }
             label="Turtle"
           />
         </FormGroup>
@@ -142,10 +155,9 @@ const SearchBox = () => {
           <BottomNavigation
             value={value.type}
             onChange={(event, newValue) => {
-              if(value.type === "" | value.type !== newValue)
-                setValue({...value, type: newValue});
-              else
-              setValue({...value, type: ""});
+              if ((value.type === "") | (value.type !== newValue))
+                setValue({ ...value, type: newValue });
+              else setValue({ ...value, type: "" });
             }}
             showLabels
           >
@@ -170,7 +182,14 @@ const SearchBox = () => {
           </BottomNavigation>
         </div>
         <div className={classes.priceBox}>
-          <h2 className={classes.h2}>Rate</h2>
+          <h2
+            className={classes.h2}
+            style={{
+              paddingRight: "100px",
+            }}
+          >
+            Rate
+          </h2>
           <div className={classes.priceBoxLine2}>
             <TextField
               className={classes.priceInput}
@@ -237,10 +256,16 @@ const SearchBox = () => {
               size="small"
               value={value.date.start}
               onChange={(event) => {
-                if(new Date(event.target.value) > new Date(value.date.end)) {
-                  setValue({...value, date: {start: event.target.value, end: ""}})
+                if (new Date(event.target.value) > new Date(value.date.end)) {
+                  setValue({
+                    ...value,
+                    date: { start: event.target.value, end: "" },
+                  });
                 } else {
-                  setValue({...value, date: {start: event.target.value, end: value.date.end}})
+                  setValue({
+                    ...value,
+                    date: { start: event.target.value, end: value.date.end },
+                  });
                 }
               }}
             />
@@ -256,7 +281,7 @@ const SearchBox = () => {
             <TextField
               inputProps={{
                 style: { opacity: 0.5 },
-                min: (value.date.start === "") ? getToday() : value.date.start
+                min: value.date.start === "" ? getToday() : value.date.start,
               }}
               variant="outlined"
               type="date"
@@ -264,13 +289,20 @@ const SearchBox = () => {
               size="small"
               value={value.date.end}
               onChange={(event) => {
-                setValue({...value, date: {start: value.date.start, end: event.target.value}})
+                setValue({
+                  ...value,
+                  date: { start: value.date.start, end: event.target.value },
+                });
               }}
             />
           </div>
         </div>
       </div>
-      <Button className={classes.button} variant="contained" onClick={searchHandle}>
+      <Button
+        className={classes.button}
+        variant="contained"
+        onClick={searchHandle}
+      >
         Search
       </Button>
     </div>

@@ -10,7 +10,11 @@ const SearchPage = () => {
     <div className="search__page">
       <Header />
       <div className={classes.searchPage}>
-        <SearchBox />
+        <div style={{ height: "150px" }}></div>
+
+        <div className={classes.searchBox1}>
+          <SearchBox />
+        </div>
       </div>
     </div>
   );
