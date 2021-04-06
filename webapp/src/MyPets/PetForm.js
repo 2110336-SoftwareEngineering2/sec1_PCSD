@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Form, Col } from "react-bootstrap";
 
-import Input from "./Components";
+import Input from "./FormComponents";
 import defaultPetImg from "../petpic.png";
-import "./Components.css";
 
 function PetForm({ currentPet, savePet, cancelForm }) {
   const [submitted, setSubmitted] = useState(false);

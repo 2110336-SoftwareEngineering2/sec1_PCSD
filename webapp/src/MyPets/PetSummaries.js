@@ -1,12 +1,14 @@
 import React from "react";
-import { Button, Card, Row, Col, Badge } from "react-bootstrap";
+import { Button, Card, Row, Col, Badge, Spinner } from "react-bootstrap";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Avatar } from "@material-ui/core";
 
 function PetSummaries({ pets, addPet, editPet, deletePet }) {
   return !pets ? (
-    <h1>Loading</h1>
+    <Spinner animation="border" variant="danger" role="status">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
   ) : (
     <div id="pet_summary">
       <div>
@@ -33,13 +35,13 @@ export default PetSummaries;
 function PetBanner({ pet, editPet, deletePet }) {
   console.log(pet);
   return (
-    <Card>
+    <Card className="mx-1 mx-sm-5">
       <Card.Header>{pet.petType}</Card.Header>
-      <Row className="no-gutters align-items-center">
-        <Col xs="8" sm="4" md="3">
+      <Row className="no-gutters align-items-center pt-4 pt-sm-0">
+        <Col xs="9" sm="4" md="3">
           <Avatar className="mx-auto m-2" src={pet.imgURL} />
         </Col>
-        <Col xs="4" sm="1" md className="text-center">
+        <Col xs="3" sm="1" md className="text-center">
           <Button style={{ display: "block" }} variant="info" onClick={editPet}>
             <EditTwoToneIcon />
           </Button>
@@ -51,7 +53,7 @@ function PetBanner({ pet, editPet, deletePet }) {
             <DeleteIcon />
           </Button>
         </Col>
-        <Col xs="12" sm="7" md="8" className="px-5">
+        <Col xs="12" sm="7" md="8" className="px-3 px-sm-5">
           <Card.Body>
             <Card.Title>
               {pet.petName}&nbsp;

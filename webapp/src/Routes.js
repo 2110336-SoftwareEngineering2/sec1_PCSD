@@ -24,7 +24,6 @@ import ReserveForm from "./ReserveForm/ReserveForm";
 import UserProfile from "./UserProfile/UserProfile";
 import MyPets from "./MyPets/MyPets";
 import MyServices from "./MyServices/MyServices";
-import PetForm from "./MyPets/MyPetForm";
 
 function Routes() {
   const context = useContext(RegisterContext);
@@ -56,7 +55,6 @@ function Routes() {
         <AuthRoute path="/profile" exact component={UserProfile} />
         <AuthRoute path="/pets" exact component={MyPets} />
         <AuthRoute path="/services" exact component={MyServices} />
-        <AuthRoute path="/petform" exact component={PetForm} />
 
         <AuthRoute path="/addmoney" exact component={AddMoneyPage} />
         <AuthRoute path="/payment" exact component={PaymentPage} />
