@@ -43,6 +43,13 @@
   cursor: pointer;
 }
 
+#my_pet_info .was-validated .filled {
+  box-shadow: 0px 0px 0px 1px #28a745;
+}
+#my_pet_info .was-validated .unfilled {
+  box-shadow: 0px 0px 0px 1px #dc3545;
+}
+
 /* Input & Label */
 
 #my_pet_info input {

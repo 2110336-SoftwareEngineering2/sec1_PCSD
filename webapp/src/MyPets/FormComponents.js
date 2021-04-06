@@ -1,6 +1,6 @@
 import { Image, Form, Col, Button, Spinner } from "react-bootstrap";
 
-function Choice_({ name, label, checked, onChange, className, hidden }) {
+function Choice_({ name, label, checked, onChange, className }) {
   const id = label.replace(" ", "");
   return (
     <Form.Check
@@ -8,11 +8,11 @@ function Choice_({ name, label, checked, onChange, className, hidden }) {
       name={name}
       id={id}
       value={id}
-      label={!hidden && label}
+      label={label}
       checked={checked}
       onChange={onChange}
       className={className}
-      hidden={hidden}
+      required
     />
   );
 }
@@ -60,10 +60,7 @@ function PetImage({ input, onChange }) {
               onChange={onChange}
               hidden
             />
-            <Form.Text
-              className="text-muted small mt-3"
-              minWidth="120px"
-            >
+            <Form.Text className="text-muted small mt-3" minWidth="120px">
               Acceptable formats: <b className="text-dark">JPG, PNG</b>
             </Form.Text>
             <Form.Text className="text-muted small">
@@ -92,7 +89,12 @@ function PetType({ input, onChange }) {
   return (
     <Form.Group as={Col} xs="8" className="px-2">
       <Form.Label>Pet Type</Form.Label>
-      <Col className="px-1 border rounded">
+      <Col
+        className={
+          "px-1 border rounded " +
+          (input.petType === null ? "unfilled" : "filled")
+        }
+      >
         <Form.Row>
           {choice("dog")}
           {choice("cat")}
@@ -124,7 +126,12 @@ function PetGender({ input, onChange }) {
   return (
     <Form.Group as={Col} xs="4" className="px-2">
       <Form.Label>Pet Gender</Form.Label>
-      <Col className="px-1 px-md-3 border rounded">
+      <Col
+        className={
+          "px-1 px-md-3 border rounded " +
+          (input.gender === null ? "unfilled" : "filled")
+        }
+      >
         <Form.Row>{choice("male")}</Form.Row>
         <Form.Row>{choice("female")}</Form.Row>
       </Col>

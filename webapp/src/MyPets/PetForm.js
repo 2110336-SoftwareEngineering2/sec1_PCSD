@@ -10,11 +10,11 @@ function PetForm({ currentPet, savePet, cancelForm }) {
   const isNewPet = currentPet === null;
   const [input, setInput] = useState(
     currentPet || {
-      petType: "",
+      petType: null,
       petName: "",
       breed: "",
       age: "",
-      gender: "",
+      gender: null,
       imgURL: defaultPetImg,
       petImg: null,
     }
@@ -35,7 +35,7 @@ function PetForm({ currentPet, savePet, cancelForm }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form validated={modified} onSubmit={handleSubmit}>
       <fieldset disabled={submitted}>
         <Form.Row>
           <Col md>
