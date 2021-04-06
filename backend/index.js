@@ -12,12 +12,23 @@ app.use(cors());
 const chatServer = require("./chat/server");
 chatServer.listen(server);
 
+// fork new process to crate noti socket server
+const notiApp = express();
+notiApp.use(cors());
+const notiServer = http.createServer(notiApp);
+const notificationServer = require("./notification/notification");
+notificationServer.listen(notiServer);
+notiServer.listen(5000, (err) => {
+  console.log(`Notification server listens on port ${5000}`);
+});
+
 // Routes
 const UserRoute = require("./routes/User");
 const AuthRoute = require("./routes/Authentication");
 const AdminRoute = require("./routes/Admin");
 const ChatRoute = require("./routes/Chat");
 const ReserveRoute = require("./routes/Reserve");
+const NotificationsRoute = require("./routes/Notification");
 
 // ENVIRONMENT VARIABLE (in .env file)
 require("dotenv").config();
@@ -51,6 +62,9 @@ app.use("/admin", AdminRoute);
 app.use("/chat", ChatRoute);
 
 app.use("/reserve", ReserveRoute);
+
+// Notifications Route
+app.use("/notifications", NotificationsRoute);
 
 app.get("/", (req, res) => {
   res.send("First page");

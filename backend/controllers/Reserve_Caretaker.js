@@ -1,5 +1,6 @@
 //  Reserve Care taker is the operation when user in user role reserve and unresurve the caretaker.
 const checkAuth = require("./Authentication");
+const { deletePaymentById } = require("./Payment");
 // const Caretaker = require("../models/User/Caretaker-model");
 // const checkUser = require("./User");
 const User = require("../models/User/User-model");
@@ -100,7 +101,7 @@ const reserveCaretaker = async (req, res) => {
         console.log(err)
         res.status(400).send(err);
       } else {
-        console.log(newReserve)
+        // console.log(newReserve)
         res.status(200).json(newReserve);
       }
     });
@@ -113,17 +114,20 @@ const removeReserveCaretaker = async (req, res) => {
     
   // if (!problem && user.role === "user") {
   const reserveId = req.params.id;
+  console.log(reserveId)
   await Reserve.findOneAndDelete(
     {
       _id: reserveId,
     },
-    (err) => {
+    (err, doc) => {
       if (err) {
         res.status(400).send(err);
       } else {
+        deletePaymentById(doc.paymentId);
         res.status(200).send("Remove reserve successful");
       }
-    }
+    },
+    {new: false}
   );
   // }
 };
