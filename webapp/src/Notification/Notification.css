@@ -27,3 +27,21 @@
 #my_noti .MuiBadge-badge {
   background-color: rgba(255, 0, 0, 0.8);
 }
+
+.notification-item-detail .ACCEPT {
+  color: #ffc107;
+}
+.notification-item-detail .DONE {
+  color: #87BD43;
+  background-color: transparent;
+}
+
+.notification-item-detail .CANCEL {
+  color: #dc3545;
+  background-color: transparent;
+}
+
+.notification-item-detail .RESERVE {
+  color: #17a2b8;
+  background-color: transparent;
+}

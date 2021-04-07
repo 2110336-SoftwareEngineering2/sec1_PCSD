@@ -16,6 +16,7 @@ function ChatRoom({info}){
     const roomId = info.roomId;
     const [firstname, setFname] = useState("");
     const [lastname, setLname] = useState("");
+    const [isHovering,setHovering] = useState("");
     axios
         .post("http://localhost:4000/user/email", {email: info.title})
         .then((res) => {
@@ -82,9 +83,22 @@ function ChatRoom({info}){
         }
         socketRef.current.emit('read', data);
     }
+    function handleMouseEnter(e){
+        setHovering(true)
+        
+        //console.log("mouse enter")
+    }
+    function handleMouseLeave(){
+        setHovering(false)
+        //console.log("mouse leave")
+    }
 
     return(
-        <div className = "Chat_People" onClick={() => handleOnClickChatPeople()}>
+        <div className = "Chat_People" onClick={() => handleOnClickChatPeople()}
+            onMouseEnter = {handleMouseEnter}
+            onMouseLeave = {handleMouseLeave}
+            style = {isHovering ? {backgroundColor: "#ddd"} : {backgroundColor: "#eee"}}
+        >
             <img className = "People_Profile" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ info.title}/>
             <div className = "People_Name">{firstname} {lastname} ({chatContext.unreadMessage[roomId]})</div>
         </div>

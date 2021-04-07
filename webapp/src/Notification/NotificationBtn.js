@@ -16,6 +16,7 @@ const NotificationBtn = () => {
   const endPoint = "http://localhost:4000";
   const [notifications, setNotifications] = useState([]);
   const [unread, setUnread] = useState(0);
+  const [prevUnread, setPrevUnread] = useState(unread);
   // const [y, setY] = useState(0);
   useEffect(async () => {
     axios
