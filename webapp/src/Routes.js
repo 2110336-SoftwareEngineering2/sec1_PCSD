@@ -27,6 +27,8 @@ import UserProfile from "./UserProfile/UserProfile";
 import MyPets from "./MyPets/MyPets";
 import MyServices from "./MyServices/MyServices";
 
+import UpdateImgURL from "./RegisterProfile/UpdateImgURL";
+
 function Routes() {
   const context = useContext(RegisterContext);
   const userContext = useContext(UserContext);
@@ -60,6 +62,7 @@ function Routes() {
         <AuthRoute path="/profile" exact component={UserProfile} />
         <AuthRoute path="/pets" exact component={MyPets} />
         <AuthRoute path="/services" exact component={MyServices} />
+        <AuthRoute path="/updateImgURL" exact component={UpdateImgURL} />
 
         <AuthRoute path="/addmoney" exact component={AddMoneyPage} />
         <AuthRoute path="/showmoney" exact component={ShowMoneyPage} />

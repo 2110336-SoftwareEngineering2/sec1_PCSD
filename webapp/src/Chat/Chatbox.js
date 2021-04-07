@@ -64,6 +64,7 @@ function Chatbox({roomId}){
     useEffect(async() => {
         await getChatRoomDetail();
         return () => {
+            //getName();
             setMessage([]);
         }
     }, [roomId])
@@ -103,6 +104,7 @@ function Chatbox({roomId}){
                 message: inputMessage,
                 user: email,
                 email: email,
+                receiver: inter, 
                 token: token,
                 time: Date.now()
             }
@@ -142,13 +144,15 @@ function Chatbox({roomId}){
             else {
                 //return <h1> <getName email = {members[0]} /> </h1>
                 var Inter = members[0];
-        }}
-        
+        }
+        //console.log(Inter)
+        }
+        setInter(Inter)
         axios
         .post("http://localhost:4000/user/email", {email: Inter})
         .then((res) => {
             //console.log(res.data.firstname)
-            setInter(Inter)
+            
             setInteractor(res.data.firstname + " " + res.data.lastname)
             return res.data;
             })
@@ -158,7 +162,7 @@ function Chatbox({roomId}){
 
     }
     const Chat_Title = () =>{
-        if({roomId}!=email){
+        if({roomId}!=null){
             //console.log(members);
             getName()
             return (<div className = "Interacter">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardMedia, Typography, Box } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import history from "./../../../history";
@@ -10,14 +10,21 @@ const Result = (props) => {
 
   const onClick = () => {
     console.log(props.userInfo);
-    axios.post("http://localhost:4000/user/caretaker/find", {caretaker: props.userInfo.caretaker.caretaker})
-    .then((res) => {
-      history.push( {pathname: "/reservepage", state: res.data});
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    axios
+      .post("http://localhost:4000/user/caretaker/find", {
+        caretaker: props.userInfo.caretaker.caretaker,
+      })
+      .then((res) => {
+        history.push({ pathname: "/reservepage", state: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+  const [state, setState] = useState({
+    raised: false,
+    shadow: 1,
+  });
 
   return (
     <div>
@@ -25,11 +32,19 @@ const Result = (props) => {
         className={classes.root}
         onClick={onClick}
         style={{ cursor: "pointer" }}
+        classes={{ root: state.raised ? classes.cardHovered : "" }}
+        onMouseOver={() => setState({ raised: true, shadow: 3 })}
+        onMouseOut={() => setState({ raised: false, shadow: 1 })}
+        raised={state.raised}
+        zdepth={state.shadow}
       >
         <div className={classes.profile}>
           <img
             className={classes.media}
-            src={"https://pcsdimage.s3-us-west-1.amazonaws.com/"+ props.userInfo.caretaker.caretaker}
+            src={
+              "https://pcsdimage.s3-us-west-1.amazonaws.com/" +
+              props.userInfo.caretaker.caretaker
+            }
           />
         </div>
         <div className={classes.info}>
@@ -42,16 +57,29 @@ const Result = (props) => {
               ].join(" ")}
             </span>
           </Typography>
-          <Typography className={classes.description} variant="h5">
+
+          <Typography
+            className={classes.description}
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
             {props.userInfo.caretaker.description}
           </Typography>
-          <Typography className={classes.address} variant="h6">
+
+          <Typography
+            className={classes.address}
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
             {[
               props.userInfo.caretaker.province,
               props.userInfo.caretaker.city,
               props.userInfo.caretaker.country,
-            ].join(", ")}
+            ].join(", ")}{" "}
           </Typography>
+
           <Rating
             className={classes.star}
             name="read-only"
@@ -73,7 +101,7 @@ const Result = (props) => {
         <div className={classes.priceSection}>
           <h6 className={classes.h6}>from</h6>
           <Typography className={classes.price} variant="h6">
-            {props.userInfo.caretaker.rate.$numberDecimal}
+            &#3647;{props.userInfo.caretaker.rate.$numberDecimal}
           </Typography>
           <h6 className={classes.h6}>per hour</h6>
         </div>

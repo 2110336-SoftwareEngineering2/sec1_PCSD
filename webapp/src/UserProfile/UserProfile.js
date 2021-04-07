@@ -35,6 +35,11 @@ function UserProfile() {
     if (name === "username") checkAvailability(value);
   }
 
+  function updateImage(imgFile) {
+    setInfo({ ...info, userImg: imgFile, hasImg: true });
+    setImageReady(false);
+  }
+
   function saveInfo() {
     setSubmitted(true);
     const editedUser = { ...info, id: info._id, password: info.new_password };
@@ -43,7 +48,7 @@ function UserProfile() {
       .post("http://localhost:4000/user/edit", editedUser)
       .then((res) => {
         login(res.data);
-        if (info.userImg) uploadPetPic(res.data, info.userImg);
+        if (info.hasImg) uploadProfilePic(res.data, info.userImg);
         setSaved(true);
       })
       .catch((err) => {
@@ -55,7 +60,7 @@ function UserProfile() {
     console.log("submitted");
   }
 
-  function uploadPetPic(user, img) {
+  function uploadProfilePic(user, img) {
     const data = new FormData();
     data.append("email", user.email);
     data.append("file", img);
@@ -91,7 +96,7 @@ function UserProfile() {
         <div className="col-12 col-md-4">
           <ProfileCard
             info={info}
-            updateImage={setInfo}
+            updateImage={updateImage}
             submitted={submitted}
           />
         </div>

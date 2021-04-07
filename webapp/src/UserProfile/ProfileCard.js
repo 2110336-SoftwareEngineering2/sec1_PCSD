@@ -4,13 +4,7 @@ import { Container, Card, Button, FormFile } from "react-bootstrap";
 function ProfileCard({ info, updateImage, submitted }) {
   const role = info.role == "petowner" ? "Pet Owner" : "Caretaker";
   const user_fullname = info.firstname + " " + info.lastname;
-  const imgURL = info.userImg
-    ? URL.createObjectURL(info.userImg)
-    : "https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.email;
-
-  function uploadImage(event) {
-    updateImage({ ...info, userImg: event.target.files[0] });
-  }
+  const imgURL = info.userImg ? URL.createObjectURL(info.userImg) : info.imgURL;
 
   return (
     <Container className="my-card">
@@ -35,7 +29,7 @@ function ProfileCard({ info, updateImage, submitted }) {
               id="uImg"
               accept="image/png, image/jpeg"
               name="uImg"
-              onChange={uploadImage}
+              onChange={(event) => updateImage(event.target.files[0])}
               hidden
             />
           </div>
