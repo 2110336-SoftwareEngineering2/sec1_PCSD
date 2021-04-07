@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
-import axios  from "axios";
+import axios, { CancelToken }  from "axios";
 import Header from '../Header/header';
 import { UserContext } from "../context/MyContext";
 import "./ReserveForm.css";
@@ -29,17 +29,18 @@ function ReserveForm(props) {
     const [endDate, setEndDate] = useState("");
     const [lname, setLname] = useState("");
     const [fname, setFname] = useState("");
-
     axios.post("http://localhost:4000/user/email", {email: caretaker})
     .then((res) => {
       const data = res.data;
       setFname(data.firstname);
       setLname(data.lastname);
+      console.log(data);
     })
     .catch((err) => {
       console.log(err);
     })
   const componentIsMounted = useRef(true);
+  // 0: AddPetForm, 1: AddButtonClicked, 2: SumPet
   const [pageState, setPageState] = useState(1);
   const [input, setInput] = useState({
     petType: "",
@@ -52,7 +53,6 @@ function ReserveForm(props) {
   function onClick() {
     const reserveTmp = cookie.reserveTmp;
     const selectedPets = cookie.selectedPets;
- 
     if (startDate === "" || endDate === "") {
       window.alert("Please select date");
       return;
@@ -163,7 +163,7 @@ function ReserveForm(props) {
 
 
   function CheckPet(petId) {
-
+  
   }
     return (
         <div className="ReserveForm" id="ReserveForm">
