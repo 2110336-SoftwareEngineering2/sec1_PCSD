@@ -202,27 +202,4 @@ module.exports = {
   },
 
   editUser,
-
-  updateAllImages: async (req, res) => {
-    const info = await User.updateMany(
-      {},
-      [
-        {
-          $set: {
-            imgURL: {
-              $concat: [
-                "https://pcsdimage.s3-us-west-1.amazonaws.com/",
-                "$email",
-              ],
-            },
-          },
-        },
-      ],
-      (err, res) => {
-        console.log("err:", err);
-        console.log("res:", res);
-      }
-    );
-    res.status(200).json(info);
-  },
 };
