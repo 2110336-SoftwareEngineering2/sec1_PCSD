@@ -9,42 +9,53 @@ export default makeStyles((theme) => ({
     display: "flex",
   },
   profile: {
-    width: "27%",
+    width: "24%",
     // backgroundColor: "red",
   },
   media: {
-    width: "74%",
-    height: "74%",
-    margin: "13%",
+    width: "83%",
+    height: "83%",
+    margin: "10%",
   },
   info: {
-    width: "55%",
+    marginLeft: "2%",
+    width: "56%",
     // backgroundColor: "blue",
   },
   nameSection: {
     padding: "20px 0 0 0",
-    margin: "10px 0 0 0px",
+    margin: "10px 0 0 7px",
     fontSize: "36px",
     fontWeight: "bold",
+    lineHeight: "1",
   },
   name: {
-    color: "#BD6A43",
+    color: "#872935",
   },
   description: {
-    marginTop: "10px",
-    lineHeight: "0.7",
+    marginTop: "5px",
+    marginLeft: "7px",
+    lineHeight: "1",
+  },
+  address: {
+    marginLeft: "7px",
   },
   rating: {
     lineHeight: "0.8",
     fontSize: "16px",
+    marginLeft: "7px",
     fontFamily: "Algerian",
   },
   star: {
+    // border: "1px solid red",
+    padding: "0px",
+    marginLeft: "0px",
     marginTop: "8px",
     "& .MuiRating-iconFilled": {
-      color: "black",
+      color: "#b1767d",
     },
   },
+
   priceSection: {
     width: "18%",
     textAlign: "center",

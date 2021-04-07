@@ -220,7 +220,7 @@ const SearchBox = () => {
               onChange={onChange}
             />
             <h4 style={{ margin: "10px 0px 0px 10px", opacity: "0.5" }}>
-              Baht
+              &#3647;
             </h4>
           </div>
         </div>
