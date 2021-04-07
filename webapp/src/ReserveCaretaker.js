@@ -279,23 +279,21 @@ function ReserveCaretaker(props) {
                             </div>
                         </div>
                         <div className="col--6">
-                            <form onSubmit={onSubmit}>
-                                <div className="row">
-                                    <div className="col--12 rating_section">
-                                        <Rating name="controlled-rating" value={ratingVal} size="large" onChange={(event, newVal) => {
-                                            setRatingVal(newVal);
-                                        }}/>
-                                    </div>
+                            <div className="row">
+                                <div className="col--12 rating_section">
+                                    <Rating name="controlled-rating" value={ratingVal} size="large" onChange={(event, newVal) => {
+                                        setRatingVal(newVal);
+                                    }}/>
                                 </div>
-                                <div className="row">
-                                    <form className="col--12 comment_section">
-                                        <textarea required placeholder="Comments..." value={commentVal} onChange={(event) => {
-                                            setCommentVal(event.target.value);
-                                        }}/><br/>
-                                        <button className="RButton" type="submit">Submit</button>
-                                    </form>
-                                </div>
-                            </form>
+                            </div>
+                            <div className="row">
+                                <form className="col--12 comment_section" onSubmit={onSubmit}>
+                                    <textarea required placeholder="Comments..." value={commentVal} onChange={(event) => {
+                                        setCommentVal(event.target.value);
+                                    }}/><br/>
+                                    <button className="RButton" type="submit">Submit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>}
                 </div>
