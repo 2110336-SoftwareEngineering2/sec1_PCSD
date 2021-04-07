@@ -25,7 +25,7 @@ function History_Card(_) {
   })
 
   const socketRef = useRef();
-  const notiEndPoint = "http://localhost:5000";
+  const notiEndPoint = "http://localhost:4000";
   const data = useState([]);
   
   useEffect(() => {
@@ -41,7 +41,7 @@ function History_Card(_) {
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
               getReserve((res.data).email);
-              console.log(state.reserves)
+              // console.log(state.reserves)
             })
         })
         .catch((err) => {

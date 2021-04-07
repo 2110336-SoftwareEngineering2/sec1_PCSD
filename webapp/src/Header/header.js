@@ -31,7 +31,6 @@ function Header() {
   const { user, logout } = useContext(UserContext);
   const [sumUnread, setSumUnread] = useState(0);
   const chatContext = useContext(ChatContext);
-  // const roomId = getHash(user.email);
   const endpoint = "http://localhost:4000";
   const socketRef = useRef();
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);

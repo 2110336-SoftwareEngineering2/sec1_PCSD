@@ -21,6 +21,10 @@ import "./Notification.css";
 //         timestamp: 1617618603000,
 //     }
 const Notification = ({ notification }) => {
+  const getDateString = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toTimeString().slice(0, 9) + " " + date.toLocaleDateString();
+  }
   return (
     <Dropdown.Item>
       <div className="notification-item">
@@ -35,7 +39,7 @@ const Notification = ({ notification }) => {
           <h3>{notification.title} </h3>
           <p>{notification.detail}</p>
           <span style={{ fontSize: "0.8rem" }}>
-            {Date(notification.timestamp).slice(0, 24)}
+            {getDateString(notification.timestamp)}
           </span>
         </div>
       </div>
