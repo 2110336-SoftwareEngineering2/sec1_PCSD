@@ -12,14 +12,20 @@ function PetSummaries({ pets, addPet, editPet, deletePet }) {
   ) : (
     <div id="pet_summary">
       <div>
-        {pets.map((pet) => (
-          <PetBanner
-            key={pet._id}
-            pet={pet}
-            editPet={() => editPet(pet)}
-            deletePet={() => deletePet(pet._id)}
-          />
-        ))}
+        {pets.length === 0 ? (
+          <Card.Title as="h2" className="text-center text-danger">
+            You currently don't have any pet in the system!
+          </Card.Title>
+        ) : (
+          pets.map((pet) => (
+            <PetBanner
+              key={pet._id}
+              pet={pet}
+              editPet={() => editPet(pet)}
+              deletePet={() => deletePet(pet._id)}
+            />
+          ))
+        )}
       </div>
       <div className="text-right mt-3">
         <Button className="submit" onClick={addPet}>

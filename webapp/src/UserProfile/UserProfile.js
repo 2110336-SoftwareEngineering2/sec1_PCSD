@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/MyContext";
 
 import Header from "../Header/header";
@@ -12,14 +12,31 @@ import axios from "axios";
 
 function UserProfile() {
   const { user, login } = useContext(UserContext);
+
+  const [imageReady, setImageReady] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [validUsername, setValidUsername] = useState(null);
+
   const [info, setInfo] = useState({
     ...user,
     new_password: "",
     confirm_password: "",
   });
-  const [invalidUsername, setInvalidUsername] = useState(null);
+
+  useEffect(() => {
+    if (!imageReady || !saved) return;
+    history.push("/profile");
+    history.go();
+  }, [imageReady, saved]);
+
+  function updateInfo(name, value) {
+    setInfo({ ...info, [name]: value });
+    if (name === "username") checkAvailability(value);
+  }
 
   function saveInfo() {
+    setSubmitted(true);
     const editedUser = { ...info, id: info._id, password: info.new_password };
     if (!editedUser.password) delete editedUser.password;
     axios
@@ -27,15 +44,13 @@ function UserProfile() {
       .then((res) => {
         login(res.data);
         if (info.userImg) uploadPetPic(res.data, info.userImg);
-        else {
-          history.push("/profile");
-          history.go();
-        }
+        setSaved(true);
       })
       .catch((err) => {
         console.error(err);
         console.log(err);
-        setInvalidUsername(info.username);
+        setSubmitted(false);
+        checkAvailability(info.username);
       });
     console.log("submitted");
   }
@@ -49,8 +64,22 @@ function UserProfile() {
       .post("http://localhost:4000/user/profilepic", data)
       .then((res) => {
         console.log(res);
-        history.push("/profile");
-        history.go();
+        setImageReady(true);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function checkAvailability(username) {
+    if (!username) {
+      setValidUsername(false);
+      return;
+    }
+    axios
+      .get(`http://localhost:4000/user/profile/${username}`)
+      .then((res) => {
+        setValidUsername(
+          typeof res.data === "string" || res.data._id === user._id
+        );
       })
       .catch((err) => console.log(err));
   }
@@ -60,14 +89,19 @@ function UserProfile() {
       <Header />
       <div id="user_profile" className="row py-4">
         <div className="col-12 col-md-4">
-          <ProfileCard info={info} updateImage={setInfo} />
+          <ProfileCard
+            info={info}
+            updateImage={setInfo}
+            submitted={submitted}
+          />
         </div>
         <div className="col-12 col-md-8">
           <ProfileForm
             input={info}
-            updateInput={setInfo}
+            updateInput={updateInfo}
+            valid={validUsername}
             submitForm={saveInfo}
-            invalidUsername={invalidUsername}
+            submitted={submitted}
           />
         </div>
       </div>

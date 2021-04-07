@@ -1,0 +1,25 @@
+#register_profile .my-card {
+  margin: 2em 0em;
+}
+
+#register_profile .card {
+  min-width: 200px;
+  border-radius: 1rem;
+  border-color: #872935;
+  box-shadow: 5px 5px 5px 0px rgba(83, 1, 1, 0.25);
+}
+
+#register_profile .card-header {
+  color: #fff;
+  background-color: #872935;
+  border-color: #872935;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+#register_profile .card-img {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}

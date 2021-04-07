@@ -21,6 +21,7 @@ import PaymentPage from "./Payment/PaymentPage";
 import UserPage from "./UserPage/UserPage";
 import ReserveForm from "./ReserveForm/ReserveForm";
 
+import RegisterProfile from "./RegisterProfile/RegisterProfile";
 import UserProfile from "./UserProfile/UserProfile";
 import MyPets from "./MyPets/MyPets";
 import MyServices from "./MyServices/MyServices";
@@ -41,14 +42,17 @@ function Routes() {
         />
         <Route
           path="/register"
+          exact
           component={context.data.role == "petowner" ? Petowner : Caretaker}
         />
-        <AuthRoute path="/searchpage" component={SearchPage} />
-        <AuthRoute path="/searchresult" component={SearchResult} />
-        <AuthRoute path="/reservepage" component={ReservePage} />
-        <AuthRoute path="/chat" component={ChatPage} />
-        <AuthRoute path="/banpage" component={BanPage} />
-        
+        <Route path="/user_register" exact component={RegisterProfile} />
+
+        <AuthRoute path="/searchpage" exact component={SearchPage} />
+        <AuthRoute path="/searchresult" exact component={SearchResult} />
+        <AuthRoute path="/reservepage" exact component={ReservePage} />
+        <AuthRoute path="/chat" exact component={ChatPage} />
+        <AuthRoute path="/banpage" exact component={BanPage} />
+
         <AuthRoute path="/user/:username" exact component={UserPage} />
         <AuthRoute path="/test" exact component={Test} />
 

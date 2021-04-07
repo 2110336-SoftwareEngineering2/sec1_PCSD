@@ -1,12 +1,14 @@
 import React from "react";
 import { Container, Card, Button, FormFile } from "react-bootstrap";
 
+import defaultUserImg from "../userpic.png";
+
 function ProfileCard({ info, updateImage, submitted }) {
   const role = info.role == "petowner" ? "Pet Owner" : "Caretaker";
   const user_fullname = info.firstname + " " + info.lastname;
   const imgURL = info.userImg
     ? URL.createObjectURL(info.userImg)
-    : "https://pcsdimage.s3-us-west-1.amazonaws.com/" + info.email;
+    : defaultUserImg;
 
   function uploadImage(event) {
     updateImage({ ...info, userImg: event.target.files[0] });
@@ -26,8 +28,8 @@ function ProfileCard({ info, updateImage, submitted }) {
           </div>
           <div>
             <Button
-              onClick={() => document.getElementById("uImg").click()}
               disabled={submitted}
+              onClick={() => document.getElementById("uImg").click()}
             >
               Choose Photo
             </Button>
