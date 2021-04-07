@@ -48,7 +48,6 @@ const CaretakerSchema = new Schema({
   }},
   raw_rate : [raw_rate],
   // comment : [comment],
-  reserved : String,
   
 });
 
