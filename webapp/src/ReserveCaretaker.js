@@ -299,12 +299,12 @@ function ReserveCaretaker(props) {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col--12 comment_section">
-                                        <textarea placeholder="Comments..." value={commentVal} onChange={(event) => {
+                                    <form className="col--12 comment_section">
+                                        <textarea required placeholder="Comments..." value={commentVal} onChange={(event) => {
                                             setCommentVal(event.target.value);
                                         }}/><br/>
                                         <button className="RButton" type="submit">Submit</button>
-                                    </div>
+                                    </form>
                                 </div>
                             </form>
                         </div>
