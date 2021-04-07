@@ -35,21 +35,24 @@ function ReserveCaretaker(props) {
     const [rating, setRating] = useState({rating: 0, count: 0});
     const endPoint = "http://localhost:4000";
     const [show, setShow] = useState(false);
+    const [comments, setComment] = useState(null);
 
     useEffect(() => {
-        // axios
-        // .get("http://localhost:4000/user/comment/caretaker", {caretaker: caretaker})
-        // .then((res) => {
-        //     console.log(res);
-        //     })
-        // .catch((err) => {
-        //     console.log(err);
-        //     });
+        axios
+        .post("http://localhost:4000/user/comment/caretaker/get", {caretaker: caretaker})
+        .then((res) => {
+            console.log(res);
+            const data = res.data;
+            setComment(data.comment);
+            })
+        .catch((err) => {
+            console.log(err);
+            });
 
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
-            // console.log(res);
+            console.log(res);
             const data = res.data;
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
@@ -197,8 +200,6 @@ function ReserveCaretaker(props) {
             window.location.reload();
         }
     }
-    
-    const test = [1,2,3,4,5];
 
     return (
         <div className="reserve">
@@ -286,7 +287,7 @@ function ReserveCaretaker(props) {
                     <div className="row">
                         <div className="col--6">
                             <div className="show-comment">
-                                {test.map((num) => <ReserveComment val={num}/>)}
+                                {comments.map((comment) => <ReserveComment comment={comment}/>)}
                             </div>
                         </div>
                         <div className="col--6">
