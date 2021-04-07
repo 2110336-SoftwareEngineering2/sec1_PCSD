@@ -22,17 +22,23 @@ const updateCaretaker = async (req, res) => {
 };
 
 const get_comment = async (body,res) =>{
-  await Caretaker.findOne({ caretaker : body.caretaker }, '-_id comment', (err, result) => {
-    if(err){
-      res.status(400).send(err);
-    }
-    else{
-      result.comment.sort(function(a,b){
-        return b.date - a.date;
-      });
-      res.send(result);
-    }
-  });
+  console.log(body);
+  if(body.caretaker){
+    await Caretaker.findOne({ caretaker : body.caretaker }, '-_id comment', (err, result) => {
+      if(err){
+        res.status(400).send(err);
+      }
+      else{
+        result.comment.sort(function(a,b){
+          return b.date - a.date;
+        });
+        res.send(result);
+      }
+    });
+  }
+  else{
+    res.send("no input");
+  }
 };
 
 const comment = async (body,res) =>{
