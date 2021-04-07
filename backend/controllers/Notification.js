@@ -11,14 +11,36 @@ const Notifications = require("../models/Notification/Notification-model");
 //     })
 // }
 
+function compare(a, b ) {
+  if ( a.last_nom < b.last_nom ){
+    return -1;
+  }
+  if ( a.last_nom > b.last_nom ){
+    return 1;
+  }
+  return 0;
+}
+
 const findNotificationsByEmail = async (req, res) => {
     const user = req.params.email;
-    await Notifications.findOne({user: user}, (err, result)=> {
-        if (err) {
-            res.status(404).send(err);
-        } else {
-            res.status(200).json(result);
-        }
+
+    const notification = await Notifications.findOne({user: user});
+    const unread = notification.unreadNotifications;
+    var n = 0;
+    if (unread < 3) {
+        n = 3;
+    } else {
+        n = unread;
+    }
+    var result = notification.notifications;
+    result.sort((a, b) => {
+        if (a.timestamp > b.timestamp) return -1;
+        if (a.timestamp < b.timestamp) return 1;
+        return 0;
+    });
+    res.json({
+        unreadNotifications: unread,
+        notifications: result.slice(0, n)
     });
 }
 
