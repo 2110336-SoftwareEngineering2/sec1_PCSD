@@ -10,8 +10,8 @@ function ShowMoney() {
             <div className="showheader">
                 <h2>My account balance</h2>
             </div>
-            <div className="row showbody">
-            <div className="col-12 user">
+            <div className="showbody">
+            <div className="user">
                     <Avatar
                         src={
                             "https://pcsdimage.s3-us-west-1.amazonaws.com/" + user.email
@@ -21,7 +21,7 @@ function ShowMoney() {
                 <span className="title">{user.firstname} {user.lastname}</span>
               </div>
             </div>
-            <div className="col-12 content">
+            <div className="content">
                 <span className="pin ml-2">฿{user.balance.$numberDecimal}</span>
             </div>   
             </div>
