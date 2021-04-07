@@ -43,7 +43,6 @@ function UserLogin(props) {
         // console.log(res.data);
       })
       .catch((err) => {
-        console.log(err.response.data)
         setShowError({errorMessage: err.response.data.error});
       });
   };
