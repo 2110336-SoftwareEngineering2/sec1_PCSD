@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Spinner, Card } from "react-bootstrap";
+import { Spinner, Card, Alert } from "react-bootstrap";
 import { UserContext } from "../context/MyContext";
 
 import Header from "../Header/header";
@@ -9,10 +9,23 @@ import "./MyServices.css";
 import history from "../history";
 import axios from "axios";
 
-function MyServices(props) {
+function MyServices() {
   const { user } = useContext(UserContext);
+  const [newUser, setNewUser] = useState(null);
   const [info, setInfo] = useState(null);
-  console.log(props);
+
+  const initialInfo = {
+    caretaker: user.email,
+    type: [],
+    rate: "",
+    city: "",
+    province: "",
+    country: "",
+    description: "",
+    pet_type: [],
+    available_day: [],
+    reserved: false,
+  };
 
   useEffect(() => {
     axios
@@ -20,16 +33,21 @@ function MyServices(props) {
         caretaker: user.email,
       })
       .then((res) => {
-        setInfo({ ...res.data, rate: res.data.rate.$numberDecimal });
+        console.log(res.data);
+        setNewUser(!res.data);
+        setInfo(
+          res.data
+            ? { ...res.data, rate: res.data.rate.$numberDecimal }
+            : initialInfo
+        );
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }, []);
 
   function saveInfo() {
+    const path = newUser ? "" : "edit/";
     axios
-      .post("http://localhost:4000/user/edit/caretaker", info)
+      .post(`http://localhost:4000/user/${path}caretaker`, info)
       .then((res) => {
         console.log(res.data);
         history.push("/services");
@@ -38,13 +56,18 @@ function MyServices(props) {
       .catch((err) => {
         console.log(err.response.data);
       });
-    console.log("summitted");
+    console.log("submitted");
   }
 
   return (
     <div>
       <Header />
       <div id="service_info" className="p-4">
+        {newUser ? (
+          <Alert variant="warning">
+            Please complete your services information, or the customer will never find you.
+          </Alert>
+        ) : null}
         <Card>
           <Card.Header className="h2 text-center">
             Service Information

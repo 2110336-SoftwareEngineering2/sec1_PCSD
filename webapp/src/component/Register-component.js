@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
 import "./script";
-import history from "./../history";
+import history from "../history";
 import { RegisterContext } from "../context/MyContext";
 
 function Register() {
@@ -27,7 +27,13 @@ function Register() {
   return (
     <li>
       <div className="content__wrapper">
-        <form method="POST" action="">
+        <form
+          method="POST"
+          onSubmit={() => {
+            history.push({ pathname: "/user_register" });
+            setData();
+          }}
+        >
           <div className="nameja">
             <input
               type="fname"
@@ -60,6 +66,7 @@ function Register() {
             onChange={onChange}
           />
           <input
+            autoComplete="new-password"
             type="password"
             name="password"
             placeholder="New Password"
@@ -99,6 +106,7 @@ function Register() {
                 name="role"
                 value="petowner"
                 onChange={onChange}
+                required
               />
               <label htmlFor="po">Pet Owner</label>
             </div>
@@ -109,19 +117,12 @@ function Register() {
                 name="role"
                 value="caretaker"
                 onChange={onChange}
+                required
               />
               <label htmlFor="ct">Caretaker</label>
             </div>
           </div>
-          <input
-            type="submit"
-            value="Sign Up"
-            name="register"
-            onClick={() => {
-              history.push({ pathname: "/register" });
-              setData();
-            }}
-          />
+          <input type="submit" value="Sign Up" name="register" />
         </form>
       </div>
     </li>

@@ -40,15 +40,17 @@ function LastName({ input, onChange }) {
   );
 }
 
-function NewPassword({ onChange }) {
+function Password({ input, onChange }) {
   return (
-    <InputForm id="new_password" label="New Password">
+    <InputForm id="password" label="Password">
       <Form.Control
         autoComplete="new-password"
         type="password"
-        name="new_password"
-        placeholder="New Password"
+        name="password"
+        placeholder="Password"
+        defaultValue={input.password}
         onChange={onChange}
+        required
       />
     </InputForm>
   );
@@ -59,31 +61,38 @@ function ConfirmPassword({ input, onChange }) {
     <InputForm id="confirm_password" label="Confirm Password">
       <Form.Control
         autoComplete="new-password"
-        pattern={"^" + input.new_password + "$"}
+        pattern={"^" + input.password + "$"}
         type="password"
         name="confirm_password"
         placeholder="Confirm Password"
         onChange={onChange}
-        required={!!input.new_password}
+        required
       />
       <Form.Control.Feedback type="invalid">
-        Confirm-password does not match.
+        {input.confirm_password !== input.password
+          ? "Confirm-password does not match."
+          : ""}
       </Form.Control.Feedback>
     </InputForm>
   );
 }
 
-function Email({ input }) {
+function Email({ input, onChange, valid }) {
   return (
     <InputForm id="email" label="Email Address">
       <Form.Control
+        className={valid ? "valid" : "invalid"}
         type="email"
         name="email"
         placeholder="Email Address"
         defaultValue={input.email}
-        readOnly
+        onChange={onChange}
         required
+        isInvalid={!valid}
       />
+      <Form.Control.Feedback type="invalid">
+        This email is invalid or unavailable.
+      </Form.Control.Feedback>
     </InputForm>
   );
 }
@@ -91,7 +100,7 @@ function Email({ input }) {
 function Username({ input, onChange, valid }) {
   return (
     <InputForm id="username" label="Username">
-      <InputGroup>
+      <InputGroup hasValidation>
         <InputGroup.Prepend>
           <InputGroup.Text>@</InputGroup.Text>
         </InputGroup.Prepend>
@@ -106,7 +115,9 @@ function Username({ input, onChange, valid }) {
           isInvalid={!valid}
         />
         <Form.Control.Feedback type="invalid">
-          {input.username ? "This username is unavailable." : "Username cannot be blank."}
+          {input.username
+            ? "This username is unavailable."
+            : "Username cannot be blank."}
         </Form.Control.Feedback>
       </InputGroup>
     </InputForm>
@@ -120,7 +131,7 @@ function MobileNumber({ input, onChange }) {
         type="tel"
         pattern="[0-9]{10}"
         name="mobileNumber"
-        placeholder="0991239876"
+        placeholder="0991234567"
         defaultValue={input.mobileNumber}
         onChange={onChange}
         required
@@ -156,10 +167,10 @@ function Gender({ input, onChange }) {
   );
 }
 
-function Submit({ modified, submitted }) {
+function Submit({ submitted }) {
   return (
     <div className="text-right mx-lg-3">
-      <Button disabled={!modified} type="submit">
+      <Button type="submit">
         {submitted ? (
           <Spinner
             as="span"
@@ -169,7 +180,7 @@ function Submit({ modified, submitted }) {
             aria-hidden="true"
           />
         ) : null}
-        {submitted ? " Saving..." : "Save Changes"}
+        {submitted ? " Saving..." : "Submit"}
       </Button>
     </div>
   );
@@ -178,7 +189,7 @@ function Submit({ modified, submitted }) {
 export default {
   FirstName,
   LastName,
-  NewPassword,
+  Password,
   ConfirmPassword,
   Email,
   Username,

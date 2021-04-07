@@ -285,7 +285,9 @@ function ReserveCaretaker(props) {
                     {!clickReview.clicked ? null : 
                     <div className="row">
                         <div className="col--6">
-                            {test.map((num) => <ReserveComment val={num}/>)}
+                            <div className="show-comment">
+                                {test.map((num) => <ReserveComment val={num}/>)}
+                            </div>
                         </div>
                         <div className="col--6">
                             <form onSubmit={onSubmit}>
