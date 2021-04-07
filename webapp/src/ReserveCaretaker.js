@@ -10,12 +10,14 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { UserContext } from "./context/MyContext";
 import Rating from '@material-ui/lab/Rating';
+import ReserveComment from "./ReserveComment"
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
+
 function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
     const userEmail = user.email;
-    console.log(userEmail);
+    // console.log(userEmail);
     const caretaker = props.location.state.caretaker;
     // console.log(caretaker);
     const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ caretaker;
@@ -33,11 +35,21 @@ function ReserveCaretaker(props) {
     const [rating, setRating] = useState({rating: 0, count: 0});
     const endPoint = "http://localhost:4000";
     const [show, setShow] = useState(false);
+
     useEffect(() => {
+        // axios
+        // .get("http://localhost:4000/user/comment/caretaker", {caretaker: caretaker})
+        // .then((res) => {
+        //     console.log(res);
+        //     })
+        // .catch((err) => {
+        //     console.log(err);
+        //     });
+
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
-            console.log(res);
+            // console.log(res);
             const data = res.data;
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
@@ -155,33 +167,39 @@ function ReserveCaretaker(props) {
     function onSubmit(e) {
         e.preventDefault();
 
-        const sentRating = {caretaker: caretaker, rater: userEmail, rate: ratingVal};
-        const sentComment = {email: caretaker, comment: commentVal};
-        console.log(sentRating);
-        console.log(sentComment);
-        
-        axios
-        .post("http://localhost:4000/user/caretaker/rate", sentRating)
-        .then((res) => {
-            console.log(res.data);
-        })
-        .catch((err) => {
-            console.log(err.response.data);
-        });
+        if (ratingVal == 0 && commentVal == "") {
+            window.alert("Please review before submitting!");
+        } else {
+            const sentRating = {caretaker: caretaker, rater: userEmail, rate: ratingVal};
+            const sentComment = {email: caretaker, comment: commentVal};
+            // console.log(sentRating);
+            // console.log(sentComment);
+            
+            axios
+            .post("http://localhost:4000/user/caretaker/rate", sentRating)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+            });
 
-        axios
-        .post("http://localhost:4000/user/comment/caretaker", sentComment)
-        .then((res) => {
-            console.log(res.data);
-        })
-        .catch((err) => {
-            console.log(err.response.data);
-        });
+            axios
+            .post("http://localhost:4000/user/comment/caretaker", sentComment)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+            });
 
-        window.alert("Review sent!");
-        window.location.reload();
+            window.alert("Review sent!");
+            window.location.reload();
+        }
     }
     
+    const test = [1,2,3,4,5];
+
     return (
         <div className="reserve">
             <Header/>
@@ -193,8 +211,10 @@ function ReserveCaretaker(props) {
                         </div>
                         <div className="col--9 reserve_userinfo">
                             <label className="namelabel">{name.firstname} &nbsp; {name.lastname}</label>
-                            <Rating value={rating.rating} precision={0.5} size="large" readOnly/>
-                            <label className="rating_label">({rating.count})</label><br/>
+                            <div className="show-rating">
+                                <Rating value={rating.rating} precision={0.5} size="large" readOnly/>
+                                <label className="rating_label">({rating.count})</label>
+                            </div><br/>
                             <label className="greylabel">{description.desc}</label>
                         </div>
                     </div>
@@ -249,38 +269,43 @@ function ReserveCaretaker(props) {
                         </div>
                     </div>
                     <div className="alert">
-                    <Alert show={show} variant="danger">
-        <Alert.Heading>Wait!!! You're not a Petowner!</Alert.Heading>
-        <p>
-          You don't have a permission to do this action. Please sign in as a Petowner.
-        </p>
-        <hr />
-        <div className="d-flex justify-content-end">
-          <Button onClick={() => setShow(false)} variant="outline-danger">
-            Close
-          </Button>
-        </div>
-      </Alert>
-      </div>
+                        <Alert show={show} variant="danger">
+                        <Alert.Heading>Wait!!! You're not a Petowner!</Alert.Heading>
+                        <p>
+                        You don't have a permission to do this action. Please sign in as a Petowner.
+                        </p>
+                        <hr />
+                        <div className="d-flex justify-content-end">
+                        <Button onClick={() => setShow(false)} variant="outline-danger">
+                            Close
+                        </Button>
+                        </div>
+                    </Alert>
+                    </div>
                     {!clickReview.clicked ? null : 
-                    <div>
-                        <form onSubmit={onSubmit}>
-                            <div className="row">
-                                <div className="col--12 rating_section">
-                                    <Rating name="controlled-rating" value={ratingVal} size="large" onChange={(event, newVal) => {
-                                        setRatingVal(newVal);
-                                    }}/>
+                    <div className="row">
+                        <div className="col--6">
+                            {test.map((num) => <ReserveComment val={num}/>)}
+                        </div>
+                        <div className="col--6">
+                            <form onSubmit={onSubmit}>
+                                <div className="row">
+                                    <div className="col--12 rating_section">
+                                        <Rating name="controlled-rating" value={ratingVal} size="large" onChange={(event, newVal) => {
+                                            setRatingVal(newVal);
+                                        }}/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col--12 comment_section">
-                                    <textarea placeholder="Comments..." value={commentVal} onChange={(event) => {
-                                        setCommentVal(event.target.value);
-                                    }}/><br/>
-                                    <button className="RButton" type="submit">Submit</button>
+                                <div className="row">
+                                    <div className="col--12 comment_section">
+                                        <textarea placeholder="Comments..." value={commentVal} onChange={(event) => {
+                                            setCommentVal(event.target.value);
+                                        }}/><br/>
+                                        <button className="RButton" type="submit">Submit</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>}
                 </div>
             </div>

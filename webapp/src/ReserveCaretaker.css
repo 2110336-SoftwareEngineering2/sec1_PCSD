@@ -71,13 +71,18 @@
     padding: 70px 50px 50px 0;
 }
 
+.show-rating {
+    display: inline;
+    margin-left: 40px;
+}
+
 .rating_section {
-    padding: 0 0 20px 60px;
+    margin: 50px 0 20px 45px;
 }
 
 .comment_section {
     text-align: center;
-    padding: 0 50px 50px 50px;
+    margin: 0 50px 50px 50px;
 }
 
 /* label ----------------------------------------*/
@@ -129,7 +134,7 @@
 /* input ----------------------------------------*/
 .comment_section textarea {
     padding: 10px;
-    width: 1000px;
+    width: 500px;
     height: 200px;
     border-color: #8e8e8e;
     border-radius: 7px;
@@ -140,10 +145,6 @@
 }
 
 /* rating ---------------------------------------*/
-.MuiRating-root {
-    margin-left: 40px;
-}
-
 .MuiRating-icon {
     margin: 0 0 0 3px;
     color: black;
