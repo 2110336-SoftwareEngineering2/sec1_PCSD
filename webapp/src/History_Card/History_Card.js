@@ -3,20 +3,19 @@ import { useCookies } from "react-cookie";
 import { CardDeck, Card, Button } from "react-bootstrap";
 import FaceIcon from '@material-ui/icons/Face';
 import axios from "axios";
-import Header from "./../Header/header";
+import Header from "../Header/header";
 import { UserContext } from "../context/MyContext";
 import { AcceptButton, ReceiveButton, CancelButton} from "../component/PaymentButton";
-import "./Test.css";
+import "./History_Card.css";
 import SumPet from "./SumPet";
 import Modal from 'react-bootstrap/Modal';
 import { ProgressBar } from 'react-bootstrap';
 import socketIOClient from "socket.io-client";
-import moment from "moment";
 import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
 import PetsIcon from '@material-ui/icons/Pets';
-function Test(_) {
+function History_Card(_) {
   const { user, login } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +25,7 @@ function Test(_) {
   })
 
   const socketRef = useRef();
-  const notiEndPoint = "http://localhost:5000";
+  const notiEndPoint = "http://localhost:4000";
   const data = useState([]);
   
   useEffect(() => {
@@ -42,7 +41,7 @@ function Test(_) {
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
               getReserve((res.data).email);
-              console.log(state.reserves)
+              // console.log(state.reserves)
             })
         })
         .catch((err) => {
@@ -231,7 +230,7 @@ function Test(_) {
   
 
   return (
-    <div className="test">
+    <div className="History_Card">
       <Header />
       <h1>{ user.role == "caretaker" ? "Job " :  "Payment "
             } &nbsp;Histories</h1>
@@ -280,4 +279,4 @@ function Test(_) {
   );
 }
 
-export default Test;
+export default History_Card;

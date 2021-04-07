@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Col } from "react-bootstrap";
 
 import Input from "./FormComponents";
@@ -32,14 +32,14 @@ function ServiceForm({ input, updateInput, submitForm }) {
     <Form validated={modified} onSubmit={handleSubmit}>
       <fieldset disabled={submitted}>
         <Form.Row>
-          <Col sm="12" md="4" lg="3" style={{ "min-width": "150px" }}>
+          <Col sm="12" md="4" lg="3" style={{ minWidth: "150px" }}>
             <Input.ServiceType input={input} onChange={modifiedInput} />
             <Input.ServiceRate input={input} onChange={modifiedInput} />
           </Col>
-          <Col sm="12" md="8" lg="5" style={{ "min-width": "150px" }}>
+          <Col sm="12" md="8" lg="5" style={{ minWidth: "150px" }}>
             <Input.ServiceArea input={input} onChange={modifiedInput} />
           </Col>
-          <Col sm="12" md="12" lg="4" style={{ "min-width": "150px" }}>
+          <Col sm="12" md="12" lg="4" style={{ minWidth: "150px" }}>
             <Input.Description input={input} onChange={modifiedInput} />
           </Col>
         </Form.Row>

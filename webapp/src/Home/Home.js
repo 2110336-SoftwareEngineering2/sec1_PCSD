@@ -19,11 +19,7 @@ import TimelineContent from "@material-ui/lab/TimelineContent";
 import PetsIcon from "@material-ui/icons/Pets";
 import SearchIcon from "@material-ui/icons/Search";
 import TimelineDot from "@material-ui/lab/TimelineDot";
-import FastfoodIcon from "@material-ui/icons/Fastfood";
-import LaptopMacIcon from "@material-ui/icons/LaptopMac";
-import HotelIcon from "@material-ui/icons/Hotel";
 import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
-import RepeatIcon from "@material-ui/icons/Repeat";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 function Home() {

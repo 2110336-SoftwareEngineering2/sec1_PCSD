@@ -104,6 +104,7 @@ function Chatbox({roomId}){
                 message: inputMessage,
                 user: email,
                 email: email,
+                receiver: inter, 
                 token: token,
                 time: Date.now()
             }

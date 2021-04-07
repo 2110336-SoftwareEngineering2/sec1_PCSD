@@ -1,5 +1,7 @@
-import React, { useContext, useState, Component } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { Alert } from "react-bootstrap";
+
 import Register from "./Register-component";
 import LoadScript from "./script";
 import "./style.css";
@@ -14,9 +16,11 @@ function UserLogin(props) {
     email: "",
     password: "",
   });
+  const [showError, setShowError] = useState(false);
 
   const onChange = (e) => {
     setValue({ ...values, [e.target.name]: e.target.value });
+    setShowError(false);
   };
 
   const onSubmit = (e) => {
@@ -34,7 +38,10 @@ function UserLogin(props) {
         // setCookie("accessToken", (res.data).accessToken, {path: "/"});
         // console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        setShowError(true);
+      });
   };
 
   return (
@@ -75,6 +82,11 @@ function UserLogin(props) {
                 <a href="#"> Forgotten password? </a>
               </label>
             </div>
+            {showError ? 
+              (<div className="login-error">
+                <Alert variant="danger">Invalid Email or Password</Alert>
+              </div>) : null
+            }
           </div>
         </li>
         <Register />

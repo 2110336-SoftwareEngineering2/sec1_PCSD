@@ -31,7 +31,6 @@ function Header() {
   const { user, logout } = useContext(UserContext);
   const [sumUnread, setSumUnread] = useState(0);
   const chatContext = useContext(ChatContext);
-  // const roomId = getHash(user.email);
   const endpoint = "http://localhost:4000";
   const socketRef = useRef();
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -42,10 +41,8 @@ function Header() {
   });
 
   useEffect(() => {
-    // setSumUnread(getSumUnreadChat());
-
     socketRef.current.on("get-sum-unread", (res) => {
-      // console.log(res)
+      console.log(res)
       setSumUnread(res.sum);
     });
 
@@ -56,17 +53,7 @@ function Header() {
 
   useEffect(() => {
     socketRef.current.emit("get-sum-unread", user.email);
-  });
-  // Hash email for create unique socket server
-
-  // const getSumUnreadChat = () => {
-  //   var sum = 0;
-  //   for (var key in chatContext.unreadMessage) {
-  //     // console.log(key + " " + chatContext.unreadMessage[key])
-  //     sum += chatContext.unreadMessage[key];
-  //   }
-  //   return sum;
-  // }
+  }, []);
 
   return (
     <div className="header">
@@ -91,9 +78,6 @@ function Header() {
         </div>
       </div>
       <div className="header__right">
-        {/* <IconButton>
-          <NotificationsIcon />
-        </IconButton> */}
         <NotificationBtn />
         <IconButton>
           <MailIcon
@@ -144,18 +128,30 @@ function Header() {
               Pet Form (NEW)
             </Dropdown.Item>
             <Dropdown.Divider />
+            {user.role == "caretaker" ? 
             <Dropdown.Item
-              eventKey="5"
-              onClick={() => {
-                history.push({ pathname: "/addmoney" });
-              }}
-            >
-              Add Money
-            </Dropdown.Item>
+            eventKey="5"
+            onClick={() => {
+              history.push({ pathname: "/showmoney" });
+            }}
+          >
+            Account Balance
+          </Dropdown.Item>
+            :
+            <Dropdown.Item
+            eventKey="5"
+            onClick={() => {
+              history.push({ pathname: "/addmoney" });
+            }}
+          >
+            Add Money
+          </Dropdown.Item>
+          }
+            
             <Dropdown.Item
               eventKey="6"
               onClick={() => {
-                history.push({ pathname: "/test" });
+                history.push({ pathname: "/historycard" });
               }}
             >
               {user.role == "caretaker" ? "Job Histories" : "Payment Histories"}
