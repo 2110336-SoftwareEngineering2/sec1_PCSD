@@ -159,11 +159,11 @@ export default makeStyles((theme) => ({
     },
   },
   header: {
-    margin: "10px",
+    margin: "10px 10px 10px 15px",
   },
   formControl: {
     width: "250px",
-    marginLeft: "10px",
+    marginLeft: "15px",
   },
   formControlLabel: {
     marginRight: "47px",
@@ -183,12 +183,12 @@ export default makeStyles((theme) => ({
   },
   sideCityInput: {
     width: "270px",
-    marginLeft: "10px",
+    marginLeft: "15px",
   },
 
   sidePriceSection: {
     display: "flex",
-    marginLeft: "10px",
+    marginLeft: "15px",
   },
   sidePriceInput: {
     width: "108px",
