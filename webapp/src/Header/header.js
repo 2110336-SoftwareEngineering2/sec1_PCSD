@@ -41,10 +41,8 @@ function Header() {
   });
 
   useEffect(() => {
-    // setSumUnread(getSumUnreadChat());
-
     socketRef.current.on("get-sum-unread", (res) => {
-      // console.log(res)
+      console.log(res)
       setSumUnread(res.sum);
     });
 
@@ -55,17 +53,7 @@ function Header() {
 
   useEffect(() => {
     socketRef.current.emit("get-sum-unread", user.email);
-  });
-  // Hash email for create unique socket server
-
-  // const getSumUnreadChat = () => {
-  //   var sum = 0;
-  //   for (var key in chatContext.unreadMessage) {
-  //     // console.log(key + " " + chatContext.unreadMessage[key])
-  //     sum += chatContext.unreadMessage[key];
-  //   }
-  //   return sum;
-  // }
+  }, []);
 
   return (
     <div className="header">
@@ -90,9 +78,6 @@ function Header() {
         </div>
       </div>
       <div className="header__right">
-        {/* <IconButton>
-          <NotificationsIcon />
-        </IconButton> */}
         <NotificationBtn />
         <IconButton>
           <MailIcon

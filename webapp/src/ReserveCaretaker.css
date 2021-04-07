@@ -76,13 +76,20 @@
     margin-left: 40px;
 }
 
+.show-comment {
+    width: 500px;
+    height: 400px;
+    overflow: auto;
+    margin: 0 0 80px 80px;
+}
+
 .rating_section {
-    margin: 50px 0 20px 45px;
+    margin: 50px 0 20px 60px;
 }
 
 .comment_section {
     text-align: center;
-    margin: 0 50px 50px 50px;
+    margin: 0 50px 50px 65px;
 }
 
 /* label ----------------------------------------*/
