@@ -5,6 +5,9 @@ const User = require("../models/User/User-model");
 const Payment = require("../models/User/Payment-model");
 
 const { authToken } = require("./Authentication");
+const { deleteCaretaker } = require("./Caretaker");
+const { deletePayment } = require("./Payment")
+const { deleteAllPet } = require("./Pet");
 
 const findUserByUsername = async (username) => {
   const user = await User.findOne({ username: username });
@@ -60,8 +63,14 @@ const deleteUserById = async (id) => {
   const user = await User.findById(id);
   if (user) {
     try {
-      const deleteUser = await User.deleteOne({ _id: id });
-      if (deleteUser === null) {
+      const deletedUser = await User.deleteOne({ _id: id });
+      if(user.role === "caretaker") {
+        deleteCaretaker(user.email);
+      } else if(user.role === "petowner") {
+        deleteAllPet(user.email);
+      }
+      deletePayment(user.email);
+      if (deletedUser === null) {
         return {
           status: 400,
           message: "Something went wrong. Cannot delete user please try again.",

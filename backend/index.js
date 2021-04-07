@@ -4,13 +4,20 @@ const http = require("http");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const server = http.createServer(app);
+const socket = require('socket.io');
 
 // Middlewares
 app.use(cors());
 
+const io = socket(server, {cors: '*'});
+
 // chat socket server
 const chatServer = require("./chat/server");
-chatServer.listen(server);
+chatServer.listen(io);
+
+// notification socket server
+const notificationServer = require("./notification/notification");
+notificationServer.listen(io);
 
 // Routes
 const UserRoute = require("./routes/User");
@@ -18,6 +25,7 @@ const AuthRoute = require("./routes/Authentication");
 const AdminRoute = require("./routes/Admin");
 const ChatRoute = require("./routes/Chat");
 const ReserveRoute = require("./routes/Reserve");
+const NotificationsRoute = require("./routes/Notification");
 
 // ENVIRONMENT VARIABLE (in .env file)
 require("dotenv").config();
@@ -51,6 +59,9 @@ app.use("/admin", AdminRoute);
 app.use("/chat", ChatRoute);
 
 app.use("/reserve", ReserveRoute);
+
+// Notifications Route
+app.use("/notifications", NotificationsRoute);
 
 app.get("/", (req, res) => {
   res.send("First page");

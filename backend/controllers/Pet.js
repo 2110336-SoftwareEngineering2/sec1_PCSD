@@ -84,4 +84,7 @@ module.exports = {
       });
     }
   },
+  deleteAllPet: async (owner) => {
+    await Pet.deleteMany({owner: owner});
+  }
 };
