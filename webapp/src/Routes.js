@@ -16,6 +16,7 @@ import { RegisterContext, UserContext } from "./context/MyContext";
 import AuthRoute from "./util/AuthRoute";
 import { useCookies } from "react-cookie";
 
+import ShowMoneyPage from "./Payment/ShowMoneyPage";
 import AddMoneyPage from "./Payment/AddMoneyPage";
 import PaymentPage from "./Payment/PaymentPage";
 import UserPage from "./UserPage/UserPage";
@@ -57,6 +58,7 @@ function Routes() {
         <AuthRoute path="/services" exact component={MyServices} />
 
         <AuthRoute path="/addmoney" exact component={AddMoneyPage} />
+        <AuthRoute path="/showmoney" exact component={ShowMoneyPage} />
         <AuthRoute path="/payment" exact component={PaymentPage} />
         <AuthRoute path="/reserveform" exact component={ReserveForm} />
       </Switch>

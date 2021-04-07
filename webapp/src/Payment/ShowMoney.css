@@ -1,0 +1,42 @@
+.showmoney {
+    width: fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    background-color: white;
+    margin: auto;
+    margin-top: 25vh;
+   
+}
+.showmoney .showheader {
+    padding: 15px 20px;
+   text-align: center;
+   background-color: #872935;
+   color: white;
+   border-radius: 15px 15px 0px 0px;
+}
+.showmoney .showbody {
+    align-items: center;
+}
+.showmoney .showbody .user {
+    display: flex;
+    align-items: center;
+    margin-left: 32%;
+}
+
+.showmoney .showbody .name {
+   font-size: 18px;
+}
+
+.showmoney .MuiAvatar-root {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+.showmoney .showbody .content {
+    font-size: 40px;
+    margin: 20px;
+    margin-top: 35px;
+    font-weight: bold;
+    text-align: center;
+    color: #872935;
+}

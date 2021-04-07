@@ -143,14 +143,26 @@ function Header() {
               Pet Form (NEW)
             </Dropdown.Item>
             <Dropdown.Divider />
+            {user.role == "caretaker" ? 
             <Dropdown.Item
-              eventKey="5"
-              onClick={() => {
-                history.push({ pathname: "/addmoney" });
-              }}
-            >
-              Add Money
-            </Dropdown.Item>
+            eventKey="5"
+            onClick={() => {
+              history.push({ pathname: "/showmoney" });
+            }}
+          >
+            Account Balance
+          </Dropdown.Item>
+            :
+            <Dropdown.Item
+            eventKey="5"
+            onClick={() => {
+              history.push({ pathname: "/addmoney" });
+            }}
+          >
+            Add Money
+          </Dropdown.Item>
+          }
+            
             <Dropdown.Item
               eventKey="6"
               onClick={() => {
