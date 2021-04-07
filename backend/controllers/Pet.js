@@ -18,6 +18,7 @@ module.exports = {
         newPet.imgURL =
           "https://pcsdimage.s3-us-west-1.amazonaws.com/" + newPet._id;
       }
+
       newPet.save((err) => {
         if (err) console.log(err);
         res.send(newPet);
@@ -74,7 +75,11 @@ module.exports = {
     // user is logged in and has "user" role
     if (!problem && user.role === "user") {
       // find and update pet
-      console.log("Editing");
+      if (req.body.hasImg) {
+        req.body.imgURL =
+          "https://pcsdimage.s3-us-west-1.amazonaws.com/" + req.body._id;
+      }
+
       Pet.findByIdAndUpdate(req.body._id, req.body, (err, docs) => {
         if (err) {
           res.send(err);
@@ -85,6 +90,6 @@ module.exports = {
     }
   },
   deleteAllPet: async (owner) => {
-    await Pet.deleteMany({owner: owner});
-  }
+    await Pet.deleteMany({ owner: owner });
+  },
 };
