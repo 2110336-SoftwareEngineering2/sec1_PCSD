@@ -26,7 +26,7 @@ function Test(_) {
   })
 
   const socketRef = useRef();
-  const notiEndPoint = "http://localhost:5000";
+  const notiEndPoint = "http://localhost:4000";
   const data = useState([]);
   
   useEffect(() => {
