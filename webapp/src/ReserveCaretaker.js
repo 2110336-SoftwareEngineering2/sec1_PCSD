@@ -37,14 +37,14 @@ function ReserveCaretaker(props) {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        // axios
-        // .get("http://localhost:4000/user/comment/caretaker", {caretaker: caretaker})
-        // .then((res) => {
-        //     console.log(res);
-        //     })
-        // .catch((err) => {
-        //     console.log(err);
-        //     });
+        axios
+        .post("http://localhost:4000/user/comment/caretaker/get", { caretaker: caretaker })
+        .then((res) => {
+            console.log(res);
+            })
+        .catch((err) => {
+            console.log(err);
+            });
 
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
