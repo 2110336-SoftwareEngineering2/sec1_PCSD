@@ -33,7 +33,6 @@ function MyServices() {
         caretaker: user.email,
       })
       .then((res) => {
-        console.log(res.data);
         setNewUser(!res.data);
         setInfo(
           res.data
@@ -49,7 +48,6 @@ function MyServices() {
     axios
       .post(`http://localhost:4000/user/${path}caretaker`, info)
       .then((res) => {
-        console.log(res.data);
         history.push("/services");
         history.go();
       })

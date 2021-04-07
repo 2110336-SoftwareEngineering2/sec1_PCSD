@@ -4,7 +4,6 @@ import Header from '../Header/header';
 import { UserContext } from "../context/MyContext";
 import "./ReserveForm.css";
 import {
-    Button,
     BottomNavigation,
     BottomNavigationAction,
     TextField,
@@ -23,7 +22,6 @@ function ReserveForm(props) {
     const caretaker = props.location.state.caretaker;
     const classes = useStyles();
     const [value, setValue] = useState(0);
-    // const [selectedDate, handleDateChange] = useState(new Date());
     const [pet_lists, setPetlists] = useState([]);
 
     const [cookie, setCookie, removeCookie] = useCookies();
@@ -31,7 +29,6 @@ function ReserveForm(props) {
     const [endDate, setEndDate] = useState("");
     const [lname, setLname] = useState("");
     const [fname, setFname] = useState("");
-    // const [service, setService] = useState("");
     axios.post("http://localhost:4000/user/email", {email: caretaker})
     .then((res) => {
       const data = res.data;
@@ -56,10 +53,7 @@ function ReserveForm(props) {
   function onClick() {
     const reserveTmp = cookie.reserveTmp;
     const selectedPets = cookie.selectedPets;
-    // console.log(reserveTmp)
-    // console.log(selectedPets)
     if (startDate === "" || endDate === "") {
-      // console.log("please select date");
       window.alert("Please select date");
       return;
     }
@@ -83,20 +77,6 @@ function ReserveForm(props) {
       window.alert("Please select caretaker again");
       history.push({pathname: "/"});
     }
-    // console.log(reserveData)
-    // console.log(cookie.accessToken)
-    // axios.post(`http://localhost:4000/reserve/caretaker`, reserveData, {
-    //   headers: {
-    //     "authorization": cookie.accessToken
-    //   }
-    // }).then((res) => {
-    //   console.log(res)
-    //   history.push({ pathname: "/payment", reserve: res.data});
-    // }).catch(err => {
-    //   console.log("whatttttt");
-    //   console.log(err);
-    // })
-
   }
   useEffect(() => {
     return () => {
@@ -105,7 +85,6 @@ function ReserveForm(props) {
   }, []);
 
   useEffect(() => {
-    // console.log(pet_lists)
     const cancelTokenSource = CancelToken.source();
     try {
       if (pageState === 1) {
@@ -184,17 +163,7 @@ function ReserveForm(props) {
 
 
   function CheckPet(petId) {
-   /* axios.delete("http://localhost:4000/user/pet", {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`
-      },
-      data: {
-        source: petId
-      }
-    }).then((res) => {
-      console.log(res.data);
-      setPetlists(pet_lists.filter((pet) => pet._id == petId));
-    }).catch((err) => console.log(err));  */
+  
   }
     return (
         <div className="ReserveForm" id="ReserveForm">

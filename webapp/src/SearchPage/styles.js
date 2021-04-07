@@ -26,16 +26,6 @@ export default makeStyles((theme) => ({
   },
   searchBox: {
     backgroundColor: "white",
-    // justifyContent: "center",
-    // position: "relative",
-    // top: "130px",
-    // left: "20%",
-
-    // position: "fixed",
-    // top: "50%",
-    // left: "50%",
-    // transform: "translate(-50%, -50%)",
-
     position: "static",
     top: "0",
     bottom: "0",
@@ -44,9 +34,6 @@ export default makeStyles((theme) => ({
 
     marginLeft: "auto",
     marginRight: "auto",
-
-    // marginTop: "-50px",
-    // marginLeft: "-50px",
 
     height: "350px",
     width: "850px",
@@ -63,20 +50,11 @@ export default makeStyles((theme) => ({
     width: "190px",
     color: "white",
     position: "absolute",
-    // top: "0",
     bottom: "1",
     left: "0",
     right: "0",
 
     margin: "auto",
-    // marginTop: "200px",
-    // position: "fixed",
-    // top: "100%",
-    // left: "50%",
-    // transform: "translate(-50%, -50%)",
-    // position: "relative",
-    // top: "0%",
-    // left: "37.5%",
     fontSize: "20px",
   },
 
@@ -130,12 +108,10 @@ export default makeStyles((theme) => ({
     margin: "0 0 0 20px",
   },
   dateInput: {
-    // marginLeft: "20px",
     width: "40%",
     transparent: "0%",
   },
   searchResult: {
-    // backgroundColor: "yellow",
     backgroundColor: "#F1F1F1",
     hegith: "100%",
     display: "flex",
@@ -159,11 +135,11 @@ export default makeStyles((theme) => ({
     },
   },
   header: {
-    margin: "10px",
+    margin: "10px 10px 10px 15px",
   },
   formControl: {
     width: "250px",
-    marginLeft: "10px",
+    marginLeft: "15px",
   },
   formControlLabel: {
     marginRight: "47px",
@@ -183,12 +159,12 @@ export default makeStyles((theme) => ({
   },
   sideCityInput: {
     width: "270px",
-    marginLeft: "10px",
+    marginLeft: "15px",
   },
 
   sidePriceSection: {
     display: "flex",
-    marginLeft: "10px",
+    marginLeft: "15px",
   },
   sidePriceInput: {
     width: "108px",
@@ -200,5 +176,15 @@ export default makeStyles((theme) => ({
   datePlaceHolder: {
     fontSize: "12px",
     opacity: "0.5",
+  },
+  checkBox: {
+    "&.MuiCheckbox-root": {
+      color: "white",
+    },
+  },
+  sideCheckBox: {
+    "&.Mui-checked": {
+      color: "#872935",
+    },
   },
 }));

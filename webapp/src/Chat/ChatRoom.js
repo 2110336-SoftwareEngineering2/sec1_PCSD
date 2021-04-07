@@ -35,13 +35,11 @@ function ChatRoom({info}){
             });
 
             socketRef.current.on('new-unread-message', (res) => {
-                // console.log(`update from unread ${res.unreadMessage}`);
                 if (res.email === user.email) {
                     if (res.unreadMessage === 0) {
                         chatContext.updateUnreadMessage(roomId, 0);
                     }
                 } else {
-                    // console.log(res.unreadMessage)
                     if (res.unreadMessage !== 0) {
                         chatContext.updateUnreadMessage(roomId, chatContext.unreadMessage[roomId] + 1);
                     }

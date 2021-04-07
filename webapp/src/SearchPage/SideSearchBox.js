@@ -311,6 +311,7 @@ const SideSearchBox = (props) => {
           className={classes.firstColumnFormControlLabel}
           control={
             <Checkbox
+              className={classes.sideCheckBox}
               name="checkedA"
               color="primary"
               value="dog"
@@ -324,6 +325,7 @@ const SideSearchBox = (props) => {
           className={classes.formControlLabel}
           control={
             <Checkbox
+              className={classes.sideCheckBox}
               name="checkedA"
               color="primary"
               value="cat"
@@ -337,6 +339,7 @@ const SideSearchBox = (props) => {
           className={classes.formControlLabel}
           control={
             <Checkbox
+              className={classes.sideCheckBox}
               name="checkedA"
               color="primary"
               value="rabbit"
@@ -350,6 +353,7 @@ const SideSearchBox = (props) => {
           className={classes.firstColumnFormControlLabel}
           control={
             <Checkbox
+              className={classes.sideCheckBox}
               name="checkedA"
               color="primary"
               value="bird"
@@ -363,6 +367,7 @@ const SideSearchBox = (props) => {
           //   className={classes.formControlLabel}
           control={
             <Checkbox
+              className={classes.sideCheckBox}
               name="checkedA"
               color="primary"
               value="hamster"
@@ -376,6 +381,7 @@ const SideSearchBox = (props) => {
           className={classes.formControlLabel}
           control={
             <Checkbox
+              className={classes.sideCheckBox}
               name="checkedA"
               color="primary"
               value="turtle"

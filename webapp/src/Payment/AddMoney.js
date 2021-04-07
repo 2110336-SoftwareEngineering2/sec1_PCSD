@@ -10,7 +10,10 @@ function Addmoney() {
 
   const onClick = () => {
     const balance = document.getElementById("amount").value;
-
+    if(balance < 0 ) {
+      window.alert("Wrong Input!!!!");
+    }
+    else {
     axios
       .post(
         "http://localhost:4000/user/topup",
@@ -27,6 +30,7 @@ function Addmoney() {
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
   return (
