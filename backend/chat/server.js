@@ -1,4 +1,4 @@
-const socket = require('socket.io');
+// const socket = require('socket.io');
 const jwt = require("jsonwebtoken");
 const ChatController = require('../controllers/Chatroom');
 const Chatrooms = require('../models/Chatroom/Chatroom-model');
@@ -26,10 +26,7 @@ const authToken = (token) => {
 };
 
 const chatServer = {
-    listen (server) {
-        io = socket(server, {
-            cors: '*'
-        });
+    listen (io) {
 
         io.on('connection', async (socket) => {
             const room = socket.handshake.query.room;
@@ -50,7 +47,6 @@ const chatServer = {
                     message: data.message,
                 }
                 var unreadMessage = data.unreadMessage;
-                // console.log(`unread: ${unreadMessage}`)
                 if (checkToken.status == true) {
                     try {
                         const res = await Chatrooms.findOneAndUpdate({_id: room}, {$push: {messages: message}}, { "new": true, "upsert": true });
@@ -87,10 +83,7 @@ const chatServer = {
             });
 
             socket.on('get-sum-unread', async (email) => {
-                // console.log(email)
                 const result = await ChatController.getSumUnreadMessage(email);
-                // console.log(result)
-                // console.log(await result);
                 var sum = 0;
                 result.forEach(elem => {
                     elem.unreadMessages.forEach(x => {
