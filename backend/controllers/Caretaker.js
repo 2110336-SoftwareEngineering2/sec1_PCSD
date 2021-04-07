@@ -78,6 +78,58 @@ const rate = async (body,res) =>{
   }
 };
 
+const rateAndcomment = async (body,res) =>{
+
+  if(body.rate<=5 && body.rate>=0 ){
+    Caretaker.updateOne({caretaker:body.caretaker}, 
+      { $push: { 
+          raw_rate: {
+            // rater : body.rater,
+            rate : body.rate,
+            comment : body.comment
+          }
+        },
+        $inc : {
+            'rate_point.rate_count' : 1,
+            'rate_point.sum_rate' : body.rate
+        }
+      },(err, result) => {
+        if(err){
+          console.log(err);
+          res.status(400).send("err");
+        }
+        else{
+          // console.log(body.comment);
+          res.send("rate caretaker successful");
+        }
+      });
+  }
+  else{
+    res.status(400).send("rate out of range");
+  }
+};
+
+const get_rateAndcomment = async (body,res) =>{
+  // console.log(body);
+  if(body.caretaker){
+    await Caretaker.findOne({ caretaker : body.caretaker }, '-_id raw_rate', (err, result) => {
+      if(err){
+        res.status(400).send(err);
+      }
+      else{
+        result.raw_rate.sort(function(a,b){
+          return b.date - a.date;
+        });
+        res.send(result);
+      }
+    });
+  }
+  else{
+    res.send("no input");
+  }
+};
+
+
 const rate_av = function(rate_point){
   if(rate_point.rate_count==0) return -1;
   var rate_data = JSON.parse(JSON.stringify(rate_point));
@@ -184,6 +236,8 @@ module.exports = {
     getCaretaker,
     SearchCaretaker,
     rate,
+    rateAndcomment,
+    get_rateAndcomment,
     comment,
     get_comment,
     deleteCaretaker,

@@ -51,6 +51,14 @@ router.post("/caretaker/rate", (req, res) => {
   CaretakerController.rate(req.body, res);
 });
 
+router.post("/rateAndcomment", (req, res) => {
+  CaretakerController.rateAndcomment(req.body, res);
+});
+
+router.post("/getrateAndcomment", (req, res) => {
+  CaretakerController.get_rateAndcomment(req.body, res);
+});
+
 router.post("/caretaker", (req, res) => {
   CaretakerController.addCaretaker(req, res);
 });
