@@ -184,6 +184,8 @@
   border: none;
   background: transparent;
   box-shadow: none;
+  margin-top: -1rem;
+  margin-bottom: 0.5rem;
 }
 
 #my_pet_info #pet_summary .card div.row {

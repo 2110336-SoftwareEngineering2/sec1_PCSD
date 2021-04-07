@@ -143,7 +143,7 @@ function Chatbox({roomId}){
             }
             else {
                 //return <h1> <getName email = {members[0]} /> </h1>
-                var Inter = members[0];
+                Inter = members[0];
         }}
         
         axios
