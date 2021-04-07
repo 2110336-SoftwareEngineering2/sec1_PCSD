@@ -48,18 +48,22 @@ module.exports = {
     const password = req.body.password;
     const val = await validEmailAndPassword(email, password);
     if (val) {
-      const accessToken = generateAccessToken(
-        {
-          email: email,
-        },
-        process.env.ACCESS_TOKEN_SECRET
-      );
-      return res.status(201).json({
-        ...val,
-        accessToken: accessToken,
-      });
+      if(!val.banStatus) {
+        const accessToken = generateAccessToken(
+          {
+            email: email,
+          },
+          process.env.ACCESS_TOKEN_SECRET
+        );
+        return res.status(201).json({
+          ...val,
+          accessToken: accessToken,
+        });
+      } else {
+        res.status(401).send({error: "You are banned"});
+      }
     } else {
-      return res.status(401).send("Email or Password invalid");
+      return res.status(401).send({error: "Invalid Email or Password"});
     }
   },
 
