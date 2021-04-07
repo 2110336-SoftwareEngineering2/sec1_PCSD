@@ -67,6 +67,10 @@ router.post("/comment/caretaker", (req, res) => {
   CaretakerController.comment(req.body, res);
 });
 
+router.get("/comment/caretaker", (req, res) => {
+  CaretakerController.get_comment(req.body, res);
+});
+
 // For testing, currently unused
 // router.delete("/account/:id", (req, res) => {
 //   UserController.deleteUser(req, res);

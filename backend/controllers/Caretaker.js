@@ -21,6 +21,20 @@ const updateCaretaker = async (req, res) => {
     res.send("Edit caretaker successful");
 };
 
+const get_comment = async (body,res) =>{
+  await Caretaker.findOne({ caretaker : body.caretaker }, '-_id comment', (err, result) => {
+    if(err){
+      res.status(400).send(err);
+    }
+    else{
+      result.comment.sort(function(a,b){
+        return b.date - a.date;
+      });
+      res.send(result);
+    }
+  });
+};
+
 const comment = async (body,res) =>{
   await Caretaker.updateOne({caretaker:body.email}, 
     { $push: {comment : {
@@ -165,5 +179,6 @@ module.exports = {
     SearchCaretaker,
     rate,
     comment,
+    get_comment,
     deleteCaretaker,
 }
