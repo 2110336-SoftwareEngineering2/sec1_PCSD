@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./ReserveComment.css";
-import blankImage from "./userpic.png";
 import Rating from '@material-ui/lab/Rating';
 
 function ReserveComment(props) {

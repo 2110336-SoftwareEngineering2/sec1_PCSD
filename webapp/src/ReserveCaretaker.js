@@ -17,9 +17,7 @@ import Button from 'react-bootstrap/Button'
 function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
     const userEmail = user.email;
-    // console.log(userEmail);
     const caretaker = props.location.state.caretaker;
-    console.log(caretaker);
     const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ caretaker;
     const [name, setName] = useState({firstname: null, lastname: null});
     const [contact, setContact] = useState({email: null, phone: null});
@@ -41,7 +39,6 @@ function ReserveCaretaker(props) {
         axios
         .post("http://localhost:4000/user/getrateAndcomment", {caretaker: caretaker})
         .then((res) => {
-            console.log(res);
             const data = res.data;
             setReview(data.raw_rate);
             })
@@ -52,7 +49,6 @@ function ReserveCaretaker(props) {
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
-            console.log(res);
             const data = res.data;
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
@@ -64,7 +60,6 @@ function ReserveCaretaker(props) {
         axios
         .post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
         .then((res) => {
-            console.log(res);
             const data = res.data;
             setDesc({desc: data.description});
             const area = data.city + ", " + data.province + ", " + data.country;
@@ -112,12 +107,10 @@ function ReserveCaretaker(props) {
             })
         .catch((err) => {
             console.log(err);
-            console.log("what");
             });
     }, []);
 
     function createChatRoom () {
-        //console.log("Hello world");
         axios.get(`${endPoint}/chat/rooms/?members=${userEmail}&members=${caretaker}`, {
             headers: {
                 authorization: "Bearer " + cookie.accessToken
@@ -138,30 +131,22 @@ function ReserveCaretaker(props) {
             })
             .catch((newErr) => console.log(newErr))
         })
-        // axios.post("http://localhost:4000/chat/create",{"members":[contact.email,userEmail]},{
-        //     headers: {
-        //         "authorization": "Bearer " + cookie.accessToken
-        //     }
-        // });
     }
 
     const saveToCookies = () => {
         const data = {
             caretaker: caretaker,
             petowner: userContext.user.email,
-            // petowner: petowner,
             rate: rate.rate,
             petType: petType,
             serviceType: serviceType,
             availDays: availDays
         }
         setCookie("reserveTmp", data, { path: "/" });
-        // console.log(cookie.ReserveTmp)
     }
 
     function onclick() {
         createChatRoom() 
-        // history.push( {pathname: "/chat"});
     }
 
     const [ratingVal, setRatingVal] = useState(0);
@@ -175,7 +160,6 @@ function ReserveCaretaker(props) {
         axios
         .post("http://localhost:4000/user/rateAndcomment", sentReview)
         .then((res) => {
-            console.log(res.data);
         })
         .catch((err) => {
             console.log(err.response.data);

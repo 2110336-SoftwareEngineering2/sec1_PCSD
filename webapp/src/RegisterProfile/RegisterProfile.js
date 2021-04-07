@@ -40,7 +40,6 @@ function RegisterProfile() {
     axios
       .post("http://localhost:4000/auth/login", user)
       .then((res) => {
-        console.log(res.data);
         login(res.data);
         history.push(user.role === "petowner" ? "/pets" : "/services");
       })
@@ -104,7 +103,6 @@ function RegisterProfile() {
     axios
       .post("http://localhost:4000/user/profilepic", data)
       .then((res) => {
-        console.log(res);
         setImageReady(true);
       })
       .catch((err) => console.log(err));
