@@ -120,6 +120,9 @@ const SearchCaretaker = async (body,res) =>{
 
       result.sort(function(a,b){
           // console.log(rate_av(a.rate_point));
+          if(rate_av(b.rate_point)==rate_av(a.rate_point)){
+            return b.rate_point.rate_count - a.rate_point.rate_count;
+          }
           return rate_av(b.rate_point)-rate_av(a.rate_point);
         });
 
