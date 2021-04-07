@@ -5,7 +5,6 @@ import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import "./LoginPage.css";
 import mainLogo from "../petidcare.png";
-import "../component/style.css";
 
 function LoginPage() {
   const logo = (
