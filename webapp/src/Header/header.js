@@ -41,7 +41,7 @@ function Header() {
   }, []);
 
   return (
-    <div className="header">
+    <div className="header" id="page_header">
       <div className="header__left">
         <div
           className="header__logo"

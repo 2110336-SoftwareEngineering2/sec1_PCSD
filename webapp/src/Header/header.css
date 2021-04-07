@@ -100,3 +100,14 @@
   align-items: center;
   margin: auto;
 }
+
+#page_header .btn-primary:focus {
+  border-color: rgba(215, 40, 40, 0.8);
+  box-shadow: 0px 0px 0px 2.5px rgba(215, 40, 40, 0.5);
+}
+#page_header .dropdown-item:hover {
+  background-color: rgba(255, 127, 80, 0.5);
+}
+#page_header .dropdown-item:active {
+  background-color: coral;
+}

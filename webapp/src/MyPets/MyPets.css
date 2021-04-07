@@ -55,6 +55,10 @@
 #my_pet_info input {
   margin: 0px;
 }
+#my_pet_info input::placeholder {
+  color: #dbc2b0;
+  text-transform: capitalize;
+}
 #my_pet_info input:focus,
 #my_pet_info textarea:focus {
   border-color: rgba(189, 86, 67, 0.8);

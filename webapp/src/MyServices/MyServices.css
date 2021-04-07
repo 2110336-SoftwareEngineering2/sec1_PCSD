@@ -47,6 +47,11 @@
 #service_info input {
   margin: 0px;
 }
+#service_info input::placeholder,
+#service_info textarea::placeholder {
+  color: #dbc2b0;
+  text-transform: capitalize;
+}
 #service_info input:focus,
 #service_info textarea:focus {
   border-color: rgba(189, 86, 67, 0.8);
