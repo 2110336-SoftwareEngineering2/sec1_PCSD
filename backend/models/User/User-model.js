@@ -12,6 +12,7 @@ const userSchema = new Schema({
   gender: String,
   password: String,
   role: String,
+  imgURL: String,
   banStatus: Boolean,
   balance: {
     type: mongoose.Decimal128,

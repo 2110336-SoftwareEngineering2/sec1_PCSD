@@ -6,7 +6,7 @@ const Payment = require("../models/User/Payment-model");
 
 const { authToken } = require("./Authentication");
 const { deleteCaretaker } = require("./Caretaker");
-const { deletePayment } = require("./Payment")
+const { deletePayment } = require("./Payment");
 const { deleteAllPet } = require("./Pet");
 
 const findUserByUsername = async (username) => {
@@ -46,6 +46,11 @@ const addUser = async (body, res) => {
     const newUser = new User({
       ...body,
     });
+    if (body.hasImg) {
+      newUser.imgURL =
+        "https://pcsdimage.s3-us-west-1.amazonaws.com/" + newUser.email;
+    }
+
     newUser.save((err) => {
       if (err) console.log(err);
     });
@@ -64,9 +69,9 @@ const deleteUserById = async (id) => {
   if (user) {
     try {
       const deletedUser = await User.deleteOne({ _id: id });
-      if(user.role === "caretaker") {
+      if (user.role === "caretaker") {
         deleteCaretaker(user.email);
-      } else if(user.role === "petowner") {
+      } else if (user.role === "petowner") {
         deleteAllPet(user.email);
       }
       deletePayment(user.email);
@@ -120,6 +125,10 @@ const editUser = async (req, res) => {
   }
 
   if (!user || user._id == id) {
+    if (req.body.hasImg) {
+      req.body.imgURL =
+        "https://pcsdimage.s3-us-west-1.amazonaws.com/" + req.body.email;
+    }
     var editedUser = await User.findByIdAndUpdate(id, req.body);
     if (editedUser) {
       editedUser = await User.findById(id);
@@ -133,7 +142,6 @@ const editUser = async (req, res) => {
 };
 
 module.exports = {
-
   getUser: async (_, res) => {
     await User.find({}).exec(function (err, result) {
       if (err) {
@@ -195,4 +203,26 @@ module.exports = {
 
   editUser,
 
+  updateAllImages: async (req, res) => {
+    const info = await User.updateMany(
+      {},
+      [
+        {
+          $set: {
+            imgURL: {
+              $concat: [
+                "https://pcsdimage.s3-us-west-1.amazonaws.com/",
+                "$email",
+              ],
+            },
+          },
+        },
+      ],
+      (err, res) => {
+        console.log("err:", err);
+        console.log("res:", res);
+      }
+    );
+    res.status(200).json(info);
+  },
 };
