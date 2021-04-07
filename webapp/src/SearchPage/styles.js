@@ -201,4 +201,14 @@ export default makeStyles((theme) => ({
     fontSize: "12px",
     opacity: "0.5",
   },
+  checkBox: {
+    "&.MuiCheckbox-root": {
+      color: "white",
+    },
+  },
+  sideCheckBox: {
+    "&.Mui-checked": {
+      color: "#872935",
+    },
+  },
 }));
