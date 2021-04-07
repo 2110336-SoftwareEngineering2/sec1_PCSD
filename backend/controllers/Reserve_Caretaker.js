@@ -109,12 +109,7 @@ const reserveCaretaker = async (req, res) => {
 };
 
 const removeReserveCaretaker = async (req, res) => {
-  // const user = checkAuth.authToken(req, res);
-  // const problem = user.nullToken | user.tokenError;
-    
-  // if (!problem && user.role === "user") {
   const reserveId = req.params.id;
-  console.log(reserveId)
   await Reserve.findOneAndDelete(
     {
       _id: reserveId,

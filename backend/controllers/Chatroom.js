@@ -137,11 +137,12 @@ const readMessage = async (id, email) => {
     return true;
 }
 
-const updateUnreadMessage = async (roomId) => {
-    const query = {_id: roomId};
+const updateUnreadMessage = async (roomId, email) => {
+    const query = {_id: roomId, "unreadMessages.email": email};
     const updateDoc = {
-        "$inc": {"unreadMessages.$[].unreadMessage": 1}
+        "$inc": {"unreadMessages.$.unreadMessage": 1}
     };
+    console.log(email)
     try {
         const result = await Chatrooms.updateMany(query, updateDoc);
         return;
@@ -151,23 +152,14 @@ const updateUnreadMessage = async (roomId) => {
 }
 
 const getUnreadMessage = async (req, res) => {
-    // const query = {};
     const query = {
         "_id": req.params.id
-        // "unreadMessages": {"$elemMatch": {"email": req.params.email}}
     }
     await Chatrooms.findOne(query, (err, result) => {
         if (err) {
             res.status(400).send(err);
         } else {
-            // console.log(result)
             var found = null;
-            // var found  = result.unreadMessages.forEach((elem) => {
-            //     if (elem.email === req.params.email) {
-            //         // console.log(elem)
-            //         return elem;
-            //     }
-            // });
             for (var i=0; i<(result.unreadMessages).length; i++) {
                 if ((result.unreadMessages)[i].email === req.params.email) {
                     found = (result.unreadMessages)[i];
@@ -190,7 +182,6 @@ const getSumUnreadMessage = async (email) => {
     };
     const result = await Chatrooms.find(query, (err, result) => {
         if (err) {
-            console.log(err);
             return null;
         } else {
             return result;
@@ -229,8 +220,8 @@ module.exports = {
         await readMessage(id, email);
     },
 
-    updateUnreadMessage: async (roomId) => {
-        await updateUnreadMessage(roomId);
+    updateUnreadMessage: async (roomId, email) => {
+        await updateUnreadMessage(roomId, email);
     },
 
     getUnreadMessage: async (req, res) => {

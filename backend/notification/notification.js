@@ -1,12 +1,12 @@
-const socket = require("socket.io");
+// const socket = require("socket.io");
 const NotificationLibs = require("./libary");
 
 
 const notificationServer = {
-    listen (server) {
-        io = socket(server, {
-            cors: "*"
-        });
+    listen (io) {
+        // io = socket(server, {
+        //     cors: "*"
+        // });
 
         io.on("connection", async (socket) => {
             const user = socket.handshake.query.user;

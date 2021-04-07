@@ -75,7 +75,7 @@ router.post("/comment/caretaker", (req, res) => {
   CaretakerController.comment(req.body, res);
 });
 
-router.get("/comment/caretaker", (req, res) => {
+router.post("/comment/caretaker/get", (req, res) => {
   CaretakerController.get_comment(req.body, res);
 });
 
