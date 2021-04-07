@@ -64,7 +64,7 @@ function Chatbox({roomId}){
     useEffect(async() => {
         await getChatRoomDetail();
         return () => {
-            getName();
+            //getName();
             setMessage([]);
         }
     }, [roomId])
@@ -143,14 +143,16 @@ function Chatbox({roomId}){
             }
             else {
                 //return <h1> <getName email = {members[0]} /> </h1>
-                Inter = members[0];
-        }}
-        
+                var Inter = members[0];
+        }
+        //console.log(Inter)
+        }
+        setInter(Inter)
         axios
         .post("http://localhost:4000/user/email", {email: Inter})
         .then((res) => {
             //console.log(res.data.firstname)
-            setInter(Inter)
+            
             setInteractor(res.data.firstname + " " + res.data.lastname)
             return res.data;
             })
@@ -162,7 +164,7 @@ function Chatbox({roomId}){
     const Chat_Title = () =>{
         if({roomId}!=null){
             //console.log(members);
-            //getName()
+            getName()
             return (<div className = "Interacter">
                         <Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + inter} />
                         <div className = "Interacter2">{interactor}</div>

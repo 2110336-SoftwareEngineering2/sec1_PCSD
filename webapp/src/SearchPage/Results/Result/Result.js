@@ -89,7 +89,7 @@ const Result = (props) => {
           />
           {props.userInfo.rate_point_av >= 0 ? (
             <Typography className={classes.rating} variant="h6">
-              Review {props.userInfo.rate_point_av}/5 (
+              Review {Math.round(props.userInfo.rate_point_av*100)/100}/5 (
               {props.userInfo.caretaker.rate_point.rate_count}){" "}
             </Typography>
           ) : (
