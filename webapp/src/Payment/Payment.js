@@ -15,7 +15,7 @@ function Payment() {
   const receiverEmail = reserveData.caretaker;
   const socketRef = useRef();
   const amount = (reserveData.endDate - reserveData.startDate) * reserveData.rate / (3600 * 1000);
-  const notiEndPoint = "http://localhost:5000";
+  const notiEndPoint = "http://localhost:4000";
   reserveData["amount"] = amount;
   
   useEffect(async () => {

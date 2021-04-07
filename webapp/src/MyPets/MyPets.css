@@ -207,3 +207,11 @@
   border-color: #872935;
   box-shadow: 0px 0px 5px 0px rgba(51, 2, 2, 0.76) inset;
 }
+
+#my_pet_info #pet_summary .card-body .badge-secondary.male {
+  background: rgb(34, 162, 249, 0.8);
+}
+
+#my_pet_info #pet_summary .card-body .badge-secondary.female {
+  background: rgb(255, 89, 189, 0.8);
+}

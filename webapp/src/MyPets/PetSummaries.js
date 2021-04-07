@@ -57,7 +57,7 @@ function PetBanner({ pet, editPet, deletePet }) {
           <Card.Body>
             <Card.Title>
               {pet.petName}&nbsp;
-              <Badge pill variant="secondary">
+              <Badge pill variant="secondary" className={pet.gender}>
                 {pet.gender === "male" ? "♂" : "♀"}
               </Badge>
             </Card.Title>

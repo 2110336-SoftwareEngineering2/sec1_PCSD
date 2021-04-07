@@ -10,7 +10,7 @@ import Petowner from "./Register/Petowner";
 import ChatPage from "./Chat/chat";
 import SearchPage from "./SearchPage/SearchPage";
 import ReservePage from "./ReserveCaretaker";
-import Test from "./test/Test";
+import History_Card from "./History_Card/History_Card";
 import SearchResult from "./SearchPage/SearchResult";
 import { RegisterContext, UserContext } from "./context/MyContext";
 import AuthRoute from "./util/AuthRoute";
@@ -50,7 +50,7 @@ function Routes() {
         <AuthRoute path="/banpage" component={BanPage} />
         
         <AuthRoute path="/user/:username" exact component={UserPage} />
-        <AuthRoute path="/test" exact component={Test} />
+        <AuthRoute path="/historycard" exact component={History_Card} />
 
         <AuthRoute path="/profile" exact component={UserProfile} />
         <AuthRoute path="/pets" exact component={MyPets} />

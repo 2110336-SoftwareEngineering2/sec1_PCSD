@@ -1,9 +1,9 @@
-.test {
+.History_Card {
     background-color: #F1F1F1;
     height: 100vh;
   
 }
-.test h1 {
+.History_Card h1 {
     text-align: center;
 }
 .DONE {
@@ -21,11 +21,11 @@
 .ACCEPTED {
     background-color: rgb(145, 152, 255);
 }
-.test .card {
+.History_Card .card {
     border-radius: 15px;
 }
 
-.test .cardtitle {
+.History_Card .cardtitle {
     background-color:#872935;
     border-radius: 15px 15px 0px 0px;
     border-color: #872935;
@@ -33,94 +33,94 @@
     color: white;
     
 }
-.test #cardtitle #delete {
+.History_Card #cardtitle #delete {
     font-weight: bold;
     font-size: 20px;
     color: gray;
     cursor: pointer;
 }
-.test #cardtitle #delete:hover {
+.History_Card #cardtitle #delete:hover {
     color: white;
 }
-.test .modal-title {
+.History_Card .modal-title {
     font-size: 20px;
     font-weight: bold;
     margin-left: auto;
 }
-.test .cardtitle .modal-header {
+.History_Card .cardtitle .modal-header {
     text-align: center;
     border: none;
    
 }
-.test .power {
+.History_Card .power {
     margin: 15px 0px 20px 0px;
 }
-.test .Pname {
+.History_Card .Pname {
     color: #363636;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
-.test .Cname {
+.History_Card .Cname {
     color: #363636;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
-.test .Service {
+.History_Card .Service {
     color: #363636;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
-.test .date {
+.History_Card .date {
     font-weight: bold;
     display: flex;
     align-items: center;
 }
-.test .Amount {
+.History_Card .Amount {
     font-weight: bold;
     display: flex;
     align-items: center;
 }
-.test .pett {
+.History_Card .pett {
     font-weight: bold;
     display: flex;
     align-items: center;
 }
-.test .cardtitle .modal-header span {
+.History_Card .cardtitle .modal-header span {
     color: white;
 }
-.test .Cardd .card-deck {
+.History_Card .Cardd .card-deck {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
-.test .Cardd {
+.History_Card .Cardd {
     max-height: 650px;
     min-width: none;
     background-color: #F1F1F1;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
-.test .Cardd > .card-deck > .card {
+.History_Card .Cardd > .card-deck > .card {
  flex: none;
  margin: 30px auto;
 }
-.test .cardstatus {
+.History_Card .cardstatus {
     align-items: center;
     margin-left: 2px;
 }
 
-.test .watingbutton{
+.History_Card .watingbutton{
     display: flex;
     margin: auto;
 }
-.test .watingcanbutton {
+.History_Card .watingcanbutton {
     margin-left: 90px;
 }
 
-.test .acceptedbutton {
+.History_Card .acceptedbutton {
     margin-left: 140px;
 }
 .cardstatus .row {
