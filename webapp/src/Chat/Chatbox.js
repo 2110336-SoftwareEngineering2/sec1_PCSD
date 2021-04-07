@@ -64,6 +64,7 @@ function Chatbox({roomId}){
     useEffect(async() => {
         await getChatRoomDetail();
         return () => {
+            getName();
             setMessage([]);
         }
     }, [roomId])
@@ -158,9 +159,9 @@ function Chatbox({roomId}){
 
     }
     const Chat_Title = () =>{
-        if({roomId}!=email){
+        if({roomId}!=null){
             //console.log(members);
-            getName()
+            //getName()
             return (<div className = "Interacter">
                         <Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + inter} />
                         <div className = "Interacter2">{interactor}</div>
