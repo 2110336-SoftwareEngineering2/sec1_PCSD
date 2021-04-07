@@ -25,6 +25,19 @@ const authToken = (token) => {
   });
 };
 
+const getTotalUnread = async (email) => {
+    const result = await ChatController.getSumUnreadMessage(email);
+    var sum = 0;
+    result.forEach(elem => {
+        elem.unreadMessages.forEach(x => {
+            if (x.email === email) {
+                sum += x.unreadMessage
+            }
+        });
+    })
+    return sum;
+}
+
 const chatServer = {
     listen (io) {
 
@@ -47,12 +60,15 @@ const chatServer = {
                     message: data.message,
                 }
                 var unreadMessage = data.unreadMessage;
+                var receiver = data.receiver;
                 if (checkToken.status == true) {
                     try {
                         const res = await Chatrooms.findOneAndUpdate({_id: room}, {$push: {messages: message}}, { "new": true, "upsert": true });
-                        const err = await ChatController.updateUnreadMessage(room);
+                        const err = await ChatController.updateUnreadMessage(room, receiver);
                         if (err) throw err;
                         io.to(room).emit('new-message-status', { status: checkToken.status, message: data.message, user: data.user, email: data.email, time: data.time});
+                        const sum = await getTotalUnread(receiver);
+                        io.to(receiver).emit('get-sum-unread', {sum : sum});
                         // io.to(room).emit('new-unread-message', {unreadMessage: unreadMessage});
                     } catch (err) {
                         io.to(room).emit('exception', { errMessage: err });
@@ -76,22 +92,16 @@ const chatServer = {
                 // console.log(id + " " + email)
                 try {
                     const check = await ChatController.readMessage(id, email);
+                    const sum = await getTotalUnread(email);
                     io.to(room).emit('new-unread-message', {unreadMessage: 0, email: email});
+                    io.to(email).emit('get-sum-unread', {sum: sum});
                 } catch (err) {
                     io.to(room).emit('exception', { errMessage: 'Read socket error.'});
                 }
             });
 
             socket.on('get-sum-unread', async (email) => {
-                const result = await ChatController.getSumUnreadMessage(email);
-                var sum = 0;
-                result.forEach(elem => {
-                    elem.unreadMessages.forEach(x => {
-                        if (x.email === email) {
-                            sum += x.unreadMessage
-                        }
-                    });
-                })
+                const sum = await getTotalUnread(email);
                 io.to(room).emit('get-sum-unread', {sum: sum});
             });
 
