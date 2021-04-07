@@ -3,7 +3,7 @@ import { Router, Switch, Route } from "react-router-dom";
 
 import history from "./history";
 import BanPage from "./banpage";
-import LoginPage from "./LoginPage";
+//import LoginPage from "./LoginPage";
 import Home from "./Home/Home";
 import ChatPage from "./Chat/chat";
 import SearchPage from "./SearchPage/SearchPage";
@@ -25,7 +25,7 @@ import UserProfile from "./UserProfile/UserProfile";
 import MyPets from "./MyPets/MyPets";
 import MyServices from "./MyServices/MyServices";
 
-import NewLogin from "./UserLogin/LoginPage";
+import LoginPage from "./UserLogin/LoginPage";
 
 function Routes() {
   const context = useContext(RegisterContext);
@@ -38,11 +38,10 @@ function Routes() {
         <Route
           path="/"
           exact
-          // component={!userContext.user ? LoginPage : Home}
           component={cookie.accessToken !== undefined ? Home : LoginPage}
         />
 
-        <Route path="/newlogin" exact component={NewLogin} />
+        <Route path="/newlogin" exact component={LoginPage} />
         <Route path="/user_register" exact component={RegisterProfile} />
 
         <AuthRoute path="/searchpage" exact component={SearchPage} />

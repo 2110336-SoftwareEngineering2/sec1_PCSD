@@ -5,7 +5,7 @@ import { UserContext } from "../context/MyContext";
 import history from "../history";
 import axios from "axios";
 
-function LoginForm({}) {
+function LoginForm() {
   const { login } = useContext(UserContext);
 
   const [submitted, setSubmitted] = useState(false);
@@ -37,17 +37,18 @@ function LoginForm({}) {
       <fieldset disabled={submitted}>
         <Form.Control
           type="email"
+          id="email"
           name="email"
           placeholder="Email Address"
           onChange={onChange}
         />
         <Form.Control
           type="password"
+          id="password"
           name="password"
           placeholder="Password"
           onChange={onChange}
         />
-        {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : null}
         <Button type="submit">
           {submitted ? (
             <Spinner
@@ -60,7 +61,7 @@ function LoginForm({}) {
           ) : null}
           {submitted ? " Loading..." : "Login"}
         </Button>
-        
+        {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : null}
       </fieldset>
     </Form>
   );
