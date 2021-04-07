@@ -25,7 +25,5 @@
 }
 
 #my_noti .MuiBadge-badge {
-  height: 15px;
-  min-width: 15px;
   background-color: rgba(255, 0, 0, 0.8);
 }
