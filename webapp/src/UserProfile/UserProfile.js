@@ -16,7 +16,7 @@ function UserProfile() {
   const [imageReady, setImageReady] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [validUsername, setValidUsername] = useState(null);
+  const [validUsername, setValidUsername] = useState(true);
 
   const [info, setInfo] = useState({
     ...user,
