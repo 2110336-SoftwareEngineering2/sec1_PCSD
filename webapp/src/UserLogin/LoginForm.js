@@ -1,37 +1,69 @@
-import React, { useState } from "react";
-import { Form, Col } from "react-bootstrap";
-function ServiceForm({ input, updateInput, submitForm }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [modified, setModified] = useState(false);
+import React, { useState, useContext } from "react";
+import { Form, Button, Alert, Spinner } from "react-bootstrap";
 
-  function modifiedInput({ target: { name, value } }) {
-    if (["type", "pet_type", "available_day"].includes(name)) {
-      const vals = input[name].includes(value)
-        ? input[name].filter((e) => {
-            return e !== value;
-          })
-        : [...input[name], value];
-      updateInput({ ...input, [name]: vals });
-    } else updateInput({ ...input, [name]: value });
-    setModified(true);
-  }
+import { UserContext } from "../context/MyContext";
+import history from "../history";
+import axios from "axios";
+
+function LoginForm({}) {
+  const { login } = useContext(UserContext);
+
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [info, setInfo] = useState({ email: "", password: "" });
 
   function handleSubmit(event) {
     event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity()) {
-      setSubmitted(true);
-      submitForm();
-    }
+    setSubmitted(true);
+    axios
+      .post("http://localhost:4000/auth/login", info)
+      .then((res) => {
+        login(res.data);
+        history.push({ pathname: "/" });
+      })
+      .catch((err) => {
+        setErrorMessage(err.response.data.error);
+        setSubmitted(false);
+      });
+  }
+
+  function onChange({ target: { name, value } }) {
+    setInfo({ ...info, [name]: value });
   }
 
   return (
-    <Form validated={modified} onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} style={{ width: "320px" }}>
       <fieldset disabled={submitted}>
+        <Form.Control
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          onChange={onChange}
+        />
+        <Form.Control
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={onChange}
+        />
+        {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : null}
+        <Button type="submit">
+          {submitted ? (
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+          ) : null}
+          {submitted ? " Loading..." : "Login"}
+        </Button>
         
       </fieldset>
     </Form>
   );
 }
 
-export default ServiceForm;
+export default LoginForm;
