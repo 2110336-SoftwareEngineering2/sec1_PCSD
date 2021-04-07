@@ -10,7 +10,8 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { UserContext } from "./context/MyContext";
 import Rating from '@material-ui/lab/Rating';
-
+import Alert from 'react-bootstrap/Alert'
+import Button from 'react-bootstrap/Button'
 function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
     const userEmail = user.email;
@@ -31,7 +32,7 @@ function ReserveCaretaker(props) {
     const [clickReview, setClickReview] = useState({clicked: false});
     const [rating, setRating] = useState({rating: 0, count: 0});
     const endPoint = "http://localhost:4000";
-    
+    const [show, setShow] = useState(false);
     useEffect(() => {
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
@@ -221,13 +222,20 @@ function ReserveCaretaker(props) {
                         <div className="col--12 reserve_button">
                             <button className="RButton" onClick = {() => onclick()}  >Chat</button>
                             <button className="RButton" onClick = {() => {
+                                 if (user.role == "caretaker") setShow(true);
+                                 else {
+                                 setShow(false);
                                     if (!clickReview.clicked) {
                                         setClickReview({clicked: true});
                                     } else {
                                         setClickReview({clicked: false});
                                     }
+                                }
                                 }}>Review</button>
                             <button className="RButton" onClick={() => {
+                                if (user.role == "caretaker") setShow(true);
+                                else {
+                                setShow(false);
                                 saveToCookies();
                                 axios.post("http://localhost:4000/user/caretaker/find", {caretaker: caretaker})
                                 .then((res) => {
@@ -236,9 +244,24 @@ function ReserveCaretaker(props) {
                                 .catch((err) => {
                                   console.log(err);
                                 })
+                                }
                                 }}>Reserve</button>
                         </div>
                     </div>
+                    <div className="alert">
+                    <Alert show={show} variant="danger">
+        <Alert.Heading>Wait!!! You're not a Petowner!</Alert.Heading>
+        <p>
+          You don't have a permission to do this action. Please sign in as a Petowner.
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setShow(false)} variant="outline-danger">
+            Close
+          </Button>
+        </div>
+      </Alert>
+      </div>
                     {!clickReview.clicked ? null : 
                     <div>
                         <form onSubmit={onSubmit}>
