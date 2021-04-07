@@ -16,11 +16,15 @@ function UserLogin(props) {
     email: "",
     password: "",
   });
-  const [showError, setShowError] = useState(false);
+  const [showError, setShowError] = useState({
+    errorMessage: null,
+  });
 
   const onChange = (e) => {
     setValue({ ...values, [e.target.name]: e.target.value });
-    setShowError(false);
+    setShowError({
+      errorMessage: null,
+    });
   };
 
   const onSubmit = (e) => {
@@ -39,8 +43,7 @@ function UserLogin(props) {
         // console.log(res.data);
       })
       .catch((err) => {
-        console.log(err)
-        setShowError(true);
+        setShowError({errorMessage: err.response.data.error});
       });
   };
 
@@ -82,9 +85,9 @@ function UserLogin(props) {
                 <a href="#"> Forgotten password? </a>
               </label>
             </div>
-            {showError ? 
+            {showError.errorMessage ? 
               (<div className="login-error">
-                <Alert variant="danger">Invalid Email or Password</Alert>
+                <Alert variant="danger">{showError.errorMessage}</Alert>
               </div>) : null
             }
           </div>
