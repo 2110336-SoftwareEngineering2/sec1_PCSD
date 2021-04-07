@@ -11,78 +11,109 @@ import useStyles from "./styles";
 
 const SideSearchBox = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(props.data ? props.data.value : {
-    minrate: "",
-    maxrate: "",
-    type: "",
-    date: {
-      start: "",
-      end: ""
-    },
-    address: "",
-  });
-  const [pet_type, setPetType] = React.useState(props.data && props.data.pet_type ? {
-    dog: props.data.pet_type.find(petType => petType == "dog") ? true : false,
-    cat: props.data.pet_type.find(petType => petType == "cat") ? true : false,
-    rabbit: props.data.pet_type.find(petType => petType == "rabbit") ? true : false,
-    bird: props.data.pet_type.find(petType => petType == "bird") ? true : false,
-    hamster: props.data.pet_type.find(petType => petType == "hamster") ? true : false,
-    turtle: props.data.pet_type.find(petType => petType == "turtle") ? true : false
-  } : {
-    dog: false,
-    cat: false,
-    rabbit: false,
-    bird: false,
-    hamster: false,
-    turtle: false,
-  })
+  const [value, setValue] = React.useState(
+    props.data
+      ? props.data.value
+      : {
+          minrate: "",
+          maxrate: "",
+          type: "",
+          date: {
+            start: "",
+            end: "",
+          },
+          address: "",
+        }
+  );
+  const [pet_type, setPetType] = React.useState(
+    props.data && props.data.pet_type
+      ? {
+          dog: props.data.pet_type.find((petType) => petType == "dog")
+            ? true
+            : false,
+          cat: props.data.pet_type.find((petType) => petType == "cat")
+            ? true
+            : false,
+          rabbit: props.data.pet_type.find((petType) => petType == "rabbit")
+            ? true
+            : false,
+          bird: props.data.pet_type.find((petType) => petType == "bird")
+            ? true
+            : false,
+          hamster: props.data.pet_type.find((petType) => petType == "hamster")
+            ? true
+            : false,
+          turtle: props.data.pet_type.find((petType) => petType == "turtle")
+            ? true
+            : false,
+        }
+      : {
+          dog: false,
+          cat: false,
+          rabbit: false,
+          bird: false,
+          hamster: false,
+          turtle: false,
+        }
+  );
 
   useEffect(() => {
     const petChecker = document.getElementsByName("checkedA");
 
-    if(props.data && props.data.pet_type) {
-      for(var i=0; i<petChecker.length; i++) {
-        const found = props.data.pet_type.find(petType => petType == petChecker[i].value)
-        console.log(petChecker[i].value+" "+found)
-        if(found != undefined) {
+    if (props.data && props.data.pet_type) {
+      for (var i = 0; i < petChecker.length; i++) {
+        const found = props.data.pet_type.find(
+          (petType) => petType == petChecker[i].value
+        );
+        console.log(petChecker[i].value + " " + found);
+        if (found != undefined) {
           petChecker[i].checked = true;
         }
       }
     }
-  }, [])
+  }, []);
 
   const onChange = (event) => {
-    setValue({...value, [event.target.name]: event.target.value})
-  }
-  
+    setValue({ ...value, [event.target.name]: event.target.value });
+  };
+
   const getSearchData = () => {
-    const minmax = [parseInt((value.minrate != "" ? value.minrate : 0)), parseInt((value.maxrate != "" ? value.maxrate : 0))];
+    const minmax = [
+      parseInt(value.minrate != "" ? value.minrate : 0),
+      parseInt(value.maxrate != "" ? value.maxrate : 0),
+    ];
     const pet_type = getPetType();
     const data = {
       minrate: minmax[0] > 0 ? minmax[0] : null,
-      maxrate: minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
+      maxrate:
+        minmax[1] > 0 ? (minmax[1] > minmax[0] ? minmax[1] : null) : null,
       pet_type: pet_type,
       type: value.type !== "" ? value.type : null,
-      date: (value.date.start !== "" && value.date.end !== "") ? value.date : null,
-      address: (value.address !== "") ? value.address : null
-    }
+      date:
+        value.date.start !== "" && value.date.end !== "" ? value.date : null,
+      address: value.address !== "" ? value.address : null,
+    };
     return data;
-  }
+  };
 
   const searchHandle = () => {
     const data = getSearchData();
-    axios.post("http://localhost:4000/user/caretaker/search", data)
-    .then((res) => {
-      props.setState(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
+    axios
+      .post("http://localhost:4000/user/caretaker/search", data)
+      .then((res) => {
+        props.setState(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const changePetType = (event) => {
-    setPetType({...pet_type, [event.target.value]: !pet_type[event.target.value]})
-  }
+    setPetType({
+      ...pet_type,
+      [event.target.value]: !pet_type[event.target.value],
+    });
+  };
 
   const getToday = () => {
     var today = new Date();
@@ -95,17 +126,17 @@ const SideSearchBox = (props) => {
   };
 
   const getPetType = () => {
-    const pet_type = []
-    const petChecker = document.getElementsByName("checkedA")
+    const pet_type = [];
+    const petChecker = document.getElementsByName("checkedA");
 
-    for(var i = 0; i<petChecker.length; i++) {
-      if(petChecker[i].checked == true) {
+    for (var i = 0; i < petChecker.length; i++) {
+      if (petChecker[i].checked == true) {
         pet_type.push(petChecker[i].value);
       }
     }
 
-    return pet_type.length > 0 ? pet_type : null
-  }
+    return pet_type.length > 0 ? pet_type : null;
+  };
 
   const resetHandle = () => {
     setValue({
@@ -114,10 +145,10 @@ const SideSearchBox = (props) => {
       type: "",
       date: {
         start: "",
-        end: ""
+        end: "",
       },
       address: "",
-    })
+    });
     setPetType({
       dog: false,
       cat: false,
@@ -125,11 +156,13 @@ const SideSearchBox = (props) => {
       bird: false,
       hamster: false,
       turtle: false,
-    })
-  }
+    });
+  };
 
   return (
     <div className={classes.sideSearchBox}>
+      <div style={{ height: "6px" }}></div>
+
       <Typography className={classes.header} variant="h4">
         Service Type
       </Typography>
@@ -148,10 +181,18 @@ const SideSearchBox = (props) => {
           name="type"
           onChange={onChange}
         >
-          <option value="housesitting" selected={value.type === "housesitting"}>House Siting</option>
-          <option value="boarding" selected={value.type === "boarding"}>Boarding</option>
-          <option value="daycare" selected={value.type === "daycare"}>Day Care</option>
-          <option value="" selected={value.type === ""}>---</option>
+          <option value="housesitting" selected={value.type === "housesitting"}>
+            House Siting
+          </option>
+          <option value="boarding" selected={value.type === "boarding"}>
+            Boarding
+          </option>
+          <option value="daycare" selected={value.type === "daycare"}>
+            Day Care
+          </option>
+          <option value="" selected={value.type === ""}>
+            ---
+          </option>
         </Select>
       </FormControl>
       <Typography className={classes.header} variant="h4">
@@ -199,6 +240,7 @@ const SideSearchBox = (props) => {
           value={value.maxrate}
           onChange={onChange}
         />
+        <h3 style={{ margin: "10px 0px 0px 10px", opacity: "0.5" }}>&#3647;</h3>
       </div>
       <Typography className={classes.header} variant="h4">
         Date
@@ -207,6 +249,7 @@ const SideSearchBox = (props) => {
         <TextField
           className={classes.sideDateInput}
           inputProps={{
+            style: { opacity: 0.5 },
             classes: {
               input: classes.datePlaceHolder,
             },
@@ -217,10 +260,16 @@ const SideSearchBox = (props) => {
           size="small"
           value={value.date.start}
           onChange={(event) => {
-            if(new Date(event.target.value) > new Date(value.date.end)) {
-              setValue({...value, date: {start: event.target.value, end: ""}})
+            if (new Date(event.target.value) > new Date(value.date.end)) {
+              setValue({
+                ...value,
+                date: { start: event.target.value, end: "" },
+              });
             } else {
-              setValue({...value, date: {start: event.target.value, end: value.date.end}})
+              setValue({
+                ...value,
+                date: { start: event.target.value, end: value.date.end },
+              });
             }
           }}
         />
@@ -236,17 +285,21 @@ const SideSearchBox = (props) => {
         <TextField
           className={classes.sideDateInput}
           inputProps={{
+            style: { opacity: 0.5 },
             classes: {
               input: classes.datePlaceHolder,
             },
-            min: (value.date.start === "") ? getToday() : value.date.start
+            min: value.date.start === "" ? getToday() : value.date.start,
           }}
           type="date"
           variant="outlined"
           size="small"
           value={value.date.end}
           onChange={(event) => {
-            setValue({...value, date: {start: value.date.start, end: event.target.value}})
+            setValue({
+              ...value,
+              date: { start: value.date.start, end: event.target.value },
+            });
           }}
         />
       </div>
@@ -256,42 +309,98 @@ const SideSearchBox = (props) => {
       <FormGroup row>
         <FormControlLabel
           className={classes.firstColumnFormControlLabel}
-          control={<Checkbox name="checkedA" color="primary" value="dog" checked={pet_type.dog} onChange={changePetType} />}
+          control={
+            <Checkbox
+              name="checkedA"
+              color="primary"
+              value="dog"
+              checked={pet_type.dog}
+              onChange={changePetType}
+            />
+          }
           label="Dog"
         />
         <FormControlLabel
           className={classes.formControlLabel}
-          control={<Checkbox name="checkedA" color="primary" value="cat" checked={pet_type.cat} onChange={changePetType} />}
+          control={
+            <Checkbox
+              name="checkedA"
+              color="primary"
+              value="cat"
+              checked={pet_type.cat}
+              onChange={changePetType}
+            />
+          }
           label="Cat"
         />
         <FormControlLabel
           className={classes.formControlLabel}
-          control={<Checkbox name="checkedA" color="primary" value="rabbit" checked={pet_type.rabbit} onChange={changePetType} />}
+          control={
+            <Checkbox
+              name="checkedA"
+              color="primary"
+              value="rabbit"
+              checked={pet_type.rabbit}
+              onChange={changePetType}
+            />
+          }
           label="Rabbit"
         />
         <FormControlLabel
           className={classes.firstColumnFormControlLabel}
-          control={<Checkbox name="checkedA" color="primary" value="bird" checked={pet_type.bird} onChange={changePetType} />}
+          control={
+            <Checkbox
+              name="checkedA"
+              color="primary"
+              value="bird"
+              checked={pet_type.bird}
+              onChange={changePetType}
+            />
+          }
           label="Bird"
         />
         <FormControlLabel
           //   className={classes.formControlLabel}
-          control={<Checkbox name="checkedA" color="primary" value="hamster" checked={pet_type.hamster} onChange={changePetType} />}
+          control={
+            <Checkbox
+              name="checkedA"
+              color="primary"
+              value="hamster"
+              checked={pet_type.hamster}
+              onChange={changePetType}
+            />
+          }
           label="Hamster"
         />
         <FormControlLabel
           className={classes.formControlLabel}
-          control={<Checkbox name="checkedA" color="primary" value="turtle" checked={pet_type.turtle} onChange={changePetType} />}
+          control={
+            <Checkbox
+              name="checkedA"
+              color="primary"
+              value="turtle"
+              checked={pet_type.turtle}
+              onChange={changePetType}
+            />
+          }
           label="Turtle"
         />
       </FormGroup>
       <div className="row">
-      <Button className={classes.sideButton} variant="contained" onClick={searchHandle}>
-        Search
-      </Button>
-      <Button className={classes.sideButton} variant="contained" onClick={resetHandle}>
-        Reset
-      </Button>
+        <Button
+          className={classes.sideButton}
+          variant="contained"
+          onClick={searchHandle}
+        >
+          Search
+        </Button>
+        <Button
+          className={classes.sideButton}
+          variant="contained"
+          onClick={resetHandle}
+        >
+          Reset
+        </Button>
       </div>
     </div>
   );

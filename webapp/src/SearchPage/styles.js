@@ -150,7 +150,7 @@ export default makeStyles((theme) => ({
   sideSearchBox: {
     margin: "10px",
     width: "350px",
-    height: "630px",
+    height: "650px",
     position: "sticky",
     top: "40px",
     backgroundColor: "white",
@@ -182,7 +182,7 @@ export default makeStyles((theme) => ({
     marginLeft: "5px",
   },
   sideButton: {
-    backgroundColor: "#bd6a43",
+    backgroundColor: "#b1767d",
     color: "white",
     fontSize: "20px",
     margin: "10px 20px 50px 35px",
@@ -201,6 +201,7 @@ export default makeStyles((theme) => ({
   },
   sideDateInput: {
     width: "150px",
+    transparent: "0%",
   },
   datePlaceHolder: {
     fontSize: "12px",

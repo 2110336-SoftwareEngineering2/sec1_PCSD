@@ -37,14 +37,14 @@ function ReserveCaretaker(props) {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        // axios
-        // .get("http://localhost:4000/user/comment/caretaker", {caretaker: caretaker})
-        // .then((res) => {
-        //     console.log(res);
-        //     })
-        // .catch((err) => {
-        //     console.log(err);
-        //     });
+        axios
+        .post("http://localhost:4000/user/comment/caretaker/get", { caretaker: caretaker })
+        .then((res) => {
+            console.log(res);
+            })
+        .catch((err) => {
+            console.log(err);
+            });
 
         axios
         .post("http://localhost:4000/user/email", {email: caretaker})
@@ -285,7 +285,9 @@ function ReserveCaretaker(props) {
                     {!clickReview.clicked ? null : 
                     <div className="row">
                         <div className="col--6">
-                            {test.map((num) => <ReserveComment val={num}/>)}
+                            <div className="show-comment">
+                                {test.map((num) => <ReserveComment val={num}/>)}
+                            </div>
                         </div>
                         <div className="col--6">
                             <form onSubmit={onSubmit}>
@@ -297,12 +299,12 @@ function ReserveCaretaker(props) {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col--12 comment_section">
-                                        <textarea placeholder="Comments..." value={commentVal} onChange={(event) => {
+                                    <form className="col--12 comment_section">
+                                        <textarea required placeholder="Comments..." value={commentVal} onChange={(event) => {
                                             setCommentVal(event.target.value);
                                         }}/><br/>
                                         <button className="RButton" type="submit">Submit</button>
-                                    </div>
+                                    </form>
                                 </div>
                             </form>
                         </div>
