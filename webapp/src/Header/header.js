@@ -4,7 +4,7 @@ import "./header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MailIcon from "@material-ui/icons/Mail";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, Badge, IconButton } from "@material-ui/core";
 import history from "./../history";
 import { UserContext, ChatContext } from "../context/MyContext";
 import { Dropdown, DropdownButton } from "react-bootstrap";
@@ -80,12 +80,13 @@ function Header() {
       <div className="header__right">
         <NotificationBtn />
         <IconButton>
-          <MailIcon
-            onClick={() => {
-              history.push({ pathname: "/chat" });
-            }}
-          />
-          {sumUnread === 0 ? null : `(${sumUnread})`}
+          <Badge badgeContent={sumUnread} color="primary">
+            <MailIcon
+              onClick={() => {
+                history.push({ pathname: "/chat" });
+              }}
+            />
+          </Badge>
         </IconButton>
         <hr />
         <div className="header__profile">
