@@ -4,7 +4,7 @@ import { Avatar } from "@material-ui/core";
 import { UserContext } from "../context/MyContext";
 
 import "./AddMoney.css";
-import Alert from '@material-ui/lab/Alert';
+
 function Addmoney() {
   const { user, login } = useContext(UserContext);
 

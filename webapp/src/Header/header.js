@@ -13,20 +13,6 @@ import socketIOClient from "socket.io-client";
 import { useCookies } from "react-cookie";
 import NotificationBtn from "../Notification/NotificationBtn";
 
-// const getHash = (str, algo = "SHA-256") => {
-//     let strBuf = new TextEncoder('utf-8').encode(str);
-//     return crypto.subtle.digest(algo, strBuf)
-//       .then(hash => {
-//         window.hash = hash;
-//         let result = '';
-//         const view = new DataView(hash);
-//         for (let i = 0; i < hash.byteLength; i += 4) {
-//           result += ('00000000' + view.getUint32(i).toString(16)).slice(-8);
-//         }
-//         return result;
-//     });
-// }
-
 function Header() {
   const { user, logout } = useContext(UserContext);
   const [sumUnread, setSumUnread] = useState(0);
@@ -42,7 +28,6 @@ function Header() {
 
   useEffect(() => {
     socketRef.current.on("get-sum-unread", (res) => {
-      console.log(res)
       setSumUnread(res.sum);
     });
 

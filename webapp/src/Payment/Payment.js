@@ -7,7 +7,7 @@ import { UserContext } from "../context/MyContext";
 import { sentNotification } from "../Notification/NotificationUtils";
 import history from "./../history";
 import "./Payment.css";
-// function Payment({receiverEmail, amount}) {
+
 function Payment() {
   const { user } = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
@@ -21,7 +21,6 @@ function Payment() {
   reserveData["amount"] = amount;
 
   useEffect(async () => {
-    // console.log(reserveData)
     socketRef.current = socketIOClient(notiEndPoint, {
       query: {
         user: user.email,
@@ -32,8 +31,7 @@ function Payment() {
       socketRef.current.disconnect();
     };
   });
-  // strub
-  //  console.log(receiverEmail);
+ 
   console.log(user);
   const [state, setState] = useState(reserveData);
 
@@ -45,13 +43,11 @@ function Payment() {
   };
 
   const onClick = () => {
-    console.log(state);
     axios
       .post("http://localhost:4000/reserve/caretaker", state, {
         headers: { authorization: "Bearer " + cookie.accessToken },
       })
       .then((res) => {
-        console.log(res.data);
         sentReserveNotification();
         window.alert(`$${state.amount} has been sent to ${state.caretaker}`);
         history.push({ pathname: "/" });

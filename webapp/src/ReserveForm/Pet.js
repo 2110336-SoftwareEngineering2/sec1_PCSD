@@ -12,12 +12,9 @@ function Pet({ info, CheckPet }) {
 
   function onClicked() {
     setClick(!click);
-    console.log(!click);
     CheckPet(info._id);
     var selectedPets = cookie.selectedPets;
-    // console.log(selectedPets)
     if (!click) {
-      // var data = 
       setCookie("selectedPets", [...selectedPets, info], {path: "/"});
     } else {
       var filtered = selectedPets.filter((value, idx, arr) => {

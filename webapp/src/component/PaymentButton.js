@@ -9,7 +9,6 @@ import { sentNotification } from "../Notification/NotificationUtils";
 function ReceiveButton({payment, accessToken, setState, state, index, socket}) {
     const onClick = () => {
         const header = {"authorization": "Bearer " + accessToken};
-        // console.log(state.reserves[index]);
         const receiver = (state.reserves[index]).petowner;
         const sender = (state.reserves[index]).caretaker;
         const type = "DONE";

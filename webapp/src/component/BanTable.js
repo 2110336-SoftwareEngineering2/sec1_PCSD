@@ -22,8 +22,6 @@ export const BanTable = () => {
   }, []);
 
   const columns = useMemo(() => COLUMNS, []);
-  // const data = useMemo(() => MOCK_DATA, []);
-  // const data = dataFromBack;
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -33,7 +31,6 @@ export const BanTable = () => {
     await axios.post("http://localhost:4000/Admin/ban", data).then((res) => {
       console.log(res);
     });
-    // await sleep(250);
     axios
       .get("http://localhost:4000/User")
       .then((res) => {
@@ -50,7 +47,6 @@ export const BanTable = () => {
         },
       })
       .then((res) => {
-        console.log("res", res);
       })
       .catch((err) => console.log("err", err));
     axios
@@ -95,7 +91,6 @@ export const BanTable = () => {
                 return (
                   <th {...column.getHeaderProps()}>
                     {column.render("Header")}
-                    {/* <hr /> */}
                   </th>
                 );
               })}
@@ -105,7 +100,6 @@ export const BanTable = () => {
         <tbody {...getTableBodyProps()}>
           {page.map((row) => {
             const status = row.values.banStatus;
-            const deleteButton = false;
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -151,7 +145,6 @@ export const BanTable = () => {
                             onClick={() => deleteUser(row.original)}
                           />
                         </IconButton>
-                        {/* <hr className="ban_line" /> */}
                       </td>
                     );
                   } else if (
@@ -197,7 +190,6 @@ export const BanTable = () => {
                             onClick={() => deleteUser(row.original)}
                           />
                         </IconButton>
-                        {/* <hr className="ban_line" /> */}
                       </td>
                     );
                   } else {
@@ -209,7 +201,6 @@ export const BanTable = () => {
                           }}
                         >
                           <h4>Banned</h4>
-                          {/* <hr className="normal_line" /> */}
                         </td>
                       );
                     } else if (cell.value === false) {
@@ -220,7 +211,6 @@ export const BanTable = () => {
                           }}
                         >
                           <h4>Normal</h4>
-                          {/* <hr className="normal_line" /> */}
                         </td>
                       );
                     } else {
@@ -232,7 +222,6 @@ export const BanTable = () => {
                           }}
                         >
                           {cell.render("Cell")}
-                          {/* <hr className="normal_line" /> */}
                         </td>
                       );
                     }

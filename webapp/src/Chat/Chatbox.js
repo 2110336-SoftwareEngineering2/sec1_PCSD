@@ -2,22 +2,16 @@ import axios from "axios";
 import socketIOClient from 'socket.io-client';
 import React, { useEffect, useContext, useState, useRef } from "react"
 import { ChatContext, UserContext } from "../context/MyContext";
-//import ReactDOM from "react-dom";
 import {useWindowScroll} from 'react'
-//import {FixedSizeList as List} from 'react-window';
 import {Container} from "react-bootstrap"
 import {Avatar} from "@material-ui/core"
-import Icon from "@material-ui/core/Icon"
 import Amesage from "./amesage";
-//import classNames from 'classnames';
-//const dump_chat = []
 import { useCookies } from "react-cookie";
 
 
 
 
 function Chatbox({roomId}){
-    // const chatContext = useContext(ChatContext);
     const userContext = useContext(UserContext);
     const chatContext = useContext(ChatContext);
     const [interactor,setInteractor] = useState("");
@@ -64,7 +58,6 @@ function Chatbox({roomId}){
     useEffect(async() => {
         await getChatRoomDetail();
         return () => {
-            //getName();
             setMessage([]);
         }
     }, [roomId])
@@ -81,7 +74,6 @@ function Chatbox({roomId}){
                 }
             });
             const data = res.data;
-            //  console.log(data)
             setMessage(data.messages);
             setMember(data.members);
         }
@@ -95,9 +87,6 @@ function Chatbox({roomId}){
     }
 
     function send () {
-        // var unreadMessage = chatContext.unreadMessage[chatContext.currentChatRoom];
-        // unreadMessage++;
-        // console.log(unreadMessage)
         
         if (inputMessage.length !== 0) {
             const data = {
@@ -128,14 +117,12 @@ function Chatbox({roomId}){
         <div>
             {message.map((mDetail, idx) => {
                 return <Amesage email = {mDetail.email} message = {mDetail.message} timestamp = {timeStampToDateStr(mDetail.time)} is_user = {mDetail.email==email} />
-                    //return (<p key={idx}>{mDetail.email}: {mDetail.message} ({timeStampToDateStr(mDetail.time)})</p>);
             })}
           <AlwaysScrollToBottom />
         </div>
       )
     const getName = () => {
         if({roomId}!=null){
-            //console.log(members);
             var Inter = ""
             if(email==members[0]){
                 //return <h1> <getName email = {members[1]} /> </h1>
@@ -145,25 +132,12 @@ function Chatbox({roomId}){
                 //return <h1> <getName email = {members[0]} /> </h1>
                 var Inter = members[0];
         }
-        //console.log(Inter)
         }
-        setInter(Inter)/*
-        axios
-        .post("http://localhost:4000/user/email", {email: Inter})
-        .then((res) => {
-            //console.log(res.data.firstname)
-            
-            setInteractor(res.data.firstname + " " + res.data.lastname)
-            return res.data;
-            })
-        .catch((err) => {
-            console.log(err);
-            });*/
+        setInter(Inter)
 
     }
     const Chat_Title = () =>{
         if({roomId}!=null){
-            //console.log(members);
             getName()
             return (<div className = "Interacter">
                         <Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + inter} />

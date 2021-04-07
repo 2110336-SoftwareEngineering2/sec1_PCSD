@@ -13,7 +13,6 @@ function ChatPage() {
     useEffect(() => {
 
         if (cookie.chatroomTmp !== undefined) {
-            // console.log(cookie.chatroomTmp)
             chatContext.changeChatRoom(cookie.chatroomTmp);
         }
     }, []);

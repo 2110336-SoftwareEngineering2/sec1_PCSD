@@ -61,7 +61,6 @@ function MyPets() {
     axios
       .post("http://localhost:4000/user/profilepic", data)
       .then((res) => {
-        console.log(res);
         reloadPage();
       })
       .catch((err) => console.log(err));
