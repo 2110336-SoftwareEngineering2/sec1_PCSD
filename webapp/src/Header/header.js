@@ -154,7 +154,7 @@ function Header() {
             <Dropdown.Item
               eventKey="6"
               onClick={() => {
-                history.push({ pathname: "/test" });
+                history.push({ pathname: "/historycard" });
               }}
             >
               {user.role == "caretaker" ? "Job Histories" : "Payment Histories"}

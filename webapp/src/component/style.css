@@ -218,7 +218,12 @@ box-shadow: 0px 12px 34px -8px rgba(0,0,0,0.28);
 
 form [type="radio"]{
     margin: auto;
-    }
+}
+
+.login-error {
+  margin: auto;
+  width: 60%;
+}
 
 
 label {
