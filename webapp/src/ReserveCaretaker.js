@@ -281,7 +281,7 @@ function ReserveCaretaker(props) {
                         <div className="col--6">
                             <div className="row">
                                 <div className="col--12 rating_section">
-                                    <Rating name="controlled-rating" value={ratingVal} size="large" onChange={(event, newVal) => {
+                                    <Rating name="controlled-rating" value={ratingVal} precision={0.5} size="large" onChange={(event, newVal) => {
                                         setRatingVal(newVal);
                                     }}/>
                                 </div>
