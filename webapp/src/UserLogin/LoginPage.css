@@ -1,0 +1,11 @@
+#main-login-page {
+  height: 100vh;
+}
+#main-login-page > .row {
+  align-items: center;
+  height: 100%;
+}
+#main-login-page > .row > .col {
+  color: #DBC2B0;
+  text-align: center;
+}

@@ -122,12 +122,6 @@ function Header() {
             >
               {user.role === "caretaker" ? "My Services" : "My Pets"}
             </Dropdown.Item>
-            <Dropdown.Item
-              eventKey="101"
-              onClick={() => history.push({ pathname: "/updateImgURL" })}
-            >
-              Update Img URL
-            </Dropdown.Item>
             <Dropdown.Divider />
             {user.role == "caretaker" ? 
             <Dropdown.Item
