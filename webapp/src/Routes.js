@@ -5,8 +5,6 @@ import history from "./history";
 import BanPage from "./banpage";
 import LoginPage from "./LoginPage";
 import Home from "./Home/Home";
-import Caretaker from "./Register/Caretaker";
-import Petowner from "./Register/Petowner";
 import ChatPage from "./Chat/chat";
 import SearchPage from "./SearchPage/SearchPage";
 import ReservePage from "./ReserveCaretaker";
@@ -43,11 +41,7 @@ function Routes() {
           // component={!userContext.user ? LoginPage : Home}
           component={cookie.accessToken !== undefined ? Home : LoginPage}
         />
-        <Route
-          path="/register"
-          exact
-          component={context.data.role == "petowner" ? Petowner : Caretaker}
-        />
+        
         <Route path="/user_register" exact component={RegisterProfile} />
 
         <AuthRoute path="/searchpage" exact component={SearchPage} />
