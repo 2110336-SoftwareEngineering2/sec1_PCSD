@@ -21,6 +21,20 @@ const updateCaretaker = async (req, res) => {
     res.send("Edit caretaker successful");
 };
 
+const get_comment = async (body,res) =>{
+  await Caretaker.findOne({ caretaker : body.caretaker }, '-_id comment', (err, result) => {
+    if(err){
+      res.status(400).send(err);
+    }
+    else{
+      result.comment.sort(function(a,b){
+        return b.date - a.date;
+      });
+      res.send(result);
+    }
+  });
+};
+
 const comment = async (body,res) =>{
   await Caretaker.updateOne({caretaker:body.email}, 
     { $push: {comment : {
@@ -120,6 +134,9 @@ const SearchCaretaker = async (body,res) =>{
 
       result.sort(function(a,b){
           // console.log(rate_av(a.rate_point));
+          if(rate_av(b.rate_point)==rate_av(a.rate_point)){
+            return b.rate_point.rate_count - a.rate_point.rate_count;
+          }
           return rate_av(b.rate_point)-rate_av(a.rate_point);
         });
 
@@ -162,5 +179,6 @@ module.exports = {
     SearchCaretaker,
     rate,
     comment,
+    get_comment,
     deleteCaretaker,
 }

@@ -71,7 +71,6 @@ function ServiceRate({ input, onChange }) {
         <Form.Control
           type="number"
           name="rate"
-          placeholder="0"
           min="0"
           defaultValue={input.rate}
           onChange={onChange}
@@ -109,7 +108,7 @@ function Description({ input, onChange }) {
         defaultValue={input.description}
         onChange={onChange}
         rows="7"
-        style={{ "min-height": "40px", "max-height": "159px" }}
+        style={{ minHeight: "40px", maxHeight: "159px" }}
       />
     </Form.Group>
   );
