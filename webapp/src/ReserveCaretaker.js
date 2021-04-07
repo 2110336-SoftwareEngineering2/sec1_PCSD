@@ -287,7 +287,11 @@ function ReserveCaretaker(props) {
                     <div className="row">
                         <div className="col--6">
                             <div className="show-comment">
-                                {comments.map((comment) => <ReserveComment comment={comment}/>)}
+                                {comments.length == 0 ? 
+                                    <div className="no-review-box">
+                                        <label className="no-review">No reviews</label>
+                                    </div> : 
+                                    comments.map((comment) => <ReserveComment comment={comment}/>)}
                             </div>
                         </div>
                         <div className="col--6">
