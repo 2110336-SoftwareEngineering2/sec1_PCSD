@@ -5,7 +5,58 @@
   align-items: center;
   height: 100%;
 }
-#main-login-page > .row > .col {
-  color: #DBC2B0;
+#main-login-page > .row > div {
+  color: #dbc2b0;
   text-align: center;
+}
+
+/* Form Tabs */
+
+#main-login-page .nav {
+  padding: 0px;
+  position: relative;
+  width: fit-content;
+}
+
+#main-login-page .nav-link {
+  position: relative;
+  color: #9d7f70;
+  width: 80px;
+  height: 36px;
+  border-radius: 10px 10px 0px 0px;
+  border-color: #eee;
+}
+#main-login-page .nav-link.active {
+  color: #fff;
+  background-color: #9d7f70;
+  transition-duration: 1000ms;
+}
+#main-login-page .nav-link:hover {
+  box-shadow: 0px 0px 3px 0px #aaaa inset;
+}
+
+/* Tabs Content */
+#main-login-page .tab-content {
+  z-index: 2;
+  position: absolute;
+}
+
+/* Button */
+#main-login-page .btn-primary {
+  background-color: #b5b3b3;
+  border-color: #b5b3b3;
+  width: 100%;
+}
+#main-login-page .btn-primary:hover {
+  background-color: #bd6a43;
+}
+#main-login-page .btn-primary:focus {
+  box-shadow: 0px 0px 0px 3px #e68051ad;
+}
+
+/* Alert */
+
+#main-login-page .alert {
+  height: fit-content;
+  padding: 0px;
 }
