@@ -37,14 +37,14 @@ function LoginForm() {
       <fieldset disabled={submitted}>
         <Form.Control
           type="email"
-          id="email"
+          id="login-email"
           name="email"
           placeholder="Email Address"
           onChange={onChange}
         />
         <Form.Control
           type="password"
-          id="password"
+          id="login-password"
           name="password"
           placeholder="Password"
           onChange={onChange}

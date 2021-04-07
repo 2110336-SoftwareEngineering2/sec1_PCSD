@@ -15,7 +15,7 @@ function LoginPage() {
   );
   const tabs = (
     <Col sm>
-      <Tabs defaultActiveKey="login">
+      <Tabs defaultActiveKey="login" className="mx-auto mr-lg-auto mr-md-auto">
         <Tab eventKey="login" title="Login">
           <LoginForm />
         </Tab>
@@ -26,8 +26,8 @@ function LoginPage() {
     </Col>
   );
   return (
-    <Container id="main-login-page">
-      <Row className="mx-5">
+    <Container id="main-login-page" className="px-lg-5">
+      <Row>
         {logo}
         {tabs}
       </Row>

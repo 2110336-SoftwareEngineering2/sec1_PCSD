@@ -4,6 +4,7 @@
 #main-login-page > .row {
   align-items: center;
   height: 100%;
+  position: relative;
 }
 #main-login-page > .row > div {
   color: #dbc2b0;
@@ -16,8 +17,8 @@
   padding: 0px;
   position: relative;
   width: fit-content;
+  margin: auto;
 }
-
 #main-login-page .nav-link {
   position: relative;
   color: #9d7f70;
@@ -33,6 +34,11 @@
 }
 #main-login-page .nav-link:hover {
   box-shadow: 0px 0px 3px 0px #aaaa inset;
+}
+#main-login-page .tab-content,
+#main-login-page .tab-pane {
+  margin: auto;
+  width: fit-content;
 }
 
 /* Form */
