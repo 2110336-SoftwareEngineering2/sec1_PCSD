@@ -5,6 +5,7 @@ import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
 import "./RegisterProfile.css";
 import "./FormComponents.css";
+import defaultUserImg from "../userpic.png";
 
 import history from "../history";
 import axios from "axios";
@@ -25,6 +26,7 @@ function RegisterProfile() {
     username: "",
     confirm_password: "",
     gender: data.gender === "" ? null : data.gender,
+    imgURL: defaultUserImg,
   });
 
   const setValid = { email: setValidEmail, username: setValidUsername };
@@ -53,6 +55,11 @@ function RegisterProfile() {
       checkAvailability({ [name]: value });
   }
 
+  function updateImage(imgFile) {
+    setInfo({ ...info, userImg: imgFile, hasImg: true });
+    setImageReady(false);
+  }
+
   function saveInfo() {
     setSubmitted(true);
     const newUser = { ...info, banStatus: false, balance: 0 };
@@ -60,7 +67,7 @@ function RegisterProfile() {
       .post("http://localhost:4000/user/register", newUser)
       .then((res) => {
         console.log(res);
-        if (info.userImg) uploadProfilePic(res.data, info.userImg);
+        if (info.hasImg) uploadProfilePic(res.data, info.userImg);
         setUser({ ...res.data, password: newUser.password });
       })
       .catch((err) => {
@@ -109,7 +116,7 @@ function RegisterProfile() {
         <div className="col-12 col-md-4">
           <ProfileCard
             info={info}
-            updateImage={setInfo}
+            updateImage={updateImage}
             submitted={submitted}
           />
         </div>
