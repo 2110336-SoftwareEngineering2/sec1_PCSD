@@ -41,7 +41,7 @@ function History_Card(_) {
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
               getReserve((res.data).email);
-              console.log(state.reserves)
+              // console.log(state.reserves)
             })
         })
         .catch((err) => {
