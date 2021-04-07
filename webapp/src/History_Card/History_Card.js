@@ -76,20 +76,6 @@ function History_Card(_) {
     return x;
   }
 
-  const getPayment = (header) => {
-    axios
-      .get("http://localhost:4000/user/payment", {
-        headers: header
-      })
-      .then((res) => {
-        setState({payments: res.data});
-        console.log("s",res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const getReserve = (email,header) => {
     axios
       .get(`http://localhost:4000/reserve/${email}`, {
@@ -105,7 +91,6 @@ function History_Card(_) {
       });
   };
   const getDate = (sdate,edate) => {
-    // DateRangeIcon
     console.log(new Date(sdate).toLocaleDateString());
     console.log(new Date(sdate).toLocaleTimeString());
     return (  <div className="date"> <DateRangeIcon />&nbsp;Date&nbsp;

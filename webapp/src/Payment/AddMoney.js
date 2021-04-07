@@ -4,13 +4,16 @@ import { Avatar } from "@material-ui/core";
 import { UserContext } from "../context/MyContext";
 
 import "./AddMoney.css";
-
+import Alert from '@material-ui/lab/Alert';
 function Addmoney() {
   const { user, login } = useContext(UserContext);
 
   const onClick = () => {
     const balance = document.getElementById("amount").value;
-
+    if(balance < 0 ) {
+      window.alert("Wrong Input!!!!");
+    }
+    else {
     axios
       .post(
         "http://localhost:4000/user/topup",
@@ -27,6 +30,7 @@ function Addmoney() {
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
   return (
