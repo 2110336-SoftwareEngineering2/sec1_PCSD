@@ -8,9 +8,7 @@ const Result = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [pic, setPic] = useState("");
-  console.log(props);
   const onClick = () => {
-    console.log(props.userInfo);
     axios
       .post("http://localhost:4000/user/caretaker/find", {
         caretaker: props.userInfo.caretaker.caretaker,

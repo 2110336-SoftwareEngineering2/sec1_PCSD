@@ -18,9 +18,10 @@ function ReserveCaretaker(props) {
     const { user } = useContext(UserContext);
     const userEmail = user.email;
     const caretaker = props.location.state.caretaker;
-    const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ caretaker;
+
     const [name, setName] = useState({firstname: null, lastname: null});
     const [contact, setContact] = useState({email: null, phone: null});
+    const [img, setImg] = useState("");
     const [description, setDesc] = useState({desc: null});
     const [serviceArea, setArea] = useState({area: null});
     const [rate, setRate] = useState({rate: null});
@@ -50,6 +51,7 @@ function ReserveCaretaker(props) {
         .post("http://localhost:4000/user/email", {email: caretaker})
         .then((res) => {
             const data = res.data;
+            setImg(data.imgURL);
             setName({firstname: data.firstname, lastname: data.lastname});
             setContact({email: data.email, phone: data.mobileNumber});
             })
