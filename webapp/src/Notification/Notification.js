@@ -44,7 +44,7 @@ const Notification = ({ notification }) => {
           }
         />
         <div className="notification-item-detail">
-          <h3>{notification.title} </h3>
+          <h3 className={notification.title}>{notification.title} </h3>
           <p>{notification.detail}</p>
           <span style={{ fontSize: "0.8rem" }}>
             {getDateString(notification.timestamp)}
