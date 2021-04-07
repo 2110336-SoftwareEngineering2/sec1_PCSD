@@ -19,7 +19,7 @@ function ReserveCaretaker(props) {
     const userEmail = user.email;
     // console.log(userEmail);
     const caretaker = props.location.state.caretaker;
-    // console.log(caretaker);
+    console.log(caretaker);
     const img = "https://pcsdimage.s3-us-west-1.amazonaws.com/"+ caretaker;
     const [name, setName] = useState({firstname: null, lastname: null});
     const [contact, setContact] = useState({email: null, phone: null});
@@ -35,15 +35,15 @@ function ReserveCaretaker(props) {
     const [rating, setRating] = useState({rating: 0, count: 0});
     const endPoint = "http://localhost:4000";
     const [show, setShow] = useState(false);
-    const [comments, setComment] = useState(null);
+    const [reviews, setReview] = useState([]);
 
     useEffect(() => {
         axios
-        .post("http://localhost:4000/user/comment/caretaker/get", {caretaker: caretaker})
+        .post("http://localhost:4000/user/getrateAndcomment", {caretaker: caretaker})
         .then((res) => {
             console.log(res);
             const data = res.data;
-            setComment(data.comment);
+            setReview(data.raw_rate);
             })
         .catch((err) => {
             console.log(err);
@@ -170,35 +170,19 @@ function ReserveCaretaker(props) {
     function onSubmit(e) {
         e.preventDefault();
 
-        if (ratingVal == 0 && commentVal == "") {
-            window.alert("Please review before submitting!");
-        } else {
-            const sentRating = {caretaker: caretaker, rater: userEmail, rate: ratingVal};
-            const sentComment = {email: caretaker, comment: commentVal};
-            // console.log(sentRating);
-            // console.log(sentComment);
+        const sentReview = {caretaker: caretaker, rate: ratingVal, comment: commentVal};
             
-            axios
-            .post("http://localhost:4000/user/caretaker/rate", sentRating)
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-            });
+        axios
+        .post("http://localhost:4000/user/rateAndcomment", sentReview)
+        .then((res) => {
+            console.log(res.data);
+        })
+        .catch((err) => {
+            console.log(err.response.data);
+        });
 
-            axios
-            .post("http://localhost:4000/user/comment/caretaker", sentComment)
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-            });
-
-            window.alert("Review sent!");
-            window.location.reload();
-        }
+        window.alert("Review sent!");
+        window.location.reload();
     }
 
     return (
@@ -271,27 +255,27 @@ function ReserveCaretaker(props) {
                     </div>
                     <div className="alert">
                         <Alert show={show} variant="danger">
-                        <Alert.Heading>Wait!!! You're not a Petowner!</Alert.Heading>
-                        <p>
-                        You don't have a permission to do this action. Please sign in as a Petowner.
-                        </p>
-                        <hr />
-                        <div className="d-flex justify-content-end">
-                        <Button onClick={() => setShow(false)} variant="outline-danger">
-                            Close
-                        </Button>
-                        </div>
-                    </Alert>
+                            <Alert.Heading>Wait!!! You're not a Petowner!</Alert.Heading>
+                            <p>
+                            You don't have a permission to do this action. Please sign in as a Petowner.
+                            </p>
+                            <hr />
+                            <div className="d-flex justify-content-end">
+                            <Button onClick={() => setShow(false)} variant="outline-danger">
+                                Close
+                            </Button>
+                            </div>
+                        </Alert>
                     </div>
                     {!clickReview.clicked ? null : 
                     <div className="row">
                         <div className="col--6">
                             <div className="show-comment">
-                                {comments.length == 0 ? 
+                                {reviews.length == 0 ? 
                                     <div className="no-review-box">
                                         <label className="no-review">No reviews</label>
                                     </div> : 
-                                    comments.map((comment) => <ReserveComment comment={comment}/>)}
+                                    reviews.map((review) => <ReserveComment key={review._id} review={review}/>)}
                             </div>
                         </div>
                         <div className="col--6">

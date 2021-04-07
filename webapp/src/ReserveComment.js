@@ -7,10 +7,10 @@ function ReserveComment(props) {
     return (
         <div className="reserve-comment">
             <div className="comment-rating">
-                <Rating value={5} precision={0.5} size="small" readOnly/>
+                <Rating value={props.review.rate.$numberDecimal} precision={0.5} size="small" readOnly/>
             </div>
-            <label>{props.comment.text == "" ? 
-                <label className="no-comment">No comment</label> : props.comment.text}</label>
+            <label>{props.review.comment == "" ? 
+                <label className="no-comment">No comments</label> : props.review.comment}</label>
         </div>
     );
 }
