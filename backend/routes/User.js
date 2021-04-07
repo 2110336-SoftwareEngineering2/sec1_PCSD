@@ -21,6 +21,10 @@ router.get("/profile/:username", (req, res) => {
   UserController.getUserByUsername(req, res);
 });
 
+router.get("/email/:email", (req, res) => {
+  UserController.getUserByEmail_(req, res);
+});
+
 router.get("/usersinfo", (req, res) => {
   UserController.getAllUsersInfo(req, res);
 });

@@ -12,7 +12,7 @@ const { deleteAllPet } = require("./Pet");
 const findUserByUsername = async (username) => {
   const user = await User.findOne({ username: username });
   if (!user) {
-    return "User with this username does not exist";
+    return `User with the username: '${username}' does not exist`;
   } else {
     return user;
   }
@@ -21,7 +21,7 @@ const findUserByUsername = async (username) => {
 const findUserByEmail = async (email) => {
   const user = await User.findOne({ email: email });
   if (!user) {
-    return "User with this email does not exist";
+    return `User with the email: '${email}' does not exist`;
   } else {
     return user;
   }
@@ -147,6 +147,12 @@ module.exports = {
   getUserById: async (req, res) => {
     const id = req.params.id;
     const user = await findUserById(id);
+    res.json(user);
+  },
+
+  getUserByEmail_: async (req, res) => {
+    const email = req.params.email;
+    const user = await findUserByEmail(email);
     res.json(user);
   },
 
