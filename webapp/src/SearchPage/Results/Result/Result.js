@@ -7,7 +7,8 @@ import axios from "axios";
 const Result = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  const [pic, setPic] = useState("");
+  console.log(props);
   const onClick = () => {
     console.log(props.userInfo);
     axios
@@ -20,6 +21,16 @@ const Result = (props) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+  const getPic = (email) => {
+    axios
+    .post("http://localhost:4000/user/email", {email: email})
+    .then((res) => {
+      setPic(res.data.imgURL);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
   const [state, setState] = useState({
     raised: false,
@@ -39,13 +50,11 @@ const Result = (props) => {
         zdepth={state.shadow}
       >
         <div className={classes.profile}>
-          <img
-            className={classes.media}
-            src={
-              "https://pcsdimage.s3-us-west-1.amazonaws.com/" +
-              props.userInfo.caretaker.caretaker
-            }
-          />
+        { getPic(props.userInfo.caretaker.caretaker)}
+        <img
+          className={classes.media}
+              src={pic}
+      />
         </div>
         <div className={classes.info}>
           <Typography className={classes.nameSection} variant="h4">
