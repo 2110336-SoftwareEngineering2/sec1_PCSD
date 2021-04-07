@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { UserContext } from "../context/MyContext";
 import { Avatar, Button, IconButton } from "@material-ui/core";
 import "./Notification.css";
+import history from "./../history";
 
 // var notification = {
 //         sender: {
@@ -21,13 +22,20 @@ import "./Notification.css";
 //         timestamp: 1617618603000,
 //     }
 const Notification = ({ notification }) => {
+
   const getDateString = (timestamp) => {
     const date = new Date(timestamp);
     return date.toTimeString().slice(0, 9) + " " + date.toLocaleDateString();
   }
+  
+  const onClick = () => {
+    const path = "historycard";
+    history.push({pathname: path})
+  }
+
   return (
     <Dropdown.Item>
-      <div className="notification-item">
+      <div className="notification-item" onClick={onClick}>
         <Avatar
           className="notification-item-pic"
           src={
