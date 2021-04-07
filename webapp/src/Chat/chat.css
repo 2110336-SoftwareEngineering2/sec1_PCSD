@@ -63,8 +63,9 @@
 
 .ChatList{  
   margin-top: 10px;
-  overflow-y: scroll;
-  height: 60vh;
+  overflow-y: auto;
+  height:75vh;
+  background-color: #eee;
 }
 .People_Name{
   grid-area: "People_Name";
@@ -74,8 +75,9 @@
 .Chat_People{
   display: flex;
   padding: 10px;
-  background-color: #eee;
+  /*background-color: #eee;*/
   height: 70px ;
+  cursor: pointer;
 }
 
 /*Chat Box Part*/

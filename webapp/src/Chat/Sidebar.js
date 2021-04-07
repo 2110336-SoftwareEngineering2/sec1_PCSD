@@ -21,11 +21,11 @@ function Sidebar(){
                 </div>
                 
             </div>
-            <div className = "Searchbar">
+            {/*<div className = "Searchbar">
                 <SearchIcon className = "SearchIcon" /> 
                 <input className = "Search_input" placeholder = "Search Chat" value = {searchContent} onChange = {onChange}></input>
-            </div>
-            <ChatList />
+            </div>*/}
+            <ChatList  />
         </div>
     );
 }

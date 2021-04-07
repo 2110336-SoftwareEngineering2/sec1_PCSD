@@ -35,6 +35,7 @@ function ChatList(){
         const title = members[0] === myEmail ? members[1] : members[0];
         return title;
     }
+
     //socketRef.current.emit('read', data);
     return(
         <div className = 'ChatList'>
