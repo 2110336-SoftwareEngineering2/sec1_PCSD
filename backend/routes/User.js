@@ -34,9 +34,6 @@ router.get("/emails", (req, res) => {
   UserController.getAllEmails(req, res);
 });
 
-router.get("/images", (req, res) => {
-  UserController.updateAllImages(req, res);
-});
 
 router.post("/email", (req, res) => {
   UserController.getUserByEmail(req, res);
