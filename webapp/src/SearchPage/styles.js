@@ -93,16 +93,10 @@ export default makeStyles((theme) => ({
     fontSize: "16px",
     borderRadius: "10px",
     width: "20px",
-    "& .MuiBottomNavigationAction-iconOnly": {
-      color: "red",
-    },
-    "& .Mui-selected": {
-      // color: "#BD6A43",
-      fontSize: "18px",
-      iconColor: "#BD6A43",
-    },
-    "& .MuiBottomNavigationAction-root": {
-      color: "red",
+
+    "&.Mui-selected": {
+      borderColor: "#C70039",
+      color: "#C70039",
     },
   },
   priceBox: {

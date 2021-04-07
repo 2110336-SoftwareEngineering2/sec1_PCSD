@@ -147,7 +147,7 @@ function Chatbox({roomId}){
         }
         //console.log(Inter)
         }
-        setInter(Inter)
+        setInter(Inter)/*
         axios
         .post("http://localhost:4000/user/email", {email: Inter})
         .then((res) => {
@@ -158,7 +158,7 @@ function Chatbox({roomId}){
             })
         .catch((err) => {
             console.log(err);
-            });
+            });*/
 
     }
     const Chat_Title = () =>{
@@ -167,13 +167,18 @@ function Chatbox({roomId}){
             getName()
             return (<div className = "Interacter">
                         <Avatar className = "ChatAvatar" src = {"https://pcsdimage.s3-us-west-1.amazonaws.com/" + inter} />
-                        <div className = "Interacter2">{interactor}</div>
+                        <div className = "Interacter2">{inter}</div>
                     </div>);
         }else{
             console.log("error");
             return <div className = "Interacter">ChatBox</div>
         }
 
+    }
+    function handlePressEnter(e){
+        if(e.key=="Enter"){
+            send()
+        }
     }
     
     return (
@@ -195,7 +200,7 @@ function Chatbox({roomId}){
                         </div>
                     </div>
                     <div className = "Downside_Bar">
-                        <input className = "Message_Box" onChange={handleChangeInputMessage} value = {inputMessage}/>
+                        <input className = "Message_Box" onChange={handleChangeInputMessage} onKeyPress = {handlePressEnter} value = {inputMessage}/>
                         <button className = "Send_Chat" onClick={() => send()}>
                             send
                         </button>
