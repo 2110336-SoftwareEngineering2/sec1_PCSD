@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { useCookies } from "react-cookie";
-import { CardDeck, Card, Button } from "react-bootstrap";
+import { CardDeck, Card } from "react-bootstrap";
 import FaceIcon from '@material-ui/icons/Face';
 import axios from "axios";
 import Header from "../Header/header";
@@ -26,7 +26,6 @@ function History_Card(_) {
 
   const socketRef = useRef();
   const notiEndPoint = "http://localhost:4000";
-  const data = useState([]);
   
   useEffect(() => {
     if (!user && cookie.accessToken !== undefined) {
@@ -41,7 +40,6 @@ function History_Card(_) {
             .then((res) => {
               login({...res.data, accessToken: cookie.accessToken});
               getReserve((res.data).email);
-              // console.log(state.reserves)
             })
         })
         .catch((err) => {
@@ -50,13 +48,11 @@ function History_Card(_) {
         });
     } else {
       const header = {"authorization": "Bearer " + cookie.accessToken};
-      //getPayment(header);
       getReserve(user.email,header);
     }
   }, []);
 
   useEffect(async () => {
-    // console.log(reserveData)
     socketRef.current = socketIOClient(notiEndPoint, {
         query: {
             user: user.email
@@ -68,28 +64,7 @@ function History_Card(_) {
     };
   });
 
-  const getPaymentById = (id) => {
-    var x = axios.get(`http://localhost:4000/user/payment/${id}`, {headers: {authorization: cookie.accessToken}})
-    .then(res => {
-      return res;
-    })
-    return x;
-  }
 
-  const getPayment = (header) => {
-    axios
-      .get("http://localhost:4000/user/payment", {
-        headers: header
-      })
-      .then((res) => {
-        setState({payments: res.data});
-        console.log("s",res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const getReserve = (email,header) => {
     axios
       .get(`http://localhost:4000/reserve/${email}`, {
@@ -97,7 +72,6 @@ function History_Card(_) {
     })
       .then((res) => {
         setState({reserves: res.data});
-        console.log("ssssss",res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -105,17 +79,14 @@ function History_Card(_) {
       });
   };
   const getDate = (sdate,edate) => {
-    // DateRangeIcon
     console.log(new Date(sdate).toLocaleDateString());
     console.log(new Date(sdate).toLocaleTimeString());
     return (  <div className="date"> <DateRangeIcon />&nbsp;Date&nbsp;
       <p style={{color: "#9D7F70" , marginLeft:"30px"}}>&nbsp;{new Date(sdate).toLocaleDateString()}, {new Date(sdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}  - {new Date(edate).toLocaleDateString()}, {new Date(edate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} </p>
-
       </div>
     );
   };
  const getStatus = (status, role) => {
-   const text = "";
     switch(status) {
       case "CANCELLED" : 
         return  <ProgressBar striped variant="danger" now={100} label={`CANCELLED`}/>;
@@ -138,14 +109,12 @@ function History_Card(_) {
     );
   };
   const deleteCard = (id) => {
-    console.log("sds",id); 
     axios
       .delete(`http://localhost:4000/reserve/delete/${id}`, {
         headers: { Authorization: `Bearer ${user.accessToken}` },
         _id: id,
       })
       .then((res) => {
-        console.log(res.data);
         setState({reserves: state.reserves.filter((card) => card._id !== id)});
       })
       .catch((err) => console.log(err));

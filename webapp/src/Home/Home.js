@@ -23,7 +23,6 @@ import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 function Home() {
-  const { user } = useContext(UserContext);
   const userContext = useContext(UserContext);
   const [cookie, setCookie, removeCookie] = useCookies(["accessToken"]);
 

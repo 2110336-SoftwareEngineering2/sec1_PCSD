@@ -5,8 +5,6 @@ import history from "./history";
 import BanPage from "./banpage";
 import LoginPage from "./LoginPage";
 import Home from "./Home/Home";
-import Caretaker from "./Register/Caretaker";
-import Petowner from "./Register/Petowner";
 import ChatPage from "./Chat/chat";
 import SearchPage from "./SearchPage/SearchPage";
 import ReservePage from "./ReserveCaretaker";
@@ -27,7 +25,7 @@ import UserProfile from "./UserProfile/UserProfile";
 import MyPets from "./MyPets/MyPets";
 import MyServices from "./MyServices/MyServices";
 
-import UpdateImgURL from "./RegisterProfile/UpdateImgURL";
+import NewLogin from "./UserLogin/LoginPage";
 
 function Routes() {
   const context = useContext(RegisterContext);
@@ -43,11 +41,8 @@ function Routes() {
           // component={!userContext.user ? LoginPage : Home}
           component={cookie.accessToken !== undefined ? Home : LoginPage}
         />
-        <Route
-          path="/register"
-          exact
-          component={context.data.role == "petowner" ? Petowner : Caretaker}
-        />
+
+        <Route path="/newlogin" exact component={NewLogin} />
         <Route path="/user_register" exact component={RegisterProfile} />
 
         <AuthRoute path="/searchpage" exact component={SearchPage} />
@@ -62,7 +57,6 @@ function Routes() {
         <AuthRoute path="/profile" exact component={UserProfile} />
         <AuthRoute path="/pets" exact component={MyPets} />
         <AuthRoute path="/services" exact component={MyServices} />
-        <AuthRoute path="/updateImgURL" exact component={UpdateImgURL} />
 
         <AuthRoute path="/addmoney" exact component={AddMoneyPage} />
         <AuthRoute path="/showmoney" exact component={ShowMoneyPage} />

@@ -13,8 +13,7 @@ function ShowMoney() {
             <div className="showbody">
             <div className="user">
                     <Avatar
-                        src={
-                            "https://pcsdimage.s3-us-west-1.amazonaws.com/" + user.email
+                        src={user.imgURL
                         }
                         />
                 <div className="name">

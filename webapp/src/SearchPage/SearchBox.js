@@ -95,59 +95,77 @@ const SearchBox = () => {
         <FormGroup row>
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" value="dog" />}
+            control={
+              <Checkbox
+                className={classes.checkBox}
+                name="checkedA"
+                color="primary"
+                value="dog"
+              />
+            }
             label="Dog"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" value="cat" />}
+            control={
+              <Checkbox
+                className={classes.checkBox}
+                name="checkedA"
+                color="primary"
+                value="cat"
+              />
+            }
             label="Cat"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
             control={
-              <Checkbox name="checkedA" color="primary" value="rabbit" />
+              <Checkbox
+                className={classes.checkBox}
+                name="checkedA"
+                color="primary"
+                value="rabbit"
+              />
             }
             label="Rabbit"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
-            control={<Checkbox name="checkedA" color="primary" value="bird" />}
+            control={
+              <Checkbox
+                className={classes.checkBox}
+                name="checkedA"
+                color="primary"
+                value="bird"
+              />
+            }
             label="Bird"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
             control={
-              <Checkbox name="checkedA" color="primary" value="hamster" />
+              <Checkbox
+                className={classes.checkBox}
+                name="checkedA"
+                color="primary"
+                value="hamster"
+              />
             }
             label="Hamster"
           />
           <FormControlLabel
             className={classes.searchBoxFormControlLabel}
             control={
-              <Checkbox name="checkedA" color="primary" value="turtle" />
+              <Checkbox
+                className={classes.checkBox}
+                name="checkedA"
+                color="primary"
+                value="turtle"
+              />
             }
             label="Turtle"
           />
         </FormGroup>
-        {/* <label className={classes.label}>
-          <input type="checkbox" name="petType" value="dog" /> Dog
-        </label>
-        <label className={classes.label}>
-          <input type="checkbox" name="petType" value="cat" /> Cat
-        </label>
-        <label className={classes.label}>
-          <input type="checkbox" name="petType" value="rabbit" /> Rabbit
-        </label>
-        <label className={classes.label}>
-          <input type="checkbox" name="petType" value="bird" /> Bird
-        </label>
-        <label className={classes.label}>
-          <input type="checkbox" name="petType" value="hamster" /> Hamster
-        </label>
-        <label className={classes.label}>
-          <input type="checkbox" name="petType" value="turtle" /> Turtle
-        </label> */}
       </div>
       <div className={classes.upperSection}>
         <div className={classes.serviceTypeBox}>

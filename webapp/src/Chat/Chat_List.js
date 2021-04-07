@@ -21,13 +21,11 @@ function ChatList(){
         });
         const allinfo = []
         for (var i=(res.data).length-1; i>=0; i--) {
-            // console.log(res.data)
             allinfo.push((res.data)[i])
         }
 
         setPeoples(allinfo)
 
-        // console.log(people)
     })
 
     const getChatroomTitle = (members) => {
@@ -35,8 +33,6 @@ function ChatList(){
         const title = members[0] === myEmail ? members[1] : members[0];
         return title;
     }
-
-    //socketRef.current.emit('read', data);
     return(
         <div className = 'ChatList'>
             {/* <ChatPeople name = 'AA'/> */}

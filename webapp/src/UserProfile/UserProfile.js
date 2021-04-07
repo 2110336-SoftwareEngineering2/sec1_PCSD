@@ -68,7 +68,6 @@ function UserProfile() {
     axios
       .post("http://localhost:4000/user/profilepic", data)
       .then((res) => {
-        console.log(res);
         setImageReady(true);
       })
       .catch((err) => console.log(err));
