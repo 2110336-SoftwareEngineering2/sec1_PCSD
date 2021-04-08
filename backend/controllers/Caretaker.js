@@ -213,18 +213,20 @@ const SearchCaretaker = async (body,res) =>{
       ///email.rate_point.rate_count
       // console.log(emaillist);
 
-      User.find({ email : {$in : emaillist}}, (err, finalresult) => {
+      User.find({ email : {$in : emaillist}, banStatus: false }, (err, finalresult) => {
         if (err) {
           res.status(400).send(fillter);
         } else {
+          new_response = {}
           for (let user of finalresult){
-            response[user.email]["user"] = {
+            new_response[user.email] = response[user.email]
+            new_response[user.email]["user"] = {
               username: user.username,
               firstname: user.firstname,
               lastname: user.lastname
             };
           }
-          res.status(200).json(response);
+          res.status(200).json(new_response);
         }
       });
     }
