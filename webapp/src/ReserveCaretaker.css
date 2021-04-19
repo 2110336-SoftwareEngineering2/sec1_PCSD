@@ -1,0 +1,174 @@
+/* row & col initialization -----------------------*/
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.row::after  {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+/* 12 columns */
+.col--1 {width: 8.33%}
+.col--2 {width: 16.66%}
+.col--3 {width: 25%}
+.col--4 {width: 33.33%}
+.col--5 {width: 41.66%}
+.col--6 {width: 50%}
+.col--7 {width: 58.33%}
+.col--8 {width: 66.66%}
+.col--9 {width: 75%}
+.col--10 {width: 83.33%}
+.col--11 {width: 91.66%}
+.col--12 {width: 100%}
+
+/* container -------------------------------------*/
+.reserve_background {
+    background-color: #f1f1f1;
+    padding: 50px 50px 35px 50px;
+}
+
+.reserve_container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
+    width: 1200px;
+    position: relative;
+    margin: auto;
+}
+
+.reserve_img {
+    padding: 70px 70px 30px 70px;
+}
+
+.reserveimg {
+    width: 170px;
+    height: 170px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.reserve_userinfo {
+    padding: 110px 0 0 0;
+    line-height: 3rem;
+}
+
+.reserve_contact {
+    padding-left: 100px;
+    padding-top: 40px;
+    line-height: 3rem;
+}
+
+.reserve_service {
+    padding-top: 10px;
+    line-height: 3rem;
+}
+
+.reserve_button {
+    text-align: right;
+    padding: 70px 50px 50px 0;
+}
+
+.show-rating {
+    display: inline;
+    margin-left: 40px;
+}
+
+.show-comment {
+    width: 500px;
+    height: 400px;
+    overflow: auto;
+    margin: 0 0 80px 80px;
+}
+
+.no-review-box {
+    margin: 5px;
+    padding: 15px;
+    border: 1px solid #644d3c;
+}
+
+.rating_section {
+    margin: 50px 0 20px 60px;
+}
+
+.comment_section {
+    text-align: center;
+    margin: 0 50px 50px 65px;
+}
+
+/* label ----------------------------------------*/
+.namelabel {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.greylabel {
+    font-size: 18px;
+    font-weight: 500;
+    color: #8e8e8e;
+}
+
+.datalabel {
+    font-size: 18px;
+    font-weight: 600;
+    padding-left: 20px;
+}
+
+.rating_label {
+    font-size: 18px;
+    font-weight: 500;
+    position: absolute;
+    margin-top: 2px;
+}
+
+.no-review {
+    margin: 0;
+    color: #8e8e8e;
+    font-size: 16px;
+}
+
+/* button ----------------------------------------*/
+.RButton {
+    border: none;
+    outline: none;
+    background-color: #bd6a43;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 12px 30px;
+}
+
+.reserve_button button {
+    margin-left: 40px;
+}
+
+.comment_section button {
+    margin-top: 40px;
+}
+
+/* input ----------------------------------------*/
+.comment_section textarea {
+    padding: 10px;
+    width: 500px;
+    height: 200px;
+    border-color: #8e8e8e;
+    border-radius: 7px;
+}
+
+.comment_section textarea::placeholder {
+    color: #8e8e8e;
+}
+
+/* rating ---------------------------------------*/
+.MuiRating-icon {
+    margin: 0 0 0 3px;
+    color: #bd6a43;
+}
+
+.MuiRating-label {
+    margin: 0 0 0 3px;
+}

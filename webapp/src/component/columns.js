@@ -1,9 +1,5 @@
 export const COLUMNS = [
   {
-    Header: "Id",
-    accessor: "id",
-  },
-  {
     Header: "Username",
     accessor: "username",
   },
@@ -17,9 +13,9 @@ export const COLUMNS = [
   },
   {
     Header: "Status",
-    accessor: "status",
+    accessor: "banStatus",
   },
   {
-    Header: "Ban/Unban",
+    Header: "Ban/Delete",
   },
 ];

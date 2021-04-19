@@ -1,0 +1,114 @@
+/* Button */
+#register_profile .btn {
+  font-size: smaller;
+  font-weight: bold;
+}
+
+#register_profile .btn-primary {
+  background-color: #872935;
+  border-color: #872935;
+}
+#register_profile .btn-primary:hover:enabled {
+  background-color: brown;
+  box-shadow: 0 0 5px 0px tomato;
+}
+#register_profile .btn-primary:focus {
+  border-color: rgba(215, 40, 40, 0.8);
+  box-shadow: 0 0 0px 2.5px rgba(215, 40, 40, 0.5);
+}
+
+/* Radio Button Area */
+#register_profile .form-check {
+  margin: 0px 5px;
+  height: calc(1.5em + 0.75rem + 4px);
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+#register_profile .form-check:focus-within {
+  border-color: rgba(189, 86, 67, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0 0 8px rgba(189, 86, 67, 0.6);
+  outline: 0 none;
+}
+#register_profile .was-validated .form-check.filled {
+  border-color: #28a745;
+}
+#register_profile .was-validated .form-check.unfilled {
+  border-color: #dc3545;
+}
+
+/* Radio Button */
+#register_profile input[type="radio"] {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #aaaaaa;
+  border-radius: 50%;
+  outline: none;
+  box-shadow: 0px 0px 5px 0px gray inset;
+  align-items: center;
+}
+#register_profile input[type="radio"]:focus-visible {
+  box-shadow: 0 0 5px 0px orange;
+}
+#register_profile input[type="radio"]:hover {
+  cursor: pointer;
+}
+#register_profile .was-validated input[type="radio"]:valid {
+  border-color: #28a745;
+}
+#register_profile .was-validated input[type="radio"]:invalid {
+  border-color: #dc3545;
+}
+
+#register_profile input[type="radio"]::before {
+  content: "";
+  display: block;
+  margin: 10% auto;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+}
+#register_profile input[type="radio"]:checked::before {
+  background: #872935;
+}
+
+#register_profile .form-check-label {
+  width: 100%;
+  padding-left: 0.75rem;
+  text-transform: capitalize;
+}
+#register_profile .form-check-label:hover {
+  cursor: pointer;
+}
+
+/* Others */
+
+#register_profile input {
+  margin: 0px;
+}
+#register_profile input::placeholder {
+  color: #dbc2b0;
+}
+#register_profile input:focus {
+  border-color: rgba(189, 86, 67, 0.8);
+  box-shadow: 0 0 8px rgba(189, 86, 67, 0.6);
+  outline: 0 none;
+}
+#register_profile .was-validated input:focus:valid {
+  border-color: #28a745;
+}
+#register_profile .was-validated .valid {
+  border-color: #28a745;
+  background-image: none;
+}
+#register_profile .was-validated .invalid {
+  border-color: #dc3545;
+  background-image: none;
+}
+#register_profile label {
+  margin-left: 0px;
+  color: #662900;
+  font-weight: bold;
+  font-size: smaller;
+}

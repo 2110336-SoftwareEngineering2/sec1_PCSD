@@ -1,15 +1,182 @@
-* {
-    margin: 0;
+/*{
+    margin: 90;
     padding: 0;
     box-sizing: border-box;
+  }*/
+
+.ChatPage{
+  display: grid;
+  background-color: #eee;
+  height: 100vh;
+}
+.Chatpage_Components{
+  display: flex;
+  flex-direction: row;
+}
+.Sidebar{
+  background-color: #fff;
+  padding:  20px;
+  width: 35vw;
+  height: 90vh;
+}
+.Sidebar_Head{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.Chat_Title{
+  margin: 10px;
+  margin-bottom: 20px;
+  padding: 5px;
+  font-size: 32pt;
+}
+.Chat_Menu{
+  height: 32pt;
+  background-color: #eee;
+  width: 64pt;
+  border-radius: 5px;
+}
+.Seachbar{
+  margin: 1px;
+  display: flex;
+}
+.Search_input{
+  border-radius: 4px;
+  padding : 0px 0px 0px 35px;
+  height: 40px;
+  width: 100% ;
+  font-size: 16pt;
+}
+.SearchIcon{
+  z-index: 2;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.People_Profile{
+  grid-area: 'People_Profile';
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+}
+
+.ChatList{  
+  margin-top: 10px;
+  overflow-y: auto;
+  height:75vh;
+  background-color: #eee;
+}
+.People_Name{
+  grid-area: "People_Name";
+  padding-top: 17px;
+  padding-left: 20px;
+}
+.Chat_People{
+  display: flex;
+  padding: 10px;
+  /*background-color: #eee;*/
+  height: 70px ;
+  cursor: pointer;
+}
+
+/*Chat Box Part*/
+.Chatbox{
+  align-self: left;
+  width: 65vw;
+}
+.Messages{
+  margin: 1%;
+  padding-left: 10px;
+  height: 82%;
+  border-radius: 5px;
+  background-color: #ccc;
+}
+.Chat_Messages{
+  height: 85%;
+  margin-bottom: 0px;
+}
+.Downside_Bar{
+  font-size: x-large;
+  display: flex;
+  flex-direction: row;
+  margin: 1%;
+  /*padding-bottom: 5px;*/
+  border-radius: 5px;
+  background-color: #fff;
+  height: 10%;
+}
+.Message_Box{
+  align-items: baseline;
+  margin : 1%;
+  padding: 10px;
+  width: 80%;
+  height: 80%;
+  border-radius: 5px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+.Send_Chat{
+  margin-top: 1%;
+  height: 80%;
+  width: 17%;
+  border-radius: 5px;
+}
+.User_Message{
+  width: fit-content;
+  align-self: left;
+  border-radius: 18px 18px 0px 18px;
+  background-color: #ddd;
+  margin: 5px;
   }
-  
-  html,
-  
+.User_Message2{
+  padding-left: 10px;
+}
+.User_Message3{
+  display: flex;
+  padding: 5px 15px 5px 5px;
+  flex-direction: row;
+}
+.User_Message4{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.Interacter_Message{
+  width: fit-content;
+  border-radius: 18px 18px 18px 0px;
+  background-color: #555;
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+}
+.Interacter_Message2{
+  padding-right: 10px;
+  color:#fff;
+}
+.Interacter_Message3{
+  display: flex;
+  padding: 5px 5px 5px 15px;
+  flex-direction: row-reverse;
+}
+
+.Interacter{
+  margin: 10px;
+  font-size: xx-large;
+  display: flex;
+}
+.Interacter2{
+  padding-left: 10px;
+  align-self: center;
+}
+
+
+
+/*  html,
+   
     body{
       height: 100%;
     }
-  
+ 
     html{
       background: #F1F1F1;
           font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;font-weight: light;
@@ -17,20 +184,19 @@
     }
   
     body{
-      display: grid;
       place-items: center;
     }
-  
+    
     #chat-container{
       display: grid;
       grid:
-          /*'Title' 71px*/
+          /*'Title' 71px
           'search-container chat-title' 60px
           'conversation-list chat-mesages' 1fr
           'new-chat-container chat-form'65px
           /275px 1fr;
       min-width: 800px;
-      /*max-width: 1000px;*/
+      /*max-width: 1000px;
       max-height: 800px;
       height: 95vh;
       width: 95vw;
@@ -49,7 +215,7 @@
       align-items: center;
       padding: 0 20px;
       border-radius: 10px 0 0 0;
-      /*Edit this*/
+      /*Edit this
       box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.25);
       z-index: 1;
     }
@@ -75,7 +241,7 @@
     }
     #new-chat-container{
       grid-area: new-chat-container;
-      /*Edit this*/
+      /*Edit this
       box-shadow: 1px solid rgba(0, 0, 0, 0.25);
       border-radius: 0 0 0 10px;
     }
@@ -102,3 +268,4 @@
       grid-row: chat-form ;
       border-radius: 0 0 10px 0;
     }
+    */

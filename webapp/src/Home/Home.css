@@ -1,0 +1,119 @@
+.home {
+
+    height: 100vh;
+}
+
+.home .row p {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.44);
+}
+.home > h2 {
+    margin-bottom: 0px;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.44);
+}
+
+
+
+.home .top {
+    height: 600px;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: luminosity;
+    margin-bottom: 40px;
+}
+.home .top .col-12 > h2 {
+    color: white;
+}
+
+.home .center .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.home .makeStyles-searchBox-5 {
+    margin-top: 5vh;
+    position: relative;
+
+
+}
+.home .center .Service-row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 18px;
+}
+.home .center .Service-row .MuiSvgIcon-root {
+    color: #bd6a43;
+    margin-right: 18px;
+    position: relative;
+    font-size: 50px;
+}
+
+.home .center .Service-row .Description {
+   font-size: 16px;
+   line-height: 1.6;
+}
+
+.home .center .Service-row .content {
+    color: #66727c;
+ }
+
+ .home .bottom {
+     margin-top: 70px;
+ }
+ .home .bottom .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+} 
+
+.home .bottom .paper {
+    border-radius: 10px;
+    height: fit-content;
+}
+.home .bottom .paper  .MuiTypography-h6 {
+    background-color: #872935;
+    border-radius: 10px 10px 0px 0px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+.home .bottom .paper.r  .MuiTypography-h6 {
+    background-color: #bd6a43;
+}
+.home .bottom .paper.s  .MuiTypography-h6 {
+    background-color: #9D7F70;
+}
+.home .bottom .secondaryTail {
+    background-color:  #872935;
+  }
+.home .bottom p {
+      font-size: 16px;
+      margin: auto;
+      font-style: normal;
+      font-weight: normal;
+      text-align: center;
+      color: #66727c;
+      text-shadow: none;
+  }
+
+.home .bottom .MuiTimelineDot-defaultPrimary {
+      background-color: #bd6a43;
+  }
+  
+.home .bottom .MuiTimelineDot-defaultSecondary{
+    background-color: #872935;
+}
+
+.home .bottom .MuiTimelineDot-defaultGrey{
+    background-color: #9D7F70;
+}

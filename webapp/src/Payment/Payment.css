@@ -1,0 +1,111 @@
+.payment .first {
+    border-radius: 8px;
+    border: 1.5px solid #F6BEBE;
+    color: #000;
+    background-color: #FEF0F0;
+    margin-top: 13px;
+}
+
+.payment .card {
+    background-color: #fff;
+    max-width: 450px;
+    min-width: 380px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+.payment #header{
+    background-color:#872935;
+    border-radius: 15px 15px 0px 0px;
+    border-color: #872935;
+    height: 110px;
+}
+.payment .MuiAvatar-root {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+.payment .name {
+    font-size: 25px;
+    color: white;
+    font-weight: bold
+}
+
+.payment .cross {
+    font-size: 15px;
+    color:  #b0aeb7 ;
+}
+.payment .crosss {
+    margin-top: 10px;
+}
+.payment .pin {
+    font-size: 14px;
+    color: #FFF4F1;
+}
+
+.payment .second {
+    border-radius: 8px;
+    border: 1px solid #acacb0;
+    color: #000;
+    background-color: #fff;
+}
+
+.dot {}
+
+.payment .head {
+    color: #872935;
+    font-size: 12px
+}
+
+.payment .dollar {
+    font-size: 18px;
+    color: #872935
+}
+
+.payment .amount {
+    color: #872935;
+    font-weight: bold;
+    font-size: 18px
+}
+
+.payment .form-control {
+    font-size: 18px;
+    font-weight: bold;
+    width: 60px;
+    height: 28px
+}
+
+.payment .backk {
+    color: #aba4a4;
+    font-size: 15px;
+    line-height: 73px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.payment .backk:hover {
+    color: #872935;
+    font-size: 15px;
+    line-height: 73px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.payment .backk:active  {
+    color: #872935;
+    font-size: 15px;
+    line-height: 73px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.payment .pay {
+    width: 150px;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 17px;
+    background-color: #acacb0;
+    border-color:#acacb0;
+}
+.payment .pay:hover {
+    background-color: #872935;
+    border-color:#872935;
+}

@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react";
 import "./App.css";
-import Logo from "./Logo";
-import UserLogin from "./component/login-component";
-import LoginPage from "./LoginPage";
-import Home from "./Home/Home";
 import Routes from "./Routes";
+import { ContextProvider, RegisterProvider, ChatProvider } from "./context/MyContext";
+
 function App() {
   return (
-    <div className="app">
-      <Routes />
-    </div>
+    <ContextProvider>
+      <RegisterProvider>
+        <ChatProvider>
+          <div className="app">
+            <Routes />
+          </div>
+        </ChatProvider>
+      </RegisterProvider>
+    </ContextProvider>
   );
 }
 

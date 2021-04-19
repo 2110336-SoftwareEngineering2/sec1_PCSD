@@ -1,0 +1,127 @@
+#service_info .card {
+  min-width: 200px;
+  border-radius: 1rem;
+  border-color: #872935;
+  box-shadow: 5px 5px 5px 0px rgba(83, 1, 1, 0.25);
+}
+
+#service_info .card-header {
+  color: #fff;
+  background-color: #872935;
+  border-color: #872935;
+  border-radius: 1rem 1rem 0px 0px;
+}
+
+/* Check Button */
+#service_info .form-check {
+  margin: 5px 5px;
+  padding: 0px;
+}
+#service_info input[type="checkbox"] {
+  margin-top: 4px;
+  width: fit-content;
+  filter: hue-rotate(140deg) brightness(1) saturate(0.5);
+}
+#service_info input[type="checkbox"]:focus {
+  box-shadow: none;
+}
+#service_info input[type="checkbox"]:focus-visible {
+  box-shadow: none;
+  outline:#288ea7 dotted 1px;
+}
+
+#service_info .form-check-label {
+  width: 100%;
+  display: inline;
+  padding-left: 1.5rem;
+  text-transform: capitalize;
+  min-width: 200px;
+}
+#service_info input[type="checkbox"],
+#service_info .form-check-label:hover {
+  cursor: pointer;
+}
+
+/* Input & Label */
+
+#service_info input {
+  margin: 0px;
+}
+#service_info input::placeholder,
+#service_info textarea::placeholder {
+  color: #dbc2b0;
+  text-transform: capitalize;
+}
+#service_info input:focus,
+#service_info textarea:focus {
+  border-color: rgba(189, 86, 67, 0.8);
+  box-shadow: 0 0 8px rgba(189, 86, 67, 0.6);
+  outline: 0 none;
+}
+#service_info .was-validated input:focus:valid,
+#service_info .was-validated textarea:focus:valid {
+  border-color: #28a745;
+}
+#service_info .was-validated .valid {
+  border-color: #28a745;
+  background-image: none;
+}
+#service_info .was-validated .invalid {
+  border-color: #dc3545;
+  background-image: none;
+}
+#service_info label {
+  margin: 0px 0px 3px;
+  color: #662900;
+  font-weight: bold;
+  font-size: medium;
+  text-transform: capitalize;
+}
+#service_info .form-group div label {
+  color: #8f5e48;
+  font-size: smaller;
+}
+
+/* Button */
+#service_info .btn {
+  font-size: smaller;
+  font-weight: bold;
+}
+
+#service_info .btn-primary {
+  background-color: #872935;
+  border-color: #872935;
+}
+#service_info .btn-primary:hover:enabled {
+  background-color: brown;
+  box-shadow: 0px 0px 5px 0px tomato;
+}
+#service_info .btn-primary:focus {
+  border-color: rgba(215, 40, 40, 0.8);
+  box-shadow: 0px 0px 0px 2.5px rgba(215, 40, 40, 0.5);
+}
+
+/* Toggle Button */
+
+#service_info .btn-secondary {
+  color: #d8d0d0;
+  width: 100%;
+  min-width: 60px;
+  font-size: smaller;
+  margin-top: 6px;
+}
+#service_info .btn-secondary {
+  background-color: #f3f2f2;
+  border-color: #d8d0d0;
+}
+#service_info .btn-secondary:hover {
+  border-color: rgba(215, 40, 40, 0.8);
+}
+#service_info .btn-secondary:focus {
+  border-color: rgba(215, 40, 40, 0.8);
+  box-shadow: none;
+}
+#service_info .btn-secondary.active {
+  color: rgb(196, 49, 49);
+  box-shadow: 0px 0px 0px 2px rgba(218, 41, 18, 0.4);
+}

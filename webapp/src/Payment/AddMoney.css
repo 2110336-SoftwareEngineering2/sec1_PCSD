@@ -1,0 +1,106 @@
+.addmoney > .container {
+    width: 600px;
+    background-color: #F1F1F1;
+    padding-top: 100px;
+    padding-bottom: 100px
+}
+
+.addmoney .card {
+    background-color: #fff;
+    max-width: 450px;
+    min-width: 380px;
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+.addmoney #headerr {
+    background-color:#872935;
+    border-radius: 15px 15px 0px 0px;
+    border-color: #872935;
+    height: 110px;
+}
+.addmoney .MuiAvatar-root {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+.addmoney .name {
+    font-size: 25px;
+    color: white;
+    font-weight: bold
+}
+
+.addmoney .cross {
+    font-size: 15px;
+    color:  #b0aeb7 ;
+}
+.addmoney .crosss {
+    margin-top: 10px;
+}
+.addmoney .pin {
+    font-size: 14px;
+    color: #FFF4F1;
+}
+
+.addmoney .second {
+    margin-top: 13px;
+    border-radius: 8px;
+    border: 1px solid #acacb0;
+    color: #000;
+    background-color: #fff
+}
+
+.addmoney .dot {
+    top: -12px;
+}
+
+.addmoney .head {
+    color: #872935;
+    font-size: 12px
+}
+
+.addmoney .dollar {
+    font-size: 18px;
+    margin-top: 3px;
+    color: #872935;
+}
+
+.addmoney .amount {
+    color: #872935;
+    font-weight: bold;
+    font-size: 18px
+}
+.addmoney .form-control {
+    font-size: 18px;
+    font-weight: bold;
+    width: 100px;
+    height: 28px
+}
+
+.addmoney > .back {
+    color: #aba4a4;
+    font-size: 15px;
+    line-height: 73px;
+    font-weight: 400
+}
+
+.addmoney .acard > .button {
+    width: 150px;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 17px;
+    margin: 30px 100px;
+    background-color: #acacb0;
+    border-color:#acacb0;
+}
+
+.addmoney .acard > .button:hover {
+    background-color: #872935;
+    border-color:#872935;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,48 @@
+.Rpet {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 1px solid hsl(216, 8%, 88%);
+    padding: 10px;
+    width: 700px;
+    margin: 25px auto;
+    background-color: #ffffff;
+}
+
+.RPet__image {
+    margin-right: 20px;
+}
+
+.unclickedButton {
+    padding: 2px;
+    cursor: pointer;
+    margin-left: 260px;
+    color: white;
+    border-radius: 4px;
+    padding: 7px 10px;
+    background-color: white;
+    border-color: #C70039;
+    border-width: 2px;
+}
+.clickedButton {
+    padding: 2px;
+    cursor: pointer;
+    margin-left: 260px;
+    border-color: gray;
+    outline: none;
+    color: #C70039;
+    border-radius: 4px;
+    padding: 7px 10px;
+    background-color: #f8f0ec;
+    border-width: 2px;
+    border-color: #C70039
+}
+.unclickedButton:hover {
+    background-color: white;
+    color: #C70039;
+}
+
+.Rpet .MuiAvatar-root {
+    width: 80px;
+    height: 80px;
+}

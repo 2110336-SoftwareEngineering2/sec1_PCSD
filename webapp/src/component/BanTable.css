@@ -5,8 +5,11 @@ table {
 }
 
 table th {
-  font-size: 18px;
-  padding: 8px 10px 8px 10px;
+  font-size: 20px;
+  text-align: center;
+  /* margin-left: 50px; */
+  /* padding-left: 100px; */
+  /* padding: 13px 10px 13px 10px; */
 }
 table td {
   font-size: 13px;
@@ -14,15 +17,24 @@ table td {
   text-align: center;
 }
 
-.normal_line {
+.pagination {
+  margin: 10px 0 0 30%;
+}
+
+/* position: 
+  /* top: 80%;
+  
+  transform: translate(-50%, -50%);
+}
+/* .normal_line {
   background-color: #c6c6c6;
   border-color: white;
   margin-top: 18px;
   margin-bottom: 1px;
-}
+} */
 
-.ban_line {
+/* .ban_line {
   margin-top: 10px;
   background-color: #c6c6c6;
   border-color: white;
-}
+} */

@@ -1,0 +1,128 @@
+.History_Card {
+    background-color: #F1F1F1;
+    height: 100vh;
+  
+}
+.History_Card h1 {
+    text-align: center;
+}
+.DONE {
+    background-color: #BFFF36;
+}
+
+.WAITING {
+    background-color: #FFDF36;
+}
+
+.CANCELLED {
+    background-color: #FF4236;
+}
+
+.ACCEPTED {
+    background-color: rgb(145, 152, 255);
+}
+.History_Card .card {
+    border-radius: 15px;
+}
+
+.History_Card .cardtitle {
+    background-color:#872935;
+    border-radius: 15px 15px 0px 0px;
+    border-color: #872935;
+    padding: 15px;
+    color: white;
+    
+}
+.History_Card #cardtitle #delete {
+    font-weight: bold;
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+}
+.History_Card #cardtitle #delete:hover {
+    color: white;
+}
+.History_Card .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: auto;
+}
+.History_Card .cardtitle .modal-header {
+    text-align: center;
+    border: none;
+   
+}
+.History_Card .power {
+    margin: 15px 0px 20px 0px;
+}
+.History_Card .Pname {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.History_Card .Cname {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.History_Card .Service {
+    color: #363636;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.History_Card .date {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.History_Card .Amount {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.History_Card .pett {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.History_Card .cardtitle .modal-header span {
+    color: white;
+}
+.History_Card .Cardd .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.History_Card .Cardd {
+    max-height: 650px;
+    min-width: none;
+    background-color: #F1F1F1;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+.History_Card .Cardd > .card-deck > .card {
+ flex: none;
+ margin: 30px auto;
+}
+.History_Card .cardstatus {
+    align-items: center;
+    margin-left: 2px;
+}
+
+.History_Card .watingbutton{
+    display: flex;
+    margin: auto;
+}
+.History_Card .watingcanbutton {
+    margin-left: 90px;
+}
+
+.History_Card .acceptedbutton {
+    margin-left: 140px;
+}
+.cardstatus .row {
+    margin: auto;
+}

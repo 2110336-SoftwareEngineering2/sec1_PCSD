@@ -1,30 +1,32 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./chat.css"
+import Header from "../Header/header";
+import Sidebar from "./Sidebar";
+import Chatbox from "./Chatbox";
+import { ChatContext } from "../context/MyContext";
+import { useCookies } from "react-cookie";
 
-export default class ChatPage extends React.Component{
-    render(){
-        return (
-        <div className ="chat-container">
-        <div id = "search-container">
-            <input type="text" placeholder="Seach on Chats:"/>
-        </div>
-        <div id = "conversation-list">
-            
-        </div>
-        <div id = "new-chat-container">
-            <a href="#">+</a>
-        </div>
-        <div id = "chat-title">
+function ChatPage() {
+    const [cookie, setCookie, removeCookie] = useCookies();
+    const chatContext = useContext(ChatContext);
+    useEffect(() => {
 
-        </div>
-        <div id = "chat-mesages">
+        if (cookie.chatroomTmp !== undefined) {
+            chatContext.changeChatRoom(cookie.chatroomTmp);
+        }
+    }, []);
 
+    return(
+        <div className = "ChatPage">
+            <Header />
+            <div className = 'Chatpage_Components'>
+                <Sidebar />
+                <Chatbox roomId={chatContext.currentChatRoom}/>
+            </div>
         </div>
-        <div id = "chat-form">
-
-        </div>
-        </div>
-        );
-    }
+    );
 }
+
+
+export default ChatPage;
